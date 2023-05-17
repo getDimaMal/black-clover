@@ -13,6 +13,11 @@ const hash = 'hash';
 const user = { id: '123', email: 'test@email.com', hash: 'hash' } as User;
 const createUserDto = { email: 'test@email.com', password: 'pwd' } as CreateUserDto;
 
+jest.mock('bcrypt', () => ({
+  genSalt: jest.fn().mockImplementation(() => Promise.resolve(salt)),
+  hash: jest.fn().mockImplementation(() => Promise.resolve(hash)),
+}));
+
 describe('UsersService', () => {
   let usersService: UsersService;
   let userRepository: Repository<User>;
@@ -34,8 +39,6 @@ describe('UsersService', () => {
 
   describe('create', () => {
     it('should create a new user and return the user object', async () => {
-      jest.spyOn(bcrypt, 'genSalt').mockImplementation(() => Promise.resolve(salt));
-      jest.spyOn(bcrypt, 'hash').mockImplementation(() => Promise.resolve(hash));
       jest.spyOn(userRepository, 'create').mockReturnValue(user);
       jest.spyOn(userRepository, 'save').mockResolvedValue(user);
 
@@ -52,8 +55,6 @@ describe('UsersService', () => {
     });
 
     it('should throw ConflictException if user already exists', async () => {
-      jest.spyOn(bcrypt, 'genSalt').mockImplementation(() => Promise.resolve(salt));
-      jest.spyOn(bcrypt, 'hash').mockImplementation(() => Promise.resolve(hash));
       jest.spyOn(userRepository, 'create').mockReturnValue(user);
       jest.spyOn(userRepository, 'save').mockImplementation(() => Promise.reject({ code: 11000 }));
 
@@ -61,8 +62,6 @@ describe('UsersService', () => {
     });
 
     it('should throw BadRequestException for other errors', async () => {
-      jest.spyOn(bcrypt, 'genSalt').mockImplementation(() => Promise.resolve(salt));
-      jest.spyOn(bcrypt, 'hash').mockImplementation(() => Promise.resolve(hash));
       jest.spyOn(userRepository, 'create').mockReturnValue(user);
       jest.spyOn(userRepository, 'save').mockRejectedValue(new Error());
 

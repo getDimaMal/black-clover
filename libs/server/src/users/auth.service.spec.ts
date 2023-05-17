@@ -12,6 +12,8 @@ const accessToken = 'accessToken';
 const user = { id: '123', email: 'test@email.com', hash: 'pwd-hash' } as User;
 const createUserDto = { email: 'test@email.com', password: 'pwd' } as CreateUserDto;
 
+jest.mock('bcrypt', () => ({ compare: jest.fn() }));
+
 describe('AuthService', () => {
   let authService: AuthService;
   let usersService: UsersService;
