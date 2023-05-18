@@ -1,9 +1,9 @@
 import { Column, Entity } from 'typeorm';
 
-import { AppBase } from '../core/app-base.entity';
+import { AppBaseEntity } from '../../core/app-base.entity';
 
 @Entity()
-export class User extends AppBase {
+export class User extends AppBaseEntity {
   @Column({ unique: true })
   email: string;
 

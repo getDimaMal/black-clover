@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { BeforeInsert, BeforeUpdate, Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class AppBase {
+export class AppBaseEntity {
   @ObjectIdColumn()
   _id: string;
 

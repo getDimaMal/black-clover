@@ -4,14 +4,14 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { CreateUserDto } from './dtos';
-import { User } from './user.entity';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
 const salt = 'salt';
 const hash = 'hash';
 const user = { id: '123', email: 'test@email.com', hash: 'hash' } as User;
-const createUserDto = { email: 'test@email.com', password: 'pwd' } as CreateUserDto;
+const createUserDto: CreateUserDto = { email: 'test@email.com', password: 'pwd' };
 
 jest.mock('bcrypt', () => ({
   genSalt: jest.fn().mockImplementation(() => Promise.resolve(salt)),

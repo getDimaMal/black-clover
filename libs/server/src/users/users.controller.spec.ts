@@ -1,7 +1,8 @@
 import { Test } from '@nestjs/testing';
 
-import { AuthService } from './auth.service';
-import { CreateUserDto, UserDto } from './dtos';
+import { AuthService } from './auth/auth.service';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { UserDto } from './dtos/user.dto';
 import { UsersController } from './users.controller';
 
 const createUserDto: CreateUserDto = { email: 'test@email.com', password: 'pwd' };

@@ -3,14 +3,15 @@ import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
 
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { User } from '../entities/user.entity';
+import { UsersService } from '../users.service';
+
 import { AuthService } from './auth.service';
-import { CreateUserDto } from './dtos';
-import { User } from './user.entity';
-import { UsersService } from './users.service';
 
 const accessToken = 'accessToken';
 const user = { id: '123', email: 'test@email.com', hash: 'pwd-hash' } as User;
-const createUserDto = { email: 'test@email.com', password: 'pwd' } as CreateUserDto;
+const createUserDto: CreateUserDto = { email: 'test@email.com', password: 'pwd' };
 
 jest.mock('bcrypt', () => ({ compare: jest.fn() }));
 

@@ -2,8 +2,9 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 
 import { Serialize } from '../interseptors/serialize.interceptor';
 
-import { AuthService } from './auth.service';
-import { CreateUserDto, UserDto } from './dtos';
+import { AuthService } from './auth/auth.service';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { UserDto } from './dtos/user.dto';
 
 @Serialize(UserDto)
 @Controller('users')
