@@ -17,6 +17,9 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
+      "@black-clover/client/redux": ["libs/client/redux/src/index.ts"],
+      "@black-clover/client/services": ["libs/client/services/src/index.ts"],
+      "@black-clover/client/ui": ["libs/client/ui/src/index.ts"],
       "@black-clover/server": ["libs/server/src/index.ts"]
     }
   },
