@@ -1,6 +1,6 @@
-import { UsersModule } from '@black-clover/server';
+import { User, UsersModule } from '@black-clover/server';
 import { Module, ValidationPipe } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -10,14 +10,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       isGlobal: true,
       envFilePath: [`.env`],
     }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'mongodb',
-        url: config.get('NX_DB_URL'),
-        synchronize: true,
-        autoLoadEntities: true,
-      }),
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      database: 'db.sqlite',
+      synchronize: true,
+      entities: [User],
     }),
     UsersModule,
   ],

@@ -3,17 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "---SERVER---": "----------------------------------------------------------------------------------------------",
+    "---BACKEND---": "----------------------------------------------------------------------------------------------",
     "server-api": "nx serve server-api",
-    "docker:dev": "docker-compose down -v && docker-compose up -d",
-    "server:dev": "yarn run docker:dev && yarn run server-api",
-    "---CLIENT---": "----------------------------------------------------------------------------------------------",
+    "---FRONTENT---": "----------------------------------------------------------------------------------------------",
     "client-front": "nx serve client-front",
     "---CODEBASE---": "--------------------------------------------------------------------------------------------",
     "format": "nx format:write && nx run-many --all --target=lint --fix",
-    "format:affected": "nx format:write && nx affected:lint --fix",
+    "affected:format": "nx format:write && nx affected:lint --fix",
     "test": "nx run-many --all --target=test --codeCoverage",
-    "test:affected": "nx affected:test --codeCoverage"
+    "affected:test": "nx affected:test --codeCoverage"
   },
   "private": true,
   "dependencies": {
@@ -31,8 +29,6 @@
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "crypto": "^1.0.1",
-    "mongodb": "^5.5.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "react": "18.2.0",
@@ -41,8 +37,10 @@
     "react-router-dom": "6.8.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
+    "sqlite3": "^5.1.6",
     "tslib": "^2.3.0",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.16",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
@@ -72,6 +70,7 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/react-router-dom": "5.3.3",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "babel-jest": "^29.4.1",

@@ -2,10 +2,10 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { JwtDto } from '../dtos/jwt.dto';
-import { UserDto } from '../dtos/user.dto';
-import { UsersService } from '../users.service';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { JwtDto } from './dtos/jwt.dto';
+import { UserDto } from './dtos/user.dto';
+import { UsersService } from './users.service';
 
 @Injectable()
 export class AuthService {
@@ -28,6 +28,7 @@ export class AuthService {
 
     if (user && (await bcrypt.compare(password, user.hash))) {
       const accessToken = this.getToken(user.email);
+
       return { ...user, accessToken };
     }
     throw new UnauthorizedException('please check your credentials');

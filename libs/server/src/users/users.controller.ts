@@ -2,9 +2,9 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 
 import { Serialize } from '../interseptors/serialize.interceptor';
 
-import { AuthService } from './auth/auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserDto } from './dtos/user.dto';
+import { AuthService } from './auth.service';
 
 @Serialize(UserDto)
 @Controller('users')
@@ -18,7 +18,7 @@ export class UsersController {
 
   @Post('/signin')
   @HttpCode(HttpStatus.OK)
-  signIn(@Body() body: CreateUserDto) {
+  signIn(@Body() body: CreateUserDto): Promise<UserDto> {
     return this.authService.signIn(body);
   }
 }

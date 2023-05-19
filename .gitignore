@@ -4,7 +4,7 @@
 dist
 tmp
 /out-tsc
-/data
+/mongodb
 
 # dependencies
 node_modules

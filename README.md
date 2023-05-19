@@ -16,8 +16,8 @@ To run client `yarn clinet-front`
 
 To run format AND lint for All project `yarn format`
 
-To run format AND lint for affected `yarn format:affected`
+To run format AND lint for affected `yarn affected:format`
 
 To run test for ALL project `yarn test`
 
-To run test for affected `yarn test:affected`
+To run test for affected `yarn affected:test`
