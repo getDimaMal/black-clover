@@ -11,6 +11,12 @@
         "lintFilePatterns": ["libs/server/**/*.ts"]
       }
     },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["tsc --noEmit -p libs/server/tsconfig.json"]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

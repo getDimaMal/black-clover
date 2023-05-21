@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn run affected:format
+yarn affected:format
 
 git add -A .
+
+yarn affected:type-check

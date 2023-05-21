@@ -10,8 +10,11 @@
     "---CODEBASE---": "--------------------------------------------------------------------------------------------",
     "format": "nx format:write && nx run-many --all --target=lint --fix",
     "affected:format": "nx format:write && nx affected:lint --fix",
+    "type-check": "nx run-many --all --target=type-check",
+    "affected:type-check": "nx affected --target=type-check",
     "test": "STAGE=dev nx run-many --all --target=test --codeCoverage",
-    "affected:test": "STAGE=dev nx affected:test --codeCoverage"
+    "affected:test": "STAGE=dev nx affected:test --codeCoverage",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
