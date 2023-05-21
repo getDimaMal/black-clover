@@ -6,3 +6,5 @@ yarn affected:format
 git add -A .
 
 yarn affected:type-check
+
+yarn affected:test

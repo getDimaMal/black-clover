@@ -23,8 +23,8 @@ export class UsersService {
 
       this.logger.verbose(`Save USER with: ${JSON.stringify(user)}`);
       return this.repo.save(user);
-    } catch (error) {
-      if (error.code === 'SQLITE_CONSTRAINT') throw new ConflictException('user already exists');
+    } catch (error: any) {
+      if (error?.code === 'SQLITE_CONSTRAINT') throw new ConflictException('user already exists');
 
       throw new BadRequestException();
     }

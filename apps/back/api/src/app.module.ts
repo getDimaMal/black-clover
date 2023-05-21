@@ -1,4 +1,4 @@
-import { User, UsersModule } from '@black-clover/server';
+import { User, UsersModule } from '@black-clover/back';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';

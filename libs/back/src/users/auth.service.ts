@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 import { CreateUserDto } from './dtos/create-user.dto';
-import { JwtDto } from './dtos/jwt.dto';
 import { UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
 
@@ -11,14 +10,13 @@ import { UsersService } from './users.service';
 export class AuthService {
   constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
-  getToken(email: string): string {
-    const payload: JwtDto = { email };
-    return this.jwtService.sign(payload);
+  getToken(id: string): string {
+    return this.jwtService.sign({ id });
   }
 
   async signUp(args: CreateUserDto): Promise<UserDto> {
     const user = await this.usersService.create(args);
-    const accessToken = this.getToken(user.email);
+    const accessToken = this.getToken(user.id);
 
     return { ...user, accessToken };
   }
@@ -27,7 +25,7 @@ export class AuthService {
     const user = await this.usersService.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.hash))) {
-      const accessToken = this.getToken(user.email);
+      const accessToken = this.getToken(user.id);
 
       return { ...user, accessToken };
     }

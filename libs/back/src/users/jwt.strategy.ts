@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
-import { JwtDto } from './dtos/jwt.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -18,9 +17,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate({ email }: JwtDto): Promise<User> {
-    this.logger.verbose(`Validate JWT with: ${JSON.stringify({ email })}`);
-    const user = await this.usersService.findOne({ email });
+  async validate({ id }: { id: string }): Promise<User> {
+    this.logger.verbose(`Validate JWT with: ${JSON.stringify({ id })}`);
+    const user = await this.usersService.findOne({ id });
 
     if (!user) throw new UnauthorizedException();
     return user;
