@@ -22,9 +22,9 @@ export class UsersService {
       const user = this.repo.create({ email, hash });
 
       this.logger.verbose(`Save USER with: ${JSON.stringify(user)}`);
-      return this.repo.save(user);
+      return await this.repo.save(user);
     } catch (error: any) {
-      if (error?.code === 'SQLITE_CONSTRAINT') throw new ConflictException('user already exists');
+      if (error?.errno === 19) throw new ConflictException('user already exists');
 
       throw new BadRequestException();
     }

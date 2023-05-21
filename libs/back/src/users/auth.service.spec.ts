@@ -9,8 +9,8 @@ import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
 const token = 'mockedToken';
-const user: User = { id: '123', email: 'test@mail.com', hash: 'hash' };
-const createUserDto: CreateUserDto = { email: 'test@mail.com', password: 'test-password' };
+const user: User = { id: 'mockedUserId', email: 'test@mail.com', hash: 'mockedHash' };
+const createUserDto: CreateUserDto = { email: 'test@example.com', password: 'password123' };
 
 jest.mock('bcrypt');
 
