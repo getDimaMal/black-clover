@@ -3,12 +3,13 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as process from 'process';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [`.env`],
+      envFilePath: [`.env.${process.env.STAGE}`],
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',

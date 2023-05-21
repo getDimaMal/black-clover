@@ -4,14 +4,14 @@
   "license": "MIT",
   "scripts": {
     "---BACKEND---": "----------------------------------------------------------------------------------------------",
-    "server-api": "nx serve server-api",
+    "server-api:dev": "STAGE=dev nx serve server-api",
     "---FRONTENT---": "----------------------------------------------------------------------------------------------",
     "client-front": "nx serve client-front",
     "---CODEBASE---": "--------------------------------------------------------------------------------------------",
     "format": "nx format:write && nx run-many --all --target=lint --fix",
     "affected:format": "nx format:write && nx affected:lint --fix",
-    "test": "nx run-many --all --target=test --codeCoverage",
-    "affected:test": "nx affected:test --codeCoverage"
+    "test": "STAGE=dev nx run-many --all --target=test --codeCoverage",
+    "affected:test": "STAGE=dev nx affected:test --codeCoverage"
   },
   "private": true,
   "dependencies": {
