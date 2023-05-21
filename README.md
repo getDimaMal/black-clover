@@ -1,23 +1,19 @@
 # BlackClover
 
-## Server
+## Backend
 
-To run server `yarn server-api`
-
-To run docker for DEV `yarn docker:dev`
-
-To run docker for DEV and server `yarn server:dev`
+To run server `yarn back-api:dev`
 
 ## Client
 
-To run client `yarn clinet-front`
+To run client `yarn front-client:dev`
 
 ## Codebase
 
-To run format AND lint for All project `yarn format`
+To run format AND lint for all files `yarn format`
 
-To run format AND lint for affected `yarn affected:format`
+To run format AND lint for affected files `yarn affected:format`
 
-To run test for ALL project `yarn test`
+To run test for all files `yarn test`
 
-To run test for affected `yarn affected:test`
+To run test for affected files `yarn affected:test`

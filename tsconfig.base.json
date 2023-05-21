@@ -17,10 +17,10 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@black-clover/client/redux": ["libs/client/redux/src/index.ts"],
-      "@black-clover/client/services": ["libs/client/services/src/index.ts"],
-      "@black-clover/client/ui": ["libs/client/ui/src/index.ts"],
-      "@black-clover/server": ["libs/server/src/index.ts"]
+      "@black-clover/back": ["libs/back/src/index.ts"],
+      "@black-clover/front/redux": ["libs/front/redux/src/index.ts"],
+      "@black-clover/front/services": ["libs/front/services/src/index.ts"],
+      "@black-clover/front/ui": ["libs/front/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
