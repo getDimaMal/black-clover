@@ -4,7 +4,6 @@
 dist
 tmp
 /out-tsc
-/mongodb
 
 # dependencies
 node_modules
@@ -38,3 +37,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Database
+db.sqlite

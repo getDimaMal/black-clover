@@ -1,5 +1,9 @@
 # BlackClover
 
+## Before start
+
+To install dependencies, run `yarn`
+
 ## Backend
 
 To run server `yarn back-api:dev`
@@ -10,9 +14,9 @@ To run client `yarn front-client:dev`
 
 ## Codebase
 
-To run format AND lint for all files `yarn format`
+To run format & lint for all files `yarn format`
 
-To run format AND lint for affected files `yarn affected:format`
+To run format & lint for affected files `yarn affected:format`
 
 To run test for all files `yarn test`
 

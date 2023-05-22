@@ -1,5 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 
 import { Serialize } from '../core/interseptors/serialize.interceptor';
 
@@ -22,11 +21,5 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   signIn(@Body() body: CreateUserDto): Promise<UserDto> {
     return this.authService.signIn(body);
-  }
-
-  @Get(':id')
-  @UseGuards(AuthGuard())
-  getUserById(@Param('id', ParseUUIDPipe) id: string): Promise<Omit<UserDto, 'accessToken'>> {
-    return this.usersService.findOne({ id });
   }
 }

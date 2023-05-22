@@ -1,7 +1,6 @@
 import { BadRequestException, ConflictException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 
 import { CreateUserDto } from './dtos/create-user.dto';
@@ -30,10 +29,8 @@ export class UsersService {
     }
   }
 
-  async findOne(args: { id?: string; email?: string }): Promise<User> {
+  async findOne(args: { id?: string; email?: string }): Promise<User | null> {
     this.logger.verbose(`Find one USER with: ${JSON.stringify(args)}`);
-    const user = await this.repo.findOneBy({ ...args });
-    if (!user) throw new NotFoundError('user not found');
-    return user;
+    return await this.repo.findOneBy({ ...args });
   }
 }

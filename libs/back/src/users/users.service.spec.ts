@@ -2,17 +2,12 @@ import { BadRequestException, ConflictException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 
-import { CreateUserDto } from './dtos/create-user.dto';
+import { createUserDto, hash, salt, user } from '../__test-data__/user.test-data';
+
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-
-const salt = 'mockedSalt';
-const hash = 'mockedHash';
-const user: User = { id: 'mockedUserId', email: 'test@mail.com', hash: 'mockedHash' };
-const createUserDto: CreateUserDto = { email: 'test@example.com', password: 'password123' };
 
 jest.mock('bcrypt');
 
@@ -82,11 +77,13 @@ describe('UsersService', () => {
       expect(result).toEqual(user);
     });
 
-    it('should throw NotFoundException if user is not found', async () => {
+    it('should return null when no user is found', async () => {
       jest.spyOn(mockRepository, 'findOneBy').mockImplementation(() => Promise.resolve(null));
 
-      await expect(usersService.findOne({ email: user.email })).rejects.toThrow(NotFoundError);
+      const result = await usersService.findOne({ email: user.email });
+
       expect(mockRepository.findOneBy).toHaveBeenCalledWith({ email: user.email });
+      expect(result).toBeNull();
     });
   });
 });
