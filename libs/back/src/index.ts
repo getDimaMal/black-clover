@@ -1,4 +1,3 @@
-import { User } from './users/entities/user.entity';
-import { UsersModule } from './users/users.module';
-
-export { UsersModule, User };
+export * from './users/users.module';
+export * from './users/entities';
+export * from './users/dtos';

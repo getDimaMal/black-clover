@@ -1,6 +1,5 @@
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { UserDto } from '../dtos/user.dto';
-import { User } from '../entities/user.entity';
+import { CreateUserDto, UserDto } from '../dtos';
+import { User } from '../entities';
 
 export const salt = 'mockedSalt';
 export const hash = 'mockedHash';

@@ -5,12 +5,11 @@ import { Serialize } from '../core/interseptors/serialize.interceptor';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
-import { UsersService } from './users.service';
 
 @Serialize(UserDto)
 @Controller('users')
 export class UsersController {
-  constructor(private authService: AuthService, private usersService: UsersService) {}
+  constructor(private authService: AuthService) {}
 
   @Post('/signup')
   signUp(@Body() body: CreateUserDto): Promise<UserDto> {
