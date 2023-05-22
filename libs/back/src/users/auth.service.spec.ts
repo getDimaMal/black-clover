@@ -3,8 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
 
-import { createUserDto, token, user } from '../__test-data__/user.test-data';
-
+import { createUserDto, token, user } from './__test-data__/users.test-data';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 

@@ -4,8 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { createUserDto, hash, salt, user } from '../__test-data__/user.test-data';
-
+import { createUserDto, hash, salt, user } from './__test-data__/users.test-data';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
