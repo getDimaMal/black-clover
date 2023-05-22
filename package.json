@@ -12,10 +12,10 @@
     "affected:format": "nx format:write && nx affected:lint --fix",
     "type-check": "nx run-many --all --target=type-check",
     "affected:type-check": "nx affected --target=type-check",
-    "test": "STAGE=test nx run-many --all --target=test --codeCoverage",
-    "affected:test": "STAGE=test nx affected:test --codeCoverage",
-    "e2e": "STAGE=test nx run-many --all --target=e2e --codeCoverage",
-    "affected:e2e": "STAGE=test nx affected:e2e --codeCoverage"
+    "test": "STAGE=test nx run-many --all --target=test",
+    "affected:test": "STAGE=test nx affected:test",
+    "e2e": "STAGE=test nx run-many --all --target=e2e",
+    "affected:e2e": "STAGE=test nx affected:e2e"
   },
   "private": true,
   "dependencies": {

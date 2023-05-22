@@ -64,6 +64,13 @@
           "codeCoverage": true
         }
       }
+    },
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/back/api/jest.e2e-config.ts",
+        "passWithNoTests": true
+      }
     }
   },
   "tags": []
