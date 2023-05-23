@@ -12,8 +12,8 @@
     "jest.e2e-config.ts",
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
-    "test/**/*.e2e-test.ts",
-    "test/**/*.e2e-spec.ts"
+    "src/test/**/*.e2e-test.ts",
+    "src/test/**/*.e2e-spec.ts"
   ],
   "include": ["src/**/*.ts"]
 }

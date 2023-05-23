@@ -17,7 +17,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@black-clover/back": ["libs/back/src/index.ts"],
+      "@black-clover/back/*": ["libs/back/src/*"],
       "@black-clover/front/redux": ["libs/front/redux/src/index.ts"],
       "@black-clover/front/services": ["libs/front/services/src/index.ts"],
       "@black-clover/front/ui": ["libs/front/ui/src/index.ts"]

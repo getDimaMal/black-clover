@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # Database
-sqlite
+dev.sqlite

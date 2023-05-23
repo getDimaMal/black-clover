@@ -1,4 +1,5 @@
-import { User, UsersModule } from '@black-clover/back';
+import { User } from '@black-clover/back/users/entities';
+import { UsersModule } from '@black-clover/back/users/users.module';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
@@ -16,7 +17,7 @@ import * as process from 'process';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'sqlite',
-        database: `./sqlite/${configService.get('NX_DB_NAME')}`,
+        database: configService.get('NX_DB_NAME'),
         synchronize: true,
         entities: [User],
       }),
