@@ -1,9 +1,9 @@
-import { BadRequestException, ConflictException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { CreateUserDto } from './dtos';
+import { UserCreateDto, UserUpdateDto } from './dtos';
 import { User } from './entities';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class UsersService {
 
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
-  async create({ email, password }: CreateUserDto): Promise<User> {
+  async create({ email, password }: UserCreateDto): Promise<User> {
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
 
@@ -29,8 +29,20 @@ export class UsersService {
     }
   }
 
-  async findOne(args: { id?: string; email?: string }): Promise<User | null> {
+  async findOne(args: { id?: string; email?: string }): Promise<User> {
     this.logger.verbose(`Find one USER with: ${JSON.stringify(args)}`);
-    return await this.repo.findOneBy({ ...args });
+    const user = await this.repo.findOneBy({ ...args });
+
+    if (user) return user;
+
+    throw new NotFoundException('user not found');
+  }
+
+  async update(id: string, userUpdate: UserUpdateDto): Promise<User> {
+    const user = await this.findOne({ id });
+    const updateUser = { ...user, ...userUpdate };
+
+    this.logger.verbose(`Save USER with: ${JSON.stringify(updateUser)}`);
+    return await this.repo.save(updateUser);
   }
 }

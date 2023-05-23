@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
 
-import { createUserDto, token, user } from './__test-data__/users.test-data';
+import { token, user, userCreate } from './__test-data__/users.test-data';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
@@ -44,9 +44,9 @@ describe('AuthService', () => {
 
   describe('signUp', () => {
     it('should create a new user and return the user object with access token', async () => {
-      const result = await authService.signUp(createUserDto);
+      const result = await authService.signUp(userCreate);
 
-      expect(mockUsersService.create).toHaveBeenCalledWith(createUserDto);
+      expect(mockUsersService.create).toHaveBeenCalledWith(userCreate);
       expect(mockJwtService.sign).toHaveBeenCalledWith({ id: user.id });
       expect(result).toEqual({ ...user, accessToken: token });
     });
@@ -54,13 +54,12 @@ describe('AuthService', () => {
 
   describe('signIn', () => {
     it('should return the user object with access token if credentials are valid', async () => {
-      const compareMock = jest.spyOn(bcrypt, 'compare');
-      compareMock.mockImplementation(() => Promise.resolve(true));
+      const compareMock = jest.spyOn(bcrypt, 'compare').mockImplementation(() => Promise.resolve(true));
 
-      const result = await authService.signIn(createUserDto);
+      const result = await authService.signIn(userCreate);
 
-      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: createUserDto.email });
-      expect(compareMock).toHaveBeenCalledWith(createUserDto.password, user.hash);
+      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: userCreate.email });
+      expect(compareMock).toHaveBeenCalledWith(userCreate.password, user.hash);
       expect(mockJwtService.sign).toHaveBeenCalledWith({ id: user.id });
       expect(result).toEqual({ ...user, accessToken: token });
     });
@@ -69,10 +68,10 @@ describe('AuthService', () => {
       const compareMock = jest.spyOn(bcrypt, 'compare');
       compareMock.mockImplementation(() => Promise.resolve(false));
 
-      await expect(authService.signIn(createUserDto)).rejects.toThrow(UnauthorizedException);
+      await expect(authService.signIn(userCreate)).rejects.toThrow(UnauthorizedException);
 
-      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: createUserDto.email });
-      expect(compareMock).toHaveBeenCalledWith(createUserDto.password, user.hash);
+      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: userCreate.email });
+      expect(compareMock).toHaveBeenCalledWith(userCreate.password, user.hash);
     });
   });
 });

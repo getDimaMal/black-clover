@@ -1,24 +1,35 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { Serialize } from '../core/interseptors/serialize.interceptor';
 
-import { CreateUserDto } from './dtos/create-user.dto';
-import { UserDto } from './dtos/user.dto';
+import { GetSelf } from './decorators/get-self.decorator';
 import { AuthService } from './auth.service';
+import { UserCreateDto, UserSelfDto, UserTokenDto, UserUpdateDto } from './dtos';
+import { User } from './entities';
+import { UsersService } from './users.service';
 
-@Serialize(UserDto)
 @Controller('users')
 export class UsersController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private usersService: UsersService) {}
 
   @Post('/signup')
-  signUp(@Body() body: CreateUserDto): Promise<UserDto> {
+  @Serialize(UserTokenDto)
+  signUp(@Body() body: UserCreateDto): Promise<UserTokenDto> {
     return this.authService.signUp(body);
   }
 
   @Post('/signin')
   @HttpCode(HttpStatus.OK)
-  signIn(@Body() body: CreateUserDto): Promise<UserDto> {
+  @Serialize(UserTokenDto)
+  signIn(@Body() body: UserCreateDto): Promise<UserTokenDto> {
     return this.authService.signIn(body);
+  }
+
+  @Put('/self')
+  @Serialize(UserSelfDto)
+  @UseGuards(AuthGuard('jwt'))
+  selfUpdate(@Body() userUpdate: UserUpdateDto, @GetSelf() self: User): Promise<UserSelfDto> {
+    return this.usersService.update(self.id, userUpdate);
   }
 }

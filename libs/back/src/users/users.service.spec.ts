@@ -1,10 +1,10 @@
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { createUserDto, hash, salt, user } from './__test-data__/users.test-data';
+import { hash, salt, user, userCreate, userUpdate } from './__test-data__/users.test-data';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -35,9 +35,9 @@ describe('UsersService', () => {
       jest.spyOn(mockRepository, 'create').mockReturnValue(user);
       jest.spyOn(mockRepository, 'save').mockResolvedValue(user);
 
-      const result = await usersService.create(createUserDto);
+      const result = await usersService.create(userCreate);
 
-      expect(mockRepository.create).toHaveBeenCalledWith({ email: createUserDto.email, hash });
+      expect(mockRepository.create).toHaveBeenCalledWith({ email: userCreate.email, hash });
       expect(mockRepository.save).toHaveBeenCalledWith(user);
       expect(result).toEqual(user);
     });
@@ -46,14 +46,14 @@ describe('UsersService', () => {
       jest.spyOn(mockRepository, 'create').mockReturnValue(user);
       jest.spyOn(mockRepository, 'save').mockRejectedValue({ errno: 19 });
 
-      await expect(usersService.create(createUserDto)).rejects.toThrow(ConflictException);
+      await expect(usersService.create(userCreate)).rejects.toThrow(ConflictException);
     });
 
     it('should throw BadRequestException for other errors', async () => {
       jest.spyOn(mockRepository, 'create').mockReturnValue(user);
       jest.spyOn(mockRepository, 'save').mockImplementation(() => Promise.reject());
 
-      await expect(usersService.create(createUserDto)).rejects.toThrow(BadRequestException);
+      await expect(usersService.create(userCreate)).rejects.toThrow(BadRequestException);
     });
   });
 
@@ -76,13 +76,29 @@ describe('UsersService', () => {
       expect(result).toEqual(user);
     });
 
-    it('should return null when no user is found', async () => {
-      jest.spyOn(mockRepository, 'findOneBy').mockImplementation(() => Promise.resolve(null));
+    it('should throw NotFoundException when user is not found', async () => {
+      jest.spyOn(mockRepository, 'findOneBy').mockResolvedValue(null);
 
-      const result = await usersService.findOne({ email: user.email });
+      try {
+        await usersService.findOne({ email: user.email });
+      } catch (error) {
+        expect(mockRepository.findOneBy).toHaveBeenCalledWith({ email: user.email });
+        expect(error).toBeInstanceOf(NotFoundException);
+      }
+    });
+  });
 
-      expect(mockRepository.findOneBy).toHaveBeenCalledWith({ email: user.email });
-      expect(result).toBeNull();
+  describe('update', () => {
+    it('should find and update the user', async () => {
+      const updatedUser = { ...user, ...userUpdate };
+      jest.spyOn(usersService, 'findOne').mockResolvedValue(user);
+      jest.spyOn(mockRepository, 'save').mockResolvedValue(updatedUser);
+
+      const result = await usersService.update(user.id, userUpdate);
+
+      expect(usersService.findOne).toHaveBeenCalledWith({ id: user.id });
+      expect(mockRepository.save).toHaveBeenCalledWith(updatedUser);
+      expect(result).toEqual(updatedUser);
     });
   });
 });

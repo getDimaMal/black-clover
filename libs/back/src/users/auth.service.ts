@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto, UserDto } from './dtos';
+import { UserCreateDto, UserTokenDto } from './dtos';
 import { UsersService } from './users.service';
 
 @Injectable()
@@ -13,20 +13,24 @@ export class AuthService {
     return this.jwtService.sign({ id });
   }
 
-  async signUp(args: CreateUserDto): Promise<UserDto> {
-    const user = await this.usersService.create(args);
+  async signUp(userCreate: UserCreateDto): Promise<UserTokenDto> {
+    const user = await this.usersService.create(userCreate);
     const accessToken = this.getToken(user.id);
 
     return { ...user, accessToken };
   }
 
-  async signIn({ email, password }: CreateUserDto): Promise<UserDto> {
-    const user = await this.usersService.findOne({ email });
+  async signIn({ email, password }: UserCreateDto): Promise<UserTokenDto> {
+    try {
+      const user = await this.usersService.findOne({ email });
+      const isPasswordValid = await bcrypt.compare(password, user.hash);
 
-    if (user && (await bcrypt.compare(password, user.hash))) {
-      const accessToken = this.getToken(user.id);
-
-      return { ...user, accessToken };
+      if (isPasswordValid) {
+        const accessToken = this.getToken(user.id);
+        return { ...user, accessToken };
+      }
+    } catch {
+      throw new UnauthorizedException('please check your credentials');
     }
     throw new UnauthorizedException('please check your credentials');
   }

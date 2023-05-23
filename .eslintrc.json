@@ -26,7 +26,7 @@
               // Packages `react` related packages come first.
               ["^react", "^@?\\w"],
               // Packages `nest` related packages come first.
-              ["^nest", "^@?\\w"],
+              ["^nestjs", "^@?\\w"],
               // Internal packages.
               ["^(@|components)(/.*|$)"],
               // Side effect imports.

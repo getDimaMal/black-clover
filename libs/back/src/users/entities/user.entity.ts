@@ -10,4 +10,10 @@ export class User {
 
   @Column()
   hash: string;
+
+  @Column({ default: null })
+  firstName: null | string;
+
+  @Column({ default: null })
+  lastName: null | string;
 }
