@@ -51,9 +51,17 @@ describe('UsersController', () => {
     });
   });
 
-  describe('update', () => {
+  describe('getSelf', () => {
+    it('should return current user', async () => {
+      const result = await usersController.getSelf(user);
+
+      expect(result).toEqual(user);
+    });
+  });
+
+  describe('updateSelf', () => {
     it('should call usersService.update and return the result', async () => {
-      const result = await usersController.selfUpdate(userUpdate, user);
+      const result = await usersController.updateSelf(userUpdate, user);
 
       expect(usersService.update).toHaveBeenCalledWith(user.id, userUpdate);
       expect(result).toEqual(userSelf);

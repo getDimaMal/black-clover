@@ -81,6 +81,27 @@ describe('UserController (e2e)', () => {
     });
   });
 
+  describe('/users/self (GET', () => {
+    it('should return current user', async () => {
+      const auth = await getAuthHeader(app);
+
+      const { status, body } = await request(app.getHttpServer())
+        .get('/users/self')
+        .set(...auth);
+
+      expect(status).toEqual(200);
+      expect(body.email).toBeDefined();
+      expect(body.accessToken).not.toBeDefined();
+    });
+
+    it('should return an unauthorized error when auth header not provided', async () => {
+      const { status, body } = await request(app.getHttpServer()).get('/users/self');
+
+      expect(status).toEqual(401);
+      expect(body.message).toEqual('Unauthorized');
+    });
+  });
+
   describe('/users/self (PUT)', () => {
     it('should return an updated user', async () => {
       const auth = await getAuthHeader(app);

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { Serialize } from '../core/interseptors/serialize.interceptor';
@@ -26,10 +26,17 @@ export class UsersController {
     return this.authService.signIn(body);
   }
 
+  @Get('/self')
+  @Serialize(UserSelfDto)
+  @UseGuards(AuthGuard('jwt'))
+  getSelf(@GetSelf() self: User): UserSelfDto {
+    return self;
+  }
+
   @Put('/self')
   @Serialize(UserSelfDto)
   @UseGuards(AuthGuard('jwt'))
-  selfUpdate(@Body() userUpdate: UserUpdateDto, @GetSelf() self: User): Promise<UserSelfDto> {
+  updateSelf(@Body() userUpdate: UserUpdateDto, @GetSelf() self: User): Promise<UserSelfDto> {
     return this.usersService.update(self.id, userUpdate);
   }
 }
