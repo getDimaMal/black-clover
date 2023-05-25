@@ -1,5 +1,7 @@
 import { User } from '@black-clover/back/users/entities';
 import { UsersModule } from '@black-clover/back/users/users.module';
+import { Workspace } from '@black-clover/back/workspaces/entities';
+import { WorkspacesModule } from '@black-clover/back/workspaces/workspaces.module';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
@@ -19,10 +21,11 @@ import * as process from 'process';
         type: 'sqlite',
         database: configService.get('NX_DB_NAME'),
         synchronize: true,
-        entities: [User],
+        entities: [User, Workspace],
       }),
     }),
     UsersModule,
+    WorkspacesModule,
   ],
   providers: [{ provide: APP_PIPE, useValue: new ValidationPipe({ whitelist: true }) }],
 })
