@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { CreateUserDto, UpdateUserDto } from './dtos';
+import { CreateUserDto, UpdateUserDto } from './dto';
 import { User } from './entities';
 
 @Injectable()
@@ -32,10 +32,10 @@ export class UsersService {
     return user;
   }
 
-  async update(id: string, updateUser: UpdateUserDto): Promise<User> {
+  async update(id: string, attrs: UpdateUserDto): Promise<User> {
     const user = await this.findOne({ id });
-    const newUser = { ...user, ...updateUser };
+    Object.assign(user, attrs);
 
-    return await this.repo.save(newUser);
+    return await this.repo.save(user);
   }
 }

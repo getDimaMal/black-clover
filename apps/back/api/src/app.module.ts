@@ -1,7 +1,5 @@
-import { User } from '@black-clover/back/users/entities';
-import { UsersModule } from '@black-clover/back/users/users.module';
-import { Workspace } from '@black-clover/back/workspaces/entities';
-import { WorkspacesModule } from '@black-clover/back/workspaces/workspaces.module';
+import { User, UsersModule } from '@black-clover/back/users';
+import { Workspace, WorkspacesModule } from '@black-clover/back/workspaces';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';

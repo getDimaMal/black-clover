@@ -8,7 +8,7 @@ export class Workspace {
   @Column()
   name: string;
 
-  @Column({ default: 1 })
+  @Column({ default: 5 })
   maxNumberOfMembers: number;
 
   @Column({ default: null })

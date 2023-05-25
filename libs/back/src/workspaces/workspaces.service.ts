@@ -9,8 +9,8 @@ import { Workspace } from './entities';
 export class WorkspacesService {
   constructor(@InjectRepository(Workspace) private repo: Repository<Workspace>) {}
 
-  async create(workspaceCreate: CreateWorkspaceDto): Promise<Workspace> {
-    const workspace = this.repo.create(workspaceCreate);
+  async create(attrs: CreateWorkspaceDto): Promise<Workspace> {
+    const workspace = this.repo.create(attrs);
     return await this.repo.save(workspace);
   }
 
@@ -22,10 +22,10 @@ export class WorkspacesService {
     return workspace;
   }
 
-  async update(id: string, workspaceUpdate: UpdateWorkspaceDto): Promise<Workspace> {
+  async update(id: string, attrs: UpdateWorkspaceDto): Promise<Workspace> {
     const workspace = await this.findOne(id);
-    const updateWorkspace = { ...workspace, ...workspaceUpdate };
+    Object.assign(workspace, attrs);
 
-    return this.repo.save(updateWorkspace);
+    return this.repo.save(workspace);
   }
 }

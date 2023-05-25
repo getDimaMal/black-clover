@@ -1,12 +1,16 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import request from 'supertest';
 
 import { AppModule } from '../app.module';
 
-import { createUser } from './__test-data__/users.test-data';
-import { createWorkspace, updateWorkspace, workspace } from './__test-data__/workspaces.test-data';
-import { getAuthHeader } from './test-utils/get-auth-header';
+import {
+  getCreateErrorCases,
+  getCreateResultCases,
+  getWorkspaceProps,
+  workspaceId,
+} from './test-data/workspaces.test-data';
+import { useGetAuthHeader } from './test-utils/users.test-utils';
+import { useGetWorkspaceById, usePostWorkspace, usePutWorkspace } from './test-utils/workspaces.test-utils';
 
 describe('WorkspacesController (e2e)', () => {
   let app: INestApplication;
@@ -25,133 +29,119 @@ describe('WorkspacesController (e2e)', () => {
   });
 
   describe('/workspaces (POST)', () => {
-    it('should create a new workspace', async () => {
-      const auth = await getAuthHeader(app, createUser);
+    it.each<(typeof getCreateResultCases)[0]>(getCreateResultCases)(
+      'should return a new workspace when: $case',
+      async ({ props, result }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ id, ...other }, status] = await usePostWorkspace({ app, header, props });
 
-      const {
-        status,
-        body: { id, ...other },
-      } = await request(app.getHttpServer())
-        .post('/workspaces')
-        .set(...auth)
-        .send(createWorkspace);
+        expect(status).toEqual(201);
+        expect(id).toBeDefined();
+        expect(other).toEqual(result);
+      }
+    );
 
-      expect(status).toEqual(201);
-      expect(id).toBeDefined();
-      expect(other).toEqual(workspace);
-    });
+    it.each<(typeof getCreateErrorCases)[0]>(getCreateErrorCases)(
+      'should return an error when: $case',
+      async ({ props, error }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ message }, status] = await usePostWorkspace({ app, header, props });
 
-    it('should return unauthorized errr when auth header not provided', async () => {
-      const { status, body } = await request(app.getHttpServer()).post('/workspaces').send(createWorkspace);
+        expect(status).toEqual(400);
+        expect(message).toContain(error);
+      }
+    );
+
+    it('should return an unauthorized error when auth header not provided', async () => {
+      const [{ message }, status] = await usePostWorkspace({ app });
 
       expect(status).toEqual(401);
-      expect(body.message).toEqual('Unauthorized');
+      expect(message).toEqual('Unauthorized');
     });
   });
 
   describe('/workspaces/:id (GET)', () => {
     it('should return a workspace by id', async () => {
-      const auth = await getAuthHeader(app, createUser);
-
-      const {
-        body: { id: workspaceId },
-      } = await request(app.getHttpServer())
-        .post('/workspaces')
-        .set(...auth)
-        .send(createWorkspace);
-
-      const {
-        status,
-        body: { id, ...other },
-      } = await request(app.getHttpServer())
-        .get(`/workspaces/${workspaceId}`)
-        .set(...auth);
+      const header = await useGetAuthHeader({ app });
+      const [{ id: workspaceId }] = await usePostWorkspace({ app, header });
+      const [{ id, ...other }, status] = await useGetWorkspaceById({ app, header, workspaceId });
 
       expect(status).toEqual(200);
       expect(id).toEqual(workspaceId);
-      expect(other).toEqual(workspace);
+      expect(other).toEqual(getWorkspaceProps());
     });
 
-    it('should return validation errr when id is not UUID format', async () => {
-      const auth = await getAuthHeader(app, createUser);
-
-      const { status, body } = await request(app.getHttpServer())
-        .get('/workspaces/workspaceId')
-        .set(...auth);
+    it('should return a validation error when id is not UUID format', async () => {
+      const header = await useGetAuthHeader({ app });
+      const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId: 'not-uuid' });
 
       expect(status).toEqual(400);
-      expect(body.message).toEqual('Validation failed (uuid is expected)');
+      expect(message).toEqual('Validation failed (uuid is expected)');
     });
 
-    it('should return unauthorized errr when auth header not provided', async () => {
-      const auth = await getAuthHeader(app, createUser);
+    it('should return an error when workspace not found', async () => {
+      const header = await useGetAuthHeader({ app });
+      const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId });
 
-      const {
-        body: { id: workspaceId },
-      } = await request(app.getHttpServer())
-        .post('/workspaces')
-        .set(...auth)
-        .send(createWorkspace);
+      expect(status).toEqual(404);
+      expect(message).toEqual('workspace not found');
+    });
 
-      const res = await request(app.getHttpServer()).get(`/workspaces/${workspaceId}`);
+    it('should return an unauthorized error when auth header not provided', async () => {
+      const [{ message }, status] = await useGetWorkspaceById({ app, workspaceId });
 
-      expect(res.status).toEqual(401);
-      expect(res.body.message).toEqual('Unauthorized');
+      expect(status).toEqual(401);
+      expect(message).toEqual('Unauthorized');
     });
   });
 
   describe('/workspaces/:id (PUT)', () => {
-    it('should return a workspace with new name', async () => {
-      const auth = await getAuthHeader(app, createUser);
+    it.each<(typeof getCreateResultCases)[0]>(getCreateResultCases)(
+      'should update a workspace when: $case',
+      async ({ props, result }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ id: workspaceId }] = await usePostWorkspace({ app, header });
+        const [{ id, ...other }, status] = await usePutWorkspace({ app, header, workspaceId, props });
 
-      const {
-        body: { id: workspaceId },
-      } = await request(app.getHttpServer())
-        .post('/workspaces')
-        .set(...auth)
-        .send(createWorkspace);
+        expect(status).toEqual(200);
+        expect(id).toBeDefined();
+        expect(other).toEqual(result);
+      }
+    );
 
-      const {
-        status,
-        body: { id, ...other },
-      } = await request(app.getHttpServer())
-        .put(`/workspaces/${workspaceId}`)
-        .set(...auth)
-        .send(updateWorkspace);
+    it.each<(typeof getCreateErrorCases)[0]>(getCreateErrorCases)(
+      'should return an error when: $case',
+      async ({ props, error }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ id: workspaceId }] = await usePostWorkspace({ app, header });
+        const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId, props });
 
-      expect(status).toEqual(200);
-      expect(id).toBeDefined();
-      expect(other).toEqual({ ...workspace, ...updateWorkspace });
-    });
+        expect(status).toEqual(400);
+        expect(message).toContain(error);
+      }
+    );
 
-    it('should return unauthorized errr when auth header not provided', async () => {
-      const auth = await getAuthHeader(app, createUser);
-
-      const {
-        body: { id: workspaceId },
-      } = await request(app.getHttpServer())
-        .post('/workspaces')
-        .set(...auth)
-        .send(createWorkspace);
-
-      const { status, body } = await request(app.getHttpServer())
-        .put(`/workspaces/${workspaceId}`)
-        .send(createWorkspace);
-
-      expect(status).toEqual(401);
-      expect(body.message).toEqual('Unauthorized');
-    });
-
-    it('should return validation errr when id is not UUID format', async () => {
-      const auth = await getAuthHeader(app, createUser);
-
-      const { status, body } = await request(app.getHttpServer())
-        .put('/workspaces/workspaceId')
-        .set(...auth)
-        .send(createWorkspace);
+    it('should return a validation error when id is not UUID format', async () => {
+      const header = await useGetAuthHeader({ app });
+      const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId: 'not-uuid' });
 
       expect(status).toEqual(400);
-      expect(body.message).toEqual('Validation failed (uuid is expected)');
+      expect(message).toEqual('Validation failed (uuid is expected)');
+    });
+
+    it('should return an error when workspace not found', async () => {
+      const header = await useGetAuthHeader({ app });
+      const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId });
+
+      expect(status).toEqual(404);
+      expect(message).toEqual('workspace not found');
+    });
+
+    it('should return an unauthorized error when auth header not provided', async () => {
+      const [{ message }, status] = await usePutWorkspace({ app, workspaceId });
+
+      expect(status).toEqual(401);
+      expect(message).toEqual('Unauthorized');
     });
   });
 });

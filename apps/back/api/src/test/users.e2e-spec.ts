@@ -1,11 +1,15 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import request from 'supertest';
 
 import { AppModule } from '../app.module';
 
-import { createUser, selfUser, updateUser } from './__test-data__/users.test-data';
-import { getAuthHeader } from './test-utils/get-auth-header';
+import {
+  getSelfUserPros,
+  getSignValidationErrorCases,
+  getUpdateValidationErrorCases,
+  getUpdateValidationResultCases,
+} from './test-data/users.test-data';
+import { useGetAuthHeader, useGetSelf, usePutSelf, useSignIn, useSignUp } from './test-utils/users.test-utils';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -25,114 +29,109 @@ describe('UserController (e2e)', () => {
 
   describe('/users/signup (POST)', () => {
     it('should create a new user', async () => {
-      const {
-        status,
-        body: { id, accessToken, ...other },
-      } = await request(app.getHttpServer()).post('/users/signup').send(createUser);
+      const [{ id, accessToken, ...other }, status] = await useSignUp({ app });
 
       expect(status).toEqual(201);
       expect(id).toBeDefined();
       expect(accessToken).toBeDefined();
-      expect(other).toEqual(selfUser);
+      expect(other).toEqual(getSelfUserPros());
     });
 
-    it('should return a validation error when fields are empty', async () => {
-      const { status, body } = await request(app.getHttpServer()).post('/users/signup').send({});
+    it.each<(typeof getSignValidationErrorCases)[0]>(getSignValidationErrorCases)(
+      'should return a validation error when: $case',
+      async ({ props: user, error }) => {
+        const [{ message }, status] = await useSignUp({ app, user });
 
-      expect(status).toEqual(400);
-      expect(body.error).toEqual('Bad Request');
-      expect(body.message[0]).toEqual('email must be an email');
-      expect(body.message[1]).toEqual('password should be min 8 chars with letters & numbers');
-    });
+        expect(status).toEqual(400);
+        expect(message).toContain(error);
+      }
+    );
 
     it('should return a conflict error when user with email exists', async () => {
-      await request(app.getHttpServer()).post('/users/signup').send(createUser);
-
-      const { status, body } = await request(app.getHttpServer()).post('/users/signup').send(createUser);
+      await useSignUp({ app });
+      const [{ message }, status] = await useSignUp({ app });
 
       expect(status).toEqual(409);
-      expect(body.error).toEqual('Conflict');
-      expect(body.message).toEqual('user already exists');
+      expect(message).toEqual('user already exists');
     });
   });
 
   describe('/users/signin (POST)', () => {
-    it('should sign in user and return an accessToken', async () => {
-      await request(app.getHttpServer()).post('/users/signup').send(createUser);
-      const {
-        status,
-        body: { id, accessToken, ...other },
-      } = await request(app.getHttpServer()).post('/users/signin').send(createUser);
+    it('should sign in a user and return an accessToken', async () => {
+      await useSignUp({ app });
+      const [{ id, accessToken, ...other }, status] = await useSignIn({ app });
 
       expect(status).toEqual(200);
       expect(id).toBeDefined();
       expect(accessToken).toBeDefined();
-      expect(other).toEqual(selfUser);
+      expect(other).toEqual(getSelfUserPros());
     });
 
-    it('should return a validation error when fields are empty', async () => {
-      const { status, body } = await request(app.getHttpServer()).post('/users/signin').send({});
+    it.each<(typeof getSignValidationErrorCases)[0]>(getSignValidationErrorCases)(
+      'should return a validation error when: $case',
+      async ({ props: user, error }) => {
+        const [{ message }, status] = await useSignIn({ app, user });
 
-      expect(status).toEqual(400);
-      expect(body.error).toEqual('Bad Request');
-      expect(body.message[0]).toEqual('email must be an email');
-      expect(body.message[1]).toEqual('password should be min 8 chars with letters & numbers');
-    });
+        expect(status).toEqual(400);
+        expect(message).toContain(error);
+      }
+    );
 
     it('should return an unauthorized error when credentials are incorrect', async () => {
-      const { status, body } = await request(app.getHttpServer()).post('/users/signin').send(createUser);
+      const [{ message }, status] = await useSignIn({ app });
 
       expect(status).toEqual(401);
-      expect(body.error).toEqual('Unauthorized');
+      expect(message).toEqual('please check your credentials');
     });
   });
 
   describe('/users/self (GET)', () => {
-    it('should return current user', async () => {
-      const auth = await getAuthHeader(app, createUser);
-
-      const {
-        status,
-        body: { id, ...other },
-      } = await request(app.getHttpServer())
-        .get('/users/self')
-        .set(...auth);
+    it('should return the current user', async () => {
+      const header = await useGetAuthHeader({ app });
+      const [{ id, ...other }, status] = await useGetSelf({ app, header });
 
       expect(status).toEqual(200);
       expect(id).toBeDefined();
-      expect(other).toEqual(selfUser);
+      expect(other).toEqual(getSelfUserPros());
     });
 
     it('should return an unauthorized error when auth header not provided', async () => {
-      const { status, body } = await request(app.getHttpServer()).get('/users/self');
+      const [{ message }, status] = await useGetSelf({ app });
 
       expect(status).toEqual(401);
-      expect(body.message).toEqual('Unauthorized');
+      expect(message).toEqual('Unauthorized');
     });
   });
 
   describe('/users/self (PUT)', () => {
-    it('should return an updated user', async () => {
-      const auth = await getAuthHeader(app, createUser);
+    it.each<(typeof getUpdateValidationResultCases)[0]>(getUpdateValidationResultCases)(
+      'should return an updated user when $case',
+      async ({ props, result }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ id, ...other }, status] = await usePutSelf({ app, header, props });
 
-      const {
-        status,
-        body: { id, ...other },
-      } = await request(app.getHttpServer())
-        .put('/users/self')
-        .set(...auth)
-        .send(updateUser);
+        expect(status).toEqual(200);
+        expect(id).toBeDefined();
+        expect(other).toEqual(result);
+      }
+    );
 
-      expect(status).toEqual(200);
-      expect(id).toBeDefined();
-      expect(other).toEqual({ ...selfUser, ...updateUser });
-    });
+    it.each<(typeof getUpdateValidationErrorCases)[0]>(getUpdateValidationErrorCases)(
+      'should return an error when: $case',
+      async ({ props, error }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ message }, status] = await usePutSelf({ app, header, props });
+
+        expect(status).toEqual(400);
+        expect(message).toContain(error);
+      }
+    );
 
     it('should return an unauthorized error when no auth is provided', async () => {
-      const { status, body } = await request(app.getHttpServer()).put('/users/self').send(updateUser);
+      const [{ message }, status] = await usePutSelf({ app });
 
       expect(status).toEqual(401);
-      expect(body.message).toEqual('Unauthorized');
+      expect(message).toEqual('Unauthorized');
     });
   });
 });

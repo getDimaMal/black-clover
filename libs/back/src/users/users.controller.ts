@@ -6,7 +6,7 @@ import { Serialize } from '../core/interseptors/serialize.interceptor';
 
 import { GetSelf } from './decorators/get-self.decorator';
 import { AuthService } from './auth.service';
-import { CreateUserDto, SelfUserDto, TokenUserDto, UpdateUserDto } from './dtos';
+import { CreateUserDto, SelfUserDto, TokenUserDto, UpdateUserDto } from './dto';
 import { User } from './entities';
 import { UsersService } from './users.service';
 
