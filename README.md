@@ -4,25 +4,22 @@
 
 ### Before start
 
-To install dependencies, run `yarn`
+- `yarn install` - to install dependencies
 
 ### Backend
 
-To run server `yarn back-api:dev`
+- `yarn run back-api:dev` - run server
 
 ### Client
 
-To run client `yarn front-client:dev`
+- `yarn run front-client:dev` - to run client
 
 ### Codebase
 
-To run format & lint for all files `yarn format`
-
-To run format & lint for affected files `yarn affected:format`
-
-To run test for all files `yarn test`
-
-To run test for affected files `yarn affected:test`
+- `yarn run format` - to run format & lint for ALL files
+- `yarn run affected:format` - to run format & lint for affected files
+- `yarn run test` - to run test for ALL files
+- `yarn run affected:test` - to run test for affected files
 
 ## Api
 
