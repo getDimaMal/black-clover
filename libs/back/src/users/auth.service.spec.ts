@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
 
-import { token, user, userCreate } from './__test-data__/users.test-data';
+import { createUser, token, user } from './__test-data__/users.test-data';
 import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 
@@ -44,9 +44,9 @@ describe('AuthService', () => {
 
   describe('signUp', () => {
     it('should create a new user and return the user object with access token', async () => {
-      const result = await authService.signUp(userCreate);
+      const result = await authService.signUp(createUser);
 
-      expect(mockUsersService.create).toHaveBeenCalledWith(userCreate);
+      expect(mockUsersService.create).toHaveBeenCalledWith(createUser);
       expect(mockJwtService.sign).toHaveBeenCalledWith({ id: user.id });
       expect(result).toEqual({ ...user, accessToken: token });
     });
@@ -56,10 +56,10 @@ describe('AuthService', () => {
     it('should return the user object with access token if credentials are valid', async () => {
       const compareMock = jest.spyOn(bcrypt, 'compare').mockImplementation(() => Promise.resolve(true));
 
-      const result = await authService.signIn(userCreate);
+      const result = await authService.signIn(createUser);
 
-      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: userCreate.email });
-      expect(compareMock).toHaveBeenCalledWith(userCreate.password, user.hash);
+      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: createUser.email });
+      expect(compareMock).toHaveBeenCalledWith(createUser.password, user.hash);
       expect(mockJwtService.sign).toHaveBeenCalledWith({ id: user.id });
       expect(result).toEqual({ ...user, accessToken: token });
     });
@@ -68,10 +68,10 @@ describe('AuthService', () => {
       const compareMock = jest.spyOn(bcrypt, 'compare');
       compareMock.mockImplementation(() => Promise.resolve(false));
 
-      await expect(authService.signIn(userCreate)).rejects.toThrow(UnauthorizedException);
+      await expect(authService.signIn(createUser)).rejects.toThrow(UnauthorizedException);
 
-      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: userCreate.email });
-      expect(compareMock).toHaveBeenCalledWith(userCreate.password, user.hash);
+      expect(mockUsersService.findOne).toHaveBeenCalledWith({ email: createUser.email });
+      expect(compareMock).toHaveBeenCalledWith(createUser.password, user.hash);
     });
   });
 });

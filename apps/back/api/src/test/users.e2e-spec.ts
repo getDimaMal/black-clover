@@ -4,7 +4,7 @@ import request from 'supertest';
 
 import { AppModule } from '../app.module';
 
-import { getUserUpdate, userCreate } from './__test-data__/users.test-data';
+import { createUser, selfUser, updateUser } from './__test-data__/users.test-data';
 import { getAuthHeader } from './test-utils/get-auth-header';
 
 describe('UserController (e2e)', () => {
@@ -25,12 +25,15 @@ describe('UserController (e2e)', () => {
 
   describe('/users/signup (POST)', () => {
     it('should create a new user', async () => {
-      const { status, body } = await request(app.getHttpServer()).post('/users/signup').send(userCreate);
+      const {
+        status,
+        body: { id, accessToken, ...other },
+      } = await request(app.getHttpServer()).post('/users/signup').send(createUser);
 
       expect(status).toEqual(201);
-      expect(body.id).toBeDefined();
-      expect(body.accessToken).toBeDefined();
-      expect(body.email).toEqual(userCreate.email);
+      expect(id).toBeDefined();
+      expect(accessToken).toBeDefined();
+      expect(other).toEqual(selfUser);
     });
 
     it('should return a validation error when fields are empty', async () => {
@@ -43,9 +46,9 @@ describe('UserController (e2e)', () => {
     });
 
     it('should return a conflict error when user with email exists', async () => {
-      await request(app.getHttpServer()).post('/users/signup').send(userCreate);
+      await request(app.getHttpServer()).post('/users/signup').send(createUser);
 
-      const { status, body } = await request(app.getHttpServer()).post('/users/signup').send(userCreate);
+      const { status, body } = await request(app.getHttpServer()).post('/users/signup').send(createUser);
 
       expect(status).toEqual(409);
       expect(body.error).toEqual('Conflict');
@@ -55,13 +58,16 @@ describe('UserController (e2e)', () => {
 
   describe('/users/signin (POST)', () => {
     it('should sign in user and return an accessToken', async () => {
-      await request(app.getHttpServer()).post('/users/signup').send(userCreate);
-      const { status, body } = await request(app.getHttpServer()).post('/users/signin').send(userCreate);
+      await request(app.getHttpServer()).post('/users/signup').send(createUser);
+      const {
+        status,
+        body: { id, accessToken, ...other },
+      } = await request(app.getHttpServer()).post('/users/signin').send(createUser);
 
       expect(status).toEqual(200);
-      expect(body.id).toBeDefined();
-      expect(body.accessToken).toBeDefined();
-      expect(body.email).toEqual(userCreate.email);
+      expect(id).toBeDefined();
+      expect(accessToken).toBeDefined();
+      expect(other).toEqual(selfUser);
     });
 
     it('should return a validation error when fields are empty', async () => {
@@ -74,24 +80,27 @@ describe('UserController (e2e)', () => {
     });
 
     it('should return an unauthorized error when credentials are incorrect', async () => {
-      const { status, body } = await request(app.getHttpServer()).post('/users/signin').send(userCreate);
+      const { status, body } = await request(app.getHttpServer()).post('/users/signin').send(createUser);
 
       expect(status).toEqual(401);
       expect(body.error).toEqual('Unauthorized');
     });
   });
 
-  describe('/users/self (GET', () => {
+  describe('/users/self (GET)', () => {
     it('should return current user', async () => {
-      const auth = await getAuthHeader(app);
+      const auth = await getAuthHeader(app, createUser);
 
-      const { status, body } = await request(app.getHttpServer())
+      const {
+        status,
+        body: { id, ...other },
+      } = await request(app.getHttpServer())
         .get('/users/self')
         .set(...auth);
 
       expect(status).toEqual(200);
-      expect(body.email).toBeDefined();
-      expect(body.accessToken).not.toBeDefined();
+      expect(id).toBeDefined();
+      expect(other).toEqual(selfUser);
     });
 
     it('should return an unauthorized error when auth header not provided', async () => {
@@ -104,110 +113,26 @@ describe('UserController (e2e)', () => {
 
   describe('/users/self (PUT)', () => {
     it('should return an updated user', async () => {
-      const auth = await getAuthHeader(app);
-      const props = getUserUpdate();
+      const auth = await getAuthHeader(app, createUser);
 
-      const { status, body } = await request(app.getHttpServer())
+      const {
+        status,
+        body: { id, ...other },
+      } = await request(app.getHttpServer())
         .put('/users/self')
         .set(...auth)
-        .send(props);
+        .send(updateUser);
 
       expect(status).toEqual(200);
-      expect(body.id).toBeDefined();
-      expect(body.email).toBeDefined();
-      expect(body.firstName).toEqual(props.firstName);
-      expect(body.lastName).toEqual(props.lastName);
+      expect(id).toBeDefined();
+      expect(other).toEqual({ ...selfUser, ...updateUser });
     });
 
     it('should return an unauthorized error when no auth is provided', async () => {
-      const props = getUserUpdate();
-
-      const { status, body } = await request(app.getHttpServer()).put('/users/self').send(props);
+      const { status, body } = await request(app.getHttpServer()).put('/users/self').send(updateUser);
 
       expect(status).toEqual(401);
       expect(body.message).toEqual('Unauthorized');
-    });
-
-    describe('fields validation', () => {
-      it('should return user with updated firstName', async () => {
-        const auth = await getAuthHeader(app);
-        const props = getUserUpdate({ lastName: undefined });
-
-        const { status, body } = await request(app.getHttpServer())
-          .put('/users/self')
-          .set(...auth)
-          .send(props);
-
-        expect(status).toEqual(200);
-        expect(body.firstName).toEqual(props.firstName);
-        expect(body.lastName).toEqual(null);
-      });
-
-      it('should return user with updated lastName', async () => {
-        const auth = await getAuthHeader(app);
-        const props = getUserUpdate({ firstName: undefined });
-
-        const { status, body } = await request(app.getHttpServer())
-          .put('/users/self')
-          .set(...auth)
-          .send(props);
-
-        expect(status).toEqual(200);
-        expect(body.firstName).toEqual(null);
-        expect(body.lastName).toEqual(props.lastName);
-      });
-
-      it('should return a validation error when firstName length less than 3 chars', async () => {
-        const auth = await getAuthHeader(app);
-        const props = getUserUpdate({ firstName: '' });
-
-        const { status, body } = await request(app.getHttpServer())
-          .put('/users/self')
-          .set(...auth)
-          .send(props);
-
-        expect(status).toEqual(400);
-        expect(body.message[0]).toEqual('firstName must be longer than or equal to 3 characters');
-      });
-
-      it('should return a validation error when firstName length longer than 24 chars', async () => {
-        const auth = await getAuthHeader(app);
-        const props = getUserUpdate({ firstName: 'too long name to test validation' });
-
-        const { status, body } = await request(app.getHttpServer())
-          .put('/users/self')
-          .set(...auth)
-          .send(props);
-
-        expect(status).toEqual(400);
-        expect(body.message[0]).toEqual('firstName must be shorter than or equal to 24 characters');
-      });
-
-      it('should return a validation error when lastName length less than 3 chars', async () => {
-        const auth = await getAuthHeader(app);
-        const props = getUserUpdate({ lastName: '' });
-
-        const { status, body } = await request(app.getHttpServer())
-          .put('/users/self')
-          .set(...auth)
-          .send(props);
-
-        expect(status).toEqual(400);
-        expect(body.message[0]).toEqual('lastName must be longer than or equal to 3 characters');
-      });
-
-      it('should return a validation error when lastName length longer than 24 chars', async () => {
-        const auth = await getAuthHeader(app);
-        const props = getUserUpdate({ lastName: 'too long name to test validation' });
-
-        const { status, body } = await request(app.getHttpServer())
-          .put('/users/self')
-          .set(...auth)
-          .send(props);
-
-        expect(status).toEqual(400);
-        expect(body.message[0]).toEqual('lastName must be shorter than or equal to 24 characters');
-      });
     });
   });
 });

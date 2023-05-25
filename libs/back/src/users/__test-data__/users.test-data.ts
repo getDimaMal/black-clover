@@ -1,4 +1,4 @@
-import { UserCreateDto, UserSelfDto, UserTokenDto, UserUpdateDto } from '../dtos';
+import { CreateUserDto, SelfUserDto, TokenUserDto, UpdateUserDto } from '../dtos';
 import { User } from '../entities';
 
 export const salt = 'mockedSalt';
@@ -13,11 +13,11 @@ export const user: User = {
   hash: 'mockedHash',
 };
 
-export const userCreate: UserCreateDto = { email: 'test@example.com', password: 'password123' };
+export const createUser: CreateUserDto = { email: 'test@example.com', password: 'password123' };
 
-export const userUpdate: UserUpdateDto = { firstName: 'Tony', lastName: 'Stark' };
+export const updateUser: UpdateUserDto = { firstName: 'Tony', lastName: 'Stark' };
 
-export const userToken: UserTokenDto = {
+export const tokenUser: TokenUserDto = {
   id: 'userId',
   email: 'test@mail.com',
   firstName: 'Tony',
@@ -25,7 +25,7 @@ export const userToken: UserTokenDto = {
   accessToken: 'mockedAccessToken',
 };
 
-export const userSelf: UserSelfDto = {
+export const selfUser: SelfUserDto = {
   id: 'userId',
   email: 'test@mail.com',
   firstName: 'Tony',

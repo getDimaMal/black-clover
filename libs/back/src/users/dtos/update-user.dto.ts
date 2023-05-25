@@ -2,7 +2,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, TransformFnParams } from 'class-transformer';
 import { IsOptional, IsString, Length } from 'class-validator';
 
-export class UserUpdateDto {
+export class UpdateUserDto {
   @IsString()
   @IsOptional()
   @Length(3, 24)

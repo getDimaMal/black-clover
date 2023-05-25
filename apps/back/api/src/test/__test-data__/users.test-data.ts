@@ -1,9 +1,9 @@
-import { UserCreateDto, UserUpdateDto } from '@black-clover/back/users/dtos';
+import { CreateUserDto, SelfUserDto, UpdateUserDto } from '@black-clover/back/users/dtos';
 
-export const userCreate: UserCreateDto = { email: 'test@email.com', password: 'password123' };
+const email = 'test@email.com';
 
-export const getUserUpdate = (props: Partial<UserUpdateDto> = {}): UserUpdateDto => ({
-  firstName: 'Tony',
-  lastName: 'Stark',
-  ...props,
-});
+export const createUser: CreateUserDto = { email, password: 'password123' };
+
+export const updateUser: UpdateUserDto = { firstName: 'Tony', lastName: 'Stark' };
+
+export const selfUser: Omit<SelfUserDto, 'id'> = { email, firstName: null, lastName: null };
