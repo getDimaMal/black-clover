@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { createUser, selfUser, tokenUser, updateUser, user } from './__test-data__/users.test-data';
+import { createUser, selfUser, tokenUser, updateUser, user } from './test-data/users.test-data';
 import { AuthService } from './auth.service';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';

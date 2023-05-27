@@ -4,7 +4,9 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { Serialize } from '../core/interseptors/serialize.interceptor';
 
-import { CreateWorkspaceDto, UpdateWorkspaceDto, WorkspaceDto } from './dto';
+import { CreateWorkspaceDto } from './dto/create-workspace.dto';
+import { UpdateWorkspaceDto } from './dto/update-workspace.dto';
+import { WorkspaceDto } from './dto/workspace.dto';
 import { WorkspacesService } from './workspaces.service';
 
 @ApiTags('Workspaces')

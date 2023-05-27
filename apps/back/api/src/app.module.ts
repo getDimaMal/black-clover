@@ -1,5 +1,7 @@
-import { User, UsersModule } from '@black-clover/back/users';
-import { Workspace, WorkspacesModule } from '@black-clover/back/workspaces';
+import { User } from '@black-clover/back/users/entities/user.entity';
+import { UsersModule } from '@black-clover/back/users/users.module';
+import { Workspace } from '@black-clover/back/workspaces/entities/workspace.entity';
+import { WorkspacesModule } from '@black-clover/back/workspaces/workspaces.module';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_PIPE } from '@nestjs/core';
@@ -19,6 +21,7 @@ import * as process from 'process';
         type: 'sqlite',
         database: configService.get('NX_DB_NAME'),
         synchronize: true,
+        autoLoadEntities: true,
         entities: [User, Workspace],
       }),
     }),

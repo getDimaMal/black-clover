@@ -1,4 +1,4 @@
-import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto';
+import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
 import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
 import { v4 as uuidV4 } from 'uuid';
 

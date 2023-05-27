@@ -1,4 +1,5 @@
-import { CreateWorkspaceDto, WorkspaceDto } from '@black-clover/back/workspaces/dto';
+import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
+import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 

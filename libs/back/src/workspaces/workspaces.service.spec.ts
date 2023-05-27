@@ -3,8 +3,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { workspace, workspaceCreate, workspaceUpdate } from './__test-data__/workspaces.test-data';
-import { Workspace } from './entities';
+import { Workspace } from './entities/workspace.entity';
+import { workspace, workspaceCreate, workspaceUpdate } from './test-data/workspaces.test-data';
 import { WorkspacesService } from './workspaces.service';
 
 describe('WorkspacesService', () => {

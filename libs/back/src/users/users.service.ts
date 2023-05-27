@@ -3,8 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { CreateUserDto, UpdateUserDto } from './dto';
-import { User } from './entities';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -20,7 +21,7 @@ export class UsersService {
     } catch (error: any) {
       if (error?.errno === 19) throw new ConflictException('user already exists');
 
-      throw new BadRequestException();
+      throw new BadRequestException(error);
     }
   }
 

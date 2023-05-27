@@ -1,4 +1,7 @@
-import { CreateUserDto, SelfUserDto, TokenUserDto, UpdateUserDto } from '@black-clover/back/users/dto';
+import { CreateUserDto } from '@black-clover/back/users/dto/create-user.dto';
+import { SelfUserDto } from '@black-clover/back/users/dto/self-user.dto';
+import { TokenUserDto } from '@black-clover/back/users/dto/token-user.dto';
+import { UpdateUserDto } from '@black-clover/back/users/dto/update-user.dto';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 

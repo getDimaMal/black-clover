@@ -4,8 +4,8 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { createUser, hash, salt, updateUser, user } from './__test-data__/users.test-data';
 import { User } from './entities/user.entity';
+import { createUser, hash, salt, updateUser, user } from './test-data/users.test-data';
 import { UsersService } from './users.service';
 
 jest.mock('bcrypt');

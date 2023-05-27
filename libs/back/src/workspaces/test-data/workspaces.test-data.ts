@@ -1,5 +1,6 @@
-import { CreateWorkspaceDto, UpdateWorkspaceDto } from '../dto';
-import { Workspace } from '../entities';
+import { CreateWorkspaceDto } from '../dto/create-workspace.dto';
+import { UpdateWorkspaceDto } from '../dto/update-workspace.dto';
+import { Workspace } from '../entities/workspace.entity';
 
 export const workspace: Workspace = {
   id: 'workspaceId',

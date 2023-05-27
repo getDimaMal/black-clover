@@ -5,9 +5,12 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Serialize } from '../core/interseptors/serialize.interceptor';
 
 import { GetSelf } from './decorators/get-self.decorator';
+import { CreateUserDto } from './dto/create-user.dto';
+import { SelfUserDto } from './dto/self-user.dto';
+import { TokenUserDto } from './dto/token-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
 import { AuthService } from './auth.service';
-import { CreateUserDto, SelfUserDto, TokenUserDto, UpdateUserDto } from './dto';
-import { User } from './entities';
 import { UsersService } from './users.service';
 
 @ApiTags('Users')
