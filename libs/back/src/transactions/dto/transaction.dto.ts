@@ -12,4 +12,7 @@ export class TransactionDto {
 
   @Expose()
   amountOfMembers: number;
+
+  @Expose()
+  createdAt: Date;
 }

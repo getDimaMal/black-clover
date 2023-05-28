@@ -8,7 +8,9 @@ export const getCreateTransactionProps = (props: Partial<CreateTransactionDto> =
   ...props,
 });
 
-export const getTransactionProps = (props: Partial<Omit<TransactionDto, 'id'>> = {}): Omit<TransactionDto, 'id'> => ({
+export const getTransactionProps = (
+  props: Partial<Omit<TransactionDto, 'id'>> = {}
+): Omit<TransactionDto, 'id' | 'createdAt'> => ({
   totalPrice: 90,
   amountOfDays: 30,
   amountOfMembers: 9,

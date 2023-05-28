@@ -30,10 +30,11 @@ describe('TransactionsController (e2e)', () => {
   describe('/transactions (POST)', () => {
     it('should return a new transaction', async () => {
       const header = await useGetAuthHeader({ app });
-      const [{ id, ...other }, status] = await usePostTransaction({ app, header });
+      const [{ id, createdAt, ...other }, status] = await usePostTransaction({ app, header });
 
       expect(status).toBe(201);
       expect(id).toBeDefined();
+      expect(createdAt).toBeDefined();
       expect(other).toEqual(getTransactionProps());
     });
 

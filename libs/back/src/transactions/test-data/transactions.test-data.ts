@@ -6,6 +6,7 @@ export const transaction: Transaction = {
   totalPrice: 180,
   amountOfDays: 60,
   amountOfMembers: 9,
+  createdAt: new Date(),
 };
 
 export const transactionsList: Transaction[] = [
@@ -14,12 +15,14 @@ export const transactionsList: Transaction[] = [
     totalPrice: 90,
     amountOfDays: 30,
     amountOfMembers: 9,
+    createdAt: new Date(),
   },
   {
     id: 'transaction-id-456',
     totalPrice: 180,
     amountOfDays: 60,
     amountOfMembers: 9,
+    createdAt: new Date(),
   },
 ];
 
