@@ -1,3 +1,5 @@
+import { Transaction } from '@black-clover/back/transactions/entities/transaction.entity';
+import { TransactionsModule } from '@black-clover/back/transactions/transactions.module';
 import { User } from '@black-clover/back/users/entities/user.entity';
 import { UsersModule } from '@black-clover/back/users/users.module';
 import { Workspace } from '@black-clover/back/workspaces/entities/workspace.entity';
@@ -22,11 +24,12 @@ import * as process from 'process';
         database: configService.get('NX_DB_NAME'),
         synchronize: true,
         autoLoadEntities: true,
-        entities: [User, Workspace],
+        entities: [User, Workspace, Transaction],
       }),
     }),
     UsersModule,
     WorkspacesModule,
+    TransactionsModule,
   ],
   providers: [{ provide: APP_PIPE, useValue: new ValidationPipe({ whitelist: true }) }],
 })
