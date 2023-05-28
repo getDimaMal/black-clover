@@ -5,9 +5,9 @@ import { AppModule } from '../app.module';
 
 import {
   getSelfUserPros,
-  getSignValidationErrorCases,
-  getUpdateValidationErrorCases,
-  getUpdateValidationResultCases,
+  getSignErrorCases,
+  getUpdateErrorCases,
+  getUpdateResultCases,
 } from './test-data/users.test-data';
 import { useGetAuthHeader, useGetSelf, usePutSelf, useSignIn, useSignUp } from './test-utils/users.test-utils';
 
@@ -37,7 +37,7 @@ describe('UserController (e2e)', () => {
       expect(other).toEqual(getSelfUserPros());
     });
 
-    it.each<(typeof getSignValidationErrorCases)[0]>(getSignValidationErrorCases)(
+    it.each<(typeof getSignErrorCases)[0]>(getSignErrorCases)(
       'should return a validation error when: $case',
       async ({ props: user, error }) => {
         const [{ message }, status] = await useSignUp({ app, user });
@@ -67,7 +67,7 @@ describe('UserController (e2e)', () => {
       expect(other).toEqual(getSelfUserPros());
     });
 
-    it.each<(typeof getSignValidationErrorCases)[0]>(getSignValidationErrorCases)(
+    it.each<(typeof getSignErrorCases)[0]>(getSignErrorCases)(
       'should return a validation error when: $case',
       async ({ props: user, error }) => {
         const [{ message }, status] = await useSignIn({ app, user });
@@ -104,7 +104,7 @@ describe('UserController (e2e)', () => {
   });
 
   describe('/users/self (PUT)', () => {
-    it.each<(typeof getUpdateValidationResultCases)[0]>(getUpdateValidationResultCases)(
+    it.each<(typeof getUpdateResultCases)[0]>(getUpdateResultCases)(
       'should return an updated user when $case',
       async ({ props, result }) => {
         const header = await useGetAuthHeader({ app });
@@ -116,7 +116,7 @@ describe('UserController (e2e)', () => {
       }
     );
 
-    it.each<(typeof getUpdateValidationErrorCases)[0]>(getUpdateValidationErrorCases)(
+    it.each<(typeof getUpdateErrorCases)[0]>(getUpdateErrorCases)(
       'should return an error when: $case',
       async ({ props, error }) => {
         const header = await useGetAuthHeader({ app });

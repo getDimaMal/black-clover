@@ -23,7 +23,7 @@ export const getUpdateUserProps = (props: Partial<UpdateUserDto> = {}): UpdateUs
   ...props,
 });
 
-export const getSignValidationErrorCases: { case: string; props: CreateUserDto; error: string }[] = [
+export const getSignErrorCases: { case: string; props: CreateUserDto; error: string }[] = [
   {
     case: 'an email is not email',
     props: getCreateUserProps({ email: 'notEmail' }),
@@ -56,7 +56,7 @@ export const getSignValidationErrorCases: { case: string; props: CreateUserDto; 
   },
 ];
 
-export const getUpdateValidationResultCases: {
+export const getUpdateResultCases: {
   case: string;
   props: UpdateUserDto;
   result: Omit<SelfUserDto, 'id'>;
@@ -83,7 +83,7 @@ export const getUpdateValidationResultCases: {
   },
 ];
 
-export const getUpdateValidationErrorCases: { case: string; props: UpdateUserDto; error: string }[] = [
+export const getUpdateErrorCases: { case: string; props: UpdateUserDto; error: string }[] = [
   {
     case: 'a firstName is too short',
     props: getUpdateUserProps({ firstName: 'li' }),

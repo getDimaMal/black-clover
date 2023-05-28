@@ -1,10 +1,11 @@
 import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
 import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
-import { v4 as uuidV4 } from 'uuid';
+
+import { getUUID } from '../test-utils/test-utils';
 
 const name = 'Test Workspace';
 
-export const workspaceId = uuidV4();
+export const workspaceId = getUUID();
 
 export const getCreateWorkspaceProps = (props: Partial<CreateWorkspaceDto> = {}): CreateWorkspaceDto => ({
   name,
