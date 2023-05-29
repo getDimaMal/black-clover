@@ -42,15 +42,10 @@ describe('WorkspacesService', () => {
       expect(result).toEqual(workspace);
     });
 
-    it('should throw NotFoundException when workspace is not found', async () => {
+    it('should throw a NotFoundException when workspace is not found', async () => {
       jest.spyOn(mockRepository, 'findOneBy').mockResolvedValue(null);
 
-      try {
-        await workspacesService.findOne(workspace.id);
-      } catch (error) {
-        expect(mockRepository.findOneBy).toHaveBeenCalledWith({ id: workspace.id });
-        expect(error).toBeInstanceOf(NotFoundException);
-      }
+      await expect(workspacesService.findOne(workspace.id)).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -66,6 +61,15 @@ describe('WorkspacesService', () => {
       expect(workspacesService.findOne).toHaveBeenCalledWith(workspace.id);
       expect(mockRepository.save).toHaveBeenCalledWith(updatedWorkspace);
       expect(result).toEqual(updatedWorkspace);
+    });
+
+    it('should throw NotFoundException when workspace is not found', async () => {
+      jest.spyOn(workspacesService, 'findOne').mockImplementation(() => {
+        throw new NotFoundException();
+      });
+
+      await expect(workspacesService.update(workspace.id, workspaceUpdate)).rejects.toThrow(NotFoundException);
+      expect(mockRepository.save).toHaveBeenCalledTimes(0);
     });
   });
 });

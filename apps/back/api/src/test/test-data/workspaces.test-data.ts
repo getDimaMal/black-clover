@@ -19,42 +19,63 @@ export const getWorkspaceProps = (props: Partial<Omit<WorkspaceDto, 'id'>> = {})
   ...props,
 });
 
-export const getCreateResultCases: {
+export const getCreateWorkspaceResultCases: {
   case: string;
   props: CreateWorkspaceDto;
   result: Omit<WorkspaceDto, 'id'>;
 }[] = [
   {
-    case: 'a regular name',
+    case: 'regular name',
     props: getCreateWorkspaceProps({ name: 'Regular Name' }),
     result: getWorkspaceProps({ name: 'Regular Name' }),
   },
   {
-    case: 'a name surrounded by spaces',
+    case: 'name surrounded by spaces',
     props: getCreateWorkspaceProps({ name: '   Regular Name   ' }),
     result: getWorkspaceProps({ name: 'Regular Name' }),
   },
 ];
 
-export const getCreateErrorCases: { case: string; props: CreateWorkspaceDto; error: string }[] = [
+export const getCreateWorkspaceErrorCases: { case: string; props: CreateWorkspaceDto; error: string }[] = [
   {
-    case: 'a name is null',
+    case: 'name is null',
     props: getCreateWorkspaceProps({ name: null }),
     error: 'name must be a string',
   },
   {
-    case: 'a name is undefined',
+    case: 'name is undefined',
     props: getCreateWorkspaceProps({ name: undefined }),
     error: 'name must be a string',
   },
   {
-    case: 'a name is empty',
+    case: 'name is empty',
     props: getCreateWorkspaceProps({ name: '' }),
     error: 'name must be longer than or equal to 3 characters',
   },
   {
-    case: 'a name is too long',
+    case: 'name is too long',
     props: getCreateWorkspaceProps({ name: 'very long name of workspace to check validation rules' }),
     error: 'name must be shorter than or equal to 48 characters',
+  },
+];
+
+export const getFindByWorkspaceIdErrorCases: { case: string; workspaceId: string; error: string; code: number }[] = [
+  {
+    case: 'workspaceId is 123',
+    workspaceId: '123',
+    error: 'Validation failed (uuid is expected)',
+    code: 400,
+  },
+  {
+    case: 'workspaceId is not UUID',
+    workspaceId: 'not-uuid',
+    error: 'Validation failed (uuid is expected)',
+    code: 400,
+  },
+  {
+    case: 'workspaceId is wrong UUID',
+    workspaceId: getUUID(),
+    error: 'workspace not found',
+    code: 404,
   },
 ];

@@ -4,8 +4,9 @@ import { Test } from '@nestjs/testing';
 import { AppModule } from '../app.module';
 
 import {
-  getCreateErrorCases,
-  getCreateResultCases,
+  getCreateWorkspaceErrorCases,
+  getCreateWorkspaceResultCases,
+  getFindByWorkspaceIdErrorCases,
   getWorkspaceProps,
   workspaceId,
 } from './test-data/workspaces.test-data';
@@ -29,7 +30,7 @@ describe('WorkspacesController (e2e)', () => {
   });
 
   describe('/workspaces (POST)', () => {
-    it.each<(typeof getCreateResultCases)[0]>(getCreateResultCases)(
+    it.each<(typeof getCreateWorkspaceResultCases)[0]>(getCreateWorkspaceResultCases)(
       'should return a new workspace when: $case',
       async ({ props, result }) => {
         const header = await useGetAuthHeader({ app });
@@ -41,7 +42,7 @@ describe('WorkspacesController (e2e)', () => {
       }
     );
 
-    it.each<(typeof getCreateErrorCases)[0]>(getCreateErrorCases)(
+    it.each<(typeof getCreateWorkspaceErrorCases)[0]>(getCreateWorkspaceErrorCases)(
       'should return an error when: $case',
       async ({ props, error }) => {
         const header = await useGetAuthHeader({ app });
@@ -71,21 +72,16 @@ describe('WorkspacesController (e2e)', () => {
       expect(other).toEqual(getWorkspaceProps());
     });
 
-    it('should return a validation error when id is not UUID format', async () => {
-      const header = await useGetAuthHeader({ app });
-      const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId: 'not-uuid' });
+    it.each<(typeof getFindByWorkspaceIdErrorCases)[0]>(getFindByWorkspaceIdErrorCases)(
+      'should return error when: $case',
+      async ({ workspaceId, error, code }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId });
 
-      expect(status).toEqual(400);
-      expect(message).toEqual('Validation failed (uuid is expected)');
-    });
-
-    it('should return an error when workspace not found', async () => {
-      const header = await useGetAuthHeader({ app });
-      const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId });
-
-      expect(status).toEqual(404);
-      expect(message).toEqual('workspace not found');
-    });
+        expect(status).toEqual(code);
+        expect(message).toEqual(error);
+      }
+    );
 
     it('should return an unauthorized error when auth header not provided', async () => {
       const [{ message }, status] = await useGetWorkspaceById({ app, workspaceId });
@@ -96,7 +92,7 @@ describe('WorkspacesController (e2e)', () => {
   });
 
   describe('/workspaces/:id (PUT)', () => {
-    it.each<(typeof getCreateResultCases)[0]>(getCreateResultCases)(
+    it.each<(typeof getCreateWorkspaceResultCases)[0]>(getCreateWorkspaceResultCases)(
       'should update a workspace when: $case',
       async ({ props, result }) => {
         const header = await useGetAuthHeader({ app });
@@ -109,7 +105,7 @@ describe('WorkspacesController (e2e)', () => {
       }
     );
 
-    it.each<(typeof getCreateErrorCases)[0]>(getCreateErrorCases)(
+    it.each<(typeof getCreateWorkspaceErrorCases)[0]>(getCreateWorkspaceErrorCases)(
       'should return an error when: $case',
       async ({ props, error }) => {
         const header = await useGetAuthHeader({ app });
@@ -121,21 +117,16 @@ describe('WorkspacesController (e2e)', () => {
       }
     );
 
-    it('should return a validation error when id is not UUID format', async () => {
-      const header = await useGetAuthHeader({ app });
-      const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId: 'not-uuid' });
+    it.each<(typeof getFindByWorkspaceIdErrorCases)[0]>(getFindByWorkspaceIdErrorCases)(
+      'should return error when: $case',
+      async ({ workspaceId, error, code }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId });
 
-      expect(status).toEqual(400);
-      expect(message).toEqual('Validation failed (uuid is expected)');
-    });
-
-    it('should return an error when workspace not found', async () => {
-      const header = await useGetAuthHeader({ app });
-      const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId });
-
-      expect(status).toEqual(404);
-      expect(message).toEqual('workspace not found');
-    });
+        expect(status).toEqual(code);
+        expect(message).toEqual(error);
+      }
+    );
 
     it('should return an unauthorized error when auth header not provided', async () => {
       const [{ message }, status] = await usePutWorkspace({ app, workspaceId });
