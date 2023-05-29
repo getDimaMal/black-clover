@@ -6,8 +6,8 @@ import { AppModule } from '../app.module';
 import {
   getSelfUserPros,
   getSignErrorCases,
-  getUpdateErrorCases,
-  getUpdateResultCases,
+  getUpdateSelfErrorCases,
+  getUpdateSelfResultCases,
 } from './test-data/users.test-data';
 import { useGetAuthHeader, useGetSelf, usePutSelf, useSignIn, useSignUp } from './test-utils/users.test-utils';
 
@@ -104,7 +104,7 @@ describe('UserController (e2e)', () => {
   });
 
   describe('/users/self (PUT)', () => {
-    it.each<(typeof getUpdateResultCases)[0]>(getUpdateResultCases)(
+    it.each<(typeof getUpdateSelfResultCases)[0]>(getUpdateSelfResultCases)(
       'should return an updated user when $case',
       async ({ props, result }) => {
         const header = await useGetAuthHeader({ app });
@@ -116,7 +116,7 @@ describe('UserController (e2e)', () => {
       }
     );
 
-    it.each<(typeof getUpdateErrorCases)[0]>(getUpdateErrorCases)(
+    it.each<(typeof getUpdateSelfErrorCases)[0]>(getUpdateSelfErrorCases)(
       'should return an error when: $case',
       async ({ props, error }) => {
         const header = await useGetAuthHeader({ app });
