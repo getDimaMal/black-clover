@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Workspace } from '../../workspaces/entities/workspace.entity';
 
 @Entity()
 export class Transaction {
@@ -13,6 +15,9 @@ export class Transaction {
 
   @Column({ nullable: true })
   amountOfMembers: null | number;
+
+  @ManyToOne(() => Workspace, (workspace) => workspace.transactions)
+  workspace: Workspace;
 
   @CreateDateColumn()
   createdAt: Date;

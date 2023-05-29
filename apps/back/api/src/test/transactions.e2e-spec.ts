@@ -7,9 +7,12 @@ import {
   getCreateTransactionErrorCases,
   getCreateTransactionProps,
   getCreateTransactionResultCases,
+  getGetTransactionsByWorkspaceIdErrorCases,
 } from './test-data/transactions.test-data';
+import { getUUID } from './test-utils/test-utils';
 import { useGetListTransactions, usePostTransaction } from './test-utils/transactions.test-utils';
 import { useGetAuthHeader } from './test-utils/users.test-utils';
+import { usePostWorkspace } from './test-utils/workspaces.test-utils';
 
 describe('TransactionsController (e2e)', () => {
   let app: INestApplication;
@@ -32,10 +35,14 @@ describe('TransactionsController (e2e)', () => {
       'should return a new transaction when: $case',
       async ({ props, result }) => {
         const header = await useGetAuthHeader({ app });
-        const [{ id, createdAt, ...other }, status] = await usePostTransaction({ app, header, props });
+        const [workspace] = await usePostWorkspace({ app, header });
+
+        props.workspaceId = workspace.id;
+        const [{ id, workspaceId, createdAt, ...other }, status] = await usePostTransaction({ app, header, props });
 
         expect(status).toBe(201);
         expect(id).toBeDefined();
+        expect(workspaceId).toBeDefined();
         expect(createdAt).toBeDefined();
         expect(other).toEqual(result);
       }
@@ -63,7 +70,8 @@ describe('TransactionsController (e2e)', () => {
   describe('/transactions (GET)', () => {
     it('should return an empty list', async () => {
       const header = await useGetAuthHeader({ app });
-      const [body, status] = await useGetListTransactions({ app, header });
+      const [{ id: workspaceId }] = await usePostWorkspace({ app, header });
+      const [body, status] = await useGetListTransactions({ app, header, workspaceId });
 
       expect(status).toBe(200);
       expect(body).toEqual([]);
@@ -71,20 +79,35 @@ describe('TransactionsController (e2e)', () => {
 
     it('should return a list of transactions', async () => {
       const header = await useGetAuthHeader({ app });
+      const [{ id: workspaceId }] = await usePostWorkspace({ app, header });
+
+      const props1 = getCreateTransactionProps({ workspaceId, totalPrice: 100 });
+      const props2 = getCreateTransactionProps({ workspaceId, totalPrice: 1000 });
 
       const result = [
-        (await usePostTransaction({ app, header, props: getCreateTransactionProps({ totalPrice: 100 }) }))[0],
-        (await usePostTransaction({ app, header, props: getCreateTransactionProps({ totalPrice: 1000 }) }))[0],
+        (await usePostTransaction({ app, header, props: props1 }))[0],
+        (await usePostTransaction({ app, header, props: props2 }))[0],
       ];
 
-      const [body, status] = await useGetListTransactions({ app, header });
+      const [body, status] = await useGetListTransactions({ app, header, workspaceId });
 
       expect(status).toBe(200);
       expect(body).toEqual([...result]);
     });
 
+    it.each<(typeof getGetTransactionsByWorkspaceIdErrorCases)[0]>(getGetTransactionsByWorkspaceIdErrorCases)(
+      'should return an error when: $case',
+      async ({ workspaceId, error, code }) => {
+        const header = await useGetAuthHeader({ app });
+        const [{ message }, status] = await useGetListTransactions({ app, header, workspaceId });
+
+        expect(status).toBe(code);
+        expect(message).toBe(error);
+      }
+    );
+
     it('should return an error when the auth header was not provided', async () => {
-      const [{ message }, status] = await useGetListTransactions({ app });
+      const [{ message }, status] = await useGetListTransactions({ app, workspaceId: getUUID() });
 
       expect(status).toBe(401);
       expect(message).toBe('Unauthorized');

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, Max, Min, Validate } from 'class-validator';
+import { IsNumber, IsUUID, Max, Min, Validate } from 'class-validator';
 
 import { NotNullTogatherValidator } from '../../core/validators/not-null-togather.validator';
 import { NullOrNumberInRangeValidator } from '../../core/validators/null-or-number-in-range.validator';
@@ -20,4 +20,8 @@ export class CreateTransactionDto {
   @Validate(NullOrNumberInRangeValidator, [{ min: 1, max: 1000 }])
   @ApiProperty({ nullable: true, type: Number })
   amountOfMembers: null | number;
+
+  @IsUUID()
+  @ApiProperty({ type: String })
+  workspaceId: string;
 }

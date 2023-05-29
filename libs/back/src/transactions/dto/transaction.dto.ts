@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 
 export class TransactionDto {
   @Expose()
@@ -15,4 +15,8 @@ export class TransactionDto {
 
   @Expose()
   createdAt: Date;
+
+  @Expose()
+  @Transform(({ obj }) => obj.workspace.id)
+  workspaceId?: string;
 }

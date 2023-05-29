@@ -1,16 +1,19 @@
 import { CreateTransactionDto } from '@black-clover/back/transactions/dto/create-transaction.dto';
 import { TransactionDto } from '@black-clover/back/transactions/dto/transaction.dto';
 
+import { getUUID } from '../test-utils/test-utils';
+
 export const getCreateTransactionProps = (props: Partial<CreateTransactionDto> = {}): CreateTransactionDto => ({
   totalPrice: 90,
   amountOfDays: 30,
   amountOfMembers: 9,
+  workspaceId: getUUID(),
   ...props,
 });
 
 export const getTransactionProps = (
   props: Partial<Omit<TransactionDto, 'id'>> = {}
-): Omit<TransactionDto, 'id' | 'createdAt'> => ({
+): Omit<TransactionDto, 'id' | 'workspaceId' | 'createdAt'> => ({
   totalPrice: 90,
   amountOfDays: 30,
   amountOfMembers: 9,
@@ -20,7 +23,7 @@ export const getTransactionProps = (
 export const getCreateTransactionResultCases: {
   case: string;
   props: CreateTransactionDto;
-  result: Omit<TransactionDto, 'id' | 'createdAt'>;
+  result: Omit<TransactionDto, 'id' | 'workspaceId' | 'createdAt'>;
 }[] = [
   {
     case: 'default body provided',
@@ -79,5 +82,57 @@ export const getCreateTransactionErrorCases: { case: string; props: CreateTransa
     case: 'amountOfDays is null & amountOfMembers is null',
     props: getCreateTransactionProps({ amountOfDays: null, amountOfMembers: null }),
     error: 'amountOfMembers & amountOfDays must not be null together',
+  },
+  {
+    case: 'workspaceId is null',
+    props: getCreateTransactionProps({ workspaceId: null }),
+    error: 'workspaceId must be a UUID',
+  },
+  {
+    case: 'workspaceId is 123',
+    props: getCreateTransactionProps({ workspaceId: '123' }),
+    error: 'workspaceId must be a UUID',
+  },
+  {
+    case: 'workspaceId not of UUID format',
+    props: getCreateTransactionProps({ workspaceId: 'not-uuid' }),
+    error: 'workspaceId must be a UUID',
+  },
+  {
+    case: 'workspaceId is random UUID',
+    props: getCreateTransactionProps({ workspaceId: getUUID() }),
+    error: 'workspace not found',
+  },
+];
+
+export const getGetTransactionsByWorkspaceIdErrorCases: {
+  case: string;
+  workspaceId: string;
+  error: string;
+  code: number;
+}[] = [
+  {
+    case: 'workspaceId is null',
+    workspaceId: null,
+    error: 'Validation failed (uuid is expected)',
+    code: 400,
+  },
+  {
+    case: 'workspaceId is 123',
+    workspaceId: '123',
+    error: 'Validation failed (uuid is expected)',
+    code: 400,
+  },
+  {
+    case: 'workspaceId not of UUID format',
+    workspaceId: 'not-uuid',
+    error: 'Validation failed (uuid is expected)',
+    code: 400,
+  },
+  {
+    case: 'workspaceId is random UUID',
+    workspaceId: getUUID(),
+    error: 'workspace not found',
+    code: 404,
   },
 ];

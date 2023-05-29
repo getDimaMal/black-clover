@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseUUIDPipe, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
@@ -21,8 +21,8 @@ export class TransactionsController {
     return await this.transactionsService.create(body);
   }
 
-  @Get()
-  async findAll(): Promise<TransactionDto[]> {
-    return await this.transactionsService.findAll();
+  @Get('/workspace/:id')
+  async findAllByWorkspaceId(@Param('id', ParseUUIDPipe) id: string): Promise<TransactionDto[]> {
+    return await this.transactionsService.findAllByWorkspaceId(id);
   }
 }

@@ -1,20 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { WorkspacesService } from '../workspaces/workspaces.service';
 
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { Transaction } from './entities/transaction.entity';
 
 @Injectable()
 export class TransactionsService {
-  constructor(@InjectRepository(Transaction) private repo: Repository<Transaction>) {}
+  constructor(
+    @InjectRepository(Transaction) private repo: Repository<Transaction>,
+    @Inject(WorkspacesService) private workspacesService: WorkspacesService
+  ) {}
 
-  async create(args: CreateTransactionDto): Promise<Transaction> {
-    const transaction = this.repo.create(args);
-    return await this.repo.save(transaction);
+  async create({ workspaceId, ...args }: CreateTransactionDto): Promise<Transaction> {
+    try {
+      const workspace = await this.workspacesService.findOne(workspaceId);
+      const transaction = this.repo.create(args);
+      transaction.workspace = workspace;
+
+      return await this.repo.save(transaction);
+    } catch {
+      throw new BadRequestException('workspace not found');
+    }
   }
 
-  async findAll(): Promise<Transaction[]> {
-    return await this.repo.find();
+  async findAllByWorkspaceId(id: string): Promise<Transaction[]> {
+    const workspace = await this.workspacesService.findOne(id);
+
+    workspace.transactions.forEach((transaction) => {
+      transaction.workspace = workspace;
+    });
+
+    return workspace.transactions;
   }
 }

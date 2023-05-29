@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Transaction } from '../../transactions/entities/transaction.entity';
 
 @Entity()
 export class Workspace {
@@ -10,6 +12,9 @@ export class Workspace {
 
   @Column({ default: 5 })
   maxNumberOfMembers: number;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.workspace, { eager: true })
+  transactions: Transaction[];
 
   @Column({ default: null })
   expiredDate: null | Date;

@@ -16,6 +16,10 @@ type UsePostProps = UseProps & {
   props?: CreateTransactionDto;
 };
 
+type GetListProps = UseProps & {
+  workspaceId: string;
+};
+
 type UsePostReturnProps = [TransactionDto & ErrorType, number];
 
 type UseGetListReturnProps = [TransactionDto[] & ErrorType, number];
@@ -35,10 +39,11 @@ export const usePostTransaction = async ({
 
 export const useGetListTransactions = async ({
   app,
+  workspaceId,
   header = ['header', ''],
-}: UseProps): Promise<UseGetListReturnProps> => {
+}: GetListProps): Promise<UseGetListReturnProps> => {
   const { body, status } = await request(app.getHttpServer())
-    .get('/transactions')
+    .get(`/transactions/workspace/${workspaceId}`)
     .set(...header);
 
   return [body as UseGetListReturnProps[0], status];

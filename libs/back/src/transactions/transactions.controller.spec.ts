@@ -10,7 +10,7 @@ describe('TransactionsController', () => {
 
   const mockTransactionsService: Partial<TransactionsService> = {
     create: jest.fn().mockResolvedValue(transaction),
-    findAll: jest.fn().mockResolvedValue(transactionsList),
+    findAllByWorkspaceId: jest.fn().mockResolvedValue(transactionsList),
   };
 
   beforeEach(async () => {
@@ -32,11 +32,12 @@ describe('TransactionsController', () => {
     });
   });
 
-  describe('findAll', () => {
-    it('should call transactionsService.findAll and return the result', async () => {
-      const result = await transactionsController.findAll();
+  describe('findAllByWorkspaceId', () => {
+    it('should call transactionsService.findAllByWorkspaceId and return the result', async () => {
+      const workspaceId = 'workspace-id-123';
+      const result = await transactionsController.findAllByWorkspaceId(workspaceId);
 
-      expect(transactionsService.findAll).toHaveBeenCalled();
+      expect(transactionsService.findAllByWorkspaceId).toHaveBeenCalledWith(workspaceId);
       expect(result).toEqual(transactionsList);
     });
   });

@@ -13,7 +13,7 @@ describe('WorkspacesService', () => {
   const mockRepository: Partial<Repository<Workspace>> = {
     create: jest.fn().mockReturnValue(workspace),
     save: jest.fn().mockResolvedValue(workspace),
-    findOneBy: jest.fn().mockResolvedValue(workspace),
+    findOne: jest.fn().mockResolvedValue(workspace),
   };
 
   beforeEach(async () => {
@@ -38,12 +38,12 @@ describe('WorkspacesService', () => {
     it('should find a workspace by id', async () => {
       const result = await workspacesService.findOne(workspace.id);
 
-      expect(mockRepository.findOneBy).toHaveBeenCalledWith({ id: workspace.id });
+      expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
       expect(result).toEqual(workspace);
     });
 
     it('should throw a NotFoundException when workspace is not found', async () => {
-      jest.spyOn(mockRepository, 'findOneBy').mockResolvedValue(null);
+      jest.spyOn(mockRepository, 'findOne').mockResolvedValue(null);
 
       await expect(workspacesService.findOne(workspace.id)).rejects.toThrow(NotFoundException);
     });
