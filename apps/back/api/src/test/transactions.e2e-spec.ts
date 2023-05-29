@@ -7,7 +7,6 @@ import {
   getCreateTransactionErrorCases,
   getCreateTransactionProps,
   getCreateTransactionResultCases,
-  getTransactionProps,
 } from './test-data/transactions.test-data';
 import { useGetListTransactions, usePostTransaction } from './test-utils/transactions.test-utils';
 import { useGetAuthHeader } from './test-utils/users.test-utils';
@@ -31,14 +30,14 @@ describe('TransactionsController (e2e)', () => {
   describe('/transactions (POST)', () => {
     it.each<(typeof getCreateTransactionResultCases)[0]>(getCreateTransactionResultCases)(
       'should return a new transaction when: $case',
-      async () => {
+      async ({ props, result }) => {
         const header = await useGetAuthHeader({ app });
-        const [{ id, createdAt, ...other }, status] = await usePostTransaction({ app, header });
+        const [{ id, createdAt, ...other }, status] = await usePostTransaction({ app, header, props });
 
         expect(status).toBe(201);
         expect(id).toBeDefined();
         expect(createdAt).toBeDefined();
-        expect(other).toEqual(getTransactionProps());
+        expect(other).toEqual(result);
       }
     );
 

@@ -58,22 +58,22 @@ export const getCreateTransactionErrorCases: { case: string; props: CreateTransa
   {
     case: 'amountOfDays is 1',
     props: getCreateTransactionProps({ amountOfDays: 1 }),
-    error: 'amountOfDays must not be less than 30',
+    error: 'amountOfDays must be null or number in the range from 30 to 365',
   },
   {
     case: 'amountOfDays is 1000',
     props: getCreateTransactionProps({ amountOfDays: 1000 }),
-    error: 'amountOfDays must not be greater than 365',
+    error: 'amountOfDays must be null or number in the range from 30 to 365',
   },
   {
     case: 'amountOfMembers is 0',
     props: getCreateTransactionProps({ amountOfMembers: 0 }),
-    error: 'amountOfMembers must not be less than 1',
+    error: 'amountOfMembers must be null or number in the range from 1 to 1000',
   },
   {
     case: 'amountOfMembers is 10000',
     props: getCreateTransactionProps({ amountOfMembers: 10000 }),
-    error: 'amountOfMembers must not be greater than 1000',
+    error: 'amountOfMembers must be null or number in the range from 1 to 1000',
   },
   {
     case: 'amountOfDays is null & amountOfMembers is null',

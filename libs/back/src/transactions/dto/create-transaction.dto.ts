@@ -1,25 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsNumber,
-  Max,
-  Min,
-  Validate,
-  ValidationArguments,
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
-} from 'class-validator';
+import { IsNumber, Max, Min, Validate } from 'class-validator';
 
-@ValidatorConstraint({ name: 'NotNullTogather', async: false })
-export class NotNullTogather implements ValidatorConstraintInterface {
-  validate(value: null | number, args: ValidationArguments) {
-    const otherFieldValue = (args.object as never)[args.constraints[0]];
-    return !(value === null && otherFieldValue === null);
-  }
-
-  defaultMessage(args: ValidationArguments) {
-    return `${args.property} & ${args.constraints[0]} must not be null together`;
-  }
-}
+import { NotNullTogatherValidator } from '../../core/validators/not-null-togather.validator';
+import { NullOrNumberInRangeValidator } from '../../core/validators/null-or-number-in-range.validator';
 
 export class CreateTransactionDto {
   @Min(9)
@@ -28,17 +11,13 @@ export class CreateTransactionDto {
   @ApiProperty({ type: Number })
   totalPrice: number;
 
-  @Min(30)
-  @Max(365)
-  @IsNumber()
-  @Validate(NotNullTogather, ['amountOfMembers'])
+  @Validate(NotNullTogatherValidator, ['amountOfMembers'])
+  @Validate(NullOrNumberInRangeValidator, [{ min: 30, max: 365 }])
   @ApiProperty({ nullable: true, type: Number })
   amountOfDays: null | number;
 
-  @Min(1)
-  @Max(1000)
-  @IsNumber()
-  @Validate(NotNullTogather, ['amountOfDays'])
+  @Validate(NotNullTogatherValidator, ['amountOfDays'])
+  @Validate(NullOrNumberInRangeValidator, [{ min: 1, max: 1000 }])
   @ApiProperty({ nullable: true, type: Number })
   amountOfMembers: null | number;
 }
