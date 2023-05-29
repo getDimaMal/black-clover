@@ -32,7 +32,7 @@ describe('TransactionsController', () => {
     });
   });
 
-  describe('create', () => {
+  describe('findAll', () => {
     it('should call transactionsService.findAll and return the result', async () => {
       const result = await transactionsController.findAll();
 

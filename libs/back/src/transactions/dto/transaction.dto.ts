@@ -11,7 +11,7 @@ export class TransactionDto {
   amountOfDays: null | number;
 
   @Expose()
-  amountOfMembers: number;
+  amountOfMembers: null | number;
 
   @Expose()
   createdAt: Date;

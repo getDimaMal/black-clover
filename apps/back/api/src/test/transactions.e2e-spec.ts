@@ -6,6 +6,7 @@ import { AppModule } from '../app.module';
 import {
   getCreateTransactionErrorCases,
   getCreateTransactionProps,
+  getCreateTransactionResultCases,
   getTransactionProps,
 } from './test-data/transactions.test-data';
 import { useGetListTransactions, usePostTransaction } from './test-utils/transactions.test-utils';
@@ -28,22 +29,18 @@ describe('TransactionsController (e2e)', () => {
   });
 
   describe('/transactions (POST)', () => {
-    it('should return a new transaction', async () => {
-      const header = await useGetAuthHeader({ app });
-      const [{ id, createdAt, ...other }, status] = await usePostTransaction({ app, header });
+    it.each<(typeof getCreateTransactionResultCases)[0]>(getCreateTransactionResultCases)(
+      'should return a new transaction when: $case',
+      async () => {
+        const header = await useGetAuthHeader({ app });
+        const [{ id, createdAt, ...other }, status] = await usePostTransaction({ app, header });
 
-      expect(status).toBe(201);
-      expect(id).toBeDefined();
-      expect(createdAt).toBeDefined();
-      expect(other).toEqual(getTransactionProps());
-    });
-
-    it('should return an error when the auth header was not provided', async () => {
-      const [{ message }, status] = await usePostTransaction({ app });
-
-      expect(status).toBe(401);
-      expect(message).toBe('Unauthorized');
-    });
+        expect(status).toBe(201);
+        expect(id).toBeDefined();
+        expect(createdAt).toBeDefined();
+        expect(other).toEqual(getTransactionProps());
+      }
+    );
 
     it.each<(typeof getCreateTransactionErrorCases)[0]>(getCreateTransactionErrorCases)(
       'should return an error when: $case',
@@ -55,6 +52,13 @@ describe('TransactionsController (e2e)', () => {
         expect(message).toContain(error);
       }
     );
+
+    it('should return an error when the auth header was not provided', async () => {
+      const [{ message }, status] = await usePostTransaction({ app });
+
+      expect(status).toBe(401);
+      expect(message).toBe('Unauthorized');
+    });
   });
 
   describe('/transactions (GET)', () => {

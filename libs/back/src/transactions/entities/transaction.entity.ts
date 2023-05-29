@@ -8,11 +8,11 @@ export class Transaction {
   @Column()
   totalPrice: number;
 
-  @Column()
-  amountOfDays: number;
+  @Column({ nullable: true })
+  amountOfDays: null | number;
 
-  @Column()
-  amountOfMembers: number;
+  @Column({ nullable: true })
+  amountOfMembers: null | number;
 
   @CreateDateColumn()
   createdAt: Date;
