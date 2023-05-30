@@ -1,16 +1,8 @@
-import { Workspace } from '../../workspaces/entities/workspace.entity';
+import { workspace } from '../../workspaces/test-data/workspaces.test-data';
 import { CreateTransactionDto } from '../dto/create-transaction.dto';
 import { Transaction } from '../entities/transaction.entity';
 
 export const workspaceId = 'workspace-id-123';
-
-export const workspace: Workspace = {
-  id: workspaceId,
-  name: 'Test Workspace',
-  maxNumberOfMembers: 12,
-  expiredDate: null,
-  transactions: [],
-};
 
 export const transaction: Transaction = {
   workspace,

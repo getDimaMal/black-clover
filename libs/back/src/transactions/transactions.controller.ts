@@ -17,12 +17,12 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
   @Post()
-  async create(@Body() body: CreateTransactionDto): Promise<TransactionDto> {
+  async create(@Body() body: CreateTransactionDto): Promise<Omit<TransactionDto, 'workspaceId'>> {
     return await this.transactionsService.create(body);
   }
 
   @Get('/workspace/:id')
-  async findAllByWorkspaceId(@Param('id', ParseUUIDPipe) id: string): Promise<TransactionDto[]> {
+  async findAllByWorkspaceId(@Param('id', ParseUUIDPipe) id: string): Promise<Omit<TransactionDto, 'workspaceId'>[]> {
     return await this.transactionsService.findAllByWorkspaceId(id);
   }
 }

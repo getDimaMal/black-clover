@@ -18,5 +18,5 @@ export class TransactionDto {
 
   @Expose()
   @Transform(({ obj }) => obj.workspace.id)
-  workspaceId?: string;
+  workspaceId: string;
 }

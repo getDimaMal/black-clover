@@ -3,16 +3,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { workspace } from '../workspaces/test-data/workspaces.test-data';
 import { WorkspacesService } from '../workspaces/workspaces.service';
 
 import { Transaction } from './entities/transaction.entity';
-import {
-  createTransaction,
-  transaction,
-  transactionsList,
-  workspace,
-  workspaceId,
-} from './test-data/transactions.test-data';
+import { createTransaction, transaction, transactionsList, workspaceId } from './test-data/transactions.test-data';
 import { TransactionsService } from './transactions.service';
 
 describe('TransactionsService', () => {
