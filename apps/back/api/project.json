@@ -48,7 +48,10 @@
     "type-check": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["tsc --noEmit -p apps/back/api/tsconfig.json"]
+        "commands": [
+          "tsc --noEmit -p apps/back/api/tsconfig.app.json",
+          "tsc --noEmit -p apps/back/api/tsconfig.spec.json"
+        ]
       }
     },
     "test": {
