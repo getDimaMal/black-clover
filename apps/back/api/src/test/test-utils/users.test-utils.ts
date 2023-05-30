@@ -3,10 +3,10 @@ import { SelfUserDto } from '@black-clover/back/users/dto/self-user.dto';
 import { TokenUserDto } from '@black-clover/back/users/dto/token-user.dto';
 import { UpdateUserDto } from '@black-clover/back/users/dto/update-user.dto';
 import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
 
 import { getCreateUserProps, getUpdateUserProps } from '../test-data/users.test-data';
 
+import { getServer } from './test-utils';
 import { ErrorType } from './types';
 
 type UseSignProps = {
@@ -28,19 +28,19 @@ type SignReturnProps = [TokenUserDto & ErrorType, number];
 type SelfReturnProps = [SelfUserDto & ErrorType, number];
 
 export const useSignUp = async ({ app, user = getCreateUserProps() }: UseSignProps): Promise<SignReturnProps> => {
-  const { body, status } = await request(app.getHttpServer()).post('/users/signup').send(user);
+  const { body, status } = await getServer(app).post('/users/signup').send(user);
 
   return [body as SignReturnProps[0], status];
 };
 
 export const useSignIn = async ({ app, user = getCreateUserProps() }: UseSignProps): Promise<SignReturnProps> => {
-  const { body, status } = await request(app.getHttpServer()).post('/users/signIn').send(user);
+  const { body, status } = await getServer(app).post('/users/signIn').send(user);
 
   return [body as SignReturnProps[0], status];
 };
 
 export const useGetSelf = async ({ app, header = ['header', ''] }: UseGetSelfProps): Promise<SelfReturnProps> => {
-  const { body, status } = await request(app.getHttpServer())
+  const { body, status } = await getServer(app)
     .get('/users/self')
     .set(...header);
 
@@ -52,7 +52,7 @@ export const usePutSelf = async ({
   header = ['header', ''],
   props = getUpdateUserProps(),
 }: UsePutSelfProps): Promise<SelfReturnProps> => {
-  const { body, status } = await request(app.getHttpServer())
+  const { body, status } = await getServer(app)
     .put('/users/self')
     .set(...header)
     .send(props);

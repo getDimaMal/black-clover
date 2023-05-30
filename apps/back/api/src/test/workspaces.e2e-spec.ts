@@ -3,13 +3,13 @@ import { Test } from '@nestjs/testing';
 
 import { AppModule } from '../app.module';
 
+import { getFindByIdErrorCases } from './test-data/test-data';
 import {
   getCreateWorkspaceErrorCases,
   getCreateWorkspaceResultCases,
-  getFindByWorkspaceIdErrorCases,
   getWorkspaceProps,
-  workspaceId,
 } from './test-data/workspaces.test-data';
+import { getUUID } from './test-utils/test-utils';
 import { useGetAuthHeader } from './test-utils/users.test-utils';
 import { useGetWorkspaceById, usePostWorkspace, usePutWorkspace } from './test-utils/workspaces.test-utils';
 
@@ -72,19 +72,19 @@ describe('WorkspacesController (e2e)', () => {
       expect(other).toEqual(getWorkspaceProps());
     });
 
-    it.each<(typeof getFindByWorkspaceIdErrorCases)[0]>(getFindByWorkspaceIdErrorCases)(
+    it.each<(typeof getFindByIdErrorCases)[0]>(getFindByIdErrorCases)(
       'should return error when: $case',
-      async ({ workspaceId, error, code }) => {
+      async ({ id, error, code }) => {
         const header = await useGetAuthHeader({ app });
-        const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId });
+        const [{ message }, status] = await useGetWorkspaceById({ app, header, workspaceId: id });
 
         expect(status).toEqual(code);
-        expect(message).toEqual(error);
+        expect(message).toContain(error);
       }
     );
 
     it('should return an unauthorized error when auth header not provided', async () => {
-      const [{ message }, status] = await useGetWorkspaceById({ app, workspaceId });
+      const [{ message }, status] = await useGetWorkspaceById({ app, workspaceId: getUUID() });
 
       expect(status).toEqual(401);
       expect(message).toEqual('Unauthorized');
@@ -117,19 +117,19 @@ describe('WorkspacesController (e2e)', () => {
       }
     );
 
-    it.each<(typeof getFindByWorkspaceIdErrorCases)[0]>(getFindByWorkspaceIdErrorCases)(
+    it.each<(typeof getFindByIdErrorCases)[0]>(getFindByIdErrorCases)(
       'should return error when: $case',
-      async ({ workspaceId, error, code }) => {
+      async ({ id, error, code }) => {
         const header = await useGetAuthHeader({ app });
-        const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId });
+        const [{ message }, status] = await usePutWorkspace({ app, header, workspaceId: id });
 
         expect(status).toEqual(code);
-        expect(message).toEqual(error);
+        expect(message).toContain(error);
       }
     );
 
     it('should return an unauthorized error when auth header not provided', async () => {
-      const [{ message }, status] = await usePutWorkspace({ app, workspaceId });
+      const [{ message }, status] = await usePutWorkspace({ app, workspaceId: getUUID() });
 
       expect(status).toEqual(401);
       expect(message).toEqual('Unauthorized');

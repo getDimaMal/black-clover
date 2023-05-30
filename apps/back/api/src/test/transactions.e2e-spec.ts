@@ -3,11 +3,11 @@ import { Test } from '@nestjs/testing';
 
 import { AppModule } from '../app.module';
 
+import { getFindByIdErrorCases } from './test-data/test-data';
 import {
   getCreateTransactionErrorCases,
   getCreateTransactionProps,
   getCreateTransactionResultCases,
-  getGetTransactionsByWorkspaceIdErrorCases,
 } from './test-data/transactions.test-data';
 import { getUUID } from './test-utils/test-utils';
 import { useGetListTransactions, usePostTransaction } from './test-utils/transactions.test-utils';
@@ -92,17 +92,17 @@ describe('TransactionsController (e2e)', () => {
       const [body, status] = await useGetListTransactions({ app, header, workspaceId });
 
       expect(status).toBe(200);
-      expect(body).toEqual([...result]);
+      expect(body).toEqual(result);
     });
 
-    it.each<(typeof getGetTransactionsByWorkspaceIdErrorCases)[0]>(getGetTransactionsByWorkspaceIdErrorCases)(
+    it.each<(typeof getFindByIdErrorCases)[0]>(getFindByIdErrorCases)(
       'should return an error when: $case',
-      async ({ workspaceId, error, code }) => {
+      async ({ id, error, code }) => {
         const header = await useGetAuthHeader({ app });
-        const [{ message }, status] = await useGetListTransactions({ app, header, workspaceId });
+        const [{ message }, status] = await useGetListTransactions({ app, header, workspaceId: id });
 
         expect(status).toBe(code);
-        expect(message).toBe(error);
+        expect(message).toContain(error);
       }
     );
 

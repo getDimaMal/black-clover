@@ -1,10 +1,10 @@
 import { CreateTransactionDto } from '@black-clover/back/transactions/dto/create-transaction.dto';
 import { TransactionDto } from '@black-clover/back/transactions/dto/transaction.dto';
 import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
 
 import { getCreateTransactionProps } from '../test-data/transactions.test-data';
 
+import { getServer } from './test-utils';
 import { ErrorType } from './types';
 
 type UseProps = {
@@ -29,7 +29,7 @@ export const usePostTransaction = async ({
   header = ['header', ''],
   props = getCreateTransactionProps(),
 }: UsePostProps): Promise<UsePostReturnProps> => {
-  const { body, status } = await request(app.getHttpServer())
+  const { body, status } = await getServer(app)
     .post('/transactions')
     .set(...header)
     .send(props);
@@ -42,7 +42,7 @@ export const useGetListTransactions = async ({
   workspaceId,
   header = ['header', ''],
 }: GetListProps): Promise<UseGetListReturnProps> => {
-  const { body, status } = await request(app.getHttpServer())
+  const { body, status } = await getServer(app)
     .get(`/transactions/workspace/${workspaceId}`)
     .set(...header);
 

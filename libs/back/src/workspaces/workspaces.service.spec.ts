@@ -51,22 +51,20 @@ describe('WorkspacesService', () => {
 
   describe('update', () => {
     it('should find and update a workspace', async () => {
-      const updatedWorkspace = { ...workspace, ...workspaceUpdate };
+      const newWorkspace = { ...workspace, ...workspaceUpdate };
 
       jest.spyOn(workspacesService, 'findOne').mockResolvedValue(workspace);
-      jest.spyOn(mockRepository, 'save').mockResolvedValue(updatedWorkspace);
+      jest.spyOn(mockRepository, 'save').mockResolvedValue(newWorkspace);
 
       const result = await workspacesService.update(workspace.id, workspaceUpdate);
 
       expect(workspacesService.findOne).toHaveBeenCalledWith(workspace.id);
-      expect(mockRepository.save).toHaveBeenCalledWith(updatedWorkspace);
-      expect(result).toEqual(updatedWorkspace);
+      expect(mockRepository.save).toHaveBeenCalledWith(newWorkspace);
+      expect(result).toEqual(newWorkspace);
     });
 
     it('should throw NotFoundException when workspace is not found', async () => {
-      jest.spyOn(workspacesService, 'findOne').mockImplementation(() => {
-        throw new NotFoundException();
-      });
+      jest.spyOn(mockRepository, 'findOne').mockResolvedValue(null);
 
       await expect(workspacesService.update(workspace.id, workspaceUpdate)).rejects.toThrow(NotFoundException);
       expect(mockRepository.save).toHaveBeenCalledTimes(0);

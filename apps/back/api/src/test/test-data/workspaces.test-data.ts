@@ -1,11 +1,7 @@
 import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
 import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
 
-import { getUUID } from '../test-utils/test-utils';
-
 const name = 'Test Workspace';
-
-export const workspaceId = getUUID();
 
 export const getCreateWorkspaceProps = (props: Partial<CreateWorkspaceDto> = {}): CreateWorkspaceDto => ({
   name,
@@ -56,26 +52,5 @@ export const getCreateWorkspaceErrorCases: { case: string; props: CreateWorkspac
     case: 'name is too long',
     props: getCreateWorkspaceProps({ name: 'very long name of workspace to check validation rules' }),
     error: 'name must be shorter than or equal to 48 characters',
-  },
-];
-
-export const getFindByWorkspaceIdErrorCases: { case: string; workspaceId: string; error: string; code: number }[] = [
-  {
-    case: 'workspaceId is 123',
-    workspaceId: '123',
-    error: 'Validation failed (uuid is expected)',
-    code: 400,
-  },
-  {
-    case: 'workspaceId is not UUID',
-    workspaceId: 'not-uuid',
-    error: 'Validation failed (uuid is expected)',
-    code: 400,
-  },
-  {
-    case: 'workspaceId is wrong UUID',
-    workspaceId: getUUID(),
-    error: 'workspace not found',
-    code: 404,
   },
 ];

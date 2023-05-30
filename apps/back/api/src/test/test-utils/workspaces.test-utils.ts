@@ -1,10 +1,10 @@
 import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
 import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
 import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
 
 import { getCreateWorkspaceProps } from '../test-data/workspaces.test-data';
 
+import { getServer } from './test-utils';
 import { ErrorType } from './types';
 
 type UseProps = {
@@ -32,7 +32,7 @@ export const usePostWorkspace = async ({
   header = ['header', ''],
   props = getCreateWorkspaceProps(),
 }: UsePostWorkspaceProps): Promise<UseWorkspaceResultProps> => {
-  const { status, body } = await request(app.getHttpServer())
+  const { status, body } = await getServer(app)
     .post('/workspaces')
     .set(...header)
     .send(props);
@@ -45,7 +45,7 @@ export const useGetWorkspaceById = async ({
   workspaceId,
   header = ['header', ''],
 }: UseGetWorkspaceByIdProps): Promise<UseWorkspaceResultProps> => {
-  const { status, body } = await request(app.getHttpServer())
+  const { status, body } = await getServer(app)
     .get(`/workspaces/${workspaceId}`)
     .set(...header);
 
@@ -58,7 +58,7 @@ export const usePutWorkspace = async ({
   header = ['header', ''],
   props = getCreateWorkspaceProps(),
 }: UsePutWorkspaceProps): Promise<UseWorkspaceResultProps> => {
-  const { status, body } = await request(app.getHttpServer())
+  const { status, body } = await getServer(app)
     .put(`/workspaces/${workspaceId}`)
     .set(...header)
     .send(props);

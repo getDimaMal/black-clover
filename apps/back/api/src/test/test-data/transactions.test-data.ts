@@ -104,35 +104,3 @@ export const getCreateTransactionErrorCases: { case: string; props: CreateTransa
     error: 'workspace not found',
   },
 ];
-
-export const getGetTransactionsByWorkspaceIdErrorCases: {
-  case: string;
-  workspaceId: string;
-  error: string;
-  code: number;
-}[] = [
-  {
-    case: 'workspaceId is null',
-    workspaceId: null,
-    error: 'Validation failed (uuid is expected)',
-    code: 400,
-  },
-  {
-    case: 'workspaceId is 123',
-    workspaceId: '123',
-    error: 'Validation failed (uuid is expected)',
-    code: 400,
-  },
-  {
-    case: 'workspaceId not of UUID format',
-    workspaceId: 'not-uuid',
-    error: 'Validation failed (uuid is expected)',
-    code: 400,
-  },
-  {
-    case: 'workspaceId is random UUID',
-    workspaceId: getUUID(),
-    error: 'workspace not found',
-    code: 404,
-  },
-];
