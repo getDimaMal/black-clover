@@ -6,6 +6,7 @@ import { Serialize } from '../core/interseptors/serialize.interceptor';
 
 import { CreateGroupDto } from './dto/create-group.dto';
 import { GroupDto } from './dto/group.dto';
+import { UpdateGroupDto } from './dto/update-group.dto';
 import { GroupsService } from './groups.service';
 
 @ApiTags('Groups')
@@ -17,22 +18,25 @@ export class GroupsController {
   constructor(private readonly groupsService: GroupsService) {}
 
   @Post()
-  async create(@Body() body: CreateGroupDto): Promise<GroupDto> {
+  async create(@Body() body: CreateGroupDto): Promise<Omit<GroupDto, 'workspaceId'>> {
     return await this.groupsService.create(body);
   }
 
-  @Get()
-  async findAll(): Promise<GroupDto[]> {
-    return await this.groupsService.findAll();
+  @Get('/workspace/:id')
+  async findAllByWorkspaceId(@Param('id', ParseUUIDPipe) id: string): Promise<Omit<GroupDto, 'workspaceId'>[]> {
+    return await this.groupsService.findAllByWorkspaceId(id);
   }
 
   @Get('/:id')
-  async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<GroupDto> {
+  async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<Omit<GroupDto, 'workspaceId'>> {
     return await this.groupsService.findOne(id);
   }
 
   @Put('/:id')
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() body: CreateGroupDto): Promise<GroupDto> {
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() body: UpdateGroupDto
+  ): Promise<Omit<GroupDto, 'workspaceId'>> {
     return await this.groupsService.update(id, body);
   }
 }

@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, TransformFnParams } from 'class-transformer';
-import { IsOptional, IsString, Length } from 'class-validator';
+import { IsOptional, IsString, IsUUID, Length } from 'class-validator';
 
 export class CreateGroupDto {
   @IsString()
@@ -15,4 +15,8 @@ export class CreateGroupDto {
   @Transform(({ value }: TransformFnParams) => value?.trim() || '')
   @ApiPropertyOptional({ type: String })
   description: string;
+
+  @IsUUID()
+  @ApiProperty({ type: String })
+  workspaceId: string;
 }

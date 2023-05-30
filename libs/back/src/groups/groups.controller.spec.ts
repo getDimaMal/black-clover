@@ -1,5 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { workspace } from '../workspaces/test-data/workspaces.test-data';
+
 import { createGroup, group, groupsList } from './test-data/groups.test-data';
 import { GroupsController } from './groups.controller';
 import { GroupsService } from './groups.service';
@@ -12,7 +14,7 @@ describe('GroupsController', () => {
     create: jest.fn().mockResolvedValue(group),
     update: jest.fn().mockResolvedValue(group),
     findOne: jest.fn().mockResolvedValue(group),
-    findAll: jest.fn().mockResolvedValue(groupsList),
+    findAllByWorkspaceId: jest.fn().mockResolvedValue(groupsList),
   };
 
   beforeEach(async () => {
@@ -34,21 +36,20 @@ describe('GroupsController', () => {
     });
   });
 
-  describe('findAll', () => {
-    it('should call groupsService.findAll and return the result', async () => {
-      const result = await groupsController.findAll();
+  describe('findAllByWorkspaceId', () => {
+    it('should call groupsService.findAllByWorkspaceId and return the result', async () => {
+      const result = await groupsController.findAllByWorkspaceId(workspace.id);
 
-      expect(groupsService.findAll).toHaveBeenCalledWith();
+      expect(groupsService.findAllByWorkspaceId).toHaveBeenCalledWith(workspace.id);
       expect(result).toEqual(groupsList);
     });
   });
 
   describe('findOne', () => {
     it('should call groupsService.findOne and return the result', async () => {
-      const groupId = 'group-id-123';
-      const result = await groupsController.findOne(groupId);
+      const result = await groupsController.findOne(group.id);
 
-      expect(groupsService.findOne).toHaveBeenCalledWith(groupId);
+      expect(groupsService.findOne).toHaveBeenCalledWith(group.id);
       expect(result).toEqual(group);
     });
   });

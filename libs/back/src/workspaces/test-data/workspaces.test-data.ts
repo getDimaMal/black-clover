@@ -8,6 +8,7 @@ export const workspace: Workspace = {
   maxNumberOfMembers: 1,
   expiredDate: null,
   transactions: [],
+  groups: [],
 };
 
 export const workspaceCreate: CreateWorkspaceDto = { name: 'New Workspace' };

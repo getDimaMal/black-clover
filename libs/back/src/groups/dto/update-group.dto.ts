@@ -1,5 +1,18 @@
-import { PartialType } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform, TransformFnParams } from 'class-transformer';
+import { IsOptional, IsString, Length } from 'class-validator';
 
-import { CreateGroupDto } from './create-group.dto';
+export class UpdateGroupDto {
+  @IsString()
+  @Length(3, 48)
+  @Transform(({ value }: TransformFnParams) => value?.trim())
+  @ApiProperty({ type: String })
+  name: string;
 
-export class UpdateGroupDto extends PartialType(CreateGroupDto) {}
+  @IsString()
+  @IsOptional()
+  @Length(0, 1000)
+  @Transform(({ value }: TransformFnParams) => value?.trim() || '')
+  @ApiPropertyOptional({ type: String })
+  description: string;
+}

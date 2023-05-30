@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 
 export class GroupDto {
   @Expose()
@@ -9,4 +9,8 @@ export class GroupDto {
 
   @Expose()
   description: string;
+
+  @Expose()
+  @Transform(({ obj }) => obj.workspace.id)
+  workspaceId: string;
 }

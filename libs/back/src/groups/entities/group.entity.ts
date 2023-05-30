@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Workspace } from '../../workspaces/entities/workspace.entity';
 
 @Entity()
 export class Group {
@@ -10,4 +12,7 @@ export class Group {
 
   @Column({ default: '' })
   description: string;
+
+  @ManyToOne(() => Workspace, (workspace) => workspace.groups)
+  workspace: Workspace;
 }
