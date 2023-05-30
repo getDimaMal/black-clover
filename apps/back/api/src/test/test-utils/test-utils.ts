@@ -9,3 +9,11 @@ export const getServer = (app: INestApplication) => {
 export const getUUID = (): string => {
   return uuidV4();
 };
+
+export const getLorem = (repeatTimes = 1): string => {
+  return `
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  Accusamus accusantium aut deserunt expedita impedit magnam minima modi praesentium similique!
+  Accusantium aliquam, atque culpa doloribus iure modi nesciunt quae sint ut.
+  `.repeat(repeatTimes);
+};

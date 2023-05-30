@@ -1,3 +1,5 @@
+import { Group } from '@black-clover/back/groups/entities/group.entity';
+import { GroupsModule } from '@black-clover/back/groups/groups.module';
 import { Transaction } from '@black-clover/back/transactions/entities/transaction.entity';
 import { TransactionsModule } from '@black-clover/back/transactions/transactions.module';
 import { User } from '@black-clover/back/users/entities/user.entity';
@@ -24,10 +26,11 @@ import * as process from 'process';
         database: configService.get('NX_DB_NAME'),
         synchronize: true,
         autoLoadEntities: true,
-        entities: [User, Workspace, Transaction],
+        entities: [User, Group, Workspace, Transaction],
       }),
     }),
     UsersModule,
+    GroupsModule,
     WorkspacesModule,
     TransactionsModule,
   ],
