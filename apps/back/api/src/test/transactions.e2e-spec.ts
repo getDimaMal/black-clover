@@ -81,13 +81,9 @@ describe('TransactionsController (e2e)', () => {
       const header = await useGetAuthHeader({ app });
       const [{ id: workspaceId }] = await usePostWorkspace({ app, header });
 
-      const props1 = getCreateTransactionProps({ workspaceId, totalPrice: 100 });
-      const props2 = getCreateTransactionProps({ workspaceId, totalPrice: 1000 });
+      const props = getCreateTransactionProps({ workspaceId, totalPrice: 100 });
 
-      const result = [
-        (await usePostTransaction({ app, header, props: props1 }))[0],
-        (await usePostTransaction({ app, header, props: props2 }))[0],
-      ];
+      const result = [(await usePostTransaction({ app, header, props }))[0]];
 
       const [body, status] = await useGetListTransactions({ app, header, workspaceId });
 

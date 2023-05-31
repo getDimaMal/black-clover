@@ -18,25 +18,22 @@ export class GroupsController {
   constructor(private readonly groupsService: GroupsService) {}
 
   @Post()
-  async create(@Body() body: CreateGroupDto): Promise<Omit<GroupDto, 'workspaceId'>> {
+  async create(@Body() body: CreateGroupDto) {
     return await this.groupsService.create(body);
   }
 
   @Get('/workspace/:id')
-  async findAllByWorkspaceId(@Param('id', ParseUUIDPipe) id: string): Promise<Omit<GroupDto, 'workspaceId'>[]> {
+  async findAllByWorkspaceId(@Param('id', ParseUUIDPipe) id: string) {
     return await this.groupsService.findAllByWorkspaceId(id);
   }
 
   @Get('/:id')
-  async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<Omit<GroupDto, 'workspaceId'>> {
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
     return await this.groupsService.findOne(id);
   }
 
   @Put('/:id')
-  async update(
-    @Param('id', ParseUUIDPipe) id: string,
-    @Body() body: UpdateGroupDto
-  ): Promise<Omit<GroupDto, 'workspaceId'>> {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() body: UpdateGroupDto) {
     return await this.groupsService.update(id, body);
   }
 }

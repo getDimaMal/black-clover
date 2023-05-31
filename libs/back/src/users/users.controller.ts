@@ -20,14 +20,14 @@ export class UsersController {
 
   @Post('/signup')
   @Serialize(TokenUserDto)
-  signUp(@Body() body: CreateUserDto): Promise<TokenUserDto> {
+  signUp(@Body() body: CreateUserDto) {
     return this.authService.signUp(body);
   }
 
   @Post('/signin')
   @HttpCode(HttpStatus.OK)
   @Serialize(TokenUserDto)
-  signIn(@Body() body: CreateUserDto): Promise<TokenUserDto> {
+  signIn(@Body() body: CreateUserDto) {
     return this.authService.signIn(body);
   }
 
@@ -35,7 +35,7 @@ export class UsersController {
   @Serialize(SelfUserDto)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('access-token')
-  getSelf(@GetSelf() self: User): SelfUserDto {
+  getSelf(@GetSelf() self: User) {
     return self;
   }
 
@@ -43,7 +43,7 @@ export class UsersController {
   @Serialize(SelfUserDto)
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('access-token')
-  updateSelf(@Body() userUpdate: UpdateUserDto, @GetSelf() self: User): Promise<SelfUserDto> {
+  updateSelf(@Body() userUpdate: UpdateUserDto, @GetSelf() self: User) {
     return this.usersService.update(self.id, userUpdate);
   }
 }

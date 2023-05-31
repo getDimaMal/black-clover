@@ -16,7 +16,7 @@ export class WorkspacesService {
   }
 
   async findOne(id: string): Promise<Workspace> {
-    const workspace = await this.repo.findOne({ where: { id }, relations: { transactions: true } });
+    const workspace = await this.repo.findOne({ where: { id }, relations: ['groups', 'transactions'] });
 
     if (!workspace) throw new NotFoundException('workspace not found');
 

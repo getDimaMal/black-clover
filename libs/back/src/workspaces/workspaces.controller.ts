@@ -18,17 +18,17 @@ export class WorkspacesController {
   constructor(private readonly workspacesService: WorkspacesService) {}
 
   @Post()
-  create(@Body() body: CreateWorkspaceDto): Promise<WorkspaceDto> {
+  create(@Body() body: CreateWorkspaceDto) {
     return this.workspacesService.create(body);
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string): Promise<WorkspaceDto> {
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.workspacesService.findOne(id);
   }
 
   @Put(':id')
-  update(@Param('id', ParseUUIDPipe) id: string, @Body() body: UpdateWorkspaceDto): Promise<WorkspaceDto> {
+  update(@Param('id', ParseUUIDPipe) id: string, @Body() body: UpdateWorkspaceDto) {
     return this.workspacesService.update(id, body);
   }
 }
