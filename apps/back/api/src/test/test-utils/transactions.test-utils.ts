@@ -1,16 +1,10 @@
 import { CreateTransactionDto } from '@black-clover/back/transactions/dto/create-transaction.dto';
 import { TransactionDto } from '@black-clover/back/transactions/dto/transaction.dto';
-import { INestApplication } from '@nestjs/common';
 
 import { getCreateTransactionProps } from '../test-data/transactions.test-data';
 
 import { getServer } from './test-utils';
-import { ErrorType } from './types';
-
-type UseProps = {
-  app: INestApplication;
-  header?: [string, string];
-};
+import { ErrorType, UseProps } from './types';
 
 type UsePostProps = UseProps & {
   props?: CreateTransactionDto;

@@ -7,19 +7,14 @@ import { INestApplication } from '@nestjs/common';
 import { getCreateUserProps, getUpdateUserProps } from '../test-data/users.test-data';
 
 import { getServer } from './test-utils';
-import { ErrorType } from './types';
+import { ErrorType, UseProps } from './types';
 
 type UseSignProps = {
   app: INestApplication;
   user?: CreateUserDto;
 };
 
-type UseGetSelfProps = {
-  app: INestApplication;
-  header?: [string, string];
-};
-
-type UsePutSelfProps = UseGetSelfProps & {
+type UsePutSelfProps = UseProps & {
   props?: UpdateUserDto;
 };
 
@@ -39,7 +34,7 @@ export const useSignIn = async ({ app, user = getCreateUserProps() }: UseSignPro
   return [body as SignReturnProps[0], status];
 };
 
-export const useGetSelf = async ({ app, header = ['header', ''] }: UseGetSelfProps): Promise<SelfReturnProps> => {
+export const useGetSelf = async ({ app, header = ['header', ''] }: UseProps): Promise<SelfReturnProps> => {
   const { body, status } = await getServer(app)
     .get('/users/self')
     .set(...header);

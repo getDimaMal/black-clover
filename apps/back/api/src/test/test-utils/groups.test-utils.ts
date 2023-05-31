@@ -1,17 +1,11 @@
 import { CreateGroupDto } from '@black-clover/back/groups/dto/create-group.dto';
 import { GroupDto } from '@black-clover/back/groups/dto/group.dto';
 import { UpdateGroupDto } from '@black-clover/back/groups/dto/update-group.dto';
-import { INestApplication } from '@nestjs/common';
 
 import { getCreateGroupProps, getUpdateGroupProps } from '../test-data/groups.test-data';
 
 import { getServer } from './test-utils';
-import { ErrorType } from './types';
-
-type UseProps = {
-  app: INestApplication;
-  header?: [string, string];
-};
+import { ErrorType, UseProps } from './types';
 
 type UsePostProps = UseProps & {
   props?: CreateGroupDto;
@@ -31,6 +25,7 @@ type UsePutProps = UseProps &
   };
 
 type UseGroupResultProps = [GroupDto & ErrorType, number];
+
 type UseListGroupsResultProps = [GroupDto[] & ErrorType, number];
 
 export const usePostGroup = async ({

@@ -1,16 +1,10 @@
 import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
 import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
-import { INestApplication } from '@nestjs/common';
 
 import { getCreateWorkspaceProps } from '../test-data/workspaces.test-data';
 
 import { getServer } from './test-utils';
-import { ErrorType } from './types';
-
-type UseProps = {
-  app: INestApplication;
-  header?: [string, string];
-};
+import { ErrorType, UseProps } from './types';
 
 type UsePostWorkspaceProps = UseProps & {
   props?: CreateWorkspaceDto;
