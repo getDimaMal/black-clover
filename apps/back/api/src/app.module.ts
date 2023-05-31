@@ -1,5 +1,7 @@
 import { CategoriesModule } from '@black-clover/back/categories/categories.module';
 import { Category } from '@black-clover/back/categories/entities/category.entity';
+import { Event } from '@black-clover/back/events/entities/event.entity';
+import { EventsModule } from '@black-clover/back/events/events.module';
 import { Group } from '@black-clover/back/groups/entities/group.entity';
 import { GroupsModule } from '@black-clover/back/groups/groups.module';
 import { Property } from '@black-clover/back/properties/entities/property.entity';
@@ -30,11 +32,12 @@ import * as process from 'process';
         database: configService.get('NX_DB_NAME'),
         synchronize: true,
         autoLoadEntities: true,
-        entities: [User, Group, Category, Property, Workspace, Transaction],
+        entities: [User, Group, Event, Category, Property, Workspace, Transaction],
       }),
     }),
     UsersModule,
     GroupsModule,
+    EventsModule,
     CategoriesModule,
     PropertiesModule,
     WorkspacesModule,

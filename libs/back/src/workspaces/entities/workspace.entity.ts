@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Category } from '../../categories/entities/category.entity';
+import { Event } from '../../events/entities/event.entity';
 import { Group } from '../../groups/entities/group.entity';
 import { Property } from '../../properties/entities/property.entity';
 import { Transaction } from '../../transactions/entities/transaction.entity';
@@ -24,6 +25,9 @@ export class Workspace {
 
   @OneToMany(() => Category, (category) => category.workspace, { eager: true })
   categories: Category[];
+
+  @OneToMany(() => Event, (event) => event.workspace, { eager: true })
+  events: Category[];
 
   @OneToMany(() => Property, (property) => property.workspace, { eager: true })
   properties: Category[];
