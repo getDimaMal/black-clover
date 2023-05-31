@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Category } from '../../categories/entities/category.entity';
 import { Group } from '../../groups/entities/group.entity';
+import { Property } from '../../properties/entities/property.entity';
 import { Transaction } from '../../transactions/entities/transaction.entity';
 
 @Entity()
@@ -23,6 +24,9 @@ export class Workspace {
 
   @OneToMany(() => Category, (category) => category.workspace, { eager: true })
   categories: Category[];
+
+  @OneToMany(() => Property, (property) => property.workspace, { eager: true })
+  properties: Category[];
 
   @Column({ default: null })
   expiredDate: null | Date;

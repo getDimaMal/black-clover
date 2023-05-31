@@ -2,6 +2,8 @@ import { CategoriesModule } from '@black-clover/back/categories/categories.modul
 import { Category } from '@black-clover/back/categories/entities/category.entity';
 import { Group } from '@black-clover/back/groups/entities/group.entity';
 import { GroupsModule } from '@black-clover/back/groups/groups.module';
+import { Property } from '@black-clover/back/properties/entities/property.entity';
+import { PropertiesModule } from '@black-clover/back/properties/properties.module';
 import { Transaction } from '@black-clover/back/transactions/entities/transaction.entity';
 import { TransactionsModule } from '@black-clover/back/transactions/transactions.module';
 import { User } from '@black-clover/back/users/entities/user.entity';
@@ -28,12 +30,13 @@ import * as process from 'process';
         database: configService.get('NX_DB_NAME'),
         synchronize: true,
         autoLoadEntities: true,
-        entities: [User, Group, Category, Workspace, Transaction],
+        entities: [User, Group, Category, Property, Workspace, Transaction],
       }),
     }),
     UsersModule,
     GroupsModule,
     CategoriesModule,
+    PropertiesModule,
     WorkspacesModule,
     TransactionsModule,
   ],

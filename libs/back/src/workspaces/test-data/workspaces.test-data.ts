@@ -9,6 +9,7 @@ export const workspace: Workspace = {
   expiredDate: null,
   transactions: [],
   categories: [],
+  properties: [],
   groups: [],
 };
 
