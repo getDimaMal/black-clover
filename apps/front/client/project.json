@@ -74,6 +74,15 @@
         "buildTarget": "front-client:build"
       }
     },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "tsc --noEmit --project apps/front/client/tsconfig.app.json",
+          "tsc --noEmit --project apps/front/client/tsconfig.spec.json"
+        ]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
