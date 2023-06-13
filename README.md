@@ -13,6 +13,7 @@
 ### Client
 
 - `yarn run front-client:dev` - to run client
+- `yarn run front-ui:storybook` - to run storybook
 
 ### Codebase
 
@@ -31,3 +32,7 @@
 ## Api
 
 > To get API documentation go to `http://localhost:8000/swagger`
+
+## Storybook
+
+> To get Storybook documentation go to `http://localhost:4400`

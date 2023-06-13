@@ -4,7 +4,7 @@ module.exports = {
   ...nxPreset,
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
-    '!**/*.{config,dto,entity,test-data}.{js,jsx,ts,tsx}',
+    '!**/*.{config,dto,entity,test-data,stories,styles}.{js,jsx,ts,tsx}',
     '!**/index.{js,jsx,ts,tsx}',
   ],
 };

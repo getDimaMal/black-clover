@@ -1,12 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { darkTheme, lightTheme } from './theme';
+import { lightTheme } from '../../../theme/theme';
+
 import ThemeProvider, { ThemeProviderProps } from './ThemeProvider';
 
 const getProps = (props: Partial<ThemeProviderProps> = {}): ThemeProviderProps => ({
-  light: lightTheme,
-  dark: darkTheme,
+  theme: lightTheme,
+  mode: 'light',
+  setMode: jest.fn(),
+  toggleMode: jest.fn(),
   children: <div>Application</div>,
   ...props,
 });

@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 
-import { Theme } from './theme';
+import { Theme } from '../../../theme/theme';
 
 type ThemeContextProps = {
   theme: Theme;
+  mode: 'light' | 'dark';
   setMode: (mode: 'light' | 'dark') => void;
   toggleMode: () => void;
 };

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { Theme } from './theme';
+import { Theme } from '../theme/theme';
 
 type UseThemeProps = {
-  light: Theme;
-  dark: Theme;
+  lightTheme: Theme;
+  darkTheme: Theme;
 };
 
-const useTheme = ({ light, dark }: UseThemeProps) => {
+const useTheme = ({ lightTheme, darkTheme }: UseThemeProps) => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
 
   const toggleMode = () => {
@@ -18,7 +18,7 @@ const useTheme = ({ light, dark }: UseThemeProps) => {
     mode,
     setMode,
     toggleMode,
-    theme: { ...(mode === 'light' ? light : dark) },
+    theme: { ...(mode === 'light' ? lightTheme : darkTheme) },
   };
 };
 
