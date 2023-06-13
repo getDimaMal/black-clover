@@ -1,25 +1,37 @@
-import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import React, { StrictMode } from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Link } from 'react-router-dom';
+import { store } from '@black-clover/front/redux';
+import Button from '@black-clover/front/ui/atoms/Button/Button';
+import { darkTheme, lightTheme } from '@black-clover/front/ui/theme/theme';
+import ThemeProvider from '@black-clover/front/ui/theme/ThemeProvider';
 
 import ROUTES from './constants/routes.json';
-import LoginPage from './pages/login';
-import WelcomePage from './pages/welcome';
 
-// TODO get text from localisation
 export function App() {
   return (
-    <div>
-      <div role="navigation">
-        <Link to={ROUTES.ROOT}>Home</Link>
-        <span> | </span>
-        <Link to={ROUTES.LOGIN}>Login</Link>
-      </div>
+    <StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div>
+            <div role="navigation">
+              <Link to={ROUTES.ROOT}>Home</Link>
+              <span> | </span>
+              <Link to={ROUTES.LOGIN}>Login</Link>
+            </div>
 
-      <Routes>
-        <Route path={ROUTES.ROOT} element={<WelcomePage />} />
-        <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-      </Routes>
-    </div>
+            <ThemeProvider light={lightTheme} dark={darkTheme}>
+              <Button label="Hello Black Clover" onClick={() => console.log('!!! HELLO CLOVER !!!')} />
+            </ThemeProvider>
+
+            {/*<Routes>*/}
+            {/*  <Route path={ROUTES.ROOT} element={<WelcomePage />} />*/}
+            {/*  <Route path={ROUTES.LOGIN} element={<LoginPage />} />*/}
+            {/*</Routes>*/}
+          </div>
+        </BrowserRouter>
+      </Provider>
+    </StrictMode>
   );
 }
 
