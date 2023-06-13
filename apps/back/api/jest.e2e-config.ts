@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
   displayName: 'back-api',
-  preset: '../../../jest.preset.js',
+  preset: '../../../jest.preset.ts',
   testEnvironment: 'node',
   testMatch: ['**/*.e2e-spec.ts'],
   transform: {
