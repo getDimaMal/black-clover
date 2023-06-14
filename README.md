@@ -17,8 +17,8 @@
 
 ### Codebase
 
-- `yarn run format` - to run format & lint for ALL files
-- `yarn run affected:format` - to run format & lint for affected files
+- `yarn run lint` - to run format & lint for ALL files
+- `yarn run affected:lint` - to run format & lint for affected files
 
 - `yarn run type-check` - to run type check for ALL files
 - `yarn run affected:type-check` - to run type check for affected files
