@@ -1,3 +1,4 @@
+import GlobalStyles from '../src/compoents/organisms/GlobalStyles/GlobalStyles';
 import ThemeProvider from '../src/compoents/organisms/ThemeProvider/ThemeProvider';
 import { darkTheme, lightTheme } from '../src/theme/theme';
 
@@ -6,7 +7,10 @@ const withThemeProvider = (Story, context) => {
   const theme = mode === 'light' ? lightTheme : darkTheme;
   return (
     <ThemeProvider theme={theme} mode={mode} setMode={() => {}} toggleMode={() => {}}>
-      <Story />
+      <GlobalStyles />
+      <div style={{ margin: '1rem' }}>
+        <Story />
+      </div>
     </ThemeProvider>
   );
 };

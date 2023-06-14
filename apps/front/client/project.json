@@ -15,7 +15,15 @@
         "baseHref": "/",
         "main": "apps/front/client/src/main.tsx",
         "tsConfig": "apps/front/client/tsconfig.app.json",
-        "assets": ["apps/front/client/src/favicon.ico", "apps/front/client/src/assets"],
+        "assets": [
+          "apps/front/client/src/favicon.ico",
+          "apps/front/client/src/assets",
+          {
+            "glob": "**/*",
+            "input": "./libs/front/ui/src/assets",
+            "output": "./assets"
+          }
+        ],
         "styles": [],
         "scripts": [],
         "isolatedConfig": true,
