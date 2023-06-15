@@ -21,7 +21,7 @@ const preview = {
   },
   globalTypes: {
     theme: {
-      defaultValue: 'light',
+      defaultValue: 'dark',
       toolbar: {
         title: 'Theme',
         items: ['light', 'dark'],

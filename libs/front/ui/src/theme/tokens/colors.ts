@@ -9,10 +9,10 @@ export type Colors =
   | 'bg-sidebar'
   | 'bg-button-primary'
   | 'bg-button-primary-hover'
-  | 'bg-button-primary-focus'
+  | 'bg-button-primary-active'
   | 'bg-button-secondary'
   | 'bg-button-secondary-hover'
-  | 'bg-button-secondary-focus'
+  | 'bg-button-secondary-active'
   | 'bg-button-disabled'
   | 'text-main'
   | 'text-info'
@@ -42,10 +42,11 @@ export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main'
 
   'bg-button-primary': '#A34BD2',
   'bg-button-primary-hover': '#B46CDA',
-  'bg-button-primary-focus': '#9031C4',
+  'bg-button-primary-active': '#9031C4',
+
   'bg-button-secondary': '#4EA692',
   'bg-button-secondary-hover': '#66B7A4',
-  'bg-button-secondary-focus': '#418B7A',
+  'bg-button-secondary-active': '#418B7A',
   'bg-button-disabled': '#D2DAD5',
 
   'text-info': '#88CCF1',

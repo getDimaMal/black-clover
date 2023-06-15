@@ -1,8 +1,31 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'Button' })((theme) => ({
+import { Color } from './Button';
+
+type Props = {
+  color: Color;
+};
+
+const useStyles = makeStyles<Props>({ name: 'Button' })((theme, { color }) => ({
   root: {
-    backgroundColor: theme.colors['bg-button-primary'],
+    ...theme.typography['button-m'],
+
+    border: 'none',
+    color: theme.colors[`text-button-${color}`],
+    backgroundColor: theme.colors[`bg-button-${color}`],
+
+    '&:hover': {
+      cursor: 'pointer',
+      backgroundColor: theme.colors[`bg-button-${color}-hover`],
+    },
+
+    '&:active': {
+      backgroundColor: theme.colors[`bg-button-${color}-active`],
+    },
+
+    '&:disabled': {
+      backgroundColor: theme.colors['bg-button-disabled'],
+    },
   },
 }));
 
