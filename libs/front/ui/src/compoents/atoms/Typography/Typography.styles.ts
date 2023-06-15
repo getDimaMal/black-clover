@@ -6,6 +6,14 @@ const useStyles = makeStyles<void, 'header' | 'body' | 'text'>({ name: 'Typograp
     fontStile: 'normal',
   },
 
+  main: { color: theme.colors['text-main'] },
+  info: { color: theme.colors['text-info'] },
+  error: { color: theme.colors['text-error'] },
+  warning: { color: theme.colors['text-warning'] },
+  success: { color: theme.colors['text-success'] },
+  primary: { color: theme.colors['text-primary'] },
+  secondary: { color: theme.colors['text-secondary'] },
+
   header: {},
   h1: { [`&.${classes.header}`]: { ...theme.typography['headline1'] } },
   h2: { [`&.${classes.header}`]: { ...theme.typography['headline2'] } },

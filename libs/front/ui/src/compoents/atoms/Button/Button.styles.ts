@@ -2,7 +2,7 @@ import { makeStyles } from '../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'Button' })((theme) => ({
   root: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors['bg-button-primary'],
   },
 }));
 

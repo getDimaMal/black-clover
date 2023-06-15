@@ -6,12 +6,19 @@ export default {
   component: Typography,
   args: {
     variant: 'bodyM',
+    color: 'main',
   },
   argTypes: {
     variant: {
       control: {
         type: 'select',
         options: ['h1', 'h2', 'h3', 'h4', 'h5', 'bodyM', 'bodyS', 'textL', 'textM', 'textS'] as Props['variant'][],
+      },
+    },
+    color: {
+      control: {
+        type: 'select',
+        options: ['main', 'info', 'error', 'warning', 'success', 'primary', 'secondary'] as Props['color'][],
       },
     },
   },

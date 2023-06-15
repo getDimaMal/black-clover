@@ -13,7 +13,15 @@ const GlobalStyles = () => {
   return (
     <Fragment>
       {addFontFaces()}
-      <TssGlobalStyles styles={{ '*': { ...theme.typography['body-m'] } }} />
+      <TssGlobalStyles
+        styles={{
+          '*': { ...theme.typography['body-m'] },
+          body: {
+            color: theme.colors['text-main'],
+            backgroundColor: theme.colors['bg-body'],
+          },
+        }}
+      />
     </Fragment>
   );
 };

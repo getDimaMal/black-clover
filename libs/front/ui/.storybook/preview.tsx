@@ -25,7 +25,6 @@ const preview = {
       toolbar: {
         title: 'Theme',
         items: ['light', 'dark'],
-        dynamicTitle: true,
       },
     },
   },
