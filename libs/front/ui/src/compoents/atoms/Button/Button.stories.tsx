@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Button from './Button';
+import Button, { ButtonProps } from './Button';
 
 export default {
   component: Button,
@@ -12,9 +12,10 @@ export default {
     color: {
       control: {
         type: 'radio',
-        options: ['primary', 'secondary'],
+        options: [] as ButtonProps['color'][],
       },
     },
+    onClick: { control: false },
     className: { control: false },
   },
 } as Meta<typeof Button>;

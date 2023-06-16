@@ -25,6 +25,7 @@ const useStyles = makeStyles<Props>({ name: 'Button' })((theme, { color }) => ({
 
     '&:disabled': {
       backgroundColor: theme.colors['bg-button-disabled'],
+      cursor: 'not-allowed',
     },
   },
 }));

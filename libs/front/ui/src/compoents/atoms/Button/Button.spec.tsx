@@ -4,7 +4,6 @@ import Button, { ButtonProps } from './Button';
 
 const getProps = (props: Partial<ButtonProps> = {}): ButtonProps => ({
   label: 'Press Me!',
-  onClick: jest.fn(),
   ...props,
 });
 
@@ -25,7 +24,7 @@ describe('Button', () => {
     expect(button.className).toContain(props.className);
   });
 
-  it('should render with disabled', () => {
+  it('should render disabled', () => {
     const props = getProps({ disabled: true });
     const { getByText } = customRender(<Button {...props} />);
     const button = getByText(props.label);
@@ -33,7 +32,7 @@ describe('Button', () => {
     expect(button).toBeDisabled();
   });
 
-  it('should call onClick when click', () => {
+  it('should call handleClick when click', () => {
     const handleClick = jest.fn();
     const props = getProps({ onClick: handleClick });
     const { getByText } = customRender(<Button {...props} />);

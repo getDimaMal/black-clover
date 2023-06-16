@@ -2,7 +2,11 @@ import { makeStyles } from '../../../theme/makeStyles';
 
 import { Colors } from './Typography';
 
-const useStyles = makeStyles<{ color: Colors }, 'header' | 'body' | 'text'>({ name: 'Typography' })(
+type Props = {
+  color: Colors;
+};
+
+const useStyles = makeStyles<Props, 'header' | 'body' | 'text'>({ name: 'Typography' })(
   (theme, { color }, classes) => ({
     root: {
       margin: 0,
