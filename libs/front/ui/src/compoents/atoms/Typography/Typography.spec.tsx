@@ -1,10 +1,10 @@
 import { customRender } from '../../../test-utils';
 
-import Typography, { Colors, MapVariant, TypographyProps as Props, Variant } from './Typography';
+import Typography, { MapVariant, TypographyProps, Variant } from './Typography';
 
 const text = 'Hello, Black Clover!';
 
-const generateProps = (props: Partial<Props> = {}): Props => ({
+const generateProps = (props: Partial<TypographyProps> = {}): TypographyProps => ({
   children: text,
   ...props,
 });
@@ -37,26 +37,12 @@ describe('Typography', () => {
     ['textL', 'span'],
     ['textM', 'span'],
     ['textS', 'span'],
+    ['inherit', 'span'],
   ])('should renders variant: %s', (variant, tag) => {
     const { getByText } = customRender(<Typography {...generateProps({ variant })} />);
     const element = getByText(text);
 
     expect(element.tagName.toLowerCase()).toBe(tag);
     expect(element.className).toContain(variant);
-  });
-
-  it.each<[Colors, Colors]>([
-    ['main', 'main'],
-    ['info', 'info'],
-    ['error', 'error'],
-    ['warning', 'warning'],
-    ['success', 'success'],
-    ['primary', 'primary'],
-    ['secondary', 'secondary'],
-  ])('should renders color: %s', (color, className) => {
-    const { getByText } = customRender(<Typography {...generateProps({ color })} />);
-    const element = getByText(text);
-
-    expect(element.className).toContain(className);
   });
 });

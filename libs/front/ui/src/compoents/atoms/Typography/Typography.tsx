@@ -2,9 +2,9 @@ import React, { forwardRef, HTMLAttributes } from 'react';
 
 import useStyles from './Typography.styles';
 
-export type Colors = 'main' | 'info' | 'error' | 'warning' | 'success' | 'primary' | 'secondary';
+export type Colors = 'main' | 'primary' | 'secondary';
 
-export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'bodyM' | 'bodyS' | 'textL' | 'textM' | 'textS';
+export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'bodyM' | 'bodyS' | 'textL' | 'textM' | 'textS' | 'inherit';
 export type MapVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'span';
 
 export type TypographyProps = {
@@ -24,11 +24,12 @@ const mapVariantToTag: Record<Variant, MapVariant> = {
   textL: 'span',
   textM: 'span',
   textS: 'span',
+  inherit: 'span',
 };
 
 const Typography = forwardRef<HTMLElement, TypographyProps>(
   ({ className, children, color = 'main', variant = 'bodyM', ...rest }, ref) => {
-    const { classes, cx } = useStyles();
+    const { classes, cx } = useStyles({ color });
 
     const Tag = mapVariantToTag[variant] as React.ElementType;
 
@@ -36,15 +37,7 @@ const Typography = forwardRef<HTMLElement, TypographyProps>(
     const textClasses = ['textL', 'textM', 'textS'].includes(variant) ? classes.text : null;
     const headerClasses = ['h1', 'h2', 'h3', 'h4', 'h5'].includes(variant) ? classes.header : null;
 
-    const combinedClasses = cx(
-      classes.root,
-      bodyClasses,
-      textClasses,
-      headerClasses,
-      classes[color],
-      classes[variant],
-      className
-    );
+    const combinedClasses = cx(classes.root, bodyClasses, textClasses, headerClasses, classes[variant], className);
 
     return (
       <Tag {...rest} className={combinedClasses} ref={ref}>
