@@ -1,6 +1,6 @@
-import { CreateUserDto } from '@black-clover/back/users/dto/create-user.dto';
-import { SelfUserDto } from '@black-clover/back/users/dto/self-user.dto';
-import { UpdateUserDto } from '@black-clover/back/users/dto/update-user.dto';
+import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
+import { SelfUserDto } from '@black-clover/shared/dto/users/self-user.dto';
+import { UpdateUserDto } from '@black-clover/shared/dto/users/update-user.dto';
 
 const email = 'test@email.com';
 

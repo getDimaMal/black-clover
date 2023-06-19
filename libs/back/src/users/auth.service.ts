@@ -1,9 +1,9 @@
+import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
+import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { TokenUserDto } from './dto/token-user.dto';
 import { UsersService } from './users.service';
 
 @Injectable()

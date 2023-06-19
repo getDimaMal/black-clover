@@ -1,7 +1,7 @@
-import { CreateUserDto } from '@black-clover/back/users/dto/create-user.dto';
-import { SelfUserDto } from '@black-clover/back/users/dto/self-user.dto';
-import { TokenUserDto } from '@black-clover/back/users/dto/token-user.dto';
-import { UpdateUserDto } from '@black-clover/back/users/dto/update-user.dto';
+import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
+import { SelfUserDto } from '@black-clover/shared/dto/users/self-user.dto';
+import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
+import { UpdateUserDto } from '@black-clover/shared/dto/users/update-user.dto';
 import { INestApplication } from '@nestjs/common';
 
 import { getCreateUserProps, getUpdateUserProps } from '../test-data/users.test-data';
