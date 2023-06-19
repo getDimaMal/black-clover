@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC } from 'react';
 
 import useStyles from './Button.styles';
 
@@ -9,7 +9,7 @@ export type ButtonProps = {
   color?: Color;
   disabled?: boolean;
   className?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button: FC<ButtonProps> = ({ label, onClick, className, disabled, color = 'primary' }) => {
