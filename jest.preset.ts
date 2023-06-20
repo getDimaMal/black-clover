@@ -6,5 +6,7 @@ module.exports = {
     '**/*.{js,jsx,ts,tsx}',
     '!**/*.{config,dto,entity,test-data,stories,styles}.{js,jsx,ts,tsx}',
     '!**/index.{js,jsx,ts,tsx}',
+    '!**/.storybook/**',
+    '!**/test-utils.{js,jsx,ts,tsx}',
   ],
 };
