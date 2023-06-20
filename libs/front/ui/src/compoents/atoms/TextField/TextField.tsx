@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 
-import useStyles from './InputField.styles';
+import useStyles from './TextField.styles';
 
 export type InputTypes = 'text' | 'email' | 'password';
 
-export type InputFieldProps = {
+export type TextFieldProps = {
   name: string;
   label?: string;
   value: null | string;
@@ -12,7 +12,7 @@ export type InputFieldProps = {
   type?: InputTypes;
 };
 
-const InputField: FC<InputFieldProps> = ({ name, label, value: initValue, onChange, type = 'text' }) => {
+const TextField: FC<TextFieldProps> = ({ name, label, value: initValue, onChange, type = 'text' }) => {
   const { classes } = useStyles();
   const [value, setValue] = useState(initValue ?? '');
 
@@ -31,4 +31,4 @@ const InputField: FC<InputFieldProps> = ({ name, label, value: initValue, onChan
   );
 };
 
-export default InputField;
+export default TextField;

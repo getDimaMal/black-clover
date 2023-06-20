@@ -1,8 +1,8 @@
 import { customRender, fireEvent } from '../../../test-utils';
 
-import InputField, { InputFieldProps, InputTypes } from './InputField';
+import TextField, { InputTypes,TextFieldProps } from './TextField';
 
-const getProps = (props: Partial<InputFieldProps> = {}): InputFieldProps => ({
+const getProps = (props: Partial<TextFieldProps> = {}): TextFieldProps => ({
   name: 'test',
   label: 'Test',
   value: null,
@@ -12,7 +12,7 @@ const getProps = (props: Partial<InputFieldProps> = {}): InputFieldProps => ({
 describe('InputField', () => {
   it('should render default', () => {
     const props = getProps();
-    const { getByLabelText } = customRender(<InputField {...props} />);
+    const { getByLabelText } = customRender(<TextField {...props} />);
     const element = getByLabelText(props?.label || '');
 
     expect(element).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('InputField', () => {
     ['password', 'password'],
   ])('should render with type: %s', () => {
     const props = getProps();
-    const { getByLabelText } = customRender(<InputField {...props} />);
+    const { getByLabelText } = customRender(<TextField {...props} />);
     const element = getByLabelText(props?.label || '');
 
     expect(element).toHaveAttribute('type', 'text');
@@ -33,7 +33,7 @@ describe('InputField', () => {
 
   it('should call onChange', () => {
     const props = getProps({ onChange: jest.fn() });
-    const { getByLabelText } = customRender(<InputField {...props} />);
+    const { getByLabelText } = customRender(<TextField {...props} />);
     const element = getByLabelText(props?.label || '');
 
     fireEvent.change(element, { target: { value: 'Some New Text' } });
