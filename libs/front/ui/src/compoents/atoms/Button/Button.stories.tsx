@@ -15,6 +15,7 @@ export default {
         options: [] as ButtonProps['color'][],
       },
     },
+    type: { control: false },
     onClick: { control: false },
     className: { control: false },
   },

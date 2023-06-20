@@ -1,9 +1,9 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-import { Color } from './Button';
+import { Colors } from './Button';
 
 type Props = {
-  color: Color;
+  color: Colors;
 };
 
 const useStyles = makeStyles<Props>({ name: 'Button' })((theme, { color }) => ({

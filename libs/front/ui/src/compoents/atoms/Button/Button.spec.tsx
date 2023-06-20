@@ -1,6 +1,6 @@
 import { customRender, fireEvent } from '../../../test-utils';
 
-import Button, { ButtonProps } from './Button';
+import Button, { ButtonProps, Types } from './Button';
 
 const getProps = (props: Partial<ButtonProps> = {}): ButtonProps => ({
   label: 'Press Me!',
@@ -32,14 +32,24 @@ describe('Button', () => {
     expect(button).toBeDisabled();
   });
 
-  it('should call handleClick when click', () => {
-    const handleClick = jest.fn();
-    const props = getProps({ onClick: handleClick });
+  it('should call onClick when click', () => {
+    const props = getProps({ onClick: jest.fn() });
     const { getByText } = customRender(<Button {...props} />);
     const button = getByText(props.label);
 
     fireEvent.click(button);
 
-    expect(handleClick).toBeCalled();
+    expect(props.onClick).toBeCalled();
+  });
+
+  it.each<[Types, Types]>([
+    ['submit', 'submit'],
+    ['button', 'button'],
+    ['reset', 'reset'],
+  ])('should render with type: %s', (type, result) => {
+    const props = getProps({ type });
+    const { getByText } = customRender(<Button {...props} />);
+
+    expect(getByText(props.label)).toHaveAttribute('type', result);
   });
 });
