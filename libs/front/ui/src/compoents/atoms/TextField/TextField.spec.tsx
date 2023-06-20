@@ -1,6 +1,6 @@
 import { customRender, fireEvent } from '../../../test-utils';
 
-import TextField, { InputTypes,TextFieldProps } from './TextField';
+import TextField, { InputTypes, TextFieldProps } from './TextField';
 
 const getProps = (props: Partial<TextFieldProps> = {}): TextFieldProps => ({
   name: 'test',

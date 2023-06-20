@@ -23,6 +23,4 @@ export default {
 
 type Story = StoryObj<typeof TextField>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = {};
