@@ -16,6 +16,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": ".",
+    "strictPropertyInitialization": false,
     "paths": {
       "@black-clover/back/*": ["libs/back/src/*"],
       "@black-clover/front/redux": ["libs/front/redux/src/index.ts"],
