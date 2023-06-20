@@ -6,14 +6,15 @@ export type InputTypes = 'text' | 'email' | 'password';
 
 export type TextFieldProps = {
   name: string;
-  label?: string;
   value: null | string;
+  label?: string;
+  error?: string;
   type?: InputTypes;
   inputRef?: React.Ref<HTMLInputElement>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const TextField: FC<TextFieldProps> = ({ name, label, inputRef, onChange, value: initValue, type = 'text' }) => {
+const TextField: FC<TextFieldProps> = ({ name, label, error, inputRef, onChange, value: initValue, type = 'text' }) => {
   const { classes } = useStyles();
   const [value, setValue] = useState(initValue ?? '');
 
@@ -28,6 +29,7 @@ const TextField: FC<TextFieldProps> = ({ name, label, inputRef, onChange, value:
         {label && <div className={classes.label}>{label}</div>}
         <input ref={inputRef} type={type} name={name} value={value} onChange={handleChange} />
       </label>
+      {error && <div className={classes.error}>{error}</div>}
     </div>
   );
 };

@@ -3,7 +3,11 @@ import LoginForm from '@black-clover/front/ui/compoents/organisms/LoginForm/Logi
 
 const LoginPage = () => {
   return (
-    <LoginForm onSignIn={(data) => console.log('SIGN IN:', data)} onSignUp={(data) => console.log('SIGN UP:', data)} />
+    <LoginForm
+      defaultValues={{ email: '', password: '' }}
+      onSignIn={(data) => console.log('SIGN IN:', data)}
+      onSignUp={(data) => console.log('SIGN UP:', data)}
+    />
   );
 };
 

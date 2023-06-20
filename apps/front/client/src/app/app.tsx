@@ -6,6 +6,8 @@ import ThemeProvider from '@black-clover/front/ui/compoents/organisms/ThemeProvi
 import useTheme from '@black-clover/front/ui/hooks/useTheme';
 import { darkTheme, lightTheme } from '@black-clover/front/ui/theme/theme';
 
+import 'reflect-metadata';
+
 import Pages from './pages/Pages';
 
 export function App() {

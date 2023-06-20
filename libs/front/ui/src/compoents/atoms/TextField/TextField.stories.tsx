@@ -5,8 +5,9 @@ import TextField, { TextFieldProps } from './TextField';
 export default {
   component: TextField,
   args: {
-    label: 'Some Field Label',
     type: 'text',
+    label: 'Some Field Label',
+    error: 'some error message',
   },
   argTypes: {
     type: {
@@ -18,6 +19,7 @@ export default {
     name: { control: false },
     value: { control: false },
     onChange: { control: false },
+    inputRef: { control: false },
   },
 } as Meta<typeof TextField>;
 

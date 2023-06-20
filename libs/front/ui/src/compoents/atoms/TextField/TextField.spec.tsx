@@ -26,18 +26,23 @@ describe('InputField', () => {
   ])('should render with type: %s', () => {
     const props = getProps();
     const { getByLabelText } = customRender(<TextField {...props} />);
-    const element = getByLabelText(props?.label || '');
 
-    expect(element).toHaveAttribute('type', 'text');
+    expect(getByLabelText(props?.label || '')).toHaveAttribute('type', 'text');
   });
 
   it('should call onChange', () => {
     const props = getProps({ onChange: jest.fn() });
     const { getByLabelText } = customRender(<TextField {...props} />);
-    const element = getByLabelText(props?.label || '');
 
-    fireEvent.change(element, { target: { value: 'Some New Text' } });
+    fireEvent.change(getByLabelText(props?.label || ''), { target: { value: 'Some New Text' } });
 
     expect(props.onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render error message', () => {
+    const props = getProps({ error: 'some error message' });
+    const { getByText } = customRender(<TextField {...props} />);
+
+    expect(getByText(props?.error || '')).toBeInTheDocument();
   });
 });
