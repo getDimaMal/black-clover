@@ -4,9 +4,13 @@ import LoginForm from './LoginForm';
 
 export default {
   component: LoginForm,
+  args: {
+    isLoading: false,
+  },
   argTypes: {
-    onSignIn: { control: false },
+    defaultValues: { control: false },
     onSignUp: { control: false },
+    onSignIn: { control: false },
   },
 } as Meta<typeof LoginForm>;
 

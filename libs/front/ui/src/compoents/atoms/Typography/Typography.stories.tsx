@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Typography, { TypographyProps as Props } from './Typography';
+import Typography, { TypographyProps } from './Typography';
 
 export default {
   component: Typography,
@@ -12,17 +12,17 @@ export default {
     variant: {
       control: {
         type: 'select',
-        options: [] as Props['variant'][],
+        options: [] as TypographyProps['variant'][],
       },
     },
     color: {
       control: {
         type: 'radio',
-        options: [] as Props['color'][],
+        options: [] as TypographyProps['color'][],
       },
     },
   },
-} as Meta<typeof Typography>;
+} as Meta<TypographyProps>;
 
 type Story = StoryObj<typeof Typography>;
 

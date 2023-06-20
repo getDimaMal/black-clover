@@ -56,4 +56,11 @@ describe('LoginForm', () => {
 
     expect(props.onSignUp).not.toHaveBeenCalled();
   });
+
+  it('should render ProgressBar when isLoading true', () => {
+    const props = getProps({ isLoading: true });
+    const { getByText } = customRender(<LoginForm {...props} />);
+
+    expect(getByText('Loading...')).toBeInTheDocument();
+  });
 });

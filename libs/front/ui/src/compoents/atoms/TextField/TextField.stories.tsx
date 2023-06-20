@@ -21,7 +21,7 @@ export default {
     onChange: { control: false },
     inputRef: { control: false },
   },
-} as Meta<typeof TextField>;
+} as Meta<TextFieldProps>;
 
 type Story = StoryObj<typeof TextField>;
 

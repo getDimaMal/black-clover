@@ -19,7 +19,7 @@ export default {
     onClick: { control: false },
     className: { control: false },
   },
-} as Meta<typeof Button>;
+} as Meta<ButtonProps>;
 
 type Story = StoryObj<typeof Button>;
 
