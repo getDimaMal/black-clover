@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import { useCounter } from '@black-clover/front/redux';
+import { useCounter } from '@black-clover/front/redux/hooks/counter/useCounter';
 
 export type CounterProps = {
   Content: (props: {

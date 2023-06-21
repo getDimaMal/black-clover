@@ -1,14 +1,9 @@
 import React from 'react';
-import LoginForm from '@black-clover/front/ui/compoents/organisms/LoginForm/LoginForm';
+import LoginForm from '@black-clover/front/services/components/LoginForm/LoginForm';
+import { default as LoginFormUI } from '@black-clover/front/ui/compoents/organisms/LoginForm/LoginForm';
 
 const LoginPage = () => {
-  return (
-    <LoginForm
-      defaultValues={{ email: '', password: '' }}
-      onSignIn={(data) => console.log('SIGN IN:', data)}
-      onSignUp={(data) => console.log('SIGN UP:', data)}
-    />
-  );
+  return <LoginForm>{(props) => <LoginFormUI {...props} />}</LoginForm>;
 };
 
 export default LoginPage;
