@@ -12,14 +12,29 @@ export type ButtonProps = {
   disabled?: boolean;
   className?: string;
   type?: Types;
+  testId?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button: FC<ButtonProps> = ({ label, onClick, className, disabled, color = 'primary', type = 'button' }) => {
+const Button: FC<ButtonProps> = ({
+  label,
+  testId,
+  onClick,
+  className,
+  disabled,
+  type = 'button',
+  color = 'primary',
+}) => {
   const { classes, cx } = useStyles({ color });
 
   return (
-    <button className={cx(classes.root, className)} type={type} disabled={disabled} onClick={onClick}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={cx(classes.root, className)}
+      onClick={onClick}
+      data-testid={testId}
+    >
       {label}
     </button>
   );

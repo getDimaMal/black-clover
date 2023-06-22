@@ -11,33 +11,38 @@ describe('Button', () => {
   it('should render without error', () => {
     const props = getProps();
     const { getByText } = customRender(<Button {...props} />);
-    const button = getByText(props.label);
 
-    expect(button).toBeInTheDocument();
+    expect(getByText(props.label)).toBeInTheDocument();
   });
 
-  it('should render with class name', () => {
-    const props = getProps({ className: 'class-name' });
+  it('should render with className', () => {
+    const className = 'className';
+    const props = getProps({ className });
     const { getByText } = customRender(<Button {...props} />);
-    const button = getByText(props.label);
 
-    expect(button.className).toContain(props.className);
+    expect(getByText(props.label).classList.contains(className)).toBe(true);
+  });
+
+  it('should render with testId', () => {
+    const testId = 'test-button';
+    const props = getProps({ testId });
+    const { getByTestId } = customRender(<Button {...props} />);
+
+    expect(getByTestId(testId)).toBeInTheDocument();
   });
 
   it('should render disabled', () => {
     const props = getProps({ disabled: true });
     const { getByText } = customRender(<Button {...props} />);
-    const button = getByText(props.label);
 
-    expect(button).toBeDisabled();
+    expect(getByText(props.label)).toBeDisabled();
   });
 
   it('should call onClick when click', () => {
     const props = getProps({ onClick: jest.fn() });
     const { getByText } = customRender(<Button {...props} />);
-    const button = getByText(props.label);
 
-    fireEvent.click(button);
+    fireEvent.click(getByText(props.label));
 
     expect(props.onClick).toBeCalled();
   });

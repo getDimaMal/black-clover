@@ -16,8 +16,9 @@ export default {
       },
     },
     type: { control: false },
-    onClick: { control: false },
     className: { control: false },
+    onClick: { control: false },
+    testId: { control: false },
   },
 } as Meta<ButtonProps>;
 

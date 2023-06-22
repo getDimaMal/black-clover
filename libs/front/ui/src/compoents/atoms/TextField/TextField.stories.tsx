@@ -18,8 +18,9 @@ export default {
     },
     name: { control: false },
     value: { control: false },
-    onChange: { control: false },
+    testId: { control: false },
     inputRef: { control: false },
+    onChange: { control: false },
   },
 } as Meta<TextFieldProps>;
 

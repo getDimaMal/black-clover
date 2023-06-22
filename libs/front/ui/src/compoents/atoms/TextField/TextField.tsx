@@ -10,11 +10,21 @@ export type TextFieldProps = {
   label?: string;
   error?: string;
   type?: InputTypes;
+  testId?: string;
   inputRef?: React.Ref<HTMLInputElement>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const TextField: FC<TextFieldProps> = ({ name, label, error, inputRef, onChange, value: initValue, type = 'text' }) => {
+const TextField: FC<TextFieldProps> = ({
+  name,
+  label,
+  error,
+  testId,
+  inputRef,
+  onChange,
+  value: initValue,
+  type = 'text',
+}) => {
   const { classes } = useStyles();
   const [value, setValue] = useState(initValue ?? '');
 
@@ -27,7 +37,7 @@ const TextField: FC<TextFieldProps> = ({ name, label, error, inputRef, onChange,
     <div>
       <label>
         {label && <div className={classes.label}>{label}</div>}
-        <input ref={inputRef} type={type} name={name} value={value} onChange={handleChange} />
+        <input ref={inputRef} type={type} name={name} value={value} onChange={handleChange} data-testid={testId} />
       </label>
       {error && <div className={classes.error}>{error}</div>}
     </div>

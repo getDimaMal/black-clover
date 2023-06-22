@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'ProgressBar' })((theme) => ({
+const useStyles = makeStyles({ name: 'Loader' })((theme) => ({
   root: {
     width: '100%',
     height: '100%',
