@@ -1,20 +1,12 @@
 import React, { FC } from 'react';
+import { LoginFormUIType } from '@black-clover/front/shared/types/auth';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
 export type LoginFormProps = {
-  children: (props: {
-    defaultValues: CreateUserDto;
-    onSignUp: (data: CreateUserDto) => void;
-    onSignIn: (data: CreateUserDto) => void;
-  }) => React.ReactElement;
+  children: (props: LoginFormUIType) => React.ReactElement;
 };
 
 const LoginForm: FC<LoginFormProps> = ({ children }) => {
-  const defaultValues: CreateUserDto = {
-    email: '',
-    password: '',
-  };
-
   const handleSignUp = (data: CreateUserDto) => {
     console.log('Sign UP', data);
   };
@@ -24,9 +16,9 @@ const LoginForm: FC<LoginFormProps> = ({ children }) => {
   };
 
   return children({
-    defaultValues,
     onSignUp: handleSignUp,
     onSignIn: handleSignIn,
+    isLoading: false,
   });
 };
 

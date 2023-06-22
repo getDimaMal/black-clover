@@ -1,19 +1,19 @@
+import { LoginFormUIType } from '@black-clover/front/shared/types/auth';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import LoginForm from './LoginForm';
+import LoginFormUI from './LoginFormUI';
 
 export default {
-  component: LoginForm,
+  component: LoginFormUI,
   args: {
     isLoading: false,
   },
   argTypes: {
-    defaultValues: { control: false },
     onSignUp: { control: false },
     onSignIn: { control: false },
   },
-} as Meta<typeof LoginForm>;
+} as Meta<LoginFormUIType>;
 
-type Story = StoryObj<typeof LoginForm>;
+type Story = StoryObj<typeof LoginFormUI>;
 
 export const Default: Story = {};
