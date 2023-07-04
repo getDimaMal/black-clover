@@ -1,43 +1,30 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
 import useStyles from './TextField.styles';
 
-export type InputTypes = 'text' | 'email' | 'password';
+export type Types = 'text' | 'email' | 'password';
 
 export type TextFieldProps = {
   name: string;
   value: null | string;
-  label?: string;
-  error?: string;
-  type?: InputTypes;
-  testId?: string;
-  inputRef?: React.Ref<HTMLInputElement>;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-};
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+} & Partial<{
+  type: Types;
+  label: string;
+  testId: string;
+  autoFocus: boolean;
+  error: null | string;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+}>;
 
-const TextField: FC<TextFieldProps> = ({
-  name,
-  label,
-  error,
-  testId,
-  inputRef,
-  onChange,
-  value: initValue,
-  type = 'text',
-}) => {
+const TextField: FC<TextFieldProps> = ({ label, error, testId, value, type = 'text', ...other }) => {
   const { classes } = useStyles();
-  const [value, setValue] = useState(initValue ?? '');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    onChange?.(e);
-  };
 
   return (
     <div>
       <label>
         {label && <div className={classes.label}>{label}</div>}
-        <input ref={inputRef} type={type} name={name} value={value} onChange={handleChange} data-testid={testId} />
+        <input {...other} value={value || ''} type={type} data-testid={testId} />
       </label>
       {error && <div className={classes.error}>{error}</div>}
     </div>

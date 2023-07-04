@@ -1,10 +1,11 @@
 import { customRender, fireEvent } from '../../../test-utils';
 
-import TextField, { InputTypes, TextFieldProps } from './TextField';
+import TextField, { TextFieldProps, Types } from './TextField';
 
 const getProps = (props: Partial<TextFieldProps> = {}): TextFieldProps => ({
   name: 'test',
   value: null,
+  onChange: jest.fn(),
   ...props,
 });
 
@@ -19,15 +20,11 @@ describe('InputField', () => {
     expect(getByLabelText(label)).toHaveAttribute('type', 'text');
   });
 
-  it.each<[InputTypes, InputTypes]>([
-    ['text', 'text'],
-    ['email', 'email'],
-    ['password', 'password'],
-  ])('should render with type: %s', () => {
+  it('should render with autoFocus', () => {
     const testId = 'test-field';
-    const { getByTestId } = customRender(<TextField {...getProps({ testId })} />);
+    const { getByTestId } = customRender(<TextField {...getProps({ testId, autoFocus: true })} />);
 
-    expect(getByTestId(testId)).toHaveAttribute('type', 'text');
+    expect(getByTestId(testId)).toHaveFocus();
   });
 
   it('should call onChange', () => {
@@ -40,10 +37,31 @@ describe('InputField', () => {
     expect(props.onChange).toHaveBeenCalledTimes(1);
   });
 
+  it('should call onBlur', () => {
+    const testId = 'test-field';
+    const props = getProps({ testId, autoFocus: true, onBlur: jest.fn() });
+    const { getByTestId } = customRender(<TextField {...props} />);
+
+    fireEvent.focusOut(getByTestId(testId));
+
+    expect(props.onBlur).toHaveBeenCalledTimes(1);
+  });
+
   it('should render error message', () => {
     const error = 'some error message';
     const { getByText } = customRender(<TextField {...getProps({ error })} />);
 
     expect(getByText(error)).toBeInTheDocument();
+  });
+
+  it.each<[Types, Types]>([
+    ['text', 'text'],
+    ['email', 'email'],
+    ['password', 'password'],
+  ])('should render with type: %s', () => {
+    const testId = 'test-field';
+    const { getByTestId } = customRender(<TextField {...getProps({ testId })} />);
+
+    expect(getByTestId(testId)).toHaveAttribute('type', 'text');
   });
 });

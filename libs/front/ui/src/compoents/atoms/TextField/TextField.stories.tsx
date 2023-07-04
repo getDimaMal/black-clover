@@ -6,8 +6,9 @@ export default {
   component: TextField,
   args: {
     type: 'text',
+    value: 'Some Value',
     label: 'Some Field Label',
-    error: 'some error message',
+    error: 'Some Error Message',
   },
   argTypes: {
     type: {
@@ -17,9 +18,9 @@ export default {
       },
     },
     name: { control: false },
-    value: { control: false },
     testId: { control: false },
-    inputRef: { control: false },
+    autoFocus: { control: false },
+    onBlur: { control: false },
     onChange: { control: false },
   },
 } as Meta<TextFieldProps>;

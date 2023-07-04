@@ -40,24 +40,17 @@ const LoginFormUI: FC<LoginFormUIType> = ({ isLoading, error, onSignUp, onSignIn
       <Controller
         name="email"
         control={control}
-        render={({ field: { ref, ...other } }) => (
-          <TextField
-            {...other}
-            inputRef={ref}
-            label="Email"
-            error={getError('email')}
-            testId={LoginFormUITestId['email']}
-          />
+        render={({ field }) => (
+          <TextField {...field} label="Email" error={getError('email')} testId={LoginFormUITestId['email']} />
         )}
       />
 
       <Controller
         name="password"
         control={control}
-        render={({ field: { ref, ...other } }) => (
+        render={({ field }) => (
           <TextField
-            {...other}
-            inputRef={ref}
+            {...field}
             type="password"
             label="Password"
             error={getError('password')}
