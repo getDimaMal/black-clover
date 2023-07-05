@@ -1,4 +1,3 @@
-import { act } from 'react-dom/test-utils';
 import { LoginFormUIType } from '@black-clover/front/shared/types/auth.type';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
@@ -48,10 +47,8 @@ describe('LoginForm', () => {
     const props = getProps();
     const { container, getByTestId } = customRender(<LoginFormUI {...props} />);
 
-    await act(async () => {
-      fillForm(getForm(), container);
-      fireEvent.submit(getByTestId(LoginFormUITestId['loginForm']));
-    });
+    fillForm(getForm(), container);
+    fireEvent.submit(getByTestId(LoginFormUITestId['loginForm']));
 
     expect(props.onSignIn).toHaveBeenCalledTimes(1);
   });
@@ -63,10 +60,8 @@ describe('LoginForm', () => {
     const props = getProps();
     const { container, getByTestId } = customRender(<LoginFormUI {...props} />);
 
-    await act(async () => {
-      fillForm(getForm(), container);
-      fireEvent.click(getByTestId(testId));
-    });
+    fillForm(getForm(), container);
+    fireEvent.click(getByTestId(testId));
 
     expect(props[method]).toHaveBeenCalled();
   });
@@ -80,11 +75,9 @@ describe('LoginForm', () => {
     const props = getProps();
     const { container, getByTestId } = customRender(<LoginFormUI {...props} />);
 
-    await act(async () => {
-      fillForm(form, container);
-      fireEvent.click(getByTestId(LoginFormUITestId['signUp']));
-      fireEvent.click(getByTestId(LoginFormUITestId['signIn']));
-    });
+    fillForm(form, container);
+    fireEvent.click(getByTestId(LoginFormUITestId['signUp']));
+    fireEvent.click(getByTestId(LoginFormUITestId['signIn']));
 
     expect(props.onSignUp).not.toHaveBeenCalled();
     expect(props.onSignIn).not.toHaveBeenCalled();
