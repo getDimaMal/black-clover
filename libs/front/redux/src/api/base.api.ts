@@ -1,7 +1,7 @@
-import axios, { Axios } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
 class BaseApi {
-  private instance: Axios;
+  private readonly instance: AxiosInstance;
 
   constructor(baseURL: string) {
     this.instance = axios.create({ baseURL });

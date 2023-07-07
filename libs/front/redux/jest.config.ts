@@ -8,4 +8,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/front/redux',
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 };
