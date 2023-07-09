@@ -1,4 +1,6 @@
+import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
+import { ResetPasswordDto } from '@black-clover/shared/dto/users/reset-password.dto';
 import { SelfUserDto } from '@black-clover/shared/dto/users/self-user.dto';
 import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 import { UpdateUserDto } from '@black-clover/shared/dto/users/update-user.dto';
@@ -29,6 +31,19 @@ export class UsersController {
   @Serialize(TokenUserDto)
   signIn(@Body() body: CreateUserDto) {
     return this.authService.signIn(body);
+  }
+
+  @Post('/checkEmail')
+  @HttpCode(HttpStatus.OK)
+  checkEmail(@Body() body: CheckEmailDto) {
+    return this.authService.checkEmail(body);
+  }
+
+  @Post('/resetPassword')
+  @HttpCode(HttpStatus.OK)
+  @Serialize(TokenUserDto)
+  resetPassword(@Body() body: ResetPasswordDto) {
+    return this.authService.resetPassword(body);
   }
 
   @Get('/self')

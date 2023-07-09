@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { createUser, selfUser, tokenUser, updateUser, user } from '../__test-data__/users.test-data';
+import { createUser, selfUser, token, tokenUser, updateUser, user } from '../__test-data__/users.test-data';
+
 import { AuthService } from './auth.service';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
@@ -17,6 +18,8 @@ describe('UsersController', () => {
   const mockAuthService: Partial<AuthService> = {
     signUp: jest.fn().mockResolvedValue(tokenUser),
     signIn: jest.fn().mockResolvedValue(tokenUser),
+    checkEmail: jest.fn().mockResolvedValue({ token }),
+    resetPassword: jest.fn().mockResolvedValue(tokenUser),
   };
 
   beforeEach(async () => {
@@ -47,6 +50,24 @@ describe('UsersController', () => {
       const result = await usersController.signIn(createUser);
 
       expect(authService.signIn).toHaveBeenCalledWith(createUser);
+      expect(result).toEqual(tokenUser);
+    });
+  });
+
+  describe('checkEmail', () => {
+    it('should call authService.checkEmail and return the result', async () => {
+      const { token } = await usersController.checkEmail({ email: createUser.email });
+
+      expect(authService.checkEmail).toHaveBeenCalledWith({ email: createUser.email });
+      expect(token).toBeDefined();
+    });
+  });
+
+  describe('resetPassword', () => {
+    it('should call authService.resetPassword and return the result', async () => {
+      const result = await usersController.resetPassword({ token, password: createUser.password });
+
+      expect(authService.resetPassword).toHaveBeenCalledWith({ token, password: createUser.password });
       expect(result).toEqual(tokenUser);
     });
   });

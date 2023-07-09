@@ -4,12 +4,23 @@ import { Test } from '@nestjs/testing';
 import { AppModule } from '../app.module';
 
 import {
+  getCheckEmailErrorCases,
+  getResetPasswordErrorCases,
+  getResetPasswordProps,
   getSelfUserPros,
   getSignErrorCases,
   getUpdateSelfErrorCases,
   getUpdateSelfResultCases,
 } from './test-data/users.test-data';
-import { useGetAuthHeader, useGetSelf, usePutSelf, useSignIn, useSignUp } from './test-utils/users.test-utils';
+import {
+  useCheckEmail,
+  useGetAuthHeader,
+  useGetSelf,
+  usePutSelf,
+  useResetPassword,
+  useSignIn,
+  useSignUp,
+} from './test-utils/users.test-utils';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -28,10 +39,10 @@ describe('UserController (e2e)', () => {
   });
 
   describe('/users/signup (POST)', () => {
-    it('should create a new user', async () => {
+    it('should create a new user & return accessToken', async () => {
       const [{ id, accessToken, ...other }, status] = await useSignUp({ app });
 
-      expect(status).toEqual(201);
+      expect(status).toBe(201);
       expect(id).toBeDefined();
       expect(accessToken).toBeDefined();
       expect(other).toEqual(getSelfUserPros());
@@ -42,7 +53,7 @@ describe('UserController (e2e)', () => {
       async ({ props: user, error }) => {
         const [{ message }, status] = await useSignUp({ app, user });
 
-        expect(status).toEqual(400);
+        expect(status).toBe(400);
         expect(message).toContain(error);
       }
     );
@@ -51,17 +62,17 @@ describe('UserController (e2e)', () => {
       await useSignUp({ app });
       const [{ message }, status] = await useSignUp({ app });
 
-      expect(status).toEqual(409);
-      expect(message).toEqual('user already exists');
+      expect(status).toBe(409);
+      expect(message).toBe('user already exists');
     });
   });
 
   describe('/users/signin (POST)', () => {
-    it('should sign in a user and return an accessToken', async () => {
+    it('should sign in a user & return an accessToken', async () => {
       await useSignUp({ app });
       const [{ id, accessToken, ...other }, status] = await useSignIn({ app });
 
-      expect(status).toEqual(200);
+      expect(status).toBe(200);
       expect(id).toBeDefined();
       expect(accessToken).toBeDefined();
       expect(other).toEqual(getSelfUserPros());
@@ -72,7 +83,7 @@ describe('UserController (e2e)', () => {
       async ({ props: user, error }) => {
         const [{ message }, status] = await useSignIn({ app, user });
 
-        expect(status).toEqual(400);
+        expect(status).toBe(400);
         expect(message).toContain(error);
       }
     );
@@ -80,9 +91,52 @@ describe('UserController (e2e)', () => {
     it('should return an unauthorized error when credentials are incorrect', async () => {
       const [{ message }, status] = await useSignIn({ app });
 
-      expect(status).toEqual(401);
-      expect(message).toEqual('please check your credentials');
+      expect(status).toBe(401);
+      expect(message).toBe('please check your credentials');
     });
+  });
+
+  describe('users/checkEmail (POST)', () => {
+    it('should successfully check email & return token', async () => {
+      const [{ email }] = await useSignUp({ app });
+      const [{ token }, status] = await useCheckEmail({ app, data: { email } });
+
+      expect(status).toBe(200);
+      expect(token).toBeDefined();
+    });
+
+    it.each<(typeof getCheckEmailErrorCases)[0]>(getCheckEmailErrorCases)(
+      'should return a validation error when email: $case',
+      async ({ props: data, error }) => {
+        const [{ message }] = await useCheckEmail({ app, data });
+
+        expect(message).toContain(error);
+      }
+    );
+  });
+
+  describe('users/resetPassword (POST)', () => {
+    it('should reset password & return accessToken', async () => {
+      const [{ email }] = await useSignUp({ app });
+      const [{ token }] = await useCheckEmail({ app, data: { email } });
+
+      const data = getResetPasswordProps({ token });
+      const [{ id, accessToken, ...other }, status] = await useResetPassword({ app, data });
+
+      expect(status).toBe(200);
+      expect(id).toBeDefined();
+      expect(accessToken).toBeDefined();
+      expect(other).toEqual(getSelfUserPros());
+    });
+
+    it.each<(typeof getResetPasswordErrorCases)[0]>(getResetPasswordErrorCases)(
+      'should return an error when: $case',
+      async ({ props: data, error }) => {
+        const [{ message }] = await useResetPassword({ app, data });
+
+        expect(message).toContain(error);
+      }
+    );
   });
 
   describe('/users/self (GET)', () => {
@@ -90,7 +144,7 @@ describe('UserController (e2e)', () => {
       const header = await useGetAuthHeader({ app });
       const [{ id, ...other }, status] = await useGetSelf({ app, header });
 
-      expect(status).toEqual(200);
+      expect(status).toBe(200);
       expect(id).toBeDefined();
       expect(other).toEqual(getSelfUserPros());
     });
@@ -98,8 +152,8 @@ describe('UserController (e2e)', () => {
     it('should return an unauthorized error when auth header not provided', async () => {
       const [{ message }, status] = await useGetSelf({ app });
 
-      expect(status).toEqual(401);
-      expect(message).toEqual('Unauthorized');
+      expect(status).toBe(401);
+      expect(message).toBe('Unauthorized');
     });
   });
 
@@ -110,7 +164,7 @@ describe('UserController (e2e)', () => {
         const header = await useGetAuthHeader({ app });
         const [{ id, ...other }, status] = await usePutSelf({ app, header, props });
 
-        expect(status).toEqual(200);
+        expect(status).toBe(200);
         expect(id).toBeDefined();
         expect(other).toEqual(result);
       }
@@ -122,7 +176,7 @@ describe('UserController (e2e)', () => {
         const header = await useGetAuthHeader({ app });
         const [{ message }, status] = await usePutSelf({ app, header, props });
 
-        expect(status).toEqual(400);
+        expect(status).toBe(400);
         expect(message).toContain(error);
       }
     );
@@ -130,8 +184,8 @@ describe('UserController (e2e)', () => {
     it('should return an unauthorized error when no auth is provided', async () => {
       const [{ message }, status] = await usePutSelf({ app });
 
-      expect(status).toEqual(401);
-      expect(message).toEqual('Unauthorized');
+      expect(status).toBe(401);
+      expect(message).toBe('Unauthorized');
     });
   });
 });

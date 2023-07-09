@@ -4,8 +4,9 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
-import { User } from './entities/user.entity';
 import { createUser, hash, salt, updateUser, user } from '../__test-data__/users.test-data';
+
+import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
 jest.mock('bcrypt');
@@ -27,13 +28,25 @@ describe('UsersService', () => {
     usersService = module.get<UsersService>(UsersService);
   });
 
-  describe('create', () => {
-    it('should create a new user with hashed password', async () => {
+  describe('getHash', () => {
+    it('should return hash for password', async () => {
       jest.spyOn(bcrypt, 'genSalt').mockImplementation(() => salt);
       jest.spyOn(bcrypt, 'hash').mockImplementation(() => hash);
 
+      const result = await usersService.getHash(createUser.password);
+
+      expect(bcrypt.hash).toBeCalledWith(createUser.password, salt);
+      expect(result).toBe(hash);
+    });
+  });
+
+  describe('create', () => {
+    it('should create a new user with hashed password', async () => {
+      jest.spyOn(usersService, 'getHash').mockResolvedValue(hash);
+
       const result = await usersService.create(createUser);
 
+      expect(usersService.getHash).toBeCalledWith(createUser.password);
       expect(mockRepository.create).toHaveBeenCalledWith({ email: createUser.email, hash });
       expect(mockRepository.save).toHaveBeenCalledWith(user);
       expect(result).toEqual(user);
@@ -80,7 +93,7 @@ describe('UsersService', () => {
   });
 
   describe('update', () => {
-    it('should find and update the user', async () => {
+    it('should update the user by id', async () => {
       const newUser = { ...user, ...updateUser };
       jest.spyOn(usersService, 'findOne').mockResolvedValue(user);
       jest.spyOn(mockRepository, 'save').mockResolvedValue(newUser);
@@ -90,6 +103,34 @@ describe('UsersService', () => {
       expect(usersService.findOne).toHaveBeenCalledWith({ id: user.id });
       expect(mockRepository.save).toHaveBeenCalledWith(newUser);
       expect(result).toEqual(newUser);
+    });
+
+    it('should throw NotFoundException', async () => {
+      jest.spyOn(usersService, 'findOne').mockRejectedValueOnce(new NotFoundException());
+
+      await expect(usersService.update(user.id, updateUser)).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('updatePassword', () => {
+    it('should update password by id', async () => {
+      const hash = 'new hash';
+      const newUser = { ...user, hash };
+      jest.spyOn(usersService, 'getHash').mockResolvedValue(hash);
+      jest.spyOn(usersService, 'findOne').mockResolvedValue(user);
+      jest.spyOn(mockRepository, 'save').mockResolvedValue(newUser);
+
+      const result = await usersService.resetPassword(user.id, createUser.password);
+
+      expect(usersService.findOne).toHaveBeenCalledWith({ id: user.id });
+      expect(mockRepository.save).toHaveBeenCalledWith(newUser);
+      expect(result).toEqual(newUser);
+    });
+
+    it('should throw NotFoundException', async () => {
+      jest.spyOn(usersService, 'findOne').mockRejectedValueOnce(new NotFoundException());
+
+      await expect(usersService.resetPassword(user.id, createUser.password)).rejects.toThrow(NotFoundException);
     });
   });
 });

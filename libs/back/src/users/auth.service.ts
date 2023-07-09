@@ -1,6 +1,8 @@
+import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
+import { ResetPasswordDto } from '@black-clover/shared/dto/users/reset-password.dto';
 import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -12,6 +14,15 @@ export class AuthService {
 
   getToken(id: string): string {
     return this.jwtService.sign({ id });
+  }
+
+  getIdFromToken(token: string): null | string {
+    const result = this.jwtService.decode(token, { complete: true }) as null | { payload: { id: string; exp: number } };
+    const currentTime = Date.now() / 1000;
+
+    if (result && result.payload.exp > currentTime) return result.payload.id;
+
+    return null;
   }
 
   async signUp(createUser: CreateUserDto): Promise<TokenUserDto> {
@@ -34,5 +45,23 @@ export class AuthService {
       throw new UnauthorizedException('please check your credentials');
     }
     throw new UnauthorizedException('please check your credentials');
+  }
+
+  async checkEmail({ email }: CheckEmailDto): Promise<{ token: string }> {
+    const user = await this.usersService.findOne({ email });
+    const token = this.getToken(user.id);
+    //TODO The e-mail with token to reset password should be send here
+    return { token };
+  }
+
+  async resetPassword({ token, password }: ResetPasswordDto): Promise<TokenUserDto> {
+    const userId = this.getIdFromToken(token);
+
+    if (!userId) throw new BadRequestException('token is invalid or has expired');
+
+    const user = await this.usersService.resetPassword(userId, password);
+    const accessToken = this.getToken(userId);
+
+    return { ...user, accessToken };
   }
 }

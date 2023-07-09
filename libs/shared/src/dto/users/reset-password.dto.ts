@@ -1,10 +1,10 @@
-import { IsEmail } from 'class-validator';
+import { IsString } from 'class-validator';
 
 import { IsPassword } from '../../decorators/validations.decorator';
 
-export class CreateUserDto {
-  @IsEmail()
-  email: string;
+export class ResetPasswordDto {
+  @IsString()
+  token: string;
 
   @IsPassword()
   password: string;

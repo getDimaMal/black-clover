@@ -11,12 +11,16 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
-  async create({ email, password }: CreateUserDto): Promise<User> {
+  async getHash(password: string): Promise<string> {
     const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
+    return await bcrypt.hash(password, salt);
+  }
 
+  async create({ email, password }: CreateUserDto): Promise<User> {
     try {
-      const user = this.repo.create({ email, hash });
+      const hash = await this.getHash(password);
+      const user = await this.repo.create({ email, hash });
+
       return await this.repo.save(user);
     } catch (error: any) {
       if (error?.errno === 19) throw new ConflictException('user already exists');
@@ -36,6 +40,14 @@ export class UsersService {
   async update(id: string, attrs: UpdateUserDto): Promise<User> {
     const user = await this.findOne({ id });
     Object.assign(user, attrs);
+
+    return await this.repo.save(user);
+  }
+
+  async resetPassword(id: string, password: string): Promise<User> {
+    const hash = await this.getHash(password);
+    const user = await this.findOne({ id });
+    Object.assign(user, { hash });
 
     return await this.repo.save(user);
   }
