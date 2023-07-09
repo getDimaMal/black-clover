@@ -3,7 +3,7 @@ import { SelfUserDto } from '@black-clover/shared/dto/users/self-user.dto';
 import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 import { UpdateUserDto } from '@black-clover/shared/dto/users/update-user.dto';
 
-import { User } from '../entities/user.entity';
+import { User } from '../users/entities/user.entity';
 
 export const salt = 'mockedSalt';
 export const hash = 'mockedHash';
