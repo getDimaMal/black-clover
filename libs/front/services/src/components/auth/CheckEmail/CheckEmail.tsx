@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import useUserAuth from '@black-clover/front/redux/hooks/useUserAuth';
 import { CheckEmailFormProps } from '@black-clover/front/shared/types/auth.type';
-import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 
 type CheckEmailProps = {
   children: (props: CheckEmailFormProps) => React.ReactElement;
 };
 
 const CheckEmail: React.FC<CheckEmailProps> = ({ children }) => {
+  const { token, error, isLoading, checkEmail } = useUserAuth();
+
+  useEffect(() => {
+    token && console.log(token);
+  }, [token]);
+
   return children({
-    error: 'Error',
-    isLoading: false,
-    onSubmit: (data: CheckEmailDto) => console.log('Check Email:', data),
+    error,
+    isLoading,
+    onSubmit: checkEmail,
   });
 };
 

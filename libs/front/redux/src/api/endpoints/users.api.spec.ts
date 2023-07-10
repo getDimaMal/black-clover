@@ -1,3 +1,4 @@
+import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 import axios from 'axios';
 
@@ -28,5 +29,13 @@ describe('UsersApi', () => {
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(`${root}/signIn`, body);
+  });
+
+  it('should make checkEmail request', async () => {
+    const body: CheckEmailDto = { email: 'email@mail.com' };
+    await Api.checkEmail(body);
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(`${root}/checkEmail`, body);
   });
 });
