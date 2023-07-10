@@ -7,7 +7,7 @@
     "back-api:dev": "STAGE=dev nx serve back-api",
     "---FRONTENT---": "---------------------------------------------------------------------------------------------",
     "front-client:dev": "nx serve front-client",
-    "front-ui:storybook": "nx run front-ui:storybook",
+    "front-ui:storybook": "nx reset & nx run front-ui:storybook",
     "---CODEBASE---": "---------------------------------------------------------------------------------------------",
     "lint": "nx format:write && nx run-many --all --target=lint --fix",
     "affected:lint": "nx format:write && nx affected:lint --fix",

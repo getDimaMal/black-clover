@@ -1,12 +1,9 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'CheckEmailForm' })((theme) => ({
+const useStyles = makeStyles({ name: 'CheckEmailForm' })(() => ({
   root: {
+    width: 'fit-content',
     position: 'relative',
-  },
-
-  error: {
-    color: theme.colors['text-error'],
   },
 }));
 

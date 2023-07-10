@@ -3,10 +3,10 @@ import { LoginFormProps } from '@black-clover/front/shared/types/auth.type';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
 import useForm from '../../../../hooks/useForm';
+import Alert from '../../../atoms/Alert/Alert';
 import Button from '../../../atoms/Button/Button';
 import Loader from '../../../atoms/Loader/Loader';
 import TextField from '../../../atoms/TextField/TextField';
-import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './LoginForm.styles';
 
@@ -41,9 +41,7 @@ const LoginForm: FC<LoginFormProps> = ({ isLoading, error, onSignUp, onSignIn })
 
       <TextField {...getInputProps('password')} type="password" label="Password" testId={LoginFormTestID['password']} />
 
-      <Typography variant="bodyS" className={classes.error}>
-        {error}
-      </Typography>
+      <Alert color="error" message={error || ''} />
 
       <Button label="Sign Up" testId={LoginFormTestID['signUp']} color="secondary" onClick={handleSubmit(onSignUp)} />
       <Button label="Sign In" testId={LoginFormTestID['signIn']} type="submit" />

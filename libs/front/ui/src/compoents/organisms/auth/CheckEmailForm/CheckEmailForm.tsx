@@ -3,10 +3,10 @@ import { CheckEmailFormProps } from '@black-clover/front/shared/types/auth.type'
 import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 
 import useForm from '../../../../hooks/useForm';
+import Alert from '../../../atoms/Alert/Alert';
 import Button from '../../../atoms/Button/Button';
 import Loader from '../../../atoms/Loader/Loader';
 import TextField from '../../../atoms/TextField/TextField';
-import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './CheckEmailForm.styles';
 
@@ -32,11 +32,15 @@ const CheckEmailForm: FC<CheckEmailFormProps> = ({ isLoading, error, onSubmit })
     >
       <Loader isLoading={isLoading} testId={CheckEmailFormTestID['checkEmailLoader']} />
 
-      <TextField {...getInputProps('email')} autoFocus label="Email" testId={CheckEmailFormTestID['email']} />
+      <TextField
+        {...getInputProps('email')}
+        autoFocus
+        type="email"
+        label="Email"
+        testId={CheckEmailFormTestID['email']}
+      />
 
-      <Typography variant="bodyS" className={classes.error}>
-        {error}
-      </Typography>
+      <Alert color="error" message={error || ''} />
 
       <Button type="submit" label="Send E-Mail" testId={CheckEmailFormTestID['checkEmailSubmit']} />
     </form>
