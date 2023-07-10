@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import LoginPage from './auth/LoginPage';
 import ErrorPage from './ErrorPage/ErrorPage';
-import LoginPage from './LoginPage/LoginPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import ROUTES from './routes.json';
 

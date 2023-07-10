@@ -1,10 +1,10 @@
-import { LoginFormUIType } from '@black-clover/front/shared/types/auth.type';
+import { LoginFormProps } from '@black-clover/front/shared/types/auth.type';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import LoginFormUI from './LoginFormUI';
+import LoginForm from './LoginForm';
 
 export default {
-  component: LoginFormUI,
+  component: LoginForm,
   args: {
     isLoading: false,
     error: 'Some Error',
@@ -13,8 +13,8 @@ export default {
     onSignUp: { control: false },
     onSignIn: { control: false },
   },
-} as Meta<LoginFormUIType>;
+} as Meta<LoginFormProps>;
 
-type Story = StoryObj<typeof LoginFormUI>;
+type Story = StoryObj<LoginFormProps>;
 
 export const Default: Story = {};

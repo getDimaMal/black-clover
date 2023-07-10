@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'LoginFormUI' })((theme) => ({
+const useStyles = makeStyles({ name: 'LoginForm' })((theme) => ({
   root: {
     width: 'fit-content',
     position: 'relative',

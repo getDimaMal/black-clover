@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import useUserSignRequests from '@black-clover/front/redux/hooks/useUserSignRequests';
-import { LoginFormUIType } from '@black-clover/front/shared/types/auth.type';
+import { LoginFormProps } from '@black-clover/front/shared/types/auth.type';
 
-export type LoginFormProps = {
-  children: (props: LoginFormUIType) => React.ReactElement;
+export type LoginProps = {
+  children: (props: LoginFormProps) => React.ReactElement;
 };
 
-const LoginForm: FC<LoginFormProps> = ({ children }) => {
+const Login: FC<LoginProps> = ({ children }) => {
   const { error, isLoading, signUp, signIn } = useUserSignRequests();
 
   return children({
@@ -17,4 +17,4 @@ const LoginForm: FC<LoginFormProps> = ({ children }) => {
   });
 };
 
-export default LoginForm;
+export default Login;

@@ -1,7 +1,7 @@
 import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
-export type LoginFormUIType = {
+export type LoginFormProps = {
   isLoading: boolean;
   onSignUp: (args: CreateUserDto) => void;
   onSignIn: (args: CreateUserDto) => void;
