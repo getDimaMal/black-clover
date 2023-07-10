@@ -1,4 +1,5 @@
 {
   "ROOT": "/",
-  "LOGIN": "/login"
+  "LOGIN": "/login",
+  "CHECK_EMAIL": "/login/checkEmail"
 }
