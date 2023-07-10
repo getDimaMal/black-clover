@@ -4,20 +4,20 @@ import { Test } from '@nestjs/testing';
 import { AppModule } from '../app.module';
 
 import {
+  getChangePasswordErrorCases,
+  getChangePasswordProps,
   getCheckEmailErrorCases,
-  getResetPasswordErrorCases,
-  getResetPasswordProps,
   getSelfUserPros,
   getSignErrorCases,
   getUpdateSelfErrorCases,
   getUpdateSelfResultCases,
 } from './test-data/users.test-data';
 import {
+  useChangePassword,
   useCheckEmail,
   useGetAuthHeader,
   useGetSelf,
   usePutSelf,
-  useResetPassword,
   useSignIn,
   useSignUp,
 } from './test-utils/users.test-utils';
@@ -115,13 +115,13 @@ describe('UserController (e2e)', () => {
     );
   });
 
-  describe('users/resetPassword (POST)', () => {
+  describe('users/changePassword (POST)', () => {
     it('should reset password & return accessToken', async () => {
       const [{ email }] = await useSignUp({ app });
       const [{ token }] = await useCheckEmail({ app, data: { email } });
 
-      const data = getResetPasswordProps({ token });
-      const [{ id, accessToken, ...other }, status] = await useResetPassword({ app, data });
+      const data = getChangePasswordProps({ token });
+      const [{ id, accessToken, ...other }, status] = await useChangePassword({ app, data });
 
       expect(status).toBe(200);
       expect(id).toBeDefined();
@@ -129,10 +129,10 @@ describe('UserController (e2e)', () => {
       expect(other).toEqual(getSelfUserPros());
     });
 
-    it.each<(typeof getResetPasswordErrorCases)[0]>(getResetPasswordErrorCases)(
+    it.each<(typeof getChangePasswordErrorCases)[0]>(getChangePasswordErrorCases)(
       'should return an error when: $case',
       async ({ props: data, error }) => {
-        const [{ message }] = await useResetPassword({ app, data });
+        const [{ message }] = await useChangePassword({ app, data });
 
         expect(message).toContain(error);
       }

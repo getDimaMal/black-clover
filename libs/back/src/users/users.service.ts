@@ -44,7 +44,7 @@ export class UsersService {
     return await this.repo.save(user);
   }
 
-  async resetPassword(id: string, password: string): Promise<User> {
+  async changePassword(id: string, password: string): Promise<User> {
     const hash = await this.getHash(password);
     const user = await this.findOne({ id });
     Object.assign(user, { hash });

@@ -120,7 +120,7 @@ describe('UsersService', () => {
       jest.spyOn(usersService, 'findOne').mockResolvedValue(user);
       jest.spyOn(mockRepository, 'save').mockResolvedValue(newUser);
 
-      const result = await usersService.resetPassword(user.id, createUser.password);
+      const result = await usersService.changePassword(user.id, createUser.password);
 
       expect(usersService.findOne).toHaveBeenCalledWith({ id: user.id });
       expect(mockRepository.save).toHaveBeenCalledWith(newUser);
@@ -130,7 +130,7 @@ describe('UsersService', () => {
     it('should throw NotFoundException', async () => {
       jest.spyOn(usersService, 'findOne').mockRejectedValueOnce(new NotFoundException());
 
-      await expect(usersService.resetPassword(user.id, createUser.password)).rejects.toThrow(NotFoundException);
+      await expect(usersService.changePassword(user.id, createUser.password)).rejects.toThrow(NotFoundException);
     });
   });
 });

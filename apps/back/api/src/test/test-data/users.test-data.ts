@@ -1,6 +1,6 @@
+import { ChangePasswordDto } from '@black-clover/shared/dto/users/change-password.dto';
 import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
-import { ResetPasswordDto } from '@black-clover/shared/dto/users/reset-password.dto';
 import { SelfUserDto } from '@black-clover/shared/dto/users/self-user.dto';
 import { UpdateUserDto } from '@black-clover/shared/dto/users/update-user.dto';
 
@@ -21,7 +21,7 @@ export const getCreateUserProps = (props: Partial<CreateUserDto> = {}): CreateUs
   ...props,
 });
 
-export const getResetPasswordProps = (props: Partial<ResetPasswordDto> = {}): ResetPasswordDto => ({
+export const getChangePasswordProps = (props: Partial<ChangePasswordDto> = {}): ChangePasswordDto => ({
   token: 'some token',
   password: 'password123',
   ...props,
@@ -71,40 +71,40 @@ export const getCheckEmailErrorCases: { case: string; props: CheckEmailDto; erro
   { case: 'is not exists', props: { email: 'notExists@mail.com' }, error: 'user not found' },
 ];
 
-export const getResetPasswordErrorCases: { case: string; props: ResetPasswordDto; error: string }[] = [
+export const getChangePasswordErrorCases: { case: string; props: ChangePasswordDto; error: string }[] = [
   {
     case: 'password have only letters',
-    props: getResetPasswordProps({ password: 'password without numbers' }),
+    props: getChangePasswordProps({ password: 'password without numbers' }),
     error: 'password should be min 8 chars with letters & numbers',
   },
   {
     case: 'password have only numbers',
-    props: getResetPasswordProps({ password: '123456789' }),
+    props: getChangePasswordProps({ password: '123456789' }),
     error: 'password should be min 8 chars with letters & numbers',
   },
   {
     case: 'password length is less than 8 characters',
-    props: getResetPasswordProps({ password: 'no123' }),
+    props: getChangePasswordProps({ password: 'no123' }),
     error: 'password should be min 8 chars with letters & numbers',
   },
   {
     case: 'token is null',
-    props: getResetPasswordProps({ token: null }),
+    props: getChangePasswordProps({ token: null }),
     error: 'token must be a string',
   },
   {
     case: 'token is invalid',
-    props: getResetPasswordProps(),
+    props: getChangePasswordProps(),
     error: 'token is invalid or has expired',
   },
   {
     case: 'token has expired',
-    props: getResetPasswordProps({ token: getJWTToken({ id: getUUID() }, -1000) }),
+    props: getChangePasswordProps({ token: getJWTToken({ id: getUUID() }, -1000) }),
     error: 'token is invalid or has expired',
   },
   {
     case: 'token has invalid userId',
-    props: getResetPasswordProps({ token: getJWTToken({ id: getUUID() }, 1000) }),
+    props: getChangePasswordProps({ token: getJWTToken({ id: getUUID() }, 1000) }),
     error: 'user not found',
   },
 ];

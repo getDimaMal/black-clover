@@ -2,7 +2,7 @@ import { IsString } from 'class-validator';
 
 import { IsPassword } from '../../decorators/validations.decorator';
 
-export class ResetPasswordDto {
+export class ChangePasswordDto {
   @IsString()
   token: string;
 

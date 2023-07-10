@@ -19,7 +19,7 @@ describe('UsersController', () => {
     signUp: jest.fn().mockResolvedValue(tokenUser),
     signIn: jest.fn().mockResolvedValue(tokenUser),
     checkEmail: jest.fn().mockResolvedValue({ token }),
-    resetPassword: jest.fn().mockResolvedValue(tokenUser),
+    changePassword: jest.fn().mockResolvedValue(tokenUser),
   };
 
   beforeEach(async () => {
@@ -63,11 +63,11 @@ describe('UsersController', () => {
     });
   });
 
-  describe('resetPassword', () => {
-    it('should call authService.resetPassword and return the result', async () => {
-      const result = await usersController.resetPassword({ token, password: createUser.password });
+  describe('changePassword', () => {
+    it('should call authService.changePassword and return the result', async () => {
+      const result = await usersController.changePassword({ token, password: createUser.password });
 
-      expect(authService.resetPassword).toHaveBeenCalledWith({ token, password: createUser.password });
+      expect(authService.changePassword).toHaveBeenCalledWith({ token, password: createUser.password });
       expect(result).toEqual(tokenUser);
     });
   });

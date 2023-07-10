@@ -1,6 +1,6 @@
+import { ChangePasswordDto } from '@black-clover/shared/dto/users/change-password.dto';
 import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
-import { ResetPasswordDto } from '@black-clover/shared/dto/users/reset-password.dto';
 import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -54,12 +54,12 @@ export class AuthService {
     return { token };
   }
 
-  async resetPassword({ token, password }: ResetPasswordDto): Promise<TokenUserDto> {
+  async changePassword({ token, password }: ChangePasswordDto): Promise<TokenUserDto> {
     const userId = this.getIdFromToken(token);
 
     if (!userId) throw new BadRequestException('token is invalid or has expired');
 
-    const user = await this.usersService.resetPassword(userId, password);
+    const user = await this.usersService.changePassword(userId, password);
     const accessToken = this.getToken(userId);
 
     return { ...user, accessToken };

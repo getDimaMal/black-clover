@@ -16,7 +16,7 @@ describe('AuthService', () => {
   const mockUsersService: Partial<UsersService> = {
     create: jest.fn().mockReturnValue(user),
     findOne: jest.fn().mockResolvedValue(user),
-    resetPassword: jest.fn().mockResolvedValue(user),
+    changePassword: jest.fn().mockResolvedValue(user),
   };
 
   const mockJwtService: Partial<JwtService> = {
@@ -124,11 +124,11 @@ describe('AuthService', () => {
     });
   });
 
-  describe('resetPassword', () => {
+  describe('changePassword', () => {
     it('should reset password & return user with accessToken', async () => {
       jest.spyOn(authService, 'getIdFromToken').mockReturnValue(user.id);
 
-      const result = await authService.resetPassword({ token, password: createUser.password });
+      const result = await authService.changePassword({ token, password: createUser.password });
 
       expect(result).toEqual({ ...user, accessToken: token });
     });
@@ -137,7 +137,7 @@ describe('AuthService', () => {
       jest.spyOn(authService, 'getIdFromToken').mockReturnValue(null);
 
       const data = { token, password: createUser.password };
-      await expect(authService.resetPassword(data)).rejects.toThrow(BadRequestException);
+      await expect(authService.changePassword(data)).rejects.toThrow(BadRequestException);
     });
   });
 });
