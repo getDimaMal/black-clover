@@ -1,4 +1,3 @@
-import { CheckEmailFormProps } from '@black-clover/front/shared/types/auth.type';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import CheckEmailForm from './CheckEmailForm';
@@ -12,8 +11,8 @@ export default {
   argTypes: {
     onSubmit: { control: false },
   },
-} as Meta<CheckEmailFormProps>;
+} as Meta<typeof CheckEmailForm>;
 
-type Story = StoryObj<CheckEmailFormProps>;
+type Story = StoryObj<typeof CheckEmailForm>;
 
 export const Default: Story = {};

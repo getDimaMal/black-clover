@@ -1,4 +1,3 @@
-import { LoginFormProps } from '@black-clover/front/shared/types/auth.type';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import LoginForm from './LoginForm';
@@ -13,8 +12,8 @@ export default {
     onSignUp: { control: false },
     onSignIn: { control: false },
   },
-} as Meta<LoginFormProps>;
+} as Meta<typeof LoginForm>;
 
-type Story = StoryObj<LoginFormProps>;
+type Story = StoryObj<typeof LoginForm>;
 
 export const Default: Story = {};

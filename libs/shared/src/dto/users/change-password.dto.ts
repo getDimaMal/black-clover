@@ -9,3 +9,8 @@ export class ChangePasswordDto {
   @IsPassword()
   password: string;
 }
+
+export class ChangePasswordNoTokenDto {
+  @IsPassword()
+  password: string;
+}
