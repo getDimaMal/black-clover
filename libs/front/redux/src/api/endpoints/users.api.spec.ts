@@ -1,3 +1,4 @@
+import { ChangePasswordDto } from '@black-clover/shared/dto/users/change-password.dto';
 import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 import axios from 'axios';
@@ -37,5 +38,13 @@ describe('UsersApi', () => {
 
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(`${root}/checkEmail`, body);
+  });
+
+  it('should make changePassword request', async () => {
+    const body: ChangePasswordDto = { password: 'password123', token: 'some token' };
+    await Api.changePassword(body);
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalledWith(`${root}/changePassword`, body);
   });
 });

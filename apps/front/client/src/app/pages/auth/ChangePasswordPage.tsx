@@ -2,7 +2,7 @@ import ChangePassword from '@black-clover/front/services/components/auth/ChangeP
 import ChangePasswordForm from '@black-clover/front/ui/compoents/organisms/auth/ChangePasswordForm/ChangePasswordForm';
 
 const ChangePasswordPage = () => {
-  return <ChangePassword>{(props) => <ChangePasswordForm {...props} />}</ChangePassword>;
+  return <ChangePassword token="some-token">{(props) => <ChangePasswordForm {...props} />}</ChangePassword>;
 };
 
 export default ChangePasswordPage;
