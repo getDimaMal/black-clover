@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import ChangePasswordPage from './auth/ChangePasswordPage';
 import CheckEmailPage from './auth/CheckEmailPage';
 import LoginPage from './auth/LoginPage';
 import ErrorPage from './ErrorPage/ErrorPage';
@@ -19,6 +20,7 @@ const Pages = () => {
       children: [
         { path: ROUTES.LOGIN, element: <LoginPage /> },
         { path: ROUTES.CHECK_EMAIL, element: <CheckEmailPage /> },
+        { path: ROUTES.CHANGE_PASSWORD, element: <ChangePasswordPage /> },
       ],
     },
   ]);

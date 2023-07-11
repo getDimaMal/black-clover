@@ -1,5 +1,6 @@
 {
   "ROOT": "/",
   "LOGIN": "/login",
-  "CHECK_EMAIL": "/login/checkEmail"
+  "CHECK_EMAIL": "/login/checkEmail",
+  "CHANGE_PASSWORD": "/login/changePassword"
 }
