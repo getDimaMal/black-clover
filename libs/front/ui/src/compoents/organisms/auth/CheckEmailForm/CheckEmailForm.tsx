@@ -5,6 +5,7 @@ import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import useForm from '../../../../hooks/useForm';
 import Alert from '../../../atoms/Alert/Alert';
 import Button from '../../../atoms/Button/Button';
+import Link from '../../../atoms/Link/Link';
 import Loader from '../../../atoms/Loader/Loader';
 import TextField from '../../../atoms/TextField/TextField';
 
@@ -19,7 +20,7 @@ export const CheckEmailFormTestID: Record<TCheckEmailFormTestID, TCheckEmailForm
   checkEmailSubmit: 'checkEmailSubmit',
 };
 
-const CheckEmailForm: FC<CheckEmailFormProps> = ({ isLoading, error, onSubmit }) => {
+const CheckEmailForm: FC<CheckEmailFormProps> = ({ isLoading, error, onSubmit, token }) => {
   const { classes } = useStyles();
   const { handleSubmit, getInputProps } = useForm<CheckEmailDto>({ Resolver: CheckEmailDto, initForm: { email: '' } });
 
@@ -39,6 +40,8 @@ const CheckEmailForm: FC<CheckEmailFormProps> = ({ isLoading, error, onSubmit })
         label="Email"
         testId={CheckEmailFormTestID['email']}
       />
+
+      {token && <Link to={`/login/changePassword?${token}`}>Change Password (It's for a test)</Link>}
 
       <Alert color="error" message={error || ''} />
 

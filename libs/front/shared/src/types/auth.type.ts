@@ -15,6 +15,7 @@ export type CheckEmailFormProps = {
   onSubmit: (args: CheckEmailDto) => void;
 } & Partial<{
   error: null | string;
+  token: null | string;
 }>;
 
 export type ChangePasswordFormProps = {

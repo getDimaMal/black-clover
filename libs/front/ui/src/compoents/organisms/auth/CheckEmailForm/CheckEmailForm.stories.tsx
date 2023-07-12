@@ -8,9 +8,6 @@ export default {
     isLoading: false,
     error: 'Some Error',
   },
-  argTypes: {
-    onSubmit: { control: false },
-  },
 } as Meta<typeof CheckEmailForm>;
 
 type Story = StoryObj<typeof CheckEmailForm>;
