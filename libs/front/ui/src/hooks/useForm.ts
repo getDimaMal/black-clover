@@ -11,7 +11,6 @@ export type TGetInputProps<Form> = (name: keyof Form) => {
   name: keyof Form;
   value: Form[keyof Form];
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 } & Partial<{
   error: null | string;
 }>;
@@ -19,7 +18,6 @@ export type TGetInputProps<Form> = (name: keyof Form) => {
 export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormProps<Form>) => {
   const [values, setValues] = useState<Form>(initForm);
   const [errors, setErrors] = useState<Partial<Record<keyof Form, string>>>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof Form, boolean>>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
@@ -42,14 +40,6 @@ export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormPro
     setValues((old) => ({ ...old, [name]: value }));
   };
 
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const { name } = event.target;
-    setTouched((old) => ({ ...old, [name]: true }));
-  };
-
   const handleSubmit = useCallback(
     (callback: (args: Form) => void) => (event: React.FormEvent<HTMLFormElement | HTMLButtonElement>) => {
       event.preventDefault();
@@ -66,11 +56,10 @@ export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormPro
     (name: keyof Form): ReturnType<TGetInputProps<Form>> => ({
       name,
       value: values[name],
-      error: touched[name] || isSubmitted ? errors[name] : null,
+      error: isSubmitted ? errors[name] : null,
       onChange: handleChange,
-      onBlur: handleBlur,
     }),
-    [errors, isSubmitted, touched, values]
+    [errors, isSubmitted, values]
   );
 
   return { handleSubmit, getInputProps };

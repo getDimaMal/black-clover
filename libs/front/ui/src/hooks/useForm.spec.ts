@@ -60,19 +60,6 @@ describe('useForm', () => {
       expect(result.current.getInputProps(name).value).toBe(value);
     });
 
-    it('should return error when validation failed & call onBlur', async () => {
-      const error = 'some error';
-      mockValidationSync.mockReturnValue([{ property: name, constraints: { error } }]);
-
-      const { result } = renderHook(() => useForm<Resolver>({ initForm, Resolver }));
-
-      await act(async () => {
-        result.current.getInputProps(name).onBlur(getEvent());
-      });
-
-      expect(result.current.getInputProps(name).error).toBe(error);
-    });
-
     it('should return error when validation failed & call handleSubmit', async () => {
       const error = 'some error';
       mockValidationSync.mockReturnValue([{ property: name, constraints: { error } }]);
