@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 
 import useStyles from './TextField.styles';
 
@@ -17,18 +17,20 @@ export type TextFieldProps = {
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
 }>;
 
-const TextField: FC<TextFieldProps> = ({ label, error, testId, value, type = 'text', ...other }) => {
-  const { classes } = useStyles();
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  ({ label, error, testId, value, type = 'text', ...other }, ref) => {
+    const { classes } = useStyles();
 
-  return (
-    <div>
-      <label>
-        {label && <div className={classes.label}>{label}</div>}
-        <input {...other} value={value || ''} type={type} data-testid={testId} />
-      </label>
-      {error && <div className={classes.error}>{error}</div>}
-    </div>
-  );
-};
+    return (
+      <div>
+        <label>
+          {label && <div className={classes.label}>{label}</div>}
+          <input {...other} ref={ref} value={value || ''} type={type} data-testid={testId} />
+        </label>
+        {error && <div className={classes.error}>{error}</div>}
+      </div>
+    );
+  }
+);
 
 export default TextField;
