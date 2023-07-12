@@ -20,7 +20,7 @@ const getProps = (props: Partial<LoginFormProps> = {}): LoginFormProps => ({
 
 describe('LoginForm', () => {
   it('should render without error', () => {
-    const { getByTestId } = customRender(<LoginForm {...getProps()} />);
+    const { getByTestId, getByText } = customRender(<LoginForm {...getProps()} />);
 
     // fields
     expect(getByTestId(LoginFormTestID['email'])).toBeInTheDocument();
@@ -28,12 +28,14 @@ describe('LoginForm', () => {
     // buttons
     expect(getByTestId(LoginFormTestID['signUp'])).toBeInTheDocument();
     expect(getByTestId(LoginFormTestID['signIn'])).toBeInTheDocument();
+    // link
+    expect(getByText('Forgot Password?')).toBeInTheDocument();
   });
 
   it('should render Loader when isLoading true', () => {
     const { getByTestId } = customRender(<LoginForm {...getProps({ isLoading: true })} />);
 
-    expect(getByTestId(LoginFormTestID['loginLoader'])).toBeInTheDocument();
+    expect(getByTestId(LoginFormTestID['loginFormLoader'])).toBeInTheDocument();
   });
 
   it('should render error when defined', () => {
