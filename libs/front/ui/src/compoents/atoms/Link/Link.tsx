@@ -3,7 +3,7 @@ import React from 'react';
 import { useStyles } from './Link.styles';
 
 export type Colors = 'main' | 'info';
-export type Variants = 'textL' | 'textM' | 'textS';
+export type Variants = 'textM';
 
 export type LinkProps = {
   to: string;

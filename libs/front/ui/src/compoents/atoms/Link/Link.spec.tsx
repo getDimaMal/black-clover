@@ -25,7 +25,7 @@ describe('Link', () => {
     expect(getByText(props.children as string).className).toContain(props.className);
   });
 
-  it.each<Variants>(['textL', 'textM', 'textS'])('should render with class: %s', (variant) => {
+  it.each<Variants>(['textM'])('should render with class: %s', (variant) => {
     const props = getProps({ variant });
     const { getByText } = customRender(<Link {...props} />);
 

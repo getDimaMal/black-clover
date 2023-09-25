@@ -6,7 +6,7 @@ export default {
   component: Alert,
   args: {
     message: 'Hello, Event Panel! This is Alert component!',
-    variant: 'textL',
+    variant: 'textM',
     color: 'info',
   },
   argTypes: {

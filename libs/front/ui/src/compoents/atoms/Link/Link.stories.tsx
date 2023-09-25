@@ -10,7 +10,7 @@ export default {
     color: 'info',
   },
   argTypes: {
-    variant: { type: { name: 'enum', value: ['textL', 'textM', 'textS'] as Variants[] } },
+    variant: { type: { name: 'enum', value: ['textM'] as Variants[] } },
     color: { type: { name: 'enum', value: ['main', 'info'] as Colors[] } },
   },
 } as Meta<typeof Link>;

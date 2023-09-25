@@ -13,7 +13,7 @@ describe('Alert', () => {
     const { getByText } = customRender(<Alert {...props} />);
 
     expect(getByText(props.message)).toBeInTheDocument();
-    expect(getByText(props.message).className).toContain('textL');
+    expect(getByText(props.message).className).toContain('textM');
   });
 
   it('should renders with className', () => {
@@ -23,7 +23,7 @@ describe('Alert', () => {
     expect(getByText(props.message).className).toContain(props.className);
   });
 
-  it.each<Variants>(['bodyM', 'bodyS', 'textL', 'textM', 'textS'])('should render with class: %s', (variant) => {
+  it.each<Variants>(['bodyM', 'textM'])('should render with class: %s', (variant) => {
     const props = getProps({ variant });
     const { getByText } = customRender(<Alert {...props} />);
 

@@ -11,7 +11,5 @@ export const useStyles = makeStyles<{ color: Colors }>({ name: 'Link' })((theme,
     },
   },
 
-  textL: { ...theme.typography['text-l'] },
   textM: { ...theme.typography['text-m'] },
-  textS: { ...theme.typography['text-s'] },
 }));

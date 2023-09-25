@@ -1,6 +1,6 @@
 import { customRender } from '../../../test-utils';
 
-import Typography, { MapVariant, TypographyProps, Variant } from './Typography';
+import Typography, { Colors, MapVariant, TypographyProps, Variant } from './Typography';
 
 const text = 'Hello, Black Clover!';
 
@@ -33,10 +33,7 @@ describe('Typography', () => {
     ['h4', 'h4'],
     ['h5', 'h5'],
     ['bodyM', 'p'],
-    ['bodyS', 'p'],
-    ['textL', 'span'],
     ['textM', 'span'],
-    ['textS', 'span'],
     ['inherit', 'span'],
   ])('should renders variant: %s', (variant, tag) => {
     const { getByText } = customRender(<Typography {...generateProps({ variant })} />);
@@ -44,5 +41,12 @@ describe('Typography', () => {
 
     expect(element.tagName.toLowerCase()).toBe(tag);
     expect(element.className).toContain(variant);
+  });
+
+  it.each<Colors>(['main', 'primary', 'secondary'])('should renders color: %s', (color) => {
+    const { getByText } = customRender(<Typography {...generateProps({ color })} />);
+    const element = getByText(text);
+
+    expect(element.className).toContain(color);
   });
 });

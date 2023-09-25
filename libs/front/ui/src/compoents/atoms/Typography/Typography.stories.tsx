@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Typography, { TypographyProps } from './Typography';
+import Typography, { Colors, TypographyProps, Variant } from './Typography';
 
 export default {
   component: Typography,
@@ -9,18 +9,8 @@ export default {
     color: 'main',
   },
   argTypes: {
-    variant: {
-      control: {
-        type: 'select',
-        options: [] as TypographyProps['variant'][],
-      },
-    },
-    color: {
-      control: {
-        type: 'radio',
-        options: [] as TypographyProps['color'][],
-      },
-    },
+    variant: { type: { name: 'enum', value: ['h1', 'h2', 'h3', 'h4', 'h5', 'bodyM', 'textM'] as Variant[] } },
+    color: { type: { name: 'enum', value: ['main', 'primary', 'secondary'] as Colors[] } },
   },
 } as Meta<TypographyProps>;
 

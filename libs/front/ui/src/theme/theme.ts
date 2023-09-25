@@ -1,5 +1,5 @@
 import { Colors, darkColors, lightColors } from './tokens/colors';
-import { FontFace, HindSiliguriRegular, PoppinsBold, PoppinsExtraBold, PoppinsMedium } from './tokens/fonts';
+import { FontFace, TTHovesBold, TTHovesMedium, TTHovesRegular } from './tokens/fonts';
 import { Typography, typography, TypographyDefinition } from './tokens/typography';
 
 export type Theme = {
@@ -10,7 +10,7 @@ export type Theme = {
 
 const baseTheme: Omit<Theme, 'colors'> = {
   typography,
-  fontFaces: [HindSiliguriRegular, PoppinsMedium, PoppinsBold, PoppinsExtraBold],
+  fontFaces: [TTHovesRegular, TTHovesMedium, TTHovesBold],
 };
 
 export const lightTheme: Theme = {

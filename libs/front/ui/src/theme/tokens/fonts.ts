@@ -4,26 +4,20 @@ export type FontFace = {
   src: `url(${string})`;
 };
 
-export const HindSiliguriRegular: FontFace = {
-  fontFamily: 'HindSiliguri',
+export const TTHovesRegular: FontFace = {
+  fontFamily: 'TTHoves',
   fontWeight: 400,
-  src: 'url(assets/fonts/HindSiliguri/HindSiliguri-Regular.ttf)',
+  src: 'url(assets/fonts/TTHoves/TTHoves-Regular.ttf)',
 };
 
-export const PoppinsMedium: FontFace = {
-  fontFamily: 'Poppins',
+export const TTHovesMedium: FontFace = {
+  fontFamily: 'TTHoves',
   fontWeight: 500,
-  src: `url(assets/fonts/Poppins/Poppins-Medium.ttf)`,
+  src: `url(assets/fonts/TTHoves/TTHoves-Medium.ttf)`,
 };
 
-export const PoppinsBold: FontFace = {
-  fontFamily: 'Poppins',
+export const TTHovesBold: FontFace = {
+  fontFamily: 'TTHoves',
   fontWeight: 700,
-  src: 'url(assets/fonts/Poppins/Poppins-Bold.ttf)',
-};
-
-export const PoppinsExtraBold: FontFace = {
-  fontFamily: 'Poppins',
-  fontWeight: 800,
-  src: `url(assets/fonts/Poppins/Poppins-ExtraBold.ttf)`,
+  src: 'url(assets/fonts/TTHoves/TTHoves-Bold.ttf)',
 };
