@@ -1,30 +1,58 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-import { Colors } from './Button';
-
-type Props = {
-  color: Colors;
-};
-
-const useStyles = makeStyles<Props>({ name: 'Button' })((theme, { color }) => ({
+const useStyles = makeStyles({ name: 'Button' })((theme) => ({
   root: {
     ...theme.typography['button-m'],
 
     border: 'none',
-    color: theme.colors[`text-button-${color}`],
-    backgroundColor: theme.colors[`bg-button-${color}`],
+    padding: theme.spacings['button-m'],
+    borderRadius: theme.borderRadius['button-m'],
+  },
+
+  primary: {
+    color: theme.colors['text-button-primary'],
+    boxShadow: theme.boxShadows['button-primary'],
+    backgroundColor: theme.colors['bg-button-primary'],
 
     '&:hover': {
       cursor: 'pointer',
-      backgroundColor: theme.colors[`bg-button-${color}-hover`],
+      color: theme.colors['text-button-primary-hover'],
+      boxShadow: theme.boxShadows['button-primary-hover'],
+      backgroundColor: theme.colors['bg-button-primary-hover'],
     },
 
     '&:active': {
-      backgroundColor: theme.colors[`bg-button-${color}-active`],
+      color: theme.colors['text-button-primary-active'],
+      boxShadow: theme.boxShadows['button-primary-active'],
+      backgroundColor: theme.colors['bg-button-primary-active'],
     },
 
     '&:disabled': {
-      backgroundColor: theme.colors['bg-button-disabled'],
+      color: theme.colors['text-button-primary-disabled'],
+      boxShadow: theme.boxShadows['button-primary-disabled'],
+      backgroundColor: theme.colors['bg-button-primary-disabled'],
+      cursor: 'not-allowed',
+    },
+  },
+
+  secondary: {
+    color: theme.colors['text-button-secondary'],
+    backgroundColor: theme.colors['bg-button-secondary'],
+
+    '&:hover': {
+      cursor: 'pointer',
+      color: theme.colors['text-button-secondary-hover'],
+      backgroundColor: theme.colors['bg-button-secondary-hover'],
+    },
+
+    '&:active': {
+      color: theme.colors['text-button-secondary-active'],
+      backgroundColor: theme.colors['bg-button-secondary-active'],
+    },
+
+    '&:disabled': {
+      color: theme.colors['text-button-secondary-disabled'],
+      backgroundColor: theme.colors['bg-button-secondary-disabled'],
       cursor: 'not-allowed',
     },
   },

@@ -8,7 +8,7 @@ type UseThemeProps = {
 };
 
 const useTheme = ({ lightTheme, darkTheme }: UseThemeProps) => {
-  const [mode, setMode] = useState<'light' | 'dark'>('dark');
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
 
   const toggleMode = () => {
     setMode((old) => (old === 'light' ? 'dark' : 'light'));

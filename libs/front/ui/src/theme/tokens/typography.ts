@@ -50,7 +50,7 @@ export const typography: Record<Typography, TypographyDefinition> = {
     fontFamily: 'TTHoves',
     fontStile: 'normal',
     fontWeight: 400,
-    fontSize: '18px',
+    fontSize: '16px',
   },
   'body-m': {
     fontFamily: 'TTHoves',

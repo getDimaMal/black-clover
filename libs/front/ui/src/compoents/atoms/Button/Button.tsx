@@ -25,13 +25,13 @@ const Button: FC<ButtonProps> = ({
   type = 'button',
   color = 'primary',
 }) => {
-  const { classes, cx } = useStyles({ color });
+  const { classes, cx } = useStyles();
 
   return (
     <button
       type={type}
       disabled={disabled}
-      className={cx(classes.root, className)}
+      className={cx(classes.root, classes[color], className)}
       onClick={onClick}
       data-testid={testId}
     >
