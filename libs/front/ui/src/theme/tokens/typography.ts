@@ -10,57 +10,59 @@ export type Typography =
 
 export type TypographyDefinition = {
   fontFamily: 'TTHoves';
-  fontStile: 'normal';
+  fontStyle: 'normal';
   fontWeight: number;
   fontSize: `${number}px`;
+  lineHeight?: `${number}px` | number;
 };
 
 export const typography: Record<Typography, TypographyDefinition> = {
   headline1: {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 800,
     fontSize: '57px',
   },
   headline2: {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 700,
     fontSize: '45px',
   },
   headline3: {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 700,
     fontSize: '36px',
   },
   headline4: {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 700,
     fontSize: '28px',
   },
   headline5: {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 700,
     fontSize: '20px',
   },
   'button-m': {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 400,
     fontSize: '16px',
   },
   'body-m': {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
-    fontWeight: 400,
-    fontSize: '18px',
+    fontStyle: 'normal',
+    fontWeight: 300,
+    fontSize: '14px',
+    lineHeight: 1.15,
   },
   'text-m': {
     fontFamily: 'TTHoves',
-    fontStile: 'normal',
+    fontStyle: 'normal',
     fontWeight: 400,
     fontSize: '12px',
   },

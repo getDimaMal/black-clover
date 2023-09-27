@@ -15,6 +15,7 @@ export type Colors =
   | 'bg-button-secondary-hover'
   | 'bg-button-secondary-active'
   | 'bg-button-secondary-disabled'
+  | 'divider-color'
   | 'text-main'
   | 'text-info'
   | 'text-error'
@@ -56,6 +57,8 @@ export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main'
   'bg-button-secondary-hover': '#D2EEF9',
   'bg-button-secondary-active': '#FFF',
   'bg-button-secondary-disabled': '#BDBDBD',
+
+  'divider-color': '#BDBDBD',
 
   'text-info': '#88CCF1',
   'text-error': '#F2545B',
