@@ -16,6 +16,9 @@ export type Colors =
   | 'bg-button-secondary-active'
   | 'bg-button-secondary-disabled'
   | 'divider-color'
+  | 'tag-primary'
+  | 'tag-success'
+  | 'tag-info'
   | 'text-main'
   | 'text-info'
   | 'text-error'
@@ -59,6 +62,10 @@ export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main'
   'bg-button-secondary-disabled': '#BDBDBD',
 
   'divider-color': '#BDBDBD',
+
+  'tag-primary': '#757575',
+  'tag-success': '#37FF8B',
+  'tag-info': '#88CCF1',
 
   'text-info': '#88CCF1',
   'text-error': '#F2545B',
