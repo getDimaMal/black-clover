@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
 
-import ThemeProvider from './compoents/organisms/ThemeProvider/ThemeProvider';
+import ThemeProvider from './components/organisms/ThemeProvider/ThemeProvider';
 import { lightTheme } from './theme/theme';
 
 const Provider = ({ children }: { children: ReactNode }) => {

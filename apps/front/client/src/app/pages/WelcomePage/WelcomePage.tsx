@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import Typography from '@black-clover/front/ui/compoents/atoms/Typography/Typography';
+import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
 
 import ROUTES from '../routes.json';
 

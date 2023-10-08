@@ -1,5 +1,5 @@
-import GlobalStyles from '../src/compoents/organisms/GlobalStyles/GlobalStyles';
-import ThemeProvider from '../src/compoents/organisms/ThemeProvider/ThemeProvider';
+import GlobalStyles from '../src/components/organisms/GlobalStyles/GlobalStyles';
+import ThemeProvider from '../src/components/organisms/ThemeProvider/ThemeProvider';
 import { darkTheme, lightTheme } from '../src/theme/theme';
 
 const withThemeProvider = (Story, context) => {

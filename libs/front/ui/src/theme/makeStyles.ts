@@ -1,6 +1,6 @@
 import { createMakeAndWithStyles } from 'tss-react';
 
-import { useThemeContext } from '../compoents/organisms/ThemeProvider/ThemeContext';
+import { useThemeContext } from '../components/organisms/ThemeProvider/ThemeContext';
 
 const useTheme = () => {
   const { theme } = useThemeContext();

@@ -1,6 +1,5 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-
 const useStyles = makeStyles({ name: 'Typography' })((theme) => ({
   root: {
     margin: 0,

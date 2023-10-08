@@ -1,8 +1,8 @@
 import React, { StrictMode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@black-clover/front/redux/store/store';
-import GlobalStyles from '@black-clover/front/ui/compoents/organisms/GlobalStyles/GlobalStyles';
-import ThemeProvider from '@black-clover/front/ui/compoents/organisms/ThemeProvider/ThemeProvider';
+import GlobalStyles from '@black-clover/front/ui/components/organisms/GlobalStyles/GlobalStyles';
+import ThemeProvider from '@black-clover/front/ui/components/organisms/ThemeProvider/ThemeProvider';
 import useTheme from '@black-clover/front/ui/hooks/useTheme';
 import { darkTheme, lightTheme } from '@black-clover/front/ui/theme/theme';
 
