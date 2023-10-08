@@ -16,6 +16,12 @@ export const TTHovesMedium: FontFace = {
   src: `url(assets/fonts/TTHoves/TTHoves-Medium.ttf)`,
 };
 
+export const TTHovesDemiBold: FontFace = {
+  fontFamily: 'TTHoves',
+  fontWeight: 600,
+  src: `url(assets/fonts/TTHoves/TTHoves-DemiBold.ttf)`,
+};
+
 export const TTHovesBold: FontFace = {
   fontFamily: 'TTHoves',
   fontWeight: 700,

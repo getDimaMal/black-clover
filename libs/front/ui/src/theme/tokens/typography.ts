@@ -5,7 +5,10 @@ export type Typography =
   | 'headline4'
   | 'headline5'
   | 'button-m'
+  | 'body-s'
   | 'body-m'
+  | 'body-l'
+  | 'body-bold-m'
   | 'text-m';
 
 export type TypographyDefinition = {
@@ -58,6 +61,27 @@ export const typography: Record<Typography, TypographyDefinition> = {
     fontStyle: 'normal',
     fontWeight: 300,
     fontSize: '14px',
+    lineHeight: 1.15,
+  },
+  'body-bold-m': {
+    fontFamily: 'TTHoves',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '16px',
+    lineHeight: 1.15,
+  },
+  'body-s': {
+    fontFamily: 'TTHoves',
+    fontStyle: 'normal',
+    fontWeight: 300,
+    fontSize: '14px',
+    lineHeight: 1.15,
+  },
+  'body-l': {
+    fontFamily: 'TTHoves',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '16px',
     lineHeight: 1.15,
   },
   'text-m': {

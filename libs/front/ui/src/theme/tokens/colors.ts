@@ -1,4 +1,5 @@
 export type Colors =
+  | 'background'
   | 'bg-body'
   | 'bg-info'
   | 'bg-error'
@@ -43,6 +44,8 @@ export type Colors =
   | 'line-secondary';
 
 export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main' | 'line-main'> = {
+  background: '#F9FAFC',
+
   'bg-info': '#88CCF1',
   'bg-error': '#F2545B',
   'bg-warning': '#FFD166',
@@ -71,8 +74,8 @@ export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main'
   'text-error': '#F2545B',
   'text-warning': '#FFD166',
   'text-success': '#37FF8B',
-  'text-primary': '#A34BD2',
-  'text-secondary': '#4EA692',
+  'text-primary': '#212121',
+  'text-secondary': '#757575',
 
   'text-button-primary': '#FFF',
   'text-button-primary-hover': '#757575',

@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { fireEvent, getByTestId, render } from '@testing-library/react';
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
 
 import ThemeProvider from './components/organisms/ThemeProvider/ThemeProvider';
 import { lightTheme } from './theme/theme';
@@ -18,4 +18,4 @@ const fillForm = (form: NonNullable<unknown>, container: HTMLElement) => {
   Object.entries(form).forEach(([key, value]) => fireEvent.change(getByTestId(container, key), { target: { value } }));
 };
 
-export { fireEvent, customRender, fillForm };
+export { fireEvent, screen, customRender, fillForm };
