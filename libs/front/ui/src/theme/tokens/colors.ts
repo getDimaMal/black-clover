@@ -1,4 +1,5 @@
 export type Colors =
+  | 'accent-color'
   | 'background'
   | 'bg-body'
   | 'bg-info'
@@ -17,6 +18,7 @@ export type Colors =
   | 'bg-button-secondary-active'
   | 'bg-button-secondary-disabled'
   | 'divider-color'
+  | 'secondary-text'
   | 'tag-primary'
   | 'tag-success'
   | 'tag-info'
@@ -44,8 +46,9 @@ export type Colors =
   | 'line-secondary';
 
 export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main' | 'line-main'> = {
-  background: '#F9FAFC',
+  'accent-color': '#3CB4E4',
 
+  background: '#F9FAFC',
   'bg-info': '#88CCF1',
   'bg-error': '#F2545B',
   'bg-warning': '#FFD166',
@@ -65,6 +68,8 @@ export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main'
   'bg-button-secondary-disabled': '#BDBDBD',
 
   'divider-color': '#BDBDBD',
+
+  'secondary-text': '#757575',
 
   'tag-primary': '#757575',
   'tag-success': '#37FF8B',
