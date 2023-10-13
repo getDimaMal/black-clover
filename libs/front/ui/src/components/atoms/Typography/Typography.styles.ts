@@ -6,10 +6,6 @@ const useStyles = makeStyles({ name: 'Typography' })((theme) => ({
     fontStile: 'normal',
   },
 
-  main: { color: theme.colors['text-main'] },
-  primary: { color: theme.colors['text-primary'] },
-  secondary: { color: theme.colors['text-secondary'] },
-
   h1: { ...theme.typography['headline1'] },
   h2: { ...theme.typography['headline2'] },
   h3: { ...theme.typography['headline3'] },

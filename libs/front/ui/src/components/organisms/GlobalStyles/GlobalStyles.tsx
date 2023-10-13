@@ -17,8 +17,8 @@ const GlobalStyles = () => {
         styles={{
           '*': { ...theme.typography['body-m'] },
           body: {
-            color: theme.colors['text-main'],
-            backgroundColor: theme.colors['bg-body'],
+            // color: theme.colors['text-main'],
+            // backgroundColor: theme.colors['bg-body'],
           },
         }}
       />

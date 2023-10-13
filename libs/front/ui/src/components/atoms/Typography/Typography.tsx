@@ -25,12 +25,12 @@ const mapVariantToTag: Record<Variant, MapVariant> = {
 };
 
 const Typography = forwardRef<HTMLElement, TypographyProps>(
-  ({ className, children, color = 'main', variant = 'bodyM', ...rest }, ref) => {
+  ({ className, children, variant = 'bodyM', ...rest }, ref) => {
     const { classes, cx } = useStyles();
 
     const Tag = mapVariantToTag[variant] as React.ElementType;
 
-    const combinedClasses = cx(classes.root, classes[color], classes[variant], className);
+    const combinedClasses = cx(classes.root, classes[variant], className);
 
     return (
       <Tag {...rest} className={combinedClasses} ref={ref}>

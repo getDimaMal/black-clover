@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'Loader' })((theme) => ({
+const useStyles = makeStyles({ name: 'Loader' })(() => ({
   root: {
     width: '100%',
     height: '100%',
@@ -9,7 +9,6 @@ const useStyles = makeStyles({ name: 'Loader' })((theme) => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    backgroundColor: theme.colors['bg-body'],
     opacity: '.9',
   },
 }));

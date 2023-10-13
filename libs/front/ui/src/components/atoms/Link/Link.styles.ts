@@ -1,10 +1,9 @@
 import { makeStyles } from '../../../theme/makeStyles';
 import { Colors } from '../Alert/Alert';
 
-export const useStyles = makeStyles<{ color: Colors }>({ name: 'Link' })((theme, { color }) => ({
+export const useStyles = makeStyles<{ color: Colors }>({ name: 'Link' })((theme) => ({
   root: {
     textDecoration: 'underline',
-    color: theme.colors[`text-${color}`],
 
     '&:hover': {
       cursor: 'pointer',

@@ -2,11 +2,10 @@ import { makeStyles } from '../../../theme/makeStyles';
 
 import { Colors } from './Alert';
 
-const useStyles = makeStyles<{ color: Colors }>({ name: 'Alert' })((theme, { color }) => ({
+const useStyles = makeStyles<{ color: Colors }>({ name: 'Alert' })((theme) => ({
   root: {
     margin: 0,
     fontStile: 'normal',
-    color: theme.colors[`text-${color}`],
   },
 
   bodyM: { ...theme.typography['body-m'] },

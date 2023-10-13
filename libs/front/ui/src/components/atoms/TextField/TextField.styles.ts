@@ -7,7 +7,6 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
 
   error: {
     ...theme.typography['text-m'],
-    color: theme.colors['text-error'],
   },
 }));
 

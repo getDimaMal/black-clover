@@ -6,7 +6,6 @@ const useStyles = makeStyles({ name: 'Clip' })((theme) => ({
     display: 'inline-block',
     padding: theme.spacings['clip-m'],
     borderRadius: theme.borderRadius['clip-m'],
-    border: `1px solid ${theme.colors['divider-color']}`,
   },
 }));
 

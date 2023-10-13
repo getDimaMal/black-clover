@@ -1,13 +1,9 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'TableRow' })((theme) => ({
+const useStyles = makeStyles({ name: 'TableRow' })(() => ({
   root: {
-    th: {
-      borderBottom: `1px solid ${theme.colors['divider-color']}`,
-    },
-    td: {
-      borderBottom: `1px solid ${theme.colors['divider-color']}`,
-    },
+    th: {},
+    td: {},
 
     '&:last-child': {
       td: {

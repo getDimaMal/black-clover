@@ -1,115 +1,62 @@
 export type Colors =
-  | 'accent-color'
-  | 'background'
-  | 'bg-body'
-  | 'bg-info'
-  | 'bg-error'
-  | 'bg-warning'
-  | 'bg-success'
-  | 'bg-primary'
-  | 'bg-secondary'
-  | 'bg-sidebar'
-  | 'bg-button-primary'
-  | 'bg-button-primary-hover'
-  | 'bg-button-primary-active'
-  | 'bg-button-primary-disabled'
-  | 'bg-button-secondary'
-  | 'bg-button-secondary-hover'
-  | 'bg-button-secondary-active'
-  | 'bg-button-secondary-disabled'
-  | 'divider-color'
-  | 'secondary-text'
-  | 'tag-primary'
-  | 'tag-success'
-  | 'tag-info'
-  | 'text-main'
-  | 'text-info'
-  | 'text-error'
-  | 'text-warning'
-  | 'text-success'
-  | 'text-primary'
-  | 'text-secondary'
-  | 'text-button-primary'
-  | 'text-button-primary-hover'
-  | 'text-button-primary-active'
-  | 'text-button-primary-disabled'
-  | 'text-button-secondary'
-  | 'text-button-secondary-hover'
-  | 'text-button-secondary-active'
-  | 'text-button-secondary-disabled'
-  | 'line-main'
-  | 'line-info'
-  | 'line-error'
-  | 'line-warning'
-  | 'line-success'
-  | 'line-primary'
-  | 'line-secondary';
+  | 'bg/dark'
+  | 'bg/light'
+  | 'bg/grey/1'
+  | 'bg/grey/2'
+  | 'bg/grey/3'
+  | 'bg/blue/1'
+  | 'blue/1'
+  | 'blue/2'
+  | 'text/button/contained'
+  | 'text/button/outlined'
+  | 'text/button/ghost'
+  | 'text/black/1'
+  | 'text/grey/1'
+  | 'text/disabled'
+  | 'text/error'
+  | 'text/success'
+  | 'button/default'
+  | 'button/hover'
+  | 'button/pressed'
+  | 'button/disabled'
+  | 'stroke/default'
+  | 'stroke/hover'
+  | 'stroke/pressed'
+  | 'stroke/disabled'
+  | 'field/default'
+  | 'field/focused'
+  | 'field/disabled'
+  | 'field/error'
+  | 'field/success';
 
-export const defaultColors: Omit<Record<Colors, string>, 'bg-body' | 'text-main' | 'line-main'> = {
-  'accent-color': '#3CB4E4',
-
-  background: '#F9FAFC',
-  'bg-info': '#88CCF1',
-  'bg-error': '#F2545B',
-  'bg-warning': '#FFD166',
-  'bg-success': '#37FF8B',
-  'bg-primary': '#A34BD2',
-  'bg-secondary': '#4EA692',
-  'bg-sidebar': '#282A28',
-
-  'bg-button-primary': '#3CB4E4',
-  'bg-button-primary-hover': '#DCF1FA',
-  'bg-button-primary-active': '#1987B3',
-  'bg-button-primary-disabled': '#BDBDBD',
-
-  'bg-button-secondary': '#FFF',
-  'bg-button-secondary-hover': '#D2EEF9',
-  'bg-button-secondary-active': '#FFF',
-  'bg-button-secondary-disabled': '#BDBDBD',
-
-  'divider-color': '#BDBDBD',
-
-  'secondary-text': '#757575',
-
-  'tag-primary': '#757575',
-  'tag-success': '#37FF8B',
-  'tag-info': '#88CCF1',
-
-  'text-info': '#88CCF1',
-  'text-error': '#F2545B',
-  'text-warning': '#FFD166',
-  'text-success': '#37FF8B',
-  'text-primary': '#212121',
-  'text-secondary': '#757575',
-
-  'text-button-primary': '#FFF',
-  'text-button-primary-hover': '#757575',
-  'text-button-primary-active': '#FFF',
-  'text-button-primary-disabled': '#FFF',
-
-  'text-button-secondary': '#212121',
-  'text-button-secondary-hover': '#212121',
-  'text-button-secondary-active': '#757575',
-  'text-button-secondary-disabled': '#FFF',
-
-  'line-info': '#88CCF1',
-  'line-error': '#F2545B',
-  'line-warning': '#FFD166',
-  'line-success': '#37FF8B',
-  'line-primary': '#A34BD2',
-  'line-secondary': '#4EA692',
-};
-
-export const lightColors: Record<Colors, string> = {
-  ...defaultColors,
-  'bg-body': '#F3F4F6',
-  'text-main': '#212121',
-  'line-main': '#BDBDBD',
-};
-
-export const darkColors: Record<Colors, string> = {
-  ...defaultColors,
-  'bg-body': '#282A28',
-  'text-main': '#FFFFFF',
-  'line-main': '#CAD2C5',
+export const defaultColors: Record<Colors, string> = {
+  'bg/dark': '#FFFFFF',
+  'bg/light': '#001054',
+  'bg/grey/1': '#EFEFF2',
+  'bg/grey/2': '#FAFAFF',
+  'bg/grey/3': '#F0F0F5',
+  'bg/blue/1': '#D9F2FF',
+  'blue/1': '#5770D1',
+  'blue/2': '#5FBEF7',
+  'text/button/contained': '#F1F3F3',
+  'text/button/outlined': '#5770D1',
+  'text/button/ghost': '#5770D1',
+  'text/black/1': '#000027',
+  'text/grey/1': '#5A5A81',
+  'text/disabled': '#B4B4DB',
+  'text/error': '#BD0000',
+  'text/success': '#51BA82',
+  'button/default': '#5770D1',
+  'button/hover': '#435CBD',
+  'button/pressed': '#2F48A9',
+  'button/disabled': '#E6E6FF',
+  'stroke/default': '#5770D1',
+  'stroke/hover': '#4D66C7',
+  'stroke/pressed': '#2F48A9',
+  'stroke/disabled': '#F1F3F3',
+  'field/default': '#D9F2FF',
+  'field/focused': '#CFE8F5',
+  'field/disabled': '#F1F3F3',
+  'field/error': '#BD0000',
+  'field/success': '#51BA82',
 };
