@@ -3,6 +3,7 @@ import axios from 'axios';
 jest.mock('axios');
 
 (axios.create as jest.Mock).mockReturnValue({
+  interceptors: { request: { use: jest.fn() } },
   get: (axios.get as jest.MockedFunction<typeof axios.get>).mockResolvedValue({ data: 'response' }),
   put: (axios.put as jest.MockedFunction<typeof axios.put>).mockResolvedValue({ data: 'response' }),
   post: (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({ data: 'response' }),

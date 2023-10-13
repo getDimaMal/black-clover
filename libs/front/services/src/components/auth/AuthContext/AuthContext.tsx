@@ -22,13 +22,16 @@ export const useAuth = () => {
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, saveUser] = useLocalStorage<TokenUserDto>('USER', null);
+  const [, saveToken] = useLocalStorage<string>('TOKEN', null);
 
   const login = (newUser: TokenUserDto) => {
     saveUser(newUser);
+    saveToken(newUser.accessToken);
   };
 
   const logout = () => {
     saveUser(null);
+    saveToken(null);
   };
 
   return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;

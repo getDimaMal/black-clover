@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export type LocalStorageKeys = 'USER';
+export type LocalStorageKeys = 'USER' | 'TOKEN';
 
 function useLocalStorage<T>(key: LocalStorageKeys, initialValue: T | null) {
   const storedValue = localStorage.getItem(key);
