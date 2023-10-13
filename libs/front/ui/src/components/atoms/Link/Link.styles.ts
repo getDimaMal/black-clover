@@ -1,7 +1,7 @@
 import { makeStyles } from '../../../theme/makeStyles';
 import { Colors } from '../Alert/Alert';
 
-export const useStyles = makeStyles<{ color: Colors }>({ name: 'Link' })((theme) => ({
+export const useStyles = makeStyles<{ color: Colors }>({ name: 'Link' })(() => ({
   root: {
     textDecoration: 'underline',
 
@@ -9,6 +9,4 @@ export const useStyles = makeStyles<{ color: Colors }>({ name: 'Link' })((theme)
       cursor: 'pointer',
     },
   },
-
-  textM: { ...theme.typography['text-m'] },
 }));

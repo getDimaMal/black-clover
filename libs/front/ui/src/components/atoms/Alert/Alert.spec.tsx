@@ -1,6 +1,6 @@
 import { customRender } from '../../../test-utils';
 
-import Alert, { AlertProps, Variants } from './Alert';
+import Alert, { AlertProps } from './Alert';
 
 const getProps = (props: Partial<AlertProps> = {}): AlertProps => ({
   message: 'Alert Component',
@@ -13,7 +13,6 @@ describe('Alert', () => {
     const { getByText } = customRender(<Alert {...props} />);
 
     expect(getByText(props.message)).toBeInTheDocument();
-    expect(getByText(props.message).className).toContain('textM');
   });
 
   it('should renders with className', () => {
@@ -21,12 +20,5 @@ describe('Alert', () => {
     const { getByText } = customRender(<Alert {...props} />);
 
     expect(getByText(props.message).className).toContain(props.className);
-  });
-
-  it.each<Variants>(['bodyM', 'textM'])('should render with class: %s', (variant) => {
-    const props = getProps({ variant });
-    const { getByText } = customRender(<Alert {...props} />);
-
-    expect(getByText(props.message).className).toContain(variant);
   });
 });

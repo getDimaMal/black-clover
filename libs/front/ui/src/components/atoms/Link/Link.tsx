@@ -15,11 +15,11 @@ export type LinkProps = {
   testId: string;
 }>;
 
-const Link: React.FC<LinkProps> = ({ to, children, className, variant = 'textM', color = 'info' }) => {
+const Link: React.FC<LinkProps> = ({ to, children, className, color = 'info' }) => {
   const { classes, cx } = useStyles({ color });
 
   return (
-    <a href={to} className={cx(classes.root, classes[variant], className)}>
+    <a href={to} className={cx(classes.root, className)}>
       {children}
     </a>
   );

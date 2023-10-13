@@ -2,7 +2,7 @@ import { customRender } from '../../../test-utils';
 
 import Typography, { MapVariant, TypographyProps, Variant } from './Typography';
 
-const text = 'Hello, Black Clover!';
+const text = 'Hello, Event Panel!';
 
 const generateProps = (props: Partial<TypographyProps> = {}): TypographyProps => ({
   children: text,
@@ -15,7 +15,7 @@ describe('Typography', () => {
     const element = getByText(text);
 
     expect(element.tagName.toLowerCase()).toBe('p');
-    expect(element.className).toContain('body');
+    expect(element.className).toContain('bodyM');
   });
 
   it('should renders with className', () => {
@@ -30,10 +30,12 @@ describe('Typography', () => {
     ['h1', 'h1'],
     ['h2', 'h2'],
     ['h3', 'h3'],
-    ['h4', 'h4'],
-    ['h5', 'h5'],
+    ['bodyXL', 'p'],
+    ['bodyL', 'p'],
     ['bodyM', 'p'],
-    ['textM', 'span'],
+    ['bodyS', 'p'],
+    ['bodyXS', 'p'],
+    ['bodyXXS', 'p'],
     ['inherit', 'span'],
   ])('should renders variant: %s', (variant, tag) => {
     const { getByText } = customRender(<Typography {...generateProps({ variant })} />);

@@ -4,26 +4,20 @@ export type FontFace = {
   src: `url(${string})`;
 };
 
-export const TTHovesRegular: FontFace = {
-  fontFamily: 'TTHoves',
+export const NunitoSansRegular: FontFace = {
+  fontFamily: 'NunitoSans',
   fontWeight: 400,
-  src: 'url(assets/fonts/TTHoves/TTHoves-Regular.ttf)',
+  src: 'url(assets/fonts/NunitoSans/NunitoSans-Regular.ttf)',
 };
 
-export const TTHovesMedium: FontFace = {
-  fontFamily: 'TTHoves',
-  fontWeight: 500,
-  src: `url(assets/fonts/TTHoves/TTHoves-Medium.ttf)`,
-};
-
-export const TTHovesDemiBold: FontFace = {
-  fontFamily: 'TTHoves',
+export const NunitoSansSemiBold: FontFace = {
+  fontFamily: 'NunitoSans',
   fontWeight: 600,
-  src: `url(assets/fonts/TTHoves/TTHoves-DemiBold.ttf)`,
+  src: 'url(assets/fonts/NunitoSans/NunitoSans-SemiBold.ttf)',
 };
 
-export const TTHovesBold: FontFace = {
-  fontFamily: 'TTHoves',
+export const NunitoSansBold: FontFace = {
+  fontFamily: 'NunitoSans',
   fontWeight: 700,
-  src: 'url(assets/fonts/TTHoves/TTHoves-Bold.ttf)',
+  src: 'url(assets/fonts/NunitoSans/NunitoSans-Bold.ttf)',
 };

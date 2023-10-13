@@ -30,8 +30,8 @@ export type Colors =
   | 'field/success';
 
 export const defaultColors: Record<Colors, string> = {
-  'bg/dark': '#FFFFFF',
-  'bg/light': '#001054',
+  'bg/dark': '#001054',
+  'bg/light': '#FFFFFF',
   'bg/grey/1': '#EFEFF2',
   'bg/grey/2': '#FAFAFF',
   'bg/grey/3': '#F0F0F5',

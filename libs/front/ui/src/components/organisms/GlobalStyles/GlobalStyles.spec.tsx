@@ -29,6 +29,6 @@ describe('GlobalStyles', () => {
       </Fragment>
     );
 
-    expect(getByText(text)).toHaveStyle('font-family: TTHoves;');
+    expect(getByText(text)).toHaveStyle('font-family: NunitoSans;');
   });
 });

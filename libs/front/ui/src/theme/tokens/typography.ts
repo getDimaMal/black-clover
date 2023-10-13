@@ -1,93 +1,92 @@
 export type Typography =
-  | 'headline1'
-  | 'headline2'
-  | 'headline3'
-  | 'headline4'
-  | 'headline5'
-  | 'button-m'
-  | 'body-s'
-  | 'body-m'
-  | 'body-l'
-  | 'body-bold-m'
-  | 'text-m';
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'body/xl'
+  | 'body/l'
+  | 'body/m'
+  | 'body/s'
+  | 'body/xs'
+  | 'body/xxs'
+  | 'button/m';
 
 export type TypographyDefinition = {
-  fontFamily: 'TTHoves';
+  fontFamily: 'NunitoSans';
+  lineHeight: 'normal';
   fontStyle: 'normal';
   fontWeight: number;
   fontSize: `${number}px`;
-  lineHeight?: `${number}px` | number;
 };
 
 export const typography: Record<Typography, TypographyDefinition> = {
-  headline1: {
-    fontFamily: 'TTHoves',
-    fontStyle: 'normal',
-    fontWeight: 800,
-    fontSize: '57px',
-  },
-  headline2: {
-    fontFamily: 'TTHoves',
+  h1: {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
     fontStyle: 'normal',
     fontWeight: 700,
-    fontSize: '45px',
+    fontSize: `48px`,
   },
-  headline3: {
-    fontFamily: 'TTHoves',
+  h2: {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
     fontStyle: 'normal',
     fontWeight: 700,
-    fontSize: '36px',
+    fontSize: `32px`,
   },
-  headline4: {
-    fontFamily: 'TTHoves',
-    fontStyle: 'normal',
-    fontWeight: 700,
-    fontSize: '28px',
-  },
-  headline5: {
-    fontFamily: 'TTHoves',
-    fontStyle: 'normal',
-    fontWeight: 700,
-    fontSize: '20px',
-  },
-  'button-m': {
-    fontFamily: 'TTHoves',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    fontSize: '16px',
-  },
-  'body-m': {
-    fontFamily: 'TTHoves',
-    fontStyle: 'normal',
-    fontWeight: 300,
-    fontSize: '14px',
-    lineHeight: 1.15,
-  },
-  'body-bold-m': {
-    fontFamily: 'TTHoves',
+  h3: {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
     fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: '16px',
-    lineHeight: 1.15,
+    fontSize: `28px`,
   },
-  'body-s': {
-    fontFamily: 'TTHoves',
+  'body/xl': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
     fontStyle: 'normal',
-    fontWeight: 300,
-    fontSize: '14px',
-    lineHeight: 1.15,
+    fontWeight: 600,
+    fontSize: `22px`,
   },
-  'body-l': {
-    fontFamily: 'TTHoves',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    fontSize: '16px',
-    lineHeight: 1.15,
-  },
-  'text-m': {
-    fontFamily: 'TTHoves',
+  'body/l': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '12px',
+    fontSize: `20px`,
+  },
+  'body/m': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: `18px`,
+  },
+  'body/s': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: `16px`,
+  },
+  'body/xs': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: `14px`,
+  },
+  'body/xxs': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: `12px`,
+  },
+  'button/m': {
+    fontFamily: 'NunitoSans',
+    lineHeight: `normal`,
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: `16px`,
   },
 };

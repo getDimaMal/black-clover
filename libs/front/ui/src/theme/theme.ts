@@ -1,7 +1,7 @@
 import { BorderRadius, borderRadius } from './tokens/borderRadius';
 import { BoxShadows, boxShadows } from './tokens/boxShadows';
 import { Colors, defaultColors } from './tokens/colors';
-import { FontFace, TTHovesBold, TTHovesDemiBold, TTHovesMedium, TTHovesRegular } from './tokens/fonts';
+import { FontFace, NunitoSansBold, NunitoSansRegular, NunitoSansSemiBold } from './tokens/fonts';
 import { Spacings, spacings } from './tokens/spacings';
 import { Typography, typography, TypographyDefinition } from './tokens/typography';
 
@@ -19,7 +19,7 @@ const baseTheme: Omit<Theme, 'colors'> = {
   typography,
   boxShadows,
   borderRadius,
-  fontFaces: [TTHovesRegular, TTHovesMedium, TTHovesDemiBold, TTHovesBold],
+  fontFaces: [NunitoSansRegular, NunitoSansSemiBold, NunitoSansBold],
 };
 
 export const lightTheme: Theme = {

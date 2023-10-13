@@ -2,8 +2,6 @@ import { makeStyles } from '../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'Button' })((theme) => ({
   root: {
-    ...theme.typography['button-m'],
-
     border: 'none',
     padding: theme.spacings['button-m'],
     borderRadius: theme.borderRadius['button-m'],

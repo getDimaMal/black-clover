@@ -2,8 +2,6 @@ import { makeStyles } from '../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'TableColumn' })((theme) => ({
   root: {
-    ...theme.typography['body-m'],
-
     padding: theme.spacings['spacing/8'],
 
     '&:last-child': {
@@ -11,9 +9,7 @@ const useStyles = makeStyles({ name: 'TableColumn' })((theme) => ({
     },
   },
 
-  header: {
-    ...theme.typography['body-s'],
-  },
+  header: {},
 }));
 
 export default useStyles;

@@ -13,10 +13,10 @@ export type AlertProps = {
   className: string;
 }>;
 
-const Alert: FC<AlertProps> = ({ message, className, color = 'info', variant = 'textM' }) => {
+const Alert: FC<AlertProps> = ({ message, className, color = 'info' }) => {
   const { classes, cx } = useStyles({ color });
 
-  return <p className={cx(classes.root, classes[variant], className)}>{message}</p>;
+  return <p className={cx(classes.root, className)}>{message}</p>;
 };
 
 export default Alert;

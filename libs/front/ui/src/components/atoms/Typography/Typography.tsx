@@ -2,25 +2,24 @@ import React, { forwardRef, HTMLAttributes } from 'react';
 
 import useStyles from './Typography.styles';
 
-export type Colors = 'main' | 'primary' | 'secondary';
-
-export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'bodyM' | 'textM' | 'inherit';
-export type MapVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'span';
+export type Variant = 'h1' | 'h2' | 'h3' | 'bodyXL' | 'bodyL' | 'bodyM' | 'bodyS' | 'bodyXS' | 'bodyXXS' | 'inherit';
+export type MapVariant = 'h1' | 'h2' | 'h3' | 'p' | 'span';
 
 export type TypographyProps = {
-  children: React.ReactNode;
-  color?: Colors;
   variant?: Variant;
+  children: React.ReactNode;
 } & HTMLAttributes<HTMLElement>;
 
 const mapVariantToTag: Record<Variant, MapVariant> = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
-  h4: 'h4',
-  h5: 'h5',
+  bodyXL: 'p',
+  bodyL: 'p',
   bodyM: 'p',
-  textM: 'span',
+  bodyS: 'p',
+  bodyXS: 'p',
+  bodyXXS: 'p',
   inherit: 'span',
 };
 

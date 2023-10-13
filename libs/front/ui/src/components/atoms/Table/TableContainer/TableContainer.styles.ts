@@ -2,8 +2,6 @@ import { makeStyles } from '../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'TableContainer' })((theme) => ({
   root: {
-    ...theme.typography['body-m'],
-
     borderRadius: theme.borderRadius['radius/8'],
 
     overflow: 'hidden',
@@ -20,13 +18,9 @@ const useStyles = makeStyles({ name: 'TableContainer' })((theme) => ({
     marginTop: theme.spacings['spacing/4'],
   },
 
-  label: {
-    ...theme.typography['body-s'],
-  },
+  label: {},
 
-  subLabel: {
-    ...theme.typography['body-l'],
-  },
+  subLabel: {},
 
   table: {
     width: '100%',

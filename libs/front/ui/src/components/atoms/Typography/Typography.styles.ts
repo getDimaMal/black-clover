@@ -3,18 +3,18 @@ import { makeStyles } from '../../../theme/makeStyles';
 const useStyles = makeStyles({ name: 'Typography' })((theme) => ({
   root: {
     margin: 0,
-    fontStile: 'normal',
   },
 
-  h1: { ...theme.typography['headline1'] },
-  h2: { ...theme.typography['headline2'] },
-  h3: { ...theme.typography['headline3'] },
-  h4: { ...theme.typography['headline4'] },
-  h5: { ...theme.typography['headline5'] },
+  h1: { ...theme.typography['h1'] },
+  h2: { ...theme.typography['h2'] },
+  h3: { ...theme.typography['h3'] },
 
-  bodyM: { ...theme.typography['body-m'] },
-
-  textM: { ...theme.typography['text-m'] },
+  bodyXL: { ...theme.typography['body/xl'] },
+  bodyL: { ...theme.typography['body/l'] },
+  bodyM: { ...theme.typography['body/m'] },
+  bodyS: { ...theme.typography['body/s'] },
+  bodyXS: { ...theme.typography['body/xs'] },
+  bodyXXS: { ...theme.typography['body/xxs'] },
 
   inherit: {},
 }));

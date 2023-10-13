@@ -15,10 +15,10 @@ const GlobalStyles = () => {
       {addFontFaces()}
       <TssGlobalStyles
         styles={{
-          '*': { ...theme.typography['body-m'] },
+          '*': { ...theme.typography['body/m'] },
           body: {
-            // color: theme.colors['text-main'],
-            // backgroundColor: theme.colors['bg-body'],
+            color: theme.colors['text/black/1'],
+            backgroundColor: theme.colors['bg/light'],
           },
         }}
       />
