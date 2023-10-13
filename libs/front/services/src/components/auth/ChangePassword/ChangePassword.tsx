@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useUserAuth from '@black-clover/front/redux/hooks/useUserAuth';
 import { ChangePasswordFormProps } from '@black-clover/front/shared/types/auth.type';
 import { ChangePasswordNoTokenDto } from '@black-clover/shared/dto/users/change-password.dto';
+
+import { useAuth } from '../AuthContext/AuthContext';
 
 export type ChangePasswordProps = {
   token: string;
@@ -9,16 +11,19 @@ export type ChangePasswordProps = {
 };
 
 const ChangePassword: React.FC<ChangePasswordProps> = ({ token, children }) => {
-  const { isLoading, error, changePassword } = useUserAuth();
+  const { user, isLoading, error, changePassword } = useUserAuth();
+  const { login } = useAuth();
 
-  const handleChangePassword = (data: ChangePasswordNoTokenDto) => {
-    changePassword({ ...data, token });
-  };
+  useEffect(() => {
+    if (user) {
+      login(user);
+    }
+  }, [login, user]);
 
   return children({
     error,
     isLoading,
-    onSubmit: handleChangePassword,
+    onSubmit: (data: ChangePasswordNoTokenDto) => changePassword({ ...data, token }),
   });
 };
 

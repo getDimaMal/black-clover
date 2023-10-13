@@ -1,6 +1,7 @@
 import React, { StrictMode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@black-clover/front/redux/store/store';
+import AuthProvider from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
 import GlobalStyles from '@black-clover/front/ui/components/organisms/GlobalStyles/GlobalStyles';
 import ThemeProvider from '@black-clover/front/ui/components/organisms/ThemeProvider/ThemeProvider';
 import useTheme from '@black-clover/front/ui/hooks/useTheme';
@@ -15,12 +16,14 @@ export function App() {
 
   return (
     <StrictMode>
-      <Provider store={store}>
-        <ThemeProvider {...theme}>
-          <GlobalStyles />
-          <Pages />
-        </ThemeProvider>
-      </Provider>
+      <AuthProvider>
+        <Provider store={store}>
+          <ThemeProvider {...theme}>
+            <GlobalStyles />
+            <Pages />
+          </ThemeProvider>
+        </Provider>
+      </AuthProvider>
     </StrictMode>
   );
 }

@@ -1,31 +1,34 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
 
 import ChangePasswordPage from './auth/ChangePasswordPage';
 import CheckEmailPage from './auth/CheckEmailPage';
 import LoginPage from './auth/LoginPage';
-import ErrorPage from './ErrorPage/ErrorPage';
 import WelcomePage from './WelcomePage/WelcomePage';
-import ROUTES from './routes.json';
 
 const Pages = () => {
-  const router = createBrowserRouter([
-    {
-      path: ROUTES.ROOT,
-      element: <WelcomePage />,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: ROUTES.LOGIN,
-      children: [
-        { path: ROUTES.LOGIN, element: <LoginPage /> },
-        { path: ROUTES.CHECK_EMAIL, element: <CheckEmailPage /> },
-        { path: ROUTES.CHANGE_PASSWORD, element: <ChangePasswordPage /> },
-      ],
-    },
-  ]);
+  const { user } = useAuth();
 
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Switch>
+        {user ? (
+          <>
+            <Route exact path="/" component={() => <div>Categories</div>} />
+            <Redirect to="/" />
+          </>
+        ) : (
+          <>
+            <Route exact path="/" component={WelcomePage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/login/checkEmail" component={CheckEmailPage} />
+            <Route exact path="/login/changePassword" component={ChangePasswordPage} />
+          </>
+        )}
+      </Switch>
+    </BrowserRouter>
+  );
 };
 
 export default Pages;
