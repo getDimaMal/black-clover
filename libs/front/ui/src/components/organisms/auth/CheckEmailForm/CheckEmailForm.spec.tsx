@@ -18,10 +18,10 @@ const getProps = (props: Partial<CheckEmailFormProps> = {}): CheckEmailFormProps
 
 describe('CheckEmailForm', () => {
   it('should render without error', () => {
-    const { getByTestId } = customRender(<CheckEmailForm {...getProps()} />);
+    const { getByTestId, getByText } = customRender(<CheckEmailForm {...getProps()} />);
 
     expect(getByTestId(CheckEmailFormTestID['email'])).toBeInTheDocument();
-    expect(getByTestId(CheckEmailFormTestID['checkEmailSubmit'])).toBeInTheDocument();
+    expect(getByText('Send E-Mail')).toBeInTheDocument();
   });
 
   it('should render Loader when isLoading true', () => {
@@ -49,20 +49,20 @@ describe('CheckEmailForm', () => {
 
   it('should call onSubmit when the submit button is clicked', async () => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<CheckEmailForm {...props} />);
+    const { container, getByText } = customRender(<CheckEmailForm {...props} />);
 
     fillForm(getForm(), container);
-    fireEvent.click(getByTestId(CheckEmailFormTestID['checkEmailSubmit']));
+    fireEvent.click(getByText('Send E-Mail'));
 
     expect(props.onSubmit).toHaveBeenCalled();
   });
 
   it('should NOT submit when email is NOT an Email', async () => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<CheckEmailForm {...props} />);
+    const { container, getByText } = customRender(<CheckEmailForm {...props} />);
 
     fillForm(getForm({ email: 'NotEmail' }), container);
-    fireEvent.click(getByTestId(CheckEmailFormTestID['checkEmailSubmit']));
+    fireEvent.click(getByText('Send E-Mail'));
 
     expect(props.onSubmit).not.toHaveBeenCalled();
   });

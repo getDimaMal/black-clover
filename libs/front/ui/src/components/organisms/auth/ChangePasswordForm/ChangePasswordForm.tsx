@@ -49,7 +49,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ isLoading, erro
 
       <Alert color="error" message={error || ''} />
 
-      <Button type="submit" label="Change Password" testId={ChangePasswordFormTestID['changePasswordFormSubmit']} />
+      <Button type="submit" label="Change Password" />
     </form>
   );
 };

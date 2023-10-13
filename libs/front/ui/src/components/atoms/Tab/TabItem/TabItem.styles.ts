@@ -1,8 +1,7 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-export const useStyles = makeStyles({ name: 'TabItem' })((theme) => ({
+export const useStyles = makeStyles({ name: 'TabItem' })(() => ({
   root: {
-    padding: `${theme.spacings['spacing/8']} ${theme.spacings['spacing/20']} ${theme.spacings['spacing/12']}`,
     display: 'inline-block',
     cursor: 'pointer',
     borderBottom: '2px solid transparent',

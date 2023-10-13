@@ -8,15 +8,11 @@ const useStyles = makeStyles({ name: 'TableContainer' })((theme) => ({
   },
 
   header: {
-    padding: theme.spacings['spacing/8'],
-
     display: 'flex',
     justifyContent: 'space-between',
   },
 
-  block: {
-    marginTop: theme.spacings['spacing/4'],
-  },
+  block: {},
 
   label: {},
 
@@ -28,9 +24,7 @@ const useStyles = makeStyles({ name: 'TableContainer' })((theme) => ({
     borderWidth: '1px 0px',
   },
 
-  footer: {
-    height: theme.spacings['spacing/20'],
-  },
+  footer: {},
 }));
 
 export default useStyles;

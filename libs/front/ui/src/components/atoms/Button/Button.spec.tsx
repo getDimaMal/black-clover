@@ -1,9 +1,9 @@
 import { customRender, fireEvent } from '../../../test-utils';
 
-import Button, { ButtonProps, Types } from './Button';
+import Button, { ButtonProps, Types, Variants } from './Button';
 
 const getProps = (props: Partial<ButtonProps> = {}): ButtonProps => ({
-  label: 'Press Me!',
+  label: 'Button',
   ...props,
 });
 
@@ -13,22 +13,6 @@ describe('Button', () => {
     const { getByText } = customRender(<Button {...props} />);
 
     expect(getByText(props.label)).toBeInTheDocument();
-  });
-
-  it('should render with className', () => {
-    const className = 'className';
-    const props = getProps({ className });
-    const { getByText } = customRender(<Button {...props} />);
-
-    expect(getByText(props.label).classList.contains(className)).toBe(true);
-  });
-
-  it('should render with testId', () => {
-    const testId = 'test-button';
-    const props = getProps({ testId });
-    const { getByTestId } = customRender(<Button {...props} />);
-
-    expect(getByTestId(testId)).toBeInTheDocument();
   });
 
   it('should render disabled', () => {
@@ -56,5 +40,16 @@ describe('Button', () => {
     const { getByText } = customRender(<Button {...props} />);
 
     expect(getByText(props.label)).toHaveAttribute('type', result);
+  });
+
+  it.each<[Variants, Variants]>([
+    ['contained', 'contained'],
+    ['outlined', 'outlined'],
+    ['ghost', 'ghost'],
+  ])('should render with class variant: %s', (variant, result) => {
+    const props = getProps({ variant });
+    const { getByText } = customRender(<Button {...props} />);
+
+    expect(getByText(props.label).className).toContain(result);
   });
 });

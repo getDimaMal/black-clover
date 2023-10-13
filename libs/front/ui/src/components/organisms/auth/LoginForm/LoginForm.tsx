@@ -47,8 +47,8 @@ const LoginForm: FC<LoginFormProps> = ({ isLoading, error, onSignUp, onSignIn })
 
       <Alert color="error" message={error || ''} />
 
-      <Button label="Sign Up" testId={LoginFormTestID['signUp']} color="secondary" onClick={handleSubmit(onSignUp)} />
-      <Button label="Sign In" testId={LoginFormTestID['signIn']} type="submit" />
+      <Button label="Sign Up" onClick={handleSubmit(onSignUp)} />
+      <Button label="Sign In" type="submit" />
     </form>
   );
 };

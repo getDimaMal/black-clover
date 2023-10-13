@@ -18,10 +18,10 @@ const getProps = (props: Partial<ChangePasswordFormProps> = {}): ChangePasswordF
 
 describe('ChangePasswordForm', () => {
   it('should render without error', () => {
-    const { getByTestId } = customRender(<ChangePasswordForm {...getProps()} />);
+    const { getByTestId, getByText } = customRender(<ChangePasswordForm {...getProps()} />);
 
     expect(getByTestId(ChangePasswordFormTestID['password'])).toBeInTheDocument();
-    expect(getByTestId(ChangePasswordFormTestID['changePasswordFormSubmit'])).toBeInTheDocument();
+    expect(getByText('Change Password')).toBeInTheDocument();
   });
 
   it('should render Loader when isLoading true', () => {
@@ -49,10 +49,10 @@ describe('ChangePasswordForm', () => {
 
   it('should call onSubmit when the submit button is clicked', async () => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<ChangePasswordForm {...props} />);
+    const { container, getByText } = customRender(<ChangePasswordForm {...props} />);
 
     fillForm(getForm(), container);
-    fireEvent.click(getByTestId(ChangePasswordFormTestID['changePasswordFormSubmit']));
+    fireEvent.click(getByText('Change Password'));
 
     expect(props.onSubmit).toHaveBeenCalled();
   });
@@ -63,10 +63,10 @@ describe('ChangePasswordForm', () => {
     ['password has only letters', getForm({ password: 'onlyLettersPassword' })],
   ])('should NOT submit when: %s', async (_, form) => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<ChangePasswordForm {...props} />);
+    const { container, getByText } = customRender(<ChangePasswordForm {...props} />);
 
     fillForm(form, container);
-    fireEvent.click(getByTestId(ChangePasswordFormTestID['changePasswordFormSubmit']));
+    fireEvent.click(getByText('Change Password'));
 
     expect(props.onSubmit).not.toHaveBeenCalled();
   });

@@ -2,39 +2,77 @@ import { makeStyles } from '../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'Button' })((theme) => ({
   root: {
+    ...theme.typography['button/m'],
+    padding: `${theme.spacing(2)} ${theme.spacing(4)}`,
+    borderRadius: '50px',
     border: 'none',
-    padding: theme.spacings['button-m'],
-    borderRadius: theme.borderRadius['button-m'],
-  },
-
-  primary: {
-    boxShadow: theme.boxShadows['button-primary'],
 
     '&:hover': {
       cursor: 'pointer',
+    },
+    '&:disabled': {
+      cursor: 'not-allowed',
+    },
+  },
 
-      boxShadow: theme.boxShadows['button-primary-hover'],
+  contained: {
+    color: theme.colors['text/button/contained'],
+    backgroundColor: theme.colors['button/default'],
+
+    '&:hover': {
+      backgroundColor: theme.colors['button/hover'],
     },
 
     '&:active': {
-      boxShadow: theme.boxShadows['button-primary-active'],
+      backgroundColor: theme.colors['button/pressed'],
     },
 
     '&:disabled': {
-      boxShadow: theme.boxShadows['button-primary-disabled'],
-      cursor: 'not-allowed',
+      backgroundColor: theme.colors['stroke/disabled'],
+      color: theme.colors['text/disabled'],
     },
   },
 
-  secondary: {
+  outlined: {
+    border: '1px solid',
+    color: theme.colors['button/default'],
+    borderColor: theme.colors['button/default'],
+    backgroundColor: 'inherit',
+
     '&:hover': {
-      cursor: 'pointer',
+      color: theme.colors['button/hover'],
+      borderColor: theme.colors['button/hover'],
+      backgroundColor: theme.colors['bg/grey/2'],
     },
 
-    '&:active': {},
+    '&:active': {
+      color: theme.colors['button/pressed'],
+      backgroundColor: theme.colors['bg/grey/3'],
+      borderColor: theme.colors['button/pressed'],
+    },
 
     '&:disabled': {
-      cursor: 'not-allowed',
+      color: theme.colors['text/disabled'],
+      borderColor: theme.colors['stroke/disabled'],
+    },
+  },
+
+  ghost: {
+    backgroundColor: 'inherit',
+    color: theme.colors['button/default'],
+
+    '&:hover': {
+      color: theme.colors['button/hover'],
+      backgroundColor: theme.colors['bg/grey/2'],
+    },
+
+    '&:active': {
+      color: theme.colors['button/pressed'],
+      backgroundColor: theme.colors['bg/grey/3'],
+    },
+
+    '&:disabled': {
+      color: theme.colors['text/disabled'],
     },
   },
 }));

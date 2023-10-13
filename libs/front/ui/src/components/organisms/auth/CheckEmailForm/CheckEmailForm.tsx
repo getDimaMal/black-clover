@@ -45,7 +45,7 @@ const CheckEmailForm: FC<CheckEmailFormProps> = ({ isLoading, error, onSubmit, t
 
       <Alert color="error" message={error || ''} />
 
-      <Button type="submit" label="Send E-Mail" testId={CheckEmailFormTestID['checkEmailSubmit']} />
+      <Button type="submit" label="Send E-Mail" />
     </form>
   );
 };

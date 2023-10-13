@@ -1,24 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Button, { ButtonProps } from './Button';
+import Button, { ButtonProps, Variants } from './Button';
 
 export default {
   component: Button,
   args: {
-    color: 'primary',
-    disabled: false,
+    variant: 'contained',
   },
   argTypes: {
-    color: {
-      control: {
-        type: 'radio',
-        options: [] as ButtonProps['color'][],
-      },
+    variant: {
+      control: { type: 'radio' },
+      options: ['contained', 'outlined', 'ghost'] as Variants[],
     },
     type: { control: false },
-    className: { control: false },
+    label: { control: false },
     onClick: { control: false },
-    testId: { control: false },
   },
 } as Meta<ButtonProps>;
 
@@ -26,6 +22,6 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    label: 'Press ME!',
+    label: 'Button',
   },
 };

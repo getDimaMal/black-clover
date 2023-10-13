@@ -3,7 +3,7 @@ import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
 import { customRender, fillForm, fireEvent } from '../../../../test-utils';
 
-import LoginForm, { LoginFormTestID, TLoginFormTestID } from './LoginForm';
+import LoginForm, { LoginFormTestID } from './LoginForm';
 
 const getForm = (props: Partial<CreateUserDto> = {}): CreateUserDto => ({
   email: 'mail@email.com',
@@ -26,8 +26,8 @@ describe('LoginForm', () => {
     expect(getByTestId(LoginFormTestID['email'])).toBeInTheDocument();
     expect(getByTestId(LoginFormTestID['password'])).toBeInTheDocument();
     // buttons
-    expect(getByTestId(LoginFormTestID['signUp'])).toBeInTheDocument();
-    expect(getByTestId(LoginFormTestID['signIn'])).toBeInTheDocument();
+    expect(getByText('Sign Up')).toBeInTheDocument();
+    expect(getByText('Sign In')).toBeInTheDocument();
     // link
     expect(getByText('Forgot Password?')).toBeInTheDocument();
   });
@@ -55,15 +55,15 @@ describe('LoginForm', () => {
     expect(props.onSignIn).toHaveBeenCalledTimes(1);
   });
 
-  it.each<[keyof LoginFormProps, TLoginFormTestID]>([
-    ['onSignUp', 'signUp'],
-    ['onSignIn', 'signIn'],
-  ])('should call: %s', async (method, testId) => {
+  it.each<[keyof LoginFormProps, string]>([
+    ['onSignUp', 'Sign Up'],
+    ['onSignIn', 'Sign In'],
+  ])('should call: %s', async (method, label) => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<LoginForm {...props} />);
+    const { container, getByText } = customRender(<LoginForm {...props} />);
 
     fillForm(getForm(), container);
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByText(label));
 
     expect(props[method]).toHaveBeenCalled();
   });
@@ -75,11 +75,11 @@ describe('LoginForm', () => {
     ['password has only letters', getForm({ password: 'onlyLettersPassword' })],
   ])('should NOT submit when: %s', async (_, form) => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<LoginForm {...props} />);
+    const { container, getByText } = customRender(<LoginForm {...props} />);
 
     fillForm(form, container);
-    fireEvent.click(getByTestId(LoginFormTestID['signUp']));
-    fireEvent.click(getByTestId(LoginFormTestID['signIn']));
+    fireEvent.click(getByText('Sign Up'));
+    fireEvent.click(getByText('Sign In'));
 
     expect(props.onSignUp).not.toHaveBeenCalled();
     expect(props.onSignIn).not.toHaveBeenCalled();

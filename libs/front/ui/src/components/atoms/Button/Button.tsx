@@ -2,39 +2,22 @@ import React, { FC } from 'react';
 
 import useStyles from './Button.styles';
 
-export type Colors = 'primary' | 'secondary';
-
 export type Types = 'button' | 'submit' | 'reset';
+export type Variants = 'contained' | 'outlined' | 'ghost';
 
 export type ButtonProps = {
   label: string;
-  color?: Colors;
   disabled?: boolean;
-  className?: string;
   type?: Types;
-  testId?: string;
+  variant?: Variants;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button: FC<ButtonProps> = ({
-  label,
-  testId,
-  onClick,
-  className,
-  disabled,
-  type = 'button',
-  color = 'primary',
-}) => {
+const Button: FC<ButtonProps> = ({ label, onClick, disabled, type = 'button', variant = 'contained' }) => {
   const { classes, cx } = useStyles();
 
   return (
-    <button
-      type={type}
-      disabled={disabled}
-      className={cx(classes.root, classes[color], className)}
-      onClick={onClick}
-      data-testid={testId}
-    >
+    <button type={type} disabled={disabled} className={cx(classes.root, classes[variant])} onClick={onClick}>
       {label}
     </button>
   );
