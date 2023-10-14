@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Bin } from '../../../assets/images';
+import { Search } from '../../../assets/images';
 
 import Icon, { IconProps } from './Icon';
 
 export default {
   component: Icon,
   args: {
-    icon: Bin,
+    icon: Search,
     size: 'md',
   },
   argTypes: {

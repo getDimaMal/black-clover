@@ -7,14 +7,15 @@ import useStyles from './IconButton.styles';
 export type IconButtonProps = {
   icon: React.FunctionComponent;
   size?: IconSizes;
+  className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const IconButton: FC<IconButtonProps> = ({ icon, size, onClick }) => {
-  const { classes } = useStyles();
+const IconButton: FC<IconButtonProps> = ({ icon, size, className, onClick }) => {
+  const { classes, cx } = useStyles();
 
   return (
-    <button className={classes.root} onClick={onClick}>
+    <button className={cx(classes.root, className)} onClick={onClick}>
       <Icon icon={icon} size={size} />
     </button>
   );

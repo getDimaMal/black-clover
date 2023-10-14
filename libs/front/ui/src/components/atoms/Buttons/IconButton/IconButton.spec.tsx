@@ -15,6 +15,13 @@ describe('IconButton', () => {
     expect(queryByText(/add/)).toBeInTheDocument();
   });
 
+  it('should render with className', () => {
+    const className = 'className';
+    const { getByRole } = customRender(<IconButton {...getProps({ className })} />);
+
+    expect(getByRole('button')?.className).toContain(className);
+  });
+
   it('should call onClick on click', () => {
     const onClick = jest.fn();
     const { queryByText } = customRender(<IconButton {...getProps({ onClick })} />);

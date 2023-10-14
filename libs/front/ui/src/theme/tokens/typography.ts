@@ -77,8 +77,8 @@ export const typography: Record<Typography, TypographyDefinition> = {
   },
   'body/xxs': {
     fontFamily: 'NunitoSans',
-    lineHeight: `normal`,
     fontStyle: 'normal',
+    lineHeight: '16px',
     fontWeight: 400,
     fontSize: `12px`,
   },
