@@ -5,7 +5,7 @@ import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 import useForm from '../../../../hooks/useForm';
 import Alert from '../../../atoms/Alert/Alert';
 import Button from '../../../atoms/Buttons/Button/Button';
-import Link from '../../../atoms/Link/Link';
+import Link from '../../../atoms/Buttons/Link/Link';
 import Loader from '../../../atoms/Loader/Loader';
 import TextField from '../../../atoms/TextField/TextField';
 

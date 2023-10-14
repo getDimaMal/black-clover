@@ -1,17 +1,14 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Link, { Colors, Variants } from './Link';
+import Link from './Link';
 
 export default {
   component: Link,
   args: {
     children: 'Link to the bright future',
-    variant: 'textM',
-    color: 'info',
   },
   argTypes: {
-    variant: { type: { name: 'enum', value: ['textM'] as Variants[] } },
-    color: { type: { name: 'enum', value: ['main', 'info'] as Colors[] } },
+    to: { control: false },
   },
 } as Meta<typeof Link>;
 
