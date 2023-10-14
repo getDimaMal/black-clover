@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Clip from '../../atoms/Clip/Clip';
+import Chips from '../../atoms/Chips/Chips';
 import Tag from '../../atoms/Tag/Tag';
 
 import CategoryTable, { CategoryTableProps } from './CategoryTable';
@@ -26,8 +26,8 @@ export default {
         parameters: 'content_id: Int',
         source: (
           <div style={style}>
-            <Clip label="iOS" />
-            <Clip label="Android" />
+            <Chips label="iOS" />
+            <Chips label="Android" />
           </div>
         ),
         tag: (
@@ -42,8 +42,8 @@ export default {
         parameters: 'content_id: Int',
         source: (
           <div style={style}>
-            <Clip label="iOS" />
-            <Clip label="Android" />
+            <Chips label="iOS" />
+            <Chips label="Android" />
           </div>
         ),
         tag: (
