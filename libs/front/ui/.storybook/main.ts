@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import svgr from '@svgr/rollup';
 import { mergeConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
@@ -13,6 +14,7 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return mergeConfig(config, {
       plugins: [
+        svgr(),
         tsconfigPaths({
           projects: ['../../../tsconfig.base.json'],
         }),
