@@ -12,10 +12,10 @@ export type Typography =
 
 export type TypographyDefinition = {
   fontFamily: 'NunitoSans';
-  lineHeight: 'normal';
   fontStyle: 'normal';
   fontWeight: number;
   fontSize: `${number}px`;
+  lineHeight: 'normal' | `${number}px`;
 };
 
 export const typography: Record<Typography, TypographyDefinition> = {
@@ -84,7 +84,7 @@ export const typography: Record<Typography, TypographyDefinition> = {
   },
   'button/m': {
     fontFamily: 'NunitoSans',
-    lineHeight: `normal`,
+    lineHeight: `24px`,
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: `16px`,

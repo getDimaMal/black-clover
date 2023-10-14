@@ -1,10 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { Add } from '../../../assets/images';
+
 import Button, { ButtonProps, Variants } from './Button';
 
 export default {
   component: Button,
   args: {
+    label: 'Button',
     variant: 'contained',
   },
   argTypes: {
@@ -21,7 +24,19 @@ export default {
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
-  args: {
-    label: 'Button',
-  },
+  render: (args) => (
+    <div style={{ display: 'flex', gap: '12px' }}>
+      <div>
+        <Button {...args} />
+      </div>
+
+      <div>
+        <Button {...args} endIcon={Add} />
+      </div>
+
+      <div>
+        <Button {...args} startIcon={Add} />
+      </div>
+    </div>
+  ),
 };

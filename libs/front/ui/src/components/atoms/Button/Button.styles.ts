@@ -3,9 +3,15 @@ import { makeStyles } from '../../../theme/makeStyles';
 const useStyles = makeStyles({ name: 'Button' })((theme) => ({
   root: {
     ...theme.typography['button/m'],
+
     padding: `${theme.spacing(2)} ${theme.spacing(4)}`,
-    borderRadius: '50px',
+
     border: 'none',
+    borderRadius: '50px',
+
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(2),
 
     '&:hover': {
       cursor: 'pointer',

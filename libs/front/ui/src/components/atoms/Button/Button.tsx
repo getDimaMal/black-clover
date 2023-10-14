@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import Icon from '../Icon/Icon';
+
 import useStyles from './Button.styles';
 
 export type Types = 'button' | 'submit' | 'reset';
@@ -11,14 +13,28 @@ export type ButtonProps = {
   type?: Types;
   variant?: Variants;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  startIcon?: React.FunctionComponent;
+  endIcon?: React.FunctionComponent;
 };
 
-const Button: FC<ButtonProps> = ({ label, onClick, disabled, type = 'button', variant = 'contained' }) => {
+const Button: FC<ButtonProps> = ({
+  label,
+  onClick,
+  disabled,
+  startIcon,
+  endIcon,
+  type = 'button',
+  variant = 'contained',
+}) => {
   const { classes, cx } = useStyles();
 
   return (
     <button type={type} disabled={disabled} className={cx(classes.root, classes[variant])} onClick={onClick}>
+      {startIcon && <Icon icon={startIcon} />}
+
       {label}
+
+      {endIcon && <Icon icon={endIcon} />}
     </button>
   );
 };

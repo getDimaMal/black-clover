@@ -2,6 +2,8 @@ import { customRender, fireEvent } from '../../../test-utils';
 
 import Button, { ButtonProps, Types, Variants } from './Button';
 
+const svg = 'svg';
+const icon = () => <svg>{svg}</svg>;
 const getProps = (props: Partial<ButtonProps> = {}): ButtonProps => ({
   label: 'Button',
   ...props,
@@ -51,5 +53,17 @@ describe('Button', () => {
     const { getByText } = customRender(<Button {...props} />);
 
     expect(getByText(props.label).className).toContain(result);
+  });
+
+  describe('button icons', () => {
+    it('should render start icon', () => {
+      const { getByText } = customRender(<Button {...getProps({ startIcon: icon })} />);
+      expect(getByText(svg)).toBeInTheDocument();
+    });
+
+    it('should render end icon', () => {
+      const { getByText } = customRender(<Button {...getProps({ endIcon: icon })} />);
+      expect(getByText(svg)).toBeInTheDocument();
+    });
   });
 });

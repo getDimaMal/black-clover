@@ -5,6 +5,11 @@ export const useStyles = makeStyles({ name: 'Icon' })(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    border: 'none',
+
+    '& svg path': {
+      stroke: 'currentColor',
+    },
   },
 
   xl: {
@@ -17,8 +22,8 @@ export const useStyles = makeStyles({ name: 'Icon' })(() => ({
   },
 
   md: {
-    width: '26px',
-    height: '26px',
+    width: '24px',
+    height: '24px',
     '& svg': {
       width: '24px',
       height: '24px',
