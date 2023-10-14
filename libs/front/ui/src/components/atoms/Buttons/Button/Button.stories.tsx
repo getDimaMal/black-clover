@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Add } from '../../../assets/images';
+import { Add } from '../../../../assets/images';
 
 import Button, { ButtonProps, Variants } from './Button';
 

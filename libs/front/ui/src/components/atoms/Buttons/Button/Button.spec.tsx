@@ -1,4 +1,4 @@
-import { customRender, fireEvent } from '../../../test-utils';
+import { customRender, fireEvent } from '../../../../test-utils';
 
 import Button, { ButtonProps, Types, Variants } from './Button';
 

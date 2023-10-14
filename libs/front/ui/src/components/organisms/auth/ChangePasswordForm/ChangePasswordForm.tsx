@@ -4,7 +4,7 @@ import { ChangePasswordDto, ChangePasswordNoTokenDto } from '@black-clover/share
 
 import useForm from '../../../../hooks/useForm';
 import Alert from '../../../atoms/Alert/Alert';
-import Button from '../../../atoms/Button/Button';
+import Button from '../../../atoms/Buttons/Button/Button';
 import Loader from '../../../atoms/Loader/Loader';
 import TextField from '../../../atoms/TextField/TextField';
 
