@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
 import { useStyles } from './TextInput.styles';
 
@@ -6,52 +6,50 @@ export type Types = 'text' | 'email' | 'password';
 
 export type TextInputProps = {
   name: string;
-  value: string | number | null;
+  value: string | null;
   type?: Types;
   error?: boolean;
   success?: boolean;
   disabled?: boolean;
+  autoFocus?: boolean;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   testId?: string;
 };
 
-const TextInput: FC<TextInputProps> = ({
-  name,
-  onChange,
-  disabled,
-  error,
-  success,
-  testId,
-  value: initValue,
-  type = 'text',
-}) => {
-  const { classes, cx } = useStyles();
-  const [value, setValue] = useState(String(initValue ?? ''));
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  ({ name, error, success, disabled, autoFocus, onBlur, onChange, testId, value: initValue, type = 'text' }, ref) => {
+    const { classes, cx } = useStyles();
+    const [value, setValue] = useState(initValue ?? '');
 
-  useEffect(() => {
-    setValue(String(initValue ?? ''));
-  }, [initValue]);
+    useEffect(() => {
+      setValue(initValue ?? '');
+    }, [initValue]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    setValue(event.target.value);
-    onChange?.(event);
-  };
+      setValue(event.target.value);
+      onChange?.(event);
+    };
 
-  return (
-    <input
-      type={type}
-      name={name}
-      value={value}
-      className={cx(classes.root, { [classes.error]: error, [classes.success]: success })}
-      disabled={Boolean(disabled)}
-      onChange={handleChange}
-      autoComplete="off"
-      data-testid={testId}
-    />
-  );
-};
+    return (
+      <input
+        ref={ref}
+        type={type}
+        name={name}
+        value={value}
+        autoFocus={autoFocus}
+        disabled={Boolean(disabled)}
+        className={cx(classes.root, { [classes.error]: error, [classes.success]: success })}
+        onBlur={onBlur}
+        onChange={handleChange}
+        autoComplete="off"
+        data-testid={testId}
+      />
+    );
+  }
+);
 
 export default TextInput;

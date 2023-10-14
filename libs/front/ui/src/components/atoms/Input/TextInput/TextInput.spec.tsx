@@ -46,9 +46,15 @@ describe('TextInput', () => {
   it.each<[string, string]>([
     ['error', 'error'],
     ['success', 'success'],
-  ])('should render with className: %s', (prop, classNmae) => {
+  ])('should render with className: %s', (prop, className) => {
     const { getByTestId } = customRender(<TextInput {...getProps({ testId, [prop]: true })} />);
 
-    expect(getByTestId(testId).className).toContain(classNmae);
+    expect(getByTestId(testId).className).toContain(className);
+  });
+
+  it('should render with autoFocus', () => {
+    const { getByTestId } = customRender(<TextInput {...getProps({ testId, autoFocus: true })} />);
+
+    expect(getByTestId(testId)).toHaveFocus();
   });
 });

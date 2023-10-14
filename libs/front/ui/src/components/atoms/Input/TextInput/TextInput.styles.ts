@@ -4,6 +4,7 @@ export const useStyles = makeStyles({ name: 'TextInput' })((theme) => ({
   root: {
     ...theme.typography['body/s'],
     color: theme.colors['text/grey/1'],
+    display: 'block',
 
     padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
 

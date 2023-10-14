@@ -1,21 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { Types } from '../TextInput/TextInput';
+
 import TextField, { TextFieldProps } from './TextField';
 
 export default {
   component: TextField,
   args: {
-    type: 'text',
-    value: 'Some Value',
-    label: 'Some Field Label',
-    error: 'Some Error Message',
+    type: 'email',
+    value: 'mail@gmail.com',
+    label: 'Email',
   },
   argTypes: {
     type: {
-      control: {
-        type: 'radio',
-        options: [] as TextFieldProps['type'][],
-      },
+      control: { type: 'radio' },
+      options: ['text', 'email', 'password'] as Types[],
     },
     name: { control: false },
     testId: { control: false },
@@ -27,4 +26,6 @@ export default {
 
 type Story = StoryObj<typeof TextField>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: (args) => <TextField {...args} />,
+};

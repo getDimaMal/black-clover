@@ -1,25 +1,25 @@
+import { Add } from '../../../../assets/images';
 import { customRender, fireEvent } from '../../../../test-utils';
 
 import IconButton, { IconButtonProps } from './IconButton';
 
-const svg = 'svg';
 const getProps = (props: Partial<IconButtonProps> = {}): IconButtonProps => ({
-  icon: () => <svg>{svg}</svg>,
+  icon: Add,
   ...props,
 });
 
 describe('IconButton', () => {
   it('should render icon', () => {
-    const { getByText } = customRender(<IconButton {...getProps()} />);
+    const { queryByText } = customRender(<IconButton {...getProps()} />);
 
-    expect(getByText(svg)).toBeInTheDocument();
+    expect(queryByText(/add/)).toBeInTheDocument();
   });
 
   it('should call onClick on click', () => {
     const onClick = jest.fn();
-    const { getByText } = customRender(<IconButton {...getProps({ onClick })} />);
+    const { queryByText } = customRender(<IconButton {...getProps({ onClick })} />);
 
-    fireEvent.click(getByText(svg));
+    fireEvent.click(queryByText(/add/) as Element);
 
     expect(onClick).toHaveBeenCalled();
   });
