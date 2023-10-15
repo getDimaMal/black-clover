@@ -8,9 +8,7 @@ const withThemeProvider = (Story, context) => {
   return (
     <ThemeProvider theme={theme} mode={mode} setMode={() => {}} toggleMode={() => {}}>
       <GlobalStyles />
-      <div style={{ margin: '1rem' }}>
-        <Story />
-      </div>
+      <Story />
     </ThemeProvider>
   );
 };
