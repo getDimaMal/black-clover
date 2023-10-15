@@ -4,3 +4,6 @@ export { ReactComponent as Eye } from './svg/eye.svg';
 export { ReactComponent as EyeSlash } from './svg/eyeSlash.svg';
 export { ReactComponent as Search } from './svg/search.svg';
 export { ReactComponent as Cross } from './svg/cross.svg';
+export { ReactComponent as Map } from './svg/map.svg';
+export { ReactComponent as Setting } from './svg/setting.svg';
+export { ReactComponent as Logout } from './svg/logout.svg';

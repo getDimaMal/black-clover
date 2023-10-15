@@ -8,7 +8,7 @@ import { Typography, typography, TypographyDefinition } from './tokens/typograph
 export type Theme = {
   fontFaces: FontFace[];
   colors: Record<Colors, string>;
-  spacing: (num: 0 | 0.5 | 1 | 2 | 3 | 4 | 5 | 6 | 9 | 70) => `${number}px`;
+  spacing: (num: 0 | 0.5 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 9 | 70) => `${number}px`;
   boxShadows: Record<BoxShadows, string>;
   borderRadius: Record<BorderRadius, string>;
   typography: Record<Typography, TypographyDefinition>;
