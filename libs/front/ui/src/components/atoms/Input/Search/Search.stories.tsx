@@ -14,4 +14,10 @@ export default {
 
 type Story = StoryObj<typeof Search>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: (args) => (
+    <div style={{ width: '100%' }}>
+      <Search {...args} />
+    </div>
+  ),
+};

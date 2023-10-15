@@ -27,5 +27,9 @@ export default {
 type Story = StoryObj<typeof TextField>;
 
 export const Default: Story = {
-  render: (args) => <TextField {...args} />,
+  render: (args) => (
+    <div>
+      <TextField {...args} />
+    </div>
+  ),
 };
