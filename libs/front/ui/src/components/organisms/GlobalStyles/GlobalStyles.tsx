@@ -27,7 +27,7 @@ const GlobalStyles = () => {
             maxWidth: '100vw',
 
             height: '100vh',
-            minHeight: '600px',
+            minHeight: '700px',
             maxHeight: '100vh',
 
             margin: '0 !important',

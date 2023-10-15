@@ -24,8 +24,10 @@ type SideBarNavItemProps = {
   isActive?: never;
 };
 
+export type SidebarNavItems = Array<SidebarNavCommonProps & (SideBarNavHeadProps | SideBarNavItemProps)>;
+
 type SidebarNavProps = {
-  items: Array<SidebarNavCommonProps & (SideBarNavHeadProps | SideBarNavItemProps)>;
+  items: SidebarNavItems;
   onNavigate?: (path: string) => void;
 };
 
