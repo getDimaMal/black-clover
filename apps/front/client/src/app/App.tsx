@@ -1,5 +1,6 @@
 import React, { StrictMode } from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from '@black-clover/front/redux/store/store';
 import AuthProvider from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
 import GlobalStyles from '@black-clover/front/ui/components/organisms/GlobalStyles/GlobalStyles';
@@ -20,7 +21,9 @@ export function App() {
         <Provider store={store}>
           <ThemeProvider {...theme}>
             <GlobalStyles />
-            <Pages />
+            <BrowserRouter>
+              <Pages />
+            </BrowserRouter>
           </ThemeProvider>
         </Provider>
       </AuthProvider>

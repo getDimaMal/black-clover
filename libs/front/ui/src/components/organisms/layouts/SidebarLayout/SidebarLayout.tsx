@@ -9,16 +9,17 @@ import useStiles from './SidebarLayout.styles';
 export type SidebarLayoutProps = {
   children: React.ReactNode;
   navigations: SidebarNavItems[];
+  onNavigate: (path: string) => void;
 };
 
-const SidebarLayout: FC<SidebarLayoutProps> = ({ children, navigations }) => {
+const SidebarLayout: FC<SidebarLayoutProps> = ({ children, navigations, onNavigate }) => {
   const { classes } = useStiles();
 
   return (
     <div className={classes.root}>
       <Sidebar Footer={<Button label="Logout" variant="outlined" startIcon={Logout} />}>
         {navigations.map((navigation, index) => (
-          <Sidebar.Nav key={index} items={navigation} />
+          <Sidebar.Nav key={index} items={navigation} onNavigate={onNavigate} />
         ))}
       </Sidebar>
 
