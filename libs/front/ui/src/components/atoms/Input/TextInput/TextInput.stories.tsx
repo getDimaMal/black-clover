@@ -27,13 +27,9 @@ type Story = StoryObj<typeof TextInput>;
 const TextInputHook: FC<TextInputProps> = (props) => {
   const [value, setValue] = useState<string | null>(null);
 
-  return <TextInput {...props} value={value} onChange={(event) => setValue(event.target.value)} />;
+  return <TextInput {...props} autoFocus value={value} onChange={(event) => setValue(event.target.value)} />;
 };
 
 export const Default: Story = {
-  render: (args) => (
-    <div>
-      <TextInputHook {...args} />
-    </div>
-  ),
+  render: (args) => <TextInputHook {...args} />,
 };

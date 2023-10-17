@@ -18,9 +18,9 @@ const getProps = (props: Partial<CheckEmailFormProps> = {}): CheckEmailFormProps
 
 describe('CheckEmailForm', () => {
   it('should render without error', () => {
-    const { getByTestId, getByText } = customRender(<CheckEmailForm {...getProps()} />);
+    const { getByLabelText, getByText } = customRender(<CheckEmailForm {...getProps()} />);
 
-    expect(getByTestId(CheckEmailFormTestID['email'])).toBeInTheDocument();
+    expect(getByLabelText('Email')).toBeInTheDocument();
     expect(getByText('Send E-Mail')).toBeInTheDocument();
   });
 

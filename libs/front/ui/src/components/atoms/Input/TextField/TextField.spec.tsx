@@ -3,8 +3,8 @@ import { customRender, fireEvent } from '../../../../test-utils';
 import TextField, { TextFieldProps } from './TextField';
 
 const label = 'email';
-const testId = 'testId';
 const getProps = (props: Partial<TextFieldProps> = {}): TextFieldProps => ({
+  label,
   name: 'test',
   value: null,
   onChange: jest.fn(),
@@ -13,10 +13,10 @@ const getProps = (props: Partial<TextFieldProps> = {}): TextFieldProps => ({
 
 describe('InputField', () => {
   it('should render default', () => {
-    const { getByText, getByTestId } = customRender(<TextField {...getProps({ testId, label })} />);
+    const { getByText, getByLabelText } = customRender(<TextField {...getProps()} />);
 
     expect(getByText(label)).toBeInTheDocument();
-    expect(getByTestId(testId)).toHaveAttribute('type', 'text');
+    expect(getByLabelText(label)).toHaveAttribute('type', 'text');
   });
 
   it('should render error message', () => {
@@ -34,14 +34,14 @@ describe('InputField', () => {
   });
 
   it('should render & toggle "Hide Password Button"', () => {
-    const { queryByText, getByTestId } = customRender(<TextField {...getProps({ testId, type: 'password' })} />);
+    const { queryByText, getByLabelText } = customRender(<TextField {...getProps({ type: 'password' })} />);
 
-    expect(getByTestId(testId)).toHaveAttribute('type', 'password');
+    expect(getByLabelText(label)).toHaveAttribute('type', 'password');
     fireEvent.click(queryByText(/eye/) as Element);
 
-    expect(getByTestId(testId)).toHaveAttribute('type', 'text');
+    expect(getByLabelText(label)).toHaveAttribute('type', 'text');
     fireEvent.click(queryByText(/eyeSlash/) as Element);
 
-    expect(getByTestId(testId)).toHaveAttribute('type', 'password');
+    expect(getByLabelText(label)).toHaveAttribute('type', 'password');
   });
 });

@@ -33,13 +33,7 @@ const CheckEmailForm: FC<CheckEmailFormProps> = ({ isLoading, error, onSubmit, t
     >
       <Loader isLoading={isLoading} testId={CheckEmailFormTestID['checkEmailLoader']} />
 
-      <TextField
-        {...getInputProps('email')}
-        autoFocus
-        type="email"
-        label="Email"
-        testId={CheckEmailFormTestID['email']}
-      />
+      <TextField {...getInputProps('email')} autoFocus type="email" label="Email" />
 
       {token && <Link to={`/login/changePassword?${token}`}>Change Password (It's for a test)</Link>}
 

@@ -9,14 +9,13 @@ import useStyles from './TextField.styles';
 export type TextFieldProps = {
   name: string;
   value: string | null;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: Types;
   label?: string;
   autoFocus?: boolean;
   errorMessage?: string | null;
   successMessage?: string | null;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  testId?: string;
 };
 
 const TextField: FC<TextFieldProps> = ({ label, errorMessage, successMessage, type: initType, ...other }) => {
@@ -25,9 +24,10 @@ const TextField: FC<TextFieldProps> = ({ label, errorMessage, successMessage, ty
 
   return (
     <div className={classes.root}>
-      {label && <label className={classes.label}>{label}</label>}
-
-      <TextInput {...other} type={type} error={Boolean(errorMessage)} success={Boolean(successMessage)} />
+      <label className={classes.inputContainer}>
+        {label && <div className={classes.label}>{label}</div>}
+        <TextInput {...other} type={type} error={Boolean(errorMessage)} success={Boolean(successMessage)} />
+      </label>
 
       {initType === 'password' ? (
         <div className={classes.buttonContainer}>

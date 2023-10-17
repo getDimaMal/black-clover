@@ -4,28 +4,24 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
   root: {
     position: 'relative',
     display: 'inline-block',
-    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(4),
+  },
+
+  inputContainer: {
+    display: 'inline-block',
   },
 
   label: {
     ...theme.typography['body/xxs'],
     color: theme.colors['text/grey/1'],
 
-    padding: `0 ${theme.spacing(1)}`,
-    backgroundColor: theme.colors['bg/light'],
-
-    position: 'absolute',
-    top: '0px',
-    left: '12px',
-
-    borderRadius: '50px',
+    paddingLeft: theme.spacing(1),
   },
 
   buttonContainer: {
     height: '100%',
     boxSizing: 'border-box',
-    paddingTop: theme.spacing(2),
+    paddingTop: theme.spacing(4),
     paddingRight: theme.spacing(1),
     paddingBottom: theme.spacing(4),
 

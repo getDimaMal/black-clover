@@ -18,9 +18,9 @@ const getProps = (props: Partial<ChangePasswordFormProps> = {}): ChangePasswordF
 
 describe('ChangePasswordForm', () => {
   it('should render without error', () => {
-    const { getByTestId, getByText } = customRender(<ChangePasswordForm {...getProps()} />);
+    const { getByLabelText, getByText } = customRender(<ChangePasswordForm {...getProps()} />);
 
-    expect(getByTestId(ChangePasswordFormTestID['password'])).toBeInTheDocument();
+    expect(getByLabelText('Password')).toBeInTheDocument();
     expect(getByText('Change Password')).toBeInTheDocument();
   });
 

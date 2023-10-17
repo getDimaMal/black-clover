@@ -38,9 +38,9 @@ const LoginForm: FC<LoginFormProps> = ({ isLoading, error, onSignUp, onSignIn })
     >
       <Loader testId={LoginFormTestID['loginFormLoader']} isLoading={isLoading} />
 
-      <TextField {...getInputProps('email')} autoFocus type="email" label="Email" testId={LoginFormTestID['email']} />
+      <TextField {...getInputProps('email')} autoFocus type="email" label="Email" />
 
-      <TextField {...getInputProps('password')} type="password" label="Password" testId={LoginFormTestID['password']} />
+      <TextField {...getInputProps('password')} type="password" label="Password" />
 
       {/*TODO use context for URLs*/}
       <Link to="/login/checkEmail">Forgot Password?</Link>

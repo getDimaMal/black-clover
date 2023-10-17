@@ -39,13 +39,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ isLoading, erro
     >
       <Loader isLoading={isLoading} testId={ChangePasswordFormTestID['changePasswordFormLoader']} />
 
-      <TextField
-        {...getInputProps('password')}
-        autoFocus
-        type="password"
-        label="Password"
-        testId={ChangePasswordFormTestID['password']}
-      />
+      <TextField {...getInputProps('password')} autoFocus type="password" label="Password" />
 
       <Alert color="error" message={error || ''} />
 

@@ -6,25 +6,34 @@ const testId = 'testId';
 const getProps = (props: Partial<TextInputProps> = {}): TextInputProps => ({
   name: 'email',
   value: null,
+  onChange: jest.fn(),
   ...props,
 });
 
 describe('TextInput', () => {
-  it('should render', () => {
+  it('should render with empty value', () => {
     const { getByTestId } = customRender(<TextInput {...getProps({ testId })} />);
 
     expect(getByTestId(testId)).toBeInTheDocument();
+    expect(getByTestId(testId)).toHaveAttribute('value', '');
   });
 
-  it('should call onChange & update value', () => {
+  it('should render with NOT empty value', () => {
+    const value = 'some value';
+    const { getByTestId } = customRender(<TextInput {...getProps({ testId, value })} />);
+
+    expect(getByTestId(testId)).toBeInTheDocument();
+    expect(getByTestId(testId)).toHaveAttribute('value', value);
+  });
+
+  it('should call onChange', () => {
     const value = 'Some value';
     const onChange = jest.fn();
-    const { getByTestId, getByDisplayValue } = customRender(<TextInput {...getProps({ testId, onChange })} />);
+    const { getByTestId } = customRender(<TextInput {...getProps({ testId, onChange })} />);
 
     fireEvent.change(getByTestId(testId), { target: { value } });
 
-    expect(onChange).toHaveBeenCalled();
-    expect(getByDisplayValue(value)).toBeInTheDocument();
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should be disabled when disabled === true', () => {
