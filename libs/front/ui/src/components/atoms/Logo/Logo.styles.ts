@@ -5,18 +5,17 @@ const useStyles = makeStyles({ name: 'Logo' })((theme) => ({
     ...theme.typography['body/xl'],
     color: theme.colors['bg/dark'],
 
-    display: 'flex',
-  },
-
-  container: {
-    flex: 1,
     display: 'inline-flex',
-    alignItems: 'center',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: 1,
   },
 
   logo: {
-    ...theme.logo,
+    width: '48px',
+    height: '48px',
+    display: 'inline-block',
+    backgroundImage: theme.logo,
   },
 
   invert: {

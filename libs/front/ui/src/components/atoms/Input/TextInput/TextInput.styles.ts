@@ -7,6 +7,7 @@ export const useStyles = makeStyles({ name: 'TextInput' })((theme) => ({
     display: 'block',
 
     padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
+    paddingRight: theme.spacing(9),
 
     border: 'none',
     borderRadius: '4px',

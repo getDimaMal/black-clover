@@ -7,9 +7,8 @@ import Icon from '../../Icon/Icon';
 import useStyles from './Search.stiles';
 
 export type SearchProps = {
-  onSearch: (value: string) => void;
-
   fullWidth?: boolean;
+  onSearch?: (value: string) => void;
 };
 
 const Search: FC<SearchProps> = ({ onSearch, fullWidth }) => {
@@ -22,12 +21,12 @@ const Search: FC<SearchProps> = ({ onSearch, fullWidth }) => {
 
     const { value } = event.target;
     setValue(value);
-    onSearch(value);
+    onSearch?.(value);
   };
 
   const handleClear = () => {
     setValue('');
-    onSearch('');
+    onSearch?.('');
   };
 
   return (

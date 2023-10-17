@@ -1,24 +1,46 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Typography, { TypographyProps, Variant } from './Typography';
+import Typography, { TypographyProps } from './Typography';
 
 export default {
   component: Typography,
-  args: {
-    variant: 'bodyM',
-  },
   argTypes: {
-    variant: {
-      options: ['h1', 'h2', 'h3', 'bodyXL', 'bodyM', 'bodyS', 'bodyXS', 'bodyXXS'] as Variant[],
-      control: { type: 'radio' },
-    },
+    variant: { control: false },
   },
 } as Meta<TypographyProps>;
 
 type Story = StoryObj<typeof Typography>;
 
 export const Default: Story = {
-  args: {
-    children: 'Hello, Event Panel!',
-  },
+  render: (args) => (
+    <>
+      <Typography {...args} variant="h1">
+        This variant is h1
+      </Typography>
+      <Typography {...args} variant="h2">
+        This variant is h2
+      </Typography>
+      <Typography {...args} variant="h3">
+        This variant is h3
+      </Typography>
+      <Typography {...args} variant="bodyXL">
+        This variant is bodyXl
+      </Typography>
+      <Typography {...args} variant="bodyL">
+        This variant is bodyL
+      </Typography>
+      <Typography {...args} variant="bodyM">
+        This variant is bodyM
+      </Typography>
+      <Typography {...args} variant="bodyS">
+        This variant is bodyS
+      </Typography>
+      <Typography {...args} variant="bodyXS">
+        This variant is bodyXS
+      </Typography>
+      <Typography {...args} variant="bodyXXS">
+        This variant is bodyXXS
+      </Typography>
+    </>
+  ),
 };

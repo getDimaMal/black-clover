@@ -16,6 +16,22 @@ const withThemeProvider = (Story, context) => {
 const preview = {
   parameters: {
     backgrounds: { disable: true },
+    viewport: {
+      viewports: {
+        mobile: {
+          name: 'Mobile',
+          styles: { width: '325px', height: '500px' },
+        },
+        iphoneSE: {
+          name: 'iPhone SE',
+          styles: { width: 'calc(2rem + 8px + 375px)', height: 'calc(2rem + 8px + 667px)' },
+        },
+        iPadMini: {
+          name: 'iPad Mini',
+          styles: { width: 'calc(2rem + 8px + 1024px)', height: 'calc(2rem + 8px + 768px)' },
+        },
+      },
+    },
   },
   globalTypes: {
     theme: {

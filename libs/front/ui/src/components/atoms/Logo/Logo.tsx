@@ -12,10 +12,8 @@ const Logo: FC<LogoProps> = ({ invert, onlyImage }) => {
 
   return (
     <div className={cx(classes.root, { [classes.invert]: invert })}>
-      <div className={classes.container}>
-        <div className={classes.logo} />
-        {!onlyImage && <div>EVENT PANEL</div>}
-      </div>
+      <div className={classes.logo} />
+      {!onlyImage && <div>EVENT PANEL</div>}
     </div>
   );
 };

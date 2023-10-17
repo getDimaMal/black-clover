@@ -14,14 +14,17 @@ export default {
 
 type Story = StoryObj<typeof Logo>;
 
+const styles = { display: 'flex', width: '100%', padding: '8px 0' };
 export const Default: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
-      <div style={{ padding: '8px 0', backgroundColor: '#001054' }}>
+    <>
+      <div style={{ ...styles, backgroundColor: '#001054' }}>
         <Logo {...args} invert />
       </div>
 
-      <Logo {...args} />
-    </div>
+      <div style={{ ...styles }}>
+        <Logo {...args} />
+      </div>
+    </>
   ),
 };

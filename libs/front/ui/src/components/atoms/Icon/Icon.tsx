@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { useStyles } from './Icon.styles';
 
-export type Sizes = 'md' | 'sm' | 'xl';
+export type Sizes = 'sm' | 'md' | 'lg' | 'xl';
 
 export type IconProps = {
   icon: React.FunctionComponent;

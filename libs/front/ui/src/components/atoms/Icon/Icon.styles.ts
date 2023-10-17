@@ -12,16 +12,25 @@ export const useStyles = makeStyles({ name: 'Icon' })(() => ({
     },
   },
 
-  xl: {
-    width: '80px',
-    height: '80px',
+  sm: {
+    width: '16px',
+    height: '16px',
     '& svg': {
-      width: '80px',
-      height: '80px',
+      width: '16px',
+      height: '16px',
     },
   },
 
   md: {
+    width: '20px',
+    height: '20px',
+    '& svg': {
+      width: '20px',
+      height: '20px',
+    },
+  },
+
+  lg: {
     width: '24px',
     height: '24px',
     '& svg': {
@@ -30,12 +39,12 @@ export const useStyles = makeStyles({ name: 'Icon' })(() => ({
     },
   },
 
-  sm: {
-    width: '16px',
-    height: '16px',
+  xl: {
+    width: '32px',
+    height: '32px',
     '& svg': {
-      width: '16px',
-      height: '16px',
+      width: '32px',
+      height: '32px',
     },
   },
 }));

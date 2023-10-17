@@ -2,24 +2,25 @@ import { makeStyles } from '../../../theme/makeStyles';
 
 const useStiles = makeStyles({ name: 'Sidebar' })((theme) => ({
   root: {
-    height: '100%',
     width: theme.spacing(70),
+    maxWidth: theme.spacing(70),
 
     padding: theme.spacing(6),
 
     backgroundColor: theme.colors['bg/dark'],
 
+    flex: 1,
     display: 'inline-flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    gap: theme.spacing(8),
+    gap: theme.spacing(6),
   },
 
   navigation: {
     flex: 1,
     display: 'inline-flex',
     flexDirection: 'column',
-    gap: theme.spacing(8),
+    gap: theme.spacing(6),
     justifyContent: 'flex-start',
   },
 

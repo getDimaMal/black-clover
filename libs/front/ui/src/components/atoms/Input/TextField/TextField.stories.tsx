@@ -1,26 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Types } from '../TextInput/TextInput';
-
 import TextField, { TextFieldProps } from './TextField';
 
 export default {
   component: TextField,
   args: {
-    type: 'email',
     value: 'mail@gmail.com',
-    label: 'Email',
   },
   argTypes: {
-    type: {
-      control: { type: 'radio' },
-      options: ['text', 'email', 'password'] as Types[],
-    },
     name: { control: false },
+    value: { control: false },
+    label: { control: false },
+    type: { control: false },
     testId: { control: false },
-    autoFocus: { control: false },
     onBlur: { control: false },
     onChange: { control: false },
+    autoFocus: { control: false },
   },
 } as Meta<TextFieldProps>;
 
@@ -28,8 +23,10 @@ type Story = StoryObj<typeof TextField>;
 
 export const Default: Story = {
   render: (args) => (
-    <div>
-      <TextField {...args} />
-    </div>
+    <>
+      <TextField {...args} type="text" value="without label" />
+      <TextField {...args} label="E-Mail" type="email" value="mail@mail.com" />
+      <TextField {...args} label="Password" type="password" value="mail@mail.com" />
+    </>
   ),
 };

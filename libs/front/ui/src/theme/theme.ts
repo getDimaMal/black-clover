@@ -2,7 +2,6 @@ import { BorderRadius, borderRadius } from './tokens/borderRadius';
 import { BoxShadows, boxShadows } from './tokens/boxShadows';
 import { Colors, defaultColors } from './tokens/colors';
 import { FontFace, NunitoSansBold, NunitoSansRegular, NunitoSansSemiBold } from './tokens/fonts';
-import { logo } from './tokens/logo';
 import { Typography, typography, TypographyDefinition } from './tokens/typography';
 
 export type Theme = {
@@ -12,7 +11,7 @@ export type Theme = {
   boxShadows: Record<BoxShadows, string>;
   borderRadius: Record<BorderRadius, string>;
   typography: Record<Typography, TypographyDefinition>;
-  logo: typeof logo;
+  logo: string;
 };
 
 const baseTheme: Omit<Theme, 'colors'> = {
@@ -21,7 +20,7 @@ const baseTheme: Omit<Theme, 'colors'> = {
   borderRadius,
   fontFaces: [NunitoSansRegular, NunitoSansSemiBold, NunitoSansBold],
   spacing: (num) => `${num * 4}px`,
-  logo,
+  logo: 'url(assets/images/svg/logo.svg)',
 };
 
 export const lightTheme: Theme = {

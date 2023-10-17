@@ -26,7 +26,7 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
     height: '100%',
     boxSizing: 'border-box',
     paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingRight: theme.spacing(1),
     paddingBottom: theme.spacing(4),
 
     position: 'absolute',

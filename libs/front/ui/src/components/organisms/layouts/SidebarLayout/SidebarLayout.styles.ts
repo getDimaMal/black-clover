@@ -3,6 +3,10 @@ import { makeStyles } from '../../../../theme/makeStyles';
 const useStiles = makeStyles({ name: 'SidebarLayout' })((theme) => ({
   root: {
     flex: 1,
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
     display: 'inline-flex',
   },
 

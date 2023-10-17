@@ -29,6 +29,6 @@ describe('GlobalStyles', () => {
       </Fragment>
     );
 
-    expect(getByText(text)).toHaveStyle('font-family: NunitoSans;');
+    expect(getByText(text)).toHaveStyle('font-family: NunitoSans,Arial,sans-serif;');
   });
 });
