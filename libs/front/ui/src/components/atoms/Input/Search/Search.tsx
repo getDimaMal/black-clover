@@ -35,7 +35,7 @@ const Search: FC<SearchProps> = ({ onSearch, fullWidth }) => {
 
       <div className={classes.icons}>
         <Icon size="sm" icon={SearchSVG} />
-        <IconButton size="sm" icon={Cross} onClick={handleClear} className={classes.iconButton} />
+        {value && <IconButton size="sm" icon={Cross} onClick={handleClear} className={classes.iconButton} />}
       </div>
     </div>
   );

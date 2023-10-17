@@ -14,13 +14,14 @@ export const useStyles = makeStyles({ name: 'TextInput' })((theme) => ({
     outline: '1px solid',
     outlineColor: theme.colors['field/default'],
 
+    backgroundColor: theme.colors['bg/light'],
+
     ':focus': {
       outlineColor: theme.colors['field/focused'],
       color: theme.colors['text/black/1'],
     },
 
     ':disabled': {
-      backgroundColor: 'inherit',
       color: theme.colors['text/disabled'],
       outlineColor: theme.colors['field/disabled'],
     },

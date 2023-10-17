@@ -6,8 +6,9 @@ const useStyles = makeStyles({ name: 'Button' })((theme) => ({
 
     padding: `${theme.spacing(2)} ${theme.spacing(4)}`,
 
-    border: 'none',
     borderRadius: '50px',
+    border: '1px solid transparent',
+    boxShadow: theme.shadows['shadow/2'],
 
     display: 'flex',
     alignItems: 'center',
