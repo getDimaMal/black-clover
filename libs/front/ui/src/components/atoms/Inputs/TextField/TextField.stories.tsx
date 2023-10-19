@@ -25,7 +25,7 @@ type Story = StoryObj<typeof TextField>;
 const TextFieldHook: FC<TextFieldProps> = ({ value: initValue, ...props }) => {
   const [value, setValue] = useState<string | null>(initValue);
 
-  return <TextField {...props} value={value} onChange={setValue} />;
+  return <TextField {...props} value={value} onChange={(event) => setValue(event.target.value)} />;
 };
 
 export const Default: Story = {

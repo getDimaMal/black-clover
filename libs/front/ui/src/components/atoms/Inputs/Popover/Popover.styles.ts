@@ -5,15 +5,11 @@ const useStyles = makeStyles({ name: 'Popover' })(() => ({
     position: 'relative',
   },
 
-  dropdown: {
+  popover: {
     width: '100%',
 
     position: 'absolute',
     top: '100%',
-  },
-
-  closed: {
-    display: 'none',
   },
 }));
 

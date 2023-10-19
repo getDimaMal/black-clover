@@ -9,6 +9,9 @@ export default {
   component: Popover,
   argTypes: {
     isOpen: { control: false },
+    anchor: { control: false },
+    className: { control: false },
+    onClose: { control: false },
   },
 } as Meta<PopoverProps>;
 
@@ -38,6 +41,7 @@ const DropdownToggle: FC<PopoverProps> = (props) => {
       <Popover
         {...props}
         isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
         anchor={<Button label="Toggle Dropdown" onClick={() => setIsOpen((old) => !old)} />}
       >
         <Paper>I'm a dropdown. You can place anything you want here.</Paper>
