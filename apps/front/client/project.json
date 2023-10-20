@@ -16,7 +16,6 @@
         "main": "apps/front/client/src/main.tsx",
         "tsConfig": "apps/front/client/tsconfig.app.json",
         "assets": [
-          "apps/front/client/src/favicon.ico",
           "apps/front/client/src/assets",
           {
             "glob": "**/*",

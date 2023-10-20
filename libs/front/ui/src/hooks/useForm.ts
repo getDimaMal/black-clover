@@ -10,10 +10,9 @@ export type TUseFormProps<Form> = {
 export type TGetInputProps<Form> = (name: keyof Form) => {
   name: keyof Form;
   value: Form[keyof Form];
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-} & Partial<{
   error: null | string;
-}>;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormProps<Form>) => {
   const [values, setValues] = useState<Form>(initForm);
@@ -56,8 +55,8 @@ export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormPro
     (name: keyof Form): ReturnType<TGetInputProps<Form>> => ({
       name,
       value: values[name],
-      error: isSubmitted ? errors[name] : null,
       onChange: handleChange,
+      error: isSubmitted ? errors[name] || null : null,
     }),
     [errors, isSubmitted, values]
   );

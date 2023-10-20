@@ -6,9 +6,12 @@ export default {
   component: LoginForm,
   args: {
     isLoading: false,
-    error: 'Some Error',
   },
   argTypes: {
+    error: { control: 'text' },
+    isLoading: { control: 'boolean' },
+
+    resetPasswordLink: { control: false },
     onSignUp: { control: false },
     onSignIn: { control: false },
   },

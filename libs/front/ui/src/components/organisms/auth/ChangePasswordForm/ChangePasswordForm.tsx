@@ -3,10 +3,10 @@ import { ChangePasswordFormProps } from '@black-clover/front/shared/types/auth.t
 import { ChangePasswordDto, ChangePasswordNoTokenDto } from '@black-clover/shared/dto/users/change-password.dto';
 
 import useForm from '../../../../hooks/useForm';
-import Alert from '../../../atoms/Alert/Alert';
 import Button from '../../../atoms/Buttons/Button/Button';
 import TextField from '../../../atoms/Inputs/TextField/TextField';
 import Loader from '../../../atoms/Loader/Loader';
+import Alert from '../../../atoms/Messages/Alert/Alert';
 
 import useStyles from './ChangePasswordForm.styles';
 
@@ -41,7 +41,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ isLoading, erro
 
       <TextField {...getInputProps('password')} autoFocus type="password" label="Password" />
 
-      <Alert color="error" message={error || ''} />
+      <Alert variant="error" message={error || ''} />
 
       <Button type="submit" label="Change Password" />
     </form>

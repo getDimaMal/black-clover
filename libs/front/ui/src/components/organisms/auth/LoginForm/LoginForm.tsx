@@ -3,26 +3,16 @@ import { LoginFormProps } from '@black-clover/front/shared/types/auth.type';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
 import useForm from '../../../../hooks/useForm';
-import Alert from '../../../atoms/Alert/Alert';
 import Button from '../../../atoms/Buttons/Button/Button';
 import Link from '../../../atoms/Buttons/Link/Link';
 import TextField from '../../../atoms/Inputs/TextField/TextField';
 import Loader from '../../../atoms/Loader/Loader';
+import Alert from '../../../atoms/Messages/Alert/Alert';
+import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './LoginForm.styles';
 
-export type TLoginFormTestID = keyof CreateUserDto | 'loginForm' | 'loginFormLoader' | 'signIn' | 'signUp';
-
-export const LoginFormTestID: Record<TLoginFormTestID, TLoginFormTestID> = {
-  email: 'email',
-  password: 'password',
-  loginForm: 'loginForm',
-  loginFormLoader: 'loginFormLoader',
-  signUp: 'signUp',
-  signIn: 'signIn',
-};
-
-const LoginForm: FC<LoginFormProps> = ({ isLoading, error, onSignUp, onSignIn }) => {
+const LoginForm: FC<LoginFormProps> = ({ isLoading, resetPasswordLink, error, onSignUp, onSignIn }) => {
   const { classes } = useStyles();
   const { getInputProps, handleSubmit } = useForm<CreateUserDto>({
     initForm: { email: '', password: '' },
@@ -30,25 +20,27 @@ const LoginForm: FC<LoginFormProps> = ({ isLoading, error, onSignUp, onSignIn })
   });
 
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit(onSignIn)}
-      className={classes.root}
-      data-testid={LoginFormTestID['loginForm']}
-    >
-      <Loader testId={LoginFormTestID['loginFormLoader']} isLoading={isLoading} />
+    <form noValidate onSubmit={handleSubmit(onSignIn)} className={classes.root} aria-label="form">
+      <Loader isLoading={isLoading} />
+
+      <Typography variant="h2" className={classes.alignCenter}>
+        Login
+      </Typography>
+
+      <div className={classes.alert}>{error && <Alert variant="error" message={error} />}</div>
 
       <TextField {...getInputProps('email')} autoFocus type="email" label="Email" />
 
       <TextField {...getInputProps('password')} type="password" label="Password" />
 
-      {/*TODO use context for URLs*/}
-      <Link to="/login/checkEmail">Forgot Password?</Link>
+      <div className={classes.buttonGroup}>
+        <Button label="Sign In" type="submit" />
+        <Button label="Sign Up" variant="outlined" onClick={handleSubmit(onSignUp)} />
+      </div>
 
-      <Alert color="error" message={error || ''} />
-
-      <Button label="Sign Up" onClick={handleSubmit(onSignUp)} />
-      <Button label="Sign In" type="submit" />
+      <Typography variant="bodyXS" className={classes.alignCenter}>
+        Forgot password? <Link to={resetPasswordLink}>Reset</Link>
+      </Typography>
     </form>
   );
 };

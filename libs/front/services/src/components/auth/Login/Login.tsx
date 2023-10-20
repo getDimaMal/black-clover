@@ -6,9 +6,10 @@ import { useAuth } from '../AuthContext/AuthContext';
 
 export type LoginProps = {
   children: (props: LoginFormProps) => React.ReactElement;
+  resetPasswordLink: string;
 };
 
-const Login: FC<LoginProps> = ({ children }) => {
+const Login: FC<LoginProps> = ({ children, resetPasswordLink }) => {
   const { user, error, isLoading, signUp, signIn } = useUserAuth();
   const { login } = useAuth();
 
@@ -19,6 +20,7 @@ const Login: FC<LoginProps> = ({ children }) => {
   }, [login, user]);
 
   return children({
+    resetPasswordLink,
     error,
     isLoading,
     onSignUp: signUp,

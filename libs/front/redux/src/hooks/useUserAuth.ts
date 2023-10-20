@@ -30,7 +30,7 @@ const useUserAuth = () => {
   }, [usersSignUp.response, usersSignIn.response, usersChangePassword.response]);
 
   const error = useMemo(() => {
-    return usersSignUp.error?.message || usersSignIn.error?.message || usersChangePassword.error?.message;
+    return usersSignUp.error?.message || usersSignIn.error?.message || usersChangePassword.error?.message || null;
   }, [usersSignUp.error, usersSignIn.error, usersChangePassword.error]);
 
   const isLoading = useMemo(() => {

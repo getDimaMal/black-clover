@@ -4,11 +4,11 @@ import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
 export type LoginFormProps = {
   isLoading: boolean;
+  resetPasswordLink: string;
   onSignUp: (args: CreateUserDto) => void;
   onSignIn: (args: CreateUserDto) => void;
-} & Partial<{
   error: null | string;
-}>;
+};
 
 export type CheckEmailFormProps = {
   isLoading: boolean;

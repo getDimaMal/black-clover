@@ -7,6 +7,7 @@ export type MapVariant = 'h1' | 'h2' | 'h3' | 'p' | 'span';
 
 export type TypographyProps = {
   variant?: Variant;
+  className?: string;
   children: React.ReactNode;
 } & HTMLAttributes<HTMLElement>;
 

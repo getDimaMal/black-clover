@@ -1,9 +1,9 @@
 import { LoginFormProps } from '@black-clover/front/shared/types/auth.type';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
-import { customRender, fillForm, fireEvent } from '../../../../test-utils';
+import { customRender, fireEvent } from '../../../../test-utils';
 
-import LoginForm, { LoginFormTestID } from './LoginForm';
+import LoginForm from './LoginForm';
 
 const getForm = (props: Partial<CreateUserDto> = {}): CreateUserDto => ({
   email: 'mail@email.com',
@@ -15,27 +15,31 @@ const getProps = (props: Partial<LoginFormProps> = {}): LoginFormProps => ({
   isLoading: false,
   onSignUp: jest.fn(),
   onSignIn: jest.fn(),
+  resetPasswordLink: '/',
+  error: null,
   ...props,
 });
 
 describe('LoginForm', () => {
   it('should render without error', () => {
-    const { getByLabelText, getByText } = customRender(<LoginForm {...getProps()} />);
+    const { getByLabelText, getByText, getByRole } = customRender(<LoginForm {...getProps()} />);
 
     // fields
     expect(getByLabelText('Email')).toBeInTheDocument();
     expect(getByLabelText('Password')).toBeInTheDocument();
     // buttons
-    expect(getByText('Sign Up')).toBeInTheDocument();
-    expect(getByText('Sign In')).toBeInTheDocument();
-    // link
-    expect(getByText('Forgot Password?')).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Sign Up' })).toBeInTheDocument();
+    expect(getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
+
+    expect(getByRole('heading', { name: 'Login' })).toBeInTheDocument();
+    expect(getByRole('link', { name: 'Reset' })).toBeInTheDocument();
+    expect(getByText('Forgot password?')).toBeInTheDocument();
   });
 
   it('should render Loader when isLoading true', () => {
-    const { getByTestId } = customRender(<LoginForm {...getProps({ isLoading: true })} />);
+    const { getByText } = customRender(<LoginForm {...getProps({ isLoading: true })} />);
 
-    expect(getByTestId(LoginFormTestID['loginFormLoader'])).toBeInTheDocument();
+    expect(getByText('Loading...')).toBeInTheDocument();
   });
 
   it('should render error when defined', () => {
@@ -47,10 +51,11 @@ describe('LoginForm', () => {
 
   it('should call onSignIn when submit', async () => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<LoginForm {...props} />);
+    const { getByLabelText, getByRole } = customRender(<LoginForm {...props} />);
 
-    fillForm(getForm(), container);
-    fireEvent.submit(getByTestId(LoginFormTestID['loginForm']));
+    fireEvent.change(getByLabelText('Email'), { target: { value: getForm().email } });
+    fireEvent.change(getByLabelText('Password'), { target: { value: getForm().password } });
+    fireEvent.submit(getByRole('form'));
 
     expect(props.onSignIn).toHaveBeenCalledTimes(1);
   });
@@ -60,9 +65,10 @@ describe('LoginForm', () => {
     ['onSignIn', 'Sign In'],
   ])('should call: %s', async (method, label) => {
     const props = getProps();
-    const { container, getByText } = customRender(<LoginForm {...props} />);
+    const { getByLabelText, getByText } = customRender(<LoginForm {...props} />);
 
-    fillForm(getForm(), container);
+    fireEvent.change(getByLabelText('Email'), { target: { value: getForm().email } });
+    fireEvent.change(getByLabelText('Password'), { target: { value: getForm().password } });
     fireEvent.click(getByText(label));
 
     expect(props[method]).toHaveBeenCalled();
@@ -75,9 +81,10 @@ describe('LoginForm', () => {
     ['password has only letters', getForm({ password: 'onlyLettersPassword' })],
   ])('should NOT submit when: %s', async (_, form) => {
     const props = getProps();
-    const { container, getByText } = customRender(<LoginForm {...props} />);
+    const { getByLabelText, getByText } = customRender(<LoginForm {...props} />);
 
-    fillForm(form, container);
+    fireEvent.change(getByLabelText('Email'), { target: { value: form.email } });
+    fireEvent.change(getByLabelText('Password'), { target: { value: form.password } });
     fireEvent.click(getByText('Sign Up'));
     fireEvent.click(getByText('Sign In'));
 

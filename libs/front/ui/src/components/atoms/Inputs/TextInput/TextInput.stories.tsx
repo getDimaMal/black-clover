@@ -31,5 +31,9 @@ const TextInputHook: FC<TextInputProps> = (props) => {
 };
 
 export const Default: Story = {
-  render: (args) => <TextInputHook {...args} />,
+  render: (args) => (
+    <div>
+      <TextInputHook {...args} />
+    </div>
+  ),
 };

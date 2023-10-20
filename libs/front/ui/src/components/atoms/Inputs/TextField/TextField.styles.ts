@@ -8,7 +8,12 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
   },
 
   inputContainer: {
+    width: '100%',
     display: 'inline-block',
+  },
+
+  input: {
+    width: '100%',
   },
 
   label: {
@@ -35,9 +40,12 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
 
   message: {
     ...theme.typography['body/xxs'],
+
+    padding: `0 ${theme.spacing(4)}`,
+
     position: 'absolute',
-    bottom: '0px',
-    left: '16px',
+    top: '60px',
+    left: 0,
   },
 
   error: {

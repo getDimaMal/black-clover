@@ -6,6 +6,8 @@ export const useStyles = makeStyles({ name: 'TextInput' })((theme) => ({
     color: theme.colors['text/grey/1'],
     display: 'block',
 
+    width: '100%',
+
     padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
     paddingRight: theme.spacing(9),
 
