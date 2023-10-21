@@ -42,11 +42,10 @@ const GlobalStyles = () => {
           },
 
           '#root': {
-            width: '100%',
-            minWidth: '900px',
+            minWidth: '100%',
+            minHeight: '100%',
 
-            height: '100%',
-            minHeight: '650px',
+            overflow: 'scroll',
 
             flex: 1,
             display: 'inline-flex',
@@ -54,19 +53,16 @@ const GlobalStyles = () => {
             alignContent: 'flex-start',
             justifyContent: 'flex-start',
             flexDirection: 'column',
-
-            overflow: 'scroll',
           },
 
           '#storybook-root': {
             padding: '1rem',
             border: '4px solid purple',
 
-            width: '100%',
-            minWidth: 'calc(2rem + 8px + 900px)',
+            minWidth: '100%',
+            minHeight: '100%',
 
-            height: '100%',
-            minHeight: 'calc(2rem + 8px + 650px)',
+            overflow: 'scroll',
 
             flex: 1,
             display: 'inline-flex',

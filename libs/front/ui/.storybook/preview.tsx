@@ -24,11 +24,11 @@ const preview = {
         },
         iphoneSE: {
           name: 'iPhone SE',
-          styles: { width: 'calc(2rem + 8px + 375px)', height: 'calc(2rem + 8px + 667px)' },
+          styles: { width: '375px', height: '700px' },
         },
         iPadMini: {
           name: 'iPad Mini',
-          styles: { width: 'calc(2rem + 8px + 1024px)', height: 'calc(2rem + 8px + 768px)' },
+          styles: { width: '1024px', height: '768px' },
         },
       },
     },
