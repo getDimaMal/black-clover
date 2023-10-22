@@ -8,6 +8,7 @@ import SidebarLayout from '@black-clover/front/ui/components/organisms/layouts/S
 import ChangePasswordPage from './auth/ChangePasswordPage';
 import CheckEmailPage from './auth/CheckEmailPage';
 import SignInPage from './auth/SignInPage';
+import SignUpPage from './auth/SignUpPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import ROUTES from './routes.json';
 
@@ -65,6 +66,7 @@ const Pages = () => {
         <>
           <Route exact path="/" component={WelcomePage} />
           <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+          <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
           <Route exact path={ROUTES.CHECK_EMAIL} component={CheckEmailPage} />
           <Route exact path={ROUTES.CHANGE_PASSWORD} component={ChangePasswordPage} />
         </>

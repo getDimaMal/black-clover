@@ -10,6 +10,13 @@ export type SignInFormProps = {
   onSignIn: (args: CreateUserDto) => void;
 };
 
+export type SignUpFormProps = {
+  isLoading: boolean;
+  signInLink: string;
+  errorMessage: string | null;
+  onSignUp: (args: CreateUserDto) => void;
+};
+
 export type CheckEmailFormProps = {
   isLoading: boolean;
   onSubmit: (args: CheckEmailDto) => void;
