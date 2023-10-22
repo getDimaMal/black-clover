@@ -2,12 +2,12 @@ import { ChangePasswordNoTokenDto } from '@black-clover/shared/dto/users/change-
 import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
-export type LoginFormProps = {
+export type SignInFormProps = {
   isLoading: boolean;
-  resetPasswordLink: string;
-  onSignUp: (args: CreateUserDto) => void;
+  changePasswordLink: string;
+  errorMessage: string | null;
+  onSignUp: () => void;
   onSignIn: (args: CreateUserDto) => void;
-  error: null | string;
 };
 
 export type CheckEmailFormProps = {

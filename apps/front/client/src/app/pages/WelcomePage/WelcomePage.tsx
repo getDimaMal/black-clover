@@ -13,7 +13,7 @@ const WelcomePage = () => {
       <Typography variant="h1">Welcome to Event Panel.</Typography>
 
       <Typography variant="h2">
-        To continue, please <Link to={ROUTES.LOGIN}>Login</Link>
+        To continue, please <Link to={ROUTES.SIGN_IN}>Sign In</Link>
       </Typography>
     </div>
   );

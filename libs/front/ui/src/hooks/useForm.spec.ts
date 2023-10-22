@@ -70,7 +70,7 @@ describe('useForm', () => {
         result.current.handleSubmit(jest.fn)(getEvent());
       });
 
-      expect(result.current.getInputProps(name).error).toBe(error);
+      expect(result.current.getInputProps(name).errorMessage).toBe(error);
     });
   });
 });

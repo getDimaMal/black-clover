@@ -45,7 +45,7 @@ const Alert: FC<AlertProps> = ({ header, message, variant = 'info', closeButton 
           </Typography>
         )}
 
-        <Typography variant="bodyS" className={classes.message}>
+        <Typography variant="bodyXS" className={classes.message}>
           {message}
         </Typography>
       </div>

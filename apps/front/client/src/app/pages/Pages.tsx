@@ -7,8 +7,9 @@ import SidebarLayout from '@black-clover/front/ui/components/organisms/layouts/S
 
 import ChangePasswordPage from './auth/ChangePasswordPage';
 import CheckEmailPage from './auth/CheckEmailPage';
-import LoginPage from './auth/LoginPage';
+import SignInPage from './auth/SignInPage';
 import WelcomePage from './WelcomePage/WelcomePage';
+import ROUTES from './routes.json';
 
 const Pages = () => {
   const { user } = useAuth();
@@ -63,9 +64,9 @@ const Pages = () => {
       ) : (
         <>
           <Route exact path="/" component={WelcomePage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/login/checkEmail" component={CheckEmailPage} />
-          <Route exact path="/login/changePassword" component={ChangePasswordPage} />
+          <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+          <Route exact path={ROUTES.CHECK_EMAIL} component={CheckEmailPage} />
+          <Route exact path={ROUTES.CHANGE_PASSWORD} component={ChangePasswordPage} />
         </>
       )}
     </Switch>

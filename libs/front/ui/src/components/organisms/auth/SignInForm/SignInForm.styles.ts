@@ -1,23 +1,9 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'LoginForm' })((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: '300px',
-
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    gap: theme.spacing(4),
-  },
-
+const useStyles = makeStyles({ name: 'SignInForm' })((theme) => ({
   alignCenter: {
     textAlign: 'center',
     userSelect: 'none',
-  },
-
-  alert: {
-    height: '54px',
   },
 
   buttonGroup: {

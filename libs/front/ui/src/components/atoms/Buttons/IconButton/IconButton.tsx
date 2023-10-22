@@ -15,7 +15,7 @@ const IconButton: FC<IconButtonProps> = ({ icon, size, className, onClick }) => 
   const { classes, cx } = useStyles();
 
   return (
-    <button className={cx(classes.root, className)} onClick={onClick}>
+    <button type="button" className={cx(classes.root, className)} onClick={onClick}>
       <Icon icon={icon} size={size} />
     </button>
   );

@@ -2,7 +2,7 @@ import { makeStyles } from '../../../../theme/makeStyles';
 
 const useStyles = makeStyles<{ header: boolean }>({ name: 'Alert' })((theme, { header }) => ({
   root: {
-    padding: theme.spacing(4),
+    padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
 
     width: '100%',
     display: 'flex',
