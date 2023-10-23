@@ -81,6 +81,7 @@ const useUserAuth = () => {
     user,
     error,
     isLoading,
+    clear,
     signUp: handleSignUp,
     signIn: handleSignIn,
     checkEmail: handleCheckEmail,

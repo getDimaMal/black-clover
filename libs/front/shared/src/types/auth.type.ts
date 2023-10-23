@@ -26,7 +26,6 @@ export type ResetPasswordFormProps = {
 
 export type ChangePasswordFormProps = {
   isLoading: boolean;
+  errorMessage: string | null;
   onSubmit: (args: ChangePasswordNoTokenDto) => void;
-} & Partial<{
-  error: null | string;
-}>;
+};

@@ -21,8 +21,8 @@ const ChangePassword: React.FC<ChangePasswordProps> = ({ token, children }) => {
   }, [login, user]);
 
   return children({
-    error,
     isLoading,
+    errorMessage: error,
     onSubmit: (data: ChangePasswordNoTokenDto) => changePassword({ ...data, token }),
   });
 };

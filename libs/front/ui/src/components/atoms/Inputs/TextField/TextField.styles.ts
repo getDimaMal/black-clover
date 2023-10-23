@@ -19,8 +19,6 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
   label: {
     ...theme.typography['body/xxs'],
     color: theme.colors['text/grey/1'],
-
-    paddingLeft: theme.spacing(1),
   },
 
   buttonContainer: {
@@ -40,8 +38,6 @@ const useStyles = makeStyles({ name: 'TextField' })((theme) => ({
 
   message: {
     ...theme.typography['body/xxs'],
-
-    padding: `0 ${theme.spacing(4)}`,
 
     position: 'absolute',
     top: '60px',

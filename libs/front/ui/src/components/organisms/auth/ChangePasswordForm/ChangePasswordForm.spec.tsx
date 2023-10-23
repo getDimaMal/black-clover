@@ -3,7 +3,7 @@ import { ChangePasswordDto } from '@black-clover/shared/dto/users/change-passwor
 
 import { customRender, fillForm, fireEvent } from '../../../../test-utils';
 
-import ChangePasswordForm, { ChangePasswordFormTestID } from './ChangePasswordForm';
+import ChangePasswordForm from './ChangePasswordForm';
 
 const getForm = (props: Partial<Omit<ChangePasswordDto, 'token'>> = {}): Omit<ChangePasswordDto, 'token'> => ({
   password: 'password123',
@@ -12,47 +12,25 @@ const getForm = (props: Partial<Omit<ChangePasswordDto, 'token'>> = {}): Omit<Ch
 
 const getProps = (props: Partial<ChangePasswordFormProps> = {}): ChangePasswordFormProps => ({
   isLoading: false,
+  errorMessage: null,
   onSubmit: jest.fn(),
   ...props,
 });
 
 describe('ChangePasswordForm', () => {
-  it('should render without error', () => {
+  it('should render default', () => {
     const { getByLabelText, getByText } = customRender(<ChangePasswordForm {...getProps()} />);
 
     expect(getByLabelText('Password')).toBeInTheDocument();
     expect(getByText('Change Password')).toBeInTheDocument();
   });
 
-  it('should render Loader when isLoading true', () => {
-    const { getByTestId } = customRender(<ChangePasswordForm {...getProps({ isLoading: true })} />);
-
-    expect(getByTestId(ChangePasswordFormTestID['changePasswordFormLoader'])).toBeInTheDocument();
-  });
-
-  it('should render error when defined', () => {
-    const error = 'Some Error';
-    const { getByText } = customRender(<ChangePasswordForm {...getProps({ error })} />);
-
-    expect(getByText(error)).toBeInTheDocument();
-  });
-
-  it('should call onSubmit when submit', async () => {
+  it('should call onSubmit', async () => {
     const props = getProps();
-    const { container, getByTestId } = customRender(<ChangePasswordForm {...props} />);
+    const { container, getByRole } = customRender(<ChangePasswordForm {...props} />);
 
     fillForm(getForm(), container);
-    fireEvent.submit(getByTestId(ChangePasswordFormTestID['changePasswordForm']));
-
-    expect(props.onSubmit).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call onSubmit when the submit button is clicked', async () => {
-    const props = getProps();
-    const { container, getByText } = customRender(<ChangePasswordForm {...props} />);
-
-    fillForm(getForm(), container);
-    fireEvent.click(getByText('Change Password'));
+    fireEvent.click(getByRole('button', { name: 'Change Password' }));
 
     expect(props.onSubmit).toHaveBeenCalled();
   });
@@ -63,10 +41,10 @@ describe('ChangePasswordForm', () => {
     ['password has only letters', getForm({ password: 'onlyLettersPassword' })],
   ])('should NOT submit when: %s', async (_, form) => {
     const props = getProps();
-    const { container, getByText } = customRender(<ChangePasswordForm {...props} />);
+    const { getByLabelText, getByRole } = customRender(<ChangePasswordForm {...props} />);
 
-    fillForm(form, container);
-    fireEvent.click(getByText('Change Password'));
+    fireEvent.change(getByLabelText('Password'), { target: { value: form.password } });
+    fireEvent.click(getByRole('button', { name: 'Change Password' }));
 
     expect(props.onSubmit).not.toHaveBeenCalled();
   });

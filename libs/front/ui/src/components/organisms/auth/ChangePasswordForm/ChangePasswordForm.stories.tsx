@@ -1,3 +1,4 @@
+import { ChangePasswordFormProps } from '@black-clover/front/shared/types/auth.type';
 import { Meta, StoryObj } from '@storybook/react';
 
 import ChangePasswordForm from './ChangePasswordForm';
@@ -11,8 +12,8 @@ export default {
   argTypes: {
     onSubmit: { control: false },
   },
-} as Meta<typeof ChangePasswordForm>;
+} as Meta<ChangePasswordFormProps>;
 
-type Story = StoryObj<typeof ChangePasswordForm>;
+type Story = StoryObj<ChangePasswordFormProps>;
 
 export const Default: Story = {};
