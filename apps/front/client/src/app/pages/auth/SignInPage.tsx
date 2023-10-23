@@ -11,7 +11,7 @@ const SignInPage = () => {
 
   return (
     <AuthLayout label="Sign In">
-      <SignIn changePasswordLink={ROUTES.CHANGE_PASSWORD} onSignUp={() => history.push(ROUTES.SIGN_UP)}>
+      <SignIn resetPasswordLink={ROUTES.RESET_PASSWORD} onSignUp={() => history.push(ROUTES.SIGN_UP)}>
         {(props) => <SignInForm {...props} />}
       </SignIn>
     </AuthLayout>

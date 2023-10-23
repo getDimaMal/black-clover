@@ -9,7 +9,7 @@ export default {
     errorMessage: 'Some error message',
   },
   argTypes: {
-    handleSubmit: { control: false },
+    onSubmit: { control: false },
   },
 } as Meta<AuthFormProps>;
 

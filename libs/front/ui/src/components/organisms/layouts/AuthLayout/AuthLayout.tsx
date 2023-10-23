@@ -16,7 +16,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ label, children }) => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Typography variant="h3" className={classes.header}>
+        <Typography centerAlign variant="h3">
           {label}
         </Typography>
         {children}

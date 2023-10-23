@@ -5,7 +5,7 @@ import AuthForm, { AuthFormProps } from './AuthForm';
 const getProps = (props: Partial<AuthFormProps> = {}): AuthFormProps => ({
   isLoading: false,
   errorMessage: null,
-  handleSubmit: jest.fn(),
+  onSubmit: jest.fn(),
   children: 'children',
   ...props,
 });
@@ -32,11 +32,11 @@ describe('AuthForm', () => {
   });
 
   it('should call handleSubmit', () => {
-    const handleSubmit = jest.fn();
-    const { getByRole } = customRender(<AuthForm {...getProps({ handleSubmit })} />);
+    const onSubmit = jest.fn();
+    const { getByRole } = customRender(<AuthForm {...getProps({ onSubmit })} />);
 
     fireEvent.submit(getByRole('form'));
 
-    expect(handleSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 });

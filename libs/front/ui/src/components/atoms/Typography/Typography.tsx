@@ -8,6 +8,7 @@ export type MapVariant = 'h1' | 'h2' | 'h3' | 'p' | 'span';
 export type TypographyProps = {
   variant?: Variant;
   className?: string;
+  centerAlign?: boolean;
   children: React.ReactNode;
 } & HTMLAttributes<HTMLElement>;
 
@@ -25,12 +26,14 @@ const mapVariantToTag: Record<Variant, MapVariant> = {
 };
 
 const Typography = forwardRef<HTMLElement, TypographyProps>(
-  ({ className, children, variant = 'bodyM', ...rest }, ref) => {
+  ({ className, children, centerAlign, variant = 'bodyM', ...rest }, ref) => {
     const { classes, cx } = useStyles();
 
     const Tag = mapVariantToTag[variant] as React.ElementType;
 
-    const combinedClasses = cx(classes.root, classes[variant], className);
+    const combinedClasses = cx(classes.root, classes[variant], className, {
+      [classes.centerAlign]: Boolean(centerAlign),
+    });
 
     return (
       <Tag {...rest} className={combinedClasses} ref={ref}>

@@ -4,12 +4,12 @@ import { SignUpFormProps } from '@black-clover/front/shared/types/auth.type';
 
 import { useAuth } from '../AuthContext/AuthContext';
 
-export type LoginProps = {
+export type SignUpProps = {
   signInLink: string;
   children: (props: SignUpFormProps) => React.ReactElement;
 };
 
-const SignUp: FC<LoginProps> = ({ signInLink, children }) => {
+const SignUp: FC<SignUpProps> = ({ signInLink, children }) => {
   const { user, isLoading, signUp, error } = useUserAuth();
   const { login } = useAuth();
 

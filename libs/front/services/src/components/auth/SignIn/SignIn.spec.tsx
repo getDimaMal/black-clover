@@ -6,7 +6,7 @@ describe('SignIn', () => {
   it('should render without error', () => {
     const test = 'test';
     const { getByText } = customRender(
-      <SignIn changePasswordLink="link" onSignUp={jest.fn}>
+      <SignIn resetPasswordLink="link" onSignUp={jest.fn}>
         {() => <div>{test}</div>}
       </SignIn>
     );

@@ -24,6 +24,13 @@ describe('Button', () => {
     expect(getByText(props.label)).toBeDisabled();
   });
 
+  it('should render fullWidth', () => {
+    const props = getProps({ fullWidth: true });
+    const { getByRole } = customRender(<Button {...props} />);
+
+    expect(getByRole('button', { name: props.label }).className).toContain('fullWidth');
+  });
+
   it('should call onClick when click', () => {
     const props = getProps({ onClick: jest.fn() });
     const { getByText } = customRender(<Button {...props} />);

@@ -1,11 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ChangePassword from '@black-clover/front/services/components/auth/ChangePassword/ChangePassword';
 import ChangePasswordForm from '@black-clover/front/ui/components/organisms/auth/ChangePasswordForm/ChangePasswordForm';
 
 const ChangePasswordPage = () => {
-  const { search } = useLocation();
+  const { token } = useParams<{ token: string }>();
 
-  return <ChangePassword token={search.slice(1)}>{(props) => <ChangePasswordForm {...props} />}</ChangePassword>;
+  return <ChangePassword token={token}>{(props) => <ChangePasswordForm {...props} />}</ChangePassword>;
 };
 
 export default ChangePasswordPage;

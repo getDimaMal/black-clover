@@ -6,7 +6,7 @@ import Typography from '@black-clover/front/ui/components/atoms/Typography/Typog
 import SidebarLayout from '@black-clover/front/ui/components/organisms/layouts/SidebarLayout/SidebarLayout';
 
 import ChangePasswordPage from './auth/ChangePasswordPage';
-import CheckEmailPage from './auth/CheckEmailPage';
+import ResetPasswordPage from './auth/ResetPasswordPage';
 import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
 import WelcomePage from './WelcomePage/WelcomePage';
@@ -67,8 +67,8 @@ const Pages = () => {
           <Route exact path="/" component={WelcomePage} />
           <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
           <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
-          <Route exact path={ROUTES.CHECK_EMAIL} component={CheckEmailPage} />
-          <Route exact path={ROUTES.CHANGE_PASSWORD} component={ChangePasswordPage} />
+          <Route exact path={ROUTES.RESET_PASSWORD} component={ResetPasswordPage} />
+          <Route exact path={ROUTES.CHANGE_PASSWORD + '/:token'} component={ChangePasswordPage} />
         </>
       )}
     </Switch>

@@ -12,6 +12,7 @@ export type ButtonProps = {
   disabled?: boolean;
   type?: Types;
   variant?: Variants;
+  fullWidth?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   startIcon?: React.FunctionComponent;
   endIcon?: React.FunctionComponent;
@@ -23,13 +24,19 @@ const Button: FC<ButtonProps> = ({
   disabled,
   startIcon,
   endIcon,
+  fullWidth,
   type = 'button',
   variant = 'contained',
 }) => {
   const { classes, cx } = useStyles();
 
   return (
-    <button type={type} disabled={disabled} className={cx(classes.root, classes[variant])} onClick={onClick}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={cx(classes.root, classes[variant], { [classes.fullWidth]: Boolean(fullWidth) })}
+      onClick={onClick}
+    >
       {startIcon && <Icon icon={startIcon} />}
 
       {label}

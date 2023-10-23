@@ -30,8 +30,19 @@ const useUserAuth = () => {
   }, [usersSignUp.response, usersSignIn.response, usersChangePassword.response]);
 
   const error = useMemo(() => {
-    return usersSignUp.error?.message || usersSignIn.error?.message || usersChangePassword.error?.message || null;
-  }, [usersSignUp.error, usersSignIn.error, usersChangePassword.error]);
+    return (
+      usersSignUp.error?.message ||
+      usersSignIn.error?.message ||
+      usersCheckEmail.error?.message ||
+      usersChangePassword.error?.message ||
+      null
+    );
+  }, [
+    usersSignUp.error?.message,
+    usersSignIn.error?.message,
+    usersCheckEmail.error?.message,
+    usersChangePassword.error?.message,
+  ]);
 
   const isLoading = useMemo(() => {
     return [usersSignUp.status, usersSignIn.status, usersCheckEmail.status, usersChangePassword.status].includes(

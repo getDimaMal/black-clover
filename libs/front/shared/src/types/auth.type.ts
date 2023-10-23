@@ -4,7 +4,7 @@ import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
 
 export type SignInFormProps = {
   isLoading: boolean;
-  changePasswordLink: string;
+  resetPasswordLink: string;
   errorMessage: string | null;
   onSignUp: () => void;
   onSignIn: (args: CreateUserDto) => void;
@@ -17,13 +17,12 @@ export type SignUpFormProps = {
   onSignUp: (args: CreateUserDto) => void;
 };
 
-export type CheckEmailFormProps = {
+export type ResetPasswordFormProps = {
   isLoading: boolean;
   onSubmit: (args: CheckEmailDto) => void;
-} & Partial<{
-  error: null | string;
-  token: null | string;
-}>;
+  errorMessage: string | null;
+  changePasswordLink: string | null;
+};
 
 export type ChangePasswordFormProps = {
   isLoading: boolean;

@@ -26,6 +26,12 @@ describe('Typography', () => {
     expect(element.className).toContain(className);
   });
 
+  it('should renders with centerAlign', () => {
+    const { getByText } = customRender(<Typography {...generateProps({ centerAlign: true })} />);
+
+    expect(getByText(text).className).toContain('centerAlign');
+  });
+
   it.each<[Variant, MapVariant]>([
     ['h1', 'h1'],
     ['h2', 'h2'],

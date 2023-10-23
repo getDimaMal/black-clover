@@ -4,13 +4,13 @@ import { SignInFormProps } from '@black-clover/front/shared/types/auth.type';
 
 import { useAuth } from '../AuthContext/AuthContext';
 
-export type LoginProps = {
+export type SignInProps = {
   onSignUp: () => void;
-  changePasswordLink: string;
+  resetPasswordLink: string;
   children: (props: SignInFormProps) => React.ReactElement;
 };
 
-const SignIn: FC<LoginProps> = ({ onSignUp, changePasswordLink, children }) => {
+const SignIn: FC<SignInProps> = ({ onSignUp, resetPasswordLink, children }) => {
   const { user, isLoading, signIn, error } = useUserAuth();
   const { login } = useAuth();
 
@@ -23,7 +23,7 @@ const SignIn: FC<LoginProps> = ({ onSignUp, changePasswordLink, children }) => {
   return children({
     onSignUp,
     isLoading,
-    changePasswordLink,
+    resetPasswordLink,
     onSignIn: signIn,
     errorMessage: error,
   });

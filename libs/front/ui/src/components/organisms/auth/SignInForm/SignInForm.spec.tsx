@@ -15,8 +15,8 @@ const getProps = (props: Partial<SignInFormProps> = {}): SignInFormProps => ({
   isLoading: false,
   onSignUp: jest.fn(),
   onSignIn: jest.fn(),
-  changePasswordLink: '/',
   errorMessage: null,
+  resetPasswordLink: '/',
   ...props,
 });
 

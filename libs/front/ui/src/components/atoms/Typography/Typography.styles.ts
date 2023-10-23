@@ -5,6 +5,10 @@ const useStyles = makeStyles({ name: 'Typography' })((theme) => ({
     margin: 0,
   },
 
+  centerAlign: {
+    textAlign: 'center',
+  },
+
   h1: { ...theme.typography['h1'] },
   h2: { ...theme.typography['h2'] },
   h3: { ...theme.typography['h3'] },

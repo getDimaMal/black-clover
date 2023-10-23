@@ -82,6 +82,13 @@ const useStyles = makeStyles({ name: 'Button' })((theme) => ({
       color: theme.colors['text/disabled'],
     },
   },
+
+  fullWidth: {
+    width: '100%',
+
+    display: 'inline-flex',
+    justifyContent: 'center',
+  },
 }));
 
 export default useStyles;

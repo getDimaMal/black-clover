@@ -11,7 +11,7 @@ import AuthForm from '../AuthForm/AuthForm';
 
 import useStyles from './SignInForm.styles';
 
-const SignInForm: FC<SignInFormProps> = ({ isLoading, changePasswordLink, errorMessage, onSignUp, onSignIn }) => {
+const SignInForm: FC<SignInFormProps> = ({ isLoading, resetPasswordLink, errorMessage, onSignUp, onSignIn }) => {
   const { classes } = useStyles();
   const { getInputProps, handleSubmit } = useForm<CreateUserDto>({
     initForm: { email: '', password: '' },
@@ -19,17 +19,17 @@ const SignInForm: FC<SignInFormProps> = ({ isLoading, changePasswordLink, errorM
   });
 
   return (
-    <AuthForm handleSubmit={handleSubmit(onSignIn)} isLoading={isLoading} errorMessage={errorMessage}>
+    <AuthForm onSubmit={handleSubmit(onSignIn)} isLoading={isLoading} errorMessage={errorMessage}>
       <TextField {...getInputProps('email')} autoFocus type="email" label="Email" />
       <TextField {...getInputProps('password')} type="password" label="Password" />
 
       <div className={classes.buttonGroup}>
-        <Button label="Sign In" type="submit" />
-        <Button label="Sign Up" variant="outlined" onClick={() => onSignUp()} />
+        <Button fullWidth label="Sign In" type="submit" />
+        <Button fullWidth label="Sign Up" variant="outlined" onClick={() => onSignUp()} />
       </div>
 
-      <Typography variant="bodyXS" className={classes.alignCenter}>
-        Forgot password? <Link to={changePasswordLink}>Reset</Link>
+      <Typography centerAlign variant="bodyXS">
+        Forgot password? <Link to={resetPasswordLink}>Reset</Link>
       </Typography>
     </AuthForm>
   );

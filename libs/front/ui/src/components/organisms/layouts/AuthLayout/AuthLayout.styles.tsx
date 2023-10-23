@@ -28,10 +28,6 @@ const useStyles = makeStyles({ name: 'AuthLayout' })((theme) => ({
 
     position: 'relative',
   },
-
-  header: {
-    textAlign: 'center',
-  },
 }));
 
 export default useStyles;
