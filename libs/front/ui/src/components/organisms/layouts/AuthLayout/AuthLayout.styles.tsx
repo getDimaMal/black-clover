@@ -25,6 +25,8 @@ const useStyles = makeStyles({ name: 'AuthLayout' })((theme) => ({
     alignItems: 'stretch',
     flexDirection: 'column',
     gap: theme.spacing(8),
+
+    position: 'relative',
   },
 
   header: {

@@ -28,7 +28,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ isLoading, signInLink, errorMessage, 
       </div>
 
       <Typography variant="bodyXS" className={classes.alignCenter}>
-        Already have account? <Link to={signInLink}>Sign In</Link>
+        Already have an account? <Link to={signInLink}>Sign In</Link>
       </Typography>
     </AuthForm>
   );

@@ -1,15 +1,21 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'Loader' })(() => ({
+const useStyles = makeStyles({ name: 'Loader' })((theme) => ({
   root: {
-    width: '100%',
-    height: '100%',
-    padding: 12,
-    boxSizing: 'border-box',
+    padding: theme.spacing(8),
+
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+
     position: 'absolute',
     top: 0,
     left: 0,
-    opacity: '.9',
+    right: 0,
+    bottom: 0,
+
+    backgroundColor: 'rgba(0, 16, 84, 0.20)',
+    zIndex: 999,
   },
 }));
 

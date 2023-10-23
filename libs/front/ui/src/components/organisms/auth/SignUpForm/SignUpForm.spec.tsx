@@ -30,7 +30,7 @@ describe('SignUpForm', () => {
     expect(getByRole('button', { name: 'Sign Up' })).toBeInTheDocument();
     //other
     expect(getByRole('link', { name: 'Sign In' })).toBeInTheDocument();
-    expect(getByText('Already have account?')).toBeInTheDocument();
+    expect(getByText('Already have an account?')).toBeInTheDocument();
   });
 
   it('should call onSignUp', async () => {
