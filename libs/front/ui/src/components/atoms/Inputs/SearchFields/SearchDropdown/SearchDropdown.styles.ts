@@ -6,6 +6,7 @@ const useStyles = makeStyles({ name: 'Search' })((theme) => ({
   },
 
   dropdown: {
+    padding: theme.spacing(1),
     marginTop: theme.spacing(2),
 
     borderRadius: '8px',

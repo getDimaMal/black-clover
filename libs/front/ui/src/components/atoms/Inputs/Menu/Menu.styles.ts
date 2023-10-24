@@ -13,6 +13,8 @@ const useStyles = makeStyles({ name: 'Menu' })((theme) => ({
     ...theme.typography['body/xs'],
     padding: `${theme.spacing(3)} ${theme.spacing(4)}`,
 
+    borderRadius: '8px',
+
     '&:hover': {
       cursor: 'pointer',
       backgroundColor: theme.colors['bg/grey/2'],
