@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Search, { SearchProps } from './Search';
+import SearchDropdown, { SearchProps } from './SearchDropdown';
 
 export default {
-  component: Search,
+  component: SearchDropdown,
   args: {
     fullWidth: false,
     suggestions: [
@@ -15,12 +15,14 @@ export default {
   },
   argTypes: {
     fullWidth: { control: 'boolean' },
+
+    onSearch: { control: false },
     suggestions: { control: false },
   },
 } as Meta<SearchProps>;
 
-type Story = StoryObj<typeof Search>;
+type Story = StoryObj<typeof SearchDropdown>;
 
 export const Default: Story = {
-  render: (args) => <Search {...args} />,
+  render: (args) => <SearchDropdown {...args} />,
 };

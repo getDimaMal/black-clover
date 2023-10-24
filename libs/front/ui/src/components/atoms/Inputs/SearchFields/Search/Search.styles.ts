@@ -1,4 +1,4 @@
-import { makeStyles } from '../../../../theme/makeStyles';
+import { makeStyles } from '../../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'Search' })((theme) => ({
   root: {
@@ -31,7 +31,9 @@ const useStyles = makeStyles({ name: 'Search' })((theme) => ({
     '::placeholder': {
       color: theme.colors['text/disabled'],
     },
+  },
 
+  focus: {
     ':focus': {
       boxShadow: theme.shadows['shadow/2'],
       outlineColor: theme.colors['field/focused'],
@@ -60,16 +62,6 @@ const useStyles = makeStyles({ name: 'Search' })((theme) => ({
 
   iconButton: {
     pointerEvents: 'auto',
-  },
-
-  dropdown: {
-    marginTop: theme.spacing(2),
-
-    borderRadius: '8px',
-    border: `1px solid ${theme.colors['field/focused']}`,
-    boxShadow: theme.shadows['shadow/2'],
-
-    overflow: 'hidden',
   },
 }));
 
