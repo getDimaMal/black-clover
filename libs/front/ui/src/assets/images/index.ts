@@ -12,3 +12,4 @@ export { ReactComponent as InfoCircle } from './svg/infoCircle.svg';
 export { ReactComponent as TickSquare } from './svg/tickSquare.svg';
 export { ReactComponent as CheckboxOn } from './svg/checkboxOn.svg';
 export { ReactComponent as CheckboxOff } from './svg/checkboxOff.svg';
+export { ReactComponent as ArrowDown } from './svg/arrowDown.svg';
