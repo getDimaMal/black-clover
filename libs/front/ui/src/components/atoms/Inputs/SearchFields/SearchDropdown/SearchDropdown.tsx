@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 
+import Popover from '../../../Popover/Popover';
 import Menu from '../../Menu/Menu';
-import Popover from '../../Popover/Popover';
 import Search from '../Search/Search';
 
 import useStyles from './SearchDropdown.styles';

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { useClickOutside } from '../../../../hooks/useClickOutside';
+import { useClickOutside } from '../../../hooks/useClickOutside';
 
 import useStyles from './Popover.styles';
 

@@ -1,4 +1,4 @@
-import { makeStyles } from '../../../../theme/makeStyles';
+import { makeStyles } from '../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'Popover' })(() => ({
   root: {

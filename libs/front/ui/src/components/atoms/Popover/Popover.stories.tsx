@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import Button from '../../Buttons/Button/Button';
+import Button from '../Buttons/Button/Button';
 
 import Popover, { PopoverProps } from './Popover';
 
