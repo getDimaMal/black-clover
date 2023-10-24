@@ -40,7 +40,7 @@ const MenuItem = ({ label, subLabel, checkbox, onClick, checked = false }: MenuI
   if (checkbox) {
     return (
       <List>
-        <Checkbox label={label} checked={checked} onChange={() => onClick?.()} />
+        <Checkbox label={label} checked={checked} />
       </List>
     );
   }

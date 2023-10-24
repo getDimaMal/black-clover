@@ -12,11 +12,20 @@ const useStyles = makeStyles({ name: 'Checkbox' })((theme) => ({
   },
 
   checkbox: {
-    margin: 0,
-    width: theme.spacing(6),
-    height: theme.spacing(6),
+    display: 'none',
+  },
 
-    cursor: 'pointer',
+  checkboxOn: {
+    '& svg path': {
+      stroke: theme.colors['bg/light'],
+      fill: theme.colors['button/default'],
+    },
+  },
+
+  checkboxOff: {
+    '& svg path': {
+      stroke: theme.colors['button/default'],
+    },
   },
 
   label: {
