@@ -1,14 +1,8 @@
 import { ResetPasswordFormProps } from '@black-clover/front/shared/types/auth.type';
-import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
 
-import { customRender, fillForm, fireEvent } from '../../../../test-utils';
+import { customRender, fireEvent } from '../../../../test-utils';
 
 import ResetPasswordForm from './ResetPasswordForm';
-
-const getForm = (props: Partial<CheckEmailDto> = {}): CheckEmailDto => ({
-  email: 'mail@email.com',
-  ...props,
-});
 
 const getProps = (props: Partial<ResetPasswordFormProps> = {}): ResetPasswordFormProps => ({
   isLoading: false,
@@ -28,9 +22,10 @@ describe('ResetPasswordForm', () => {
 
   it('should call onSubmit when the submit button is clicked', async () => {
     const props = getProps();
-    const { container, getByRole } = customRender(<ResetPasswordForm {...props} />);
+    const { getByLabelText, getByRole } = customRender(<ResetPasswordForm {...props} />);
 
-    fillForm(getForm(), container);
+    fireEvent.change(getByLabelText('Email'), { target: { value: 'mail@mail.com' } });
+    fireEvent.blur(getByLabelText('Email'));
     fireEvent.click(getByRole('button', { name: 'Reset Password' }));
 
     expect(props.onSubmit).toHaveBeenCalled();
@@ -38,9 +33,10 @@ describe('ResetPasswordForm', () => {
 
   it('should NOT call onSubmit when email is NOT an Email', async () => {
     const props = getProps();
-    const { container, getByRole } = customRender(<ResetPasswordForm {...props} />);
+    const { getByLabelText, getByRole } = customRender(<ResetPasswordForm {...props} />);
 
-    fillForm(getForm({ email: 'NotEmail' }), container);
+    fireEvent.change(getByLabelText('Email'), { target: { value: 'notEmail' } });
+    fireEvent.blur(getByLabelText('Email'));
     fireEvent.click(getByRole('button', { name: 'Reset Password' }));
 
     expect(props.onSubmit).not.toHaveBeenCalled();

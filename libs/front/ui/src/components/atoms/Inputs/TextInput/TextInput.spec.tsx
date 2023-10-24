@@ -32,6 +32,7 @@ describe('TextInput', () => {
     const { getByTestId } = customRender(<TextInput {...getProps({ testId, onChange })} />);
 
     fireEvent.change(getByTestId(testId), { target: { value } });
+    fireEvent.blur(getByTestId(testId));
 
     expect(onChange).toHaveBeenCalledTimes(1);
   });

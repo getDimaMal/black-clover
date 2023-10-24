@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 
 import { useStyles } from './TextInput.styles';
 
@@ -18,14 +18,21 @@ export type TextInputProps = {
 };
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ name, error, success, disabled, autoFocus, onBlur, onChange, testId, value, type = 'text' }, ref) => {
+  ({ name, error, success, disabled, autoFocus, onBlur, onChange, testId, value: initValue, type = 'text' }, ref) => {
     const { classes, cx } = useStyles();
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const [value, setValue] = useState(initValue ?? '');
+
+    useEffect(() => {
+      setValue(initValue ?? '');
+    }, [initValue]);
+
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       event.preventDefault();
       event.stopPropagation();
 
       onChange(event);
+      onBlur?.(event);
     };
 
     return (
@@ -33,12 +40,12 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         ref={ref}
         type={type}
         name={name}
-        value={value ?? ''}
+        value={value}
         autoFocus={autoFocus}
         disabled={Boolean(disabled)}
+        onBlur={handleBlur}
+        onChange={(event) => setValue(event.target.value)}
         className={cx(classes.root, { [classes.error]: error, [classes.success]: success })}
-        onBlur={onBlur}
-        onChange={handleChange}
         autoComplete="off"
         data-testid={testId}
       />
