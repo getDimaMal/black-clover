@@ -44,6 +44,7 @@ const GlobalStyles = () => {
           '#root': {
             minWidth: '100%',
             minHeight: '100%',
+            maxHeight: '100%',
 
             overflow: 'scroll',
 
@@ -61,6 +62,7 @@ const GlobalStyles = () => {
 
             minWidth: '100%',
             minHeight: '100%',
+            maxHeight: '100%',
 
             overflow: 'scroll',
 
