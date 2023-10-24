@@ -6,7 +6,7 @@ export default {
   component: Alert,
   args: {
     header: 'Hello, Event Panel!',
-    message: 'This is Alert component!',
+    message: 'This is the Alert component!',
     closeButton: true,
   },
   argTypes: {
