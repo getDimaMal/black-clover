@@ -11,12 +11,8 @@ export type SignInProps = {
 };
 
 const SignIn: FC<SignInProps> = ({ onSignUp, resetPasswordLink, children }) => {
-  const { user, isLoading, clear, signIn, error } = useUserAuth();
+  const { user, isLoading, signIn, error } = useUserAuth();
   const { login } = useAuth();
-
-  useEffect(() => {
-    return () => clear();
-  }, []);
 
   useEffect(() => {
     if (user) {

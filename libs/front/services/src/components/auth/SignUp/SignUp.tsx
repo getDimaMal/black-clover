@@ -10,8 +10,12 @@ export type SignUpProps = {
 };
 
 const SignUp: FC<SignUpProps> = ({ signInLink, children }) => {
-  const { user, isLoading, signUp, error } = useUserAuth();
+  const { user, isLoading, clear, signUp, error } = useUserAuth();
   const { login } = useAuth();
+
+  useEffect(() => {
+    clear();
+  }, [clear]);
 
   useEffect(() => {
     if (user) {
