@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Logout } from '../../../../assets/images';
 import Button from '../../../atoms/Buttons/Button/Button';
-import Sidebar, { SidebarNavItems } from '../../../atoms/Sidebar/Sidebar';
+import Sidebar, { SidebarNavItems } from '../../../molecules/Sidebar/Sidebar';
 import DesktopLayout from '../DesktopLayout/DesktopLayout';
 
 import useStiles from './SidebarLayout.styles';

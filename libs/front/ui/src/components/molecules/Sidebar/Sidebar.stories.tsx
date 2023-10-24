@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Logout, Map, Setting } from '../../../assets/images';
-import Button from '../Buttons/Button/Button';
+import Button from '../../atoms/Buttons/Button/Button';
 
 import Sidebar, { SidebarProps } from './Sidebar';
 

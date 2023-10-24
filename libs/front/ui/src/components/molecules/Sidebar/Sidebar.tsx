@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Icon from '../Icon/Icon';
-import Logo from '../Logo/Logo';
+import Icon from '../../atoms/Icon/Icon';
+import Logo from '../../atoms/Logo/Logo';
 
 import useStiles from './Sidebar.styles';
 import SidebarProvider, { useSidebar } from './SidebarContext';
