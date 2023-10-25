@@ -38,10 +38,12 @@ describe('Menu', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should render checkbox', () => {
-    const { label } = getMenuItemProps();
-    const { getByLabelText } = customRender(<TestMenu menuItemsProps={getMenuItemProps({ checkbox: true })} />);
+  it.each<[boolean, RegExp]>([
+    [true, /checkboxOn/],
+    [false, /checkboxOff/],
+  ])('should render checkbox with checked: %s', (checked, icon) => {
+    const { queryByText } = customRender(<TestMenu menuItemsProps={getMenuItemProps({ checked, checkbox: true })} />);
 
-    expect(getByLabelText(label)).toBeInTheDocument();
+    expect(queryByText(icon)).toBeInTheDocument();
   });
 });

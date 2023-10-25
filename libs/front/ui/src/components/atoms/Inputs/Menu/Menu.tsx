@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Checkbox from '../Checkbox/Checkbox';
+import { CheckboxOff, CheckboxOn } from '../../../../assets/images';
+import Icon from '../../Icon/Icon';
 
 import useStyles from './Menu.styles';
 
@@ -31,25 +32,31 @@ const Menu: MenuWrapper & MenuComposition = ({ children }) => {
 const MenuItem = ({ label, subLabel, checkbox, onClick, checked = false }: MenuItemProps) => {
   const { classes, cx } = useStyles();
 
-  const List = ({ children }: { children: React.ReactNode }) => (
-    <li onClick={() => onClick?.()} className={cx(classes.listItem, { [classes.selected]: checked })}>
-      {children}
-    </li>
-  );
+  const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
 
-  if (checkbox) {
-    return (
-      <List>
-        <Checkbox label={label} checked={checked} />
-      </List>
+    console.log('LI Click');
+
+    onClick?.();
+  };
+
+  const renderCheckbox = () => {
+    if (!checkbox) return null;
+
+    return checked ? (
+      <Icon icon={CheckboxOn} className={classes.checkboxOn} />
+    ) : (
+      <Icon icon={CheckboxOff} className={classes.checkboxOff} />
     );
-  }
+  };
 
   return (
-    <List>
+    <li onClick={handleClick} className={cx(classes.listItem, { [classes.selected]: checked })}>
+      {renderCheckbox()}
       {label}
       {subLabel && <span className={classes.subLabel}>{subLabel}</span>}
-    </List>
+    </li>
   );
 };
 

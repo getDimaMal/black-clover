@@ -15,6 +15,12 @@ const useStyles = makeStyles({ name: 'Menu' })((theme) => ({
 
     borderRadius: '8px',
 
+    display: 'flex',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: theme.spacing(2),
+
     '&:hover': {
       cursor: 'pointer',
       backgroundColor: theme.colors['bg/grey/2'],
@@ -30,6 +36,19 @@ const useStyles = makeStyles({ name: 'Menu' })((theme) => ({
 
   selected: {
     color: theme.colors['button/default'],
+  },
+
+  checkboxOn: {
+    '& svg path': {
+      stroke: theme.colors['bg/light'],
+      fill: theme.colors['button/default'],
+    },
+  },
+
+  checkboxOff: {
+    '& svg path': {
+      stroke: theme.colors['button/default'],
+    },
   },
 }));
 
