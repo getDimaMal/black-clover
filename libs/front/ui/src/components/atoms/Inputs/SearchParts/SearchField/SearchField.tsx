@@ -4,9 +4,9 @@ import { Cross, Search as SearchSVG } from '../../../../../assets/images';
 import IconButton from '../../../Buttons/IconButton/IconButton';
 import Icon from '../../../Icon/Icon';
 
-import useStyles from './Search.styles';
+import useStyles from './SearchField.styles';
 
-export type SearchProps = {
+export type SearchFieldProps = {
   value: string;
   fullWidth?: boolean;
   withFocus?: boolean;
@@ -14,7 +14,7 @@ export type SearchProps = {
   onChange?: (value: string) => void;
 };
 
-const Search: FC<SearchProps> = ({ value, fullWidth, withFocus, onChange, onKeyDown }) => {
+const SearchField: FC<SearchFieldProps> = ({ value, fullWidth, withFocus, onChange, onKeyDown }) => {
   const { classes, cx } = useStyles();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -43,4 +43,4 @@ const Search: FC<SearchProps> = ({ value, fullWidth, withFocus, onChange, onKeyD
   );
 };
 
-export default Search;
+export default SearchField;

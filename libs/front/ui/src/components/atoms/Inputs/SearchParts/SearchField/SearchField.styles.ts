@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'Search' })((theme) => ({
+const useStyles = makeStyles({ name: 'SearchField' })((theme) => ({
   root: {
     position: 'relative',
   },

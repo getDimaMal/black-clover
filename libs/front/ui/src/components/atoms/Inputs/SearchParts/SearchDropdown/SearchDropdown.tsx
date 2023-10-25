@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 
 import Popover from '../../../Popover/Popover';
 import Menu from '../../Menu/Menu';
-import Search from '../Search/Search';
+import SearchField from '../SearchField/SearchField';
 
 import useStyles from './SearchDropdown.styles';
 
@@ -31,7 +31,7 @@ const SearchDropdown: FC<SearchProps> = ({ onSearch, suggestions }) => {
       isOpen={isOpen}
       className={classes.root}
       onClose={() => setIsOpen(false)}
-      anchor={<Search fullWidth withFocus value={value} onChange={setValue} onKeyDown={() => setIsOpen(true)} />}
+      anchor={<SearchField fullWidth withFocus value={value} onChange={setValue} onKeyDown={() => setIsOpen(true)} />}
     >
       <div className={classes.dropdown}>
         <Menu>

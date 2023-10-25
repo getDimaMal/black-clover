@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import Search, { SearchProps } from './Search';
+import SearchField, { SearchFieldProps } from './SearchField';
 
 export default {
-  component: Search,
+  component: SearchField,
   args: {
     withFocus: true,
     fullWidth: false,
@@ -16,14 +16,14 @@ export default {
     onSearch: { control: false },
     onKeyDown: { control: false },
   },
-} as Meta<SearchProps>;
+} as Meta<SearchFieldProps>;
 
-type Story = StoryObj<typeof Search>;
+type Story = StoryObj<typeof SearchField>;
 
-const SearchWithHook: FC<SearchProps> = (props) => {
+const SearchWithHook: FC<SearchFieldProps> = (props) => {
   const [value, setValue] = useState('');
 
-  return <Search {...props} value={value} onChange={setValue} />;
+  return <SearchField {...props} value={value} onChange={setValue} />;
 };
 
 export const Default: Story = {
