@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
 import { Map, Setting } from '@black-clover/front/ui/assets/images';
 import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
@@ -9,6 +9,7 @@ import ChangePasswordPage from './auth/ChangePasswordPage';
 import ResetPasswordPage from './auth/ResetPasswordPage';
 import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
+import CategoryPage from './CategoryPage/CategoryPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import ROUTES from './routes.json';
 
@@ -50,7 +51,7 @@ const Pages = () => {
             ],
           ]}
         >
-          <Route exact path="/" component={() => <Typography variant="h1">Categories</Typography>} />
+          <Route exact path="/" component={CategoryPage} />
           <Route exact path="/properties" component={() => <Typography variant="h1">Properties</Typography>} />
           <Route exact path="/groups" component={() => <Typography variant="h1">Groups</Typography>} />
           <Route exact path="/events" component={() => <Typography variant="h1">Events</Typography>} />
@@ -60,7 +61,7 @@ const Pages = () => {
           <Route exact path="/billing" component={() => <Typography variant="h1">Billing</Typography>} />
           <Route exact path="/import" component={() => <Typography variant="h1">Import</Typography>} />
           <Route exact path="/export" component={() => <Typography variant="h1">Export</Typography>} />
-          {/*<Redirect to="/" />*/}
+          <Redirect to="/" />
         </SidebarLayout>
       ) : (
         <>
@@ -69,6 +70,7 @@ const Pages = () => {
           <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
           <Route exact path={ROUTES.RESET_PASSWORD} component={ResetPasswordPage} />
           <Route exact path={ROUTES.CHANGE_PASSWORD + '/:token'} component={ChangePasswordPage} />
+          {/*<Redirect to="/" />*/}
         </>
       )}
     </Switch>

@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStiles = makeStyles({ name: 'SidebarLayout' })((theme) => ({
+const useStiles = makeStyles({ name: 'SidebarLayout' })(() => ({
   root: {
     flex: 1,
     minWidth: '100%',
@@ -11,8 +11,6 @@ const useStiles = makeStyles({ name: 'SidebarLayout' })((theme) => ({
   },
 
   content: {
-    padding: theme.spacing(6),
-
     flex: 1,
     display: 'flex',
 
