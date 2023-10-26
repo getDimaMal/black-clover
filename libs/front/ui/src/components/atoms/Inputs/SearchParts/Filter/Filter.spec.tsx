@@ -89,4 +89,30 @@ describe('Filter', () => {
       expect(getByText(label).className).toContain('active');
     });
   });
+
+  describe('should render search field', () => {
+    it('should render open dropdown with search field', () => {
+      const props = getProps({ withSearch: true });
+      const { getByText, getByPlaceholderText } = customRender(<Filter {...props} />);
+
+      fireEvent.click(getByText(props.label));
+      expect(getByPlaceholderText('Search')).toBeInTheDocument();
+    });
+
+    it('should clear search on dropdown close', () => {
+      const value = 'value';
+      const props = getProps({ withSearch: true });
+      const { getByText, getByPlaceholderText, getByDisplayValue, queryByDisplayValue } = customRender(
+        <Filter {...props} />
+      );
+
+      fireEvent.click(getByText(props.label)); // Open Dropdown
+      fireEvent.change(getByPlaceholderText('Search'), { target: { value } });
+      expect(getByDisplayValue(value)).toBeInTheDocument();
+
+      fireEvent.click(getByText(props.label)); // Close Dropdown
+      fireEvent.click(getByText(props.label)); // Open Dropdown
+      expect(queryByDisplayValue(value)).not.toBeInTheDocument();
+    });
+  });
 });

@@ -61,4 +61,10 @@ describe('SearchField', () => {
 
     expect(getByPlaceholderText('Search').className).toContain('focus');
   });
+
+  it('should render with autoFocus', () => {
+    const { getByPlaceholderText } = customRender(<SearchField {...getProps({ autoFocus: true })} />);
+
+    expect(getByPlaceholderText('Search')).toHaveFocus();
+  });
 });

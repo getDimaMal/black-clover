@@ -7,6 +7,7 @@ const useStyles = makeStyles({ name: 'SearchField' })((theme) => ({
 
   fullWidth: {
     width: '100%',
+    boxSizing: 'border-box',
   },
 
   field: {

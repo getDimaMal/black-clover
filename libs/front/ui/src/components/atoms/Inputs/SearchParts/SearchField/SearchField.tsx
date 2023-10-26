@@ -10,17 +10,21 @@ export type SearchFieldProps = {
   value: string;
   fullWidth?: boolean;
   withFocus?: boolean;
+  autoFocus?: boolean;
   onKeyDown?: () => void;
   onChange?: (value: string) => void;
 };
 
-const SearchField: FC<SearchFieldProps> = ({ value, fullWidth, withFocus, onChange, onKeyDown }) => {
+const SearchField: FC<SearchFieldProps> = ({ value, fullWidth, withFocus, autoFocus, onChange, onKeyDown }) => {
   const { classes, cx } = useStyles();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleClear = () => {
-    onChange?.('');
+  const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     inputRef.current?.focus();
+    onChange?.('');
   };
 
   return (
@@ -29,6 +33,7 @@ const SearchField: FC<SearchFieldProps> = ({ value, fullWidth, withFocus, onChan
         type="text"
         placeholder="Search"
         value={value}
+        autoFocus={autoFocus}
         onKeyDown={() => onKeyDown?.()}
         onChange={(event) => onChange?.(event.target.value)}
         className={cx(classes.field, { [classes.focus]: Boolean(withFocus) })}
@@ -37,7 +42,7 @@ const SearchField: FC<SearchFieldProps> = ({ value, fullWidth, withFocus, onChan
 
       <div className={classes.icons}>
         <Icon size="sm" icon={SearchSVG} />
-        {value && <IconButton size="sm" icon={Cross} onClick={() => handleClear()} className={classes.iconButton} />}
+        {value && <IconButton size="sm" icon={Cross} onClick={handleClear} className={classes.iconButton} />}
       </div>
     </div>
   );

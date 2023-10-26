@@ -7,6 +7,9 @@ const useStyles = makeStyles({ name: 'Menu' })((theme) => ({
 
     userSelect: 'none',
     listStyleType: 'none',
+
+    maxHeight: '166px',
+    overflowY: 'scroll',
   },
 
   listItem: {
