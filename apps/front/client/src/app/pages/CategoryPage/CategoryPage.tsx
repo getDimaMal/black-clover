@@ -1,11 +1,11 @@
 import React from 'react';
-import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
+import CategoryHeader from '@black-clover/front/ui/components/organisms/categories/CategoryHeader/CategoryHeader';
 import PageLayout from '@black-clover/front/ui/components/organisms/layouts/PageLayout/PageLayout';
 
 const CategoryPage = () => {
   return (
     <PageLayout
-      Header={<Typography variant="h1">Categories</Typography>}
+      Header={<CategoryHeader name="Workspace Name" />}
       Content={
         <div
           style={{
