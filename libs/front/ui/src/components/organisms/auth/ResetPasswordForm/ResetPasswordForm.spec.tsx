@@ -25,7 +25,7 @@ describe('ResetPasswordForm', () => {
     const { getByLabelText, getByRole } = customRender(<ResetPasswordForm {...props} />);
 
     fireEvent.change(getByLabelText('Email'), { target: { value: 'mail@mail.com' } });
-    fireEvent.blur(getByLabelText('Email'));
+
     fireEvent.click(getByRole('button', { name: 'Reset Password' }));
 
     expect(props.onSubmit).toHaveBeenCalled();
@@ -36,7 +36,7 @@ describe('ResetPasswordForm', () => {
     const { getByLabelText, getByRole } = customRender(<ResetPasswordForm {...props} />);
 
     fireEvent.change(getByLabelText('Email'), { target: { value: 'notEmail' } });
-    fireEvent.blur(getByLabelText('Email'));
+
     fireEvent.click(getByRole('button', { name: 'Reset Password' }));
 
     expect(props.onSubmit).not.toHaveBeenCalled();

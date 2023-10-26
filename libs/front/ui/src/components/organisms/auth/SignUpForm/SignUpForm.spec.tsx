@@ -38,9 +38,9 @@ describe('SignUpForm', () => {
     const { getByLabelText, getByRole } = customRender(<SignUpForm {...props} />);
 
     fireEvent.change(getByLabelText('Email'), { target: { value: getForm().email } });
-    fireEvent.blur(getByLabelText('Email'));
+
     fireEvent.change(getByLabelText('Password'), { target: { value: getForm().password } });
-    fireEvent.blur(getByLabelText('Password'));
+
     fireEvent.click(getByRole('button', { name: 'Sign Up' }));
 
     expect(props.onSignUp).toHaveBeenCalled();
@@ -56,9 +56,9 @@ describe('SignUpForm', () => {
     const { getByLabelText, getByText } = customRender(<SignUpForm {...props} />);
 
     fireEvent.change(getByLabelText('Email'), { target: { value: form.email } });
-    fireEvent.blur(getByLabelText('Email'));
+
     fireEvent.change(getByLabelText('Password'), { target: { value: form.password } });
-    fireEvent.blur(getByLabelText('Password'));
+
     fireEvent.click(getByText('Sign Up'));
 
     expect(props.onSignUp).not.toHaveBeenCalled();

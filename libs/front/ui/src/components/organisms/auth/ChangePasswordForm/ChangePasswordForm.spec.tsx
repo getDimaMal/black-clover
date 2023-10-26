@@ -24,7 +24,7 @@ describe('ChangePasswordForm', () => {
     const { getByLabelText, getByRole } = customRender(<ChangePasswordForm {...props} />);
 
     fireEvent.change(getByLabelText('Password'), { target: { value: 'password123' } });
-    fireEvent.blur(getByLabelText('Password'));
+
     fireEvent.click(getByRole('button', { name: 'Change Password' }));
 
     expect(props.onSubmit).toHaveBeenCalled();
@@ -39,7 +39,7 @@ describe('ChangePasswordForm', () => {
     const { getByLabelText, getByRole } = customRender(<ChangePasswordForm {...props} />);
 
     fireEvent.change(getByLabelText('Password'), { target: { value: password } });
-    fireEvent.blur(getByLabelText('Password'));
+
     fireEvent.click(getByRole('button', { name: 'Change Password' }));
 
     expect(props.onSubmit).not.toHaveBeenCalled();
