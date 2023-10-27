@@ -5,7 +5,13 @@ import PageLayout from '@black-clover/front/ui/components/organisms/layouts/Page
 const CategoryPage = () => {
   return (
     <PageLayout
-      Header={<CategoryHeader name="Workspace Name" />}
+      Header={
+        <CategoryHeader
+          name="Workspace Name"
+          Search={<div>Place for Search</div>}
+          Filters={<div>Place for Filters</div>}
+        />
+      }
       Content={
         <div
           style={{

@@ -6,6 +6,8 @@ export default {
   component: CategoryHeader,
   args: {
     name: 'Workspace Name',
+    Search: <div>Place for Search</div>,
+    Filters: <div>Place for Filters</div>,
   },
 } as Meta<CategoryHeaderProps>;
 

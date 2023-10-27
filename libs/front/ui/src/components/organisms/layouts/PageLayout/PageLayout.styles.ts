@@ -21,10 +21,6 @@ const useStyles = makeStyles({ name: 'PageLayout' })((theme) => ({
 
     position: 'sticky',
     top: 0,
-
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(5),
   },
 
   content: {
