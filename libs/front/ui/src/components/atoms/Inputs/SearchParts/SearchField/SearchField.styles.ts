@@ -25,7 +25,7 @@ const useStyles = makeStyles({ name: 'SearchField' })((theme) => ({
     display: 'block',
     boxSizing: 'border-box',
 
-    padding: `${theme.spacing(3)} ${theme.spacing(9)}`,
+    padding: `${theme.spacing(2)} ${theme.spacing(9)}`,
 
     pointerEvents: 'auto',
 

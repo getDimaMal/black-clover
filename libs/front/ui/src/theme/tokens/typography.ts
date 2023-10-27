@@ -70,8 +70,8 @@ export const typography: Record<Typography, TypographyDefinition> = {
   },
   'body/xs': {
     fontFamily: 'NunitoSans, Arial, sans-serif',
-    lineHeight: `normal`,
     fontStyle: 'normal',
+    lineHeight: `16px`,
     fontWeight: 400,
     fontSize: `14px`,
   },

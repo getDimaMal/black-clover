@@ -1,16 +1,15 @@
 import { customRender, fireEvent } from '../../../../../test-utils';
 
-import SearchDropdown, { SearchProps } from './SearchDropdown';
+import SearchDropdown, { SearchDropdownProps } from './SearchDropdown';
 
-const label = 'Search';
-const subLabel = 'Suggestion';
-const suggestions: SearchProps['suggestions'] = [
-  { label, subLabel },
-  { label: 'Another search', subLabel: 'Another suggestion' },
+const suggestions: SearchDropdownProps['suggestions'] = [
+  { label: 'Search', subLabel: 'suggestion' },
+  { label: 'Another search', subLabel: 'another suggestion' },
 ];
 
-const getProps = (props: Partial<SearchProps> = {}): SearchProps => ({
+const getProps = (props: Partial<SearchDropdownProps> = {}): SearchDropdownProps => ({
   suggestions,
+  value: '',
   onSearch: jest.fn(),
   ...props,
 });
@@ -19,25 +18,35 @@ describe('SearchDropdown', () => {
   it('should render on Search keydown', () => {
     const { queryByText, getByText, getByPlaceholderText } = customRender(<SearchDropdown {...getProps()} />);
 
-    expect(queryByText(label)).not.toBeInTheDocument();
-    expect(queryByText(subLabel)).not.toBeInTheDocument();
+    suggestions.forEach(({ label, subLabel }) => {
+      expect(queryByText(label)).not.toBeInTheDocument();
+      expect(queryByText(subLabel)).not.toBeInTheDocument();
+    });
 
     fireEvent.keyDown(getByPlaceholderText('Search'));
-    expect(getByText(label)).toBeInTheDocument();
-    expect(getByText(subLabel)).toBeInTheDocument();
+    suggestions.forEach(({ label, subLabel }) => {
+      expect(getByText(label)).toBeInTheDocument();
+      expect(getByText(subLabel)).toBeInTheDocument();
+    });
   });
 
-  it('should set new value in Search & close Dropdown on MenuItem click', () => {
-    const { queryByText, getByText, getByPlaceholderText } = customRender(<SearchDropdown {...getProps()} />);
+  it('should call onSearch & close Dropdown on MenuItem click', () => {
+    const props = getProps();
+    const { label, subLabel } = suggestions[0];
+    const { queryByText, getByText, getByPlaceholderText } = customRender(<SearchDropdown {...props} />);
 
     fireEvent.keyDown(getByPlaceholderText('Search'));
-    expect(getByText(label)).toBeInTheDocument();
-    expect(getByText(subLabel)).toBeInTheDocument();
+    suggestions.forEach(({ label, subLabel }) => {
+      expect(getByText(label)).toBeInTheDocument();
+      expect(getByText(subLabel)).toBeInTheDocument();
+    });
 
     fireEvent.click(getByText(label));
-    expect(queryByText(label)).not.toBeInTheDocument();
-    expect(queryByText(subLabel)).not.toBeInTheDocument();
-    expect(getByPlaceholderText('Search')).toHaveAttribute('value', `${label} ${subLabel}`);
+    suggestions.forEach(({ label, subLabel }) => {
+      expect(queryByText(label)).not.toBeInTheDocument();
+      expect(queryByText(subLabel)).not.toBeInTheDocument();
+    });
+    expect(props.onSearch).toHaveBeenCalledWith(`${label} ${subLabel}`);
   });
 
   it('should close Dropdown on click outside', () => {
@@ -50,11 +59,15 @@ describe('SearchDropdown', () => {
     );
 
     fireEvent.keyDown(getByPlaceholderText('Search'));
-    expect(getByText(label)).toBeInTheDocument();
-    expect(getByText(subLabel)).toBeInTheDocument();
+    suggestions.forEach(({ label, subLabel }) => {
+      expect(getByText(label)).toBeInTheDocument();
+      expect(getByText(subLabel)).toBeInTheDocument();
+    });
 
     fireEvent.click(getByText(outside));
-    expect(queryByText(label)).not.toBeInTheDocument();
-    expect(queryByText(subLabel)).not.toBeInTheDocument();
+    suggestions.forEach(({ label, subLabel }) => {
+      expect(queryByText(label)).not.toBeInTheDocument();
+      expect(queryByText(subLabel)).not.toBeInTheDocument();
+    });
   });
 });

@@ -6,8 +6,8 @@ const useStyles = makeStyles({ name: 'Popover' })(() => ({
   },
 
   popover: {
+    minWidth: '100%',
     whiteSpace: 'nowrap',
-    width: 'fit-content',
 
     position: 'absolute',
     top: '100%',

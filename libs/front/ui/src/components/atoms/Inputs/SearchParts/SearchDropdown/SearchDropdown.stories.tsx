@@ -1,6 +1,7 @@
+import { FC, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import SearchDropdown, { SearchProps } from './SearchDropdown';
+import SearchDropdown, { SearchDropdownProps } from './SearchDropdown';
 
 export default {
   component: SearchDropdown,
@@ -19,10 +20,16 @@ export default {
     onSearch: { control: false },
     suggestions: { control: false },
   },
-} as Meta<SearchProps>;
+} as Meta<SearchDropdownProps>;
 
-type Story = StoryObj<typeof SearchDropdown>;
+type Story = StoryObj<SearchDropdownProps>;
+
+const SearchDropdownHook: FC<SearchDropdownProps> = (props) => {
+  const [value, setValue] = useState('');
+
+  return <SearchDropdown {...props} value={value} onSearch={setValue} />;
+};
 
 export const Default: Story = {
-  render: (args) => <SearchDropdown {...args} />,
+  render: (args) => <SearchDropdownHook {...args} />,
 };

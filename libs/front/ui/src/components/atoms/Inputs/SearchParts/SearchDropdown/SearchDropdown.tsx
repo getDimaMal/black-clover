@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import Popover from '../../../Popover/Popover';
 import Menu from '../../Menu/Menu';
@@ -6,24 +6,19 @@ import SearchField from '../SearchField/SearchField';
 
 import useStyles from './SearchDropdown.styles';
 
-export type SearchProps = {
-  onSearch?: (value: string) => void;
+export type SearchDropdownProps = {
+  value: string;
+  onSearch: (value: string) => void;
   suggestions: { label: string; subLabel: string }[];
 };
 
-const SearchDropdown: FC<SearchProps> = ({ onSearch, suggestions }) => {
+const SearchDropdown: FC<SearchDropdownProps> = ({ value, onSearch, suggestions }) => {
   const { classes } = useStyles();
-  const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    // ToDo Add debounce here
-    onSearch?.(value);
-  }, [onSearch, value]);
 
   const handleMenuItemClick = (label: string, subLabel: string) => {
     setIsOpen(false);
-    setValue(`${label} ${subLabel}`);
+    onSearch(`${label} ${subLabel}`);
   };
 
   return (
@@ -31,7 +26,7 @@ const SearchDropdown: FC<SearchProps> = ({ onSearch, suggestions }) => {
       isOpen={isOpen}
       className={classes.root}
       onClose={() => setIsOpen(false)}
-      anchor={<SearchField fullWidth withFocus value={value} onChange={setValue} onKeyDown={() => setIsOpen(true)} />}
+      anchor={<SearchField fullWidth withFocus value={value} onChange={onSearch} onKeyDown={() => setIsOpen(true)} />}
     >
       <div className={classes.dropdown}>
         <Menu>
