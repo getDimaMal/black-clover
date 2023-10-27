@@ -11,6 +11,7 @@ const useStyles = makeStyles({ name: 'Search' })((theme) => ({
 
     borderRadius: '8px',
     border: `1px solid ${theme.colors['field/focused']}`,
+    backgroundColor: theme.colors['bg/light'],
     boxShadow: theme.shadows['shadow/2'],
 
     overflow: 'hidden',
