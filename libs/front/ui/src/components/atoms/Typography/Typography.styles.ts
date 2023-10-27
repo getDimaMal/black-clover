@@ -20,7 +20,12 @@ const useStyles = makeStyles({ name: 'Typography' })((theme) => ({
   bodyXS: { ...theme.typography['body/xs'] },
   bodyXXS: { ...theme.typography['body/xxs'] },
 
-  inherit: {},
+  inherit: {
+    fontFamily: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
+    fontSize: 'inherit',
+  },
 }));
 
 export default useStyles;

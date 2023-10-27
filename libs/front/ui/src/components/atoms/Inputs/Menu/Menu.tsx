@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CheckboxOff, CheckboxOn } from '../../../../assets/images';
 import Icon from '../../Icon/Icon';
+import Typography from '../../Typography/Typography';
 
 import useStyles from './Menu.styles';
 
@@ -36,8 +37,6 @@ const MenuItem = ({ label, subLabel, checkbox, onClick, checked = false }: MenuI
     event.preventDefault();
     event.stopPropagation();
 
-    console.log('LI Click');
-
     onClick?.();
   };
 
@@ -54,8 +53,15 @@ const MenuItem = ({ label, subLabel, checkbox, onClick, checked = false }: MenuI
   return (
     <li onClick={handleClick} className={cx(classes.listItem, { [classes.selected]: checked })}>
       {renderCheckbox()}
-      {label}
-      {subLabel && <span className={classes.subLabel}>{subLabel}</span>}
+
+      <Typography variant="bodyXS">
+        {label}
+        {subLabel && (
+          <Typography variant="inherit" className={classes.subLabel}>
+            {subLabel}
+          </Typography>
+        )}
+      </Typography>
     </li>
   );
 };

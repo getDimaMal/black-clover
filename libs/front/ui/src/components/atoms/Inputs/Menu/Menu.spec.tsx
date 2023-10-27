@@ -26,7 +26,7 @@ describe('Menu', () => {
     const { label } = getMenuItemProps();
     const { getByText } = customRender(<TestMenu menuItemsProps={getMenuItemProps({ checked: true })} />);
 
-    expect(getByText(label).className).toContain('selected');
+    expect(getByText(label).parentElement?.className).toContain('selected');
   });
 
   it('should call onClick', () => {

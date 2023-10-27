@@ -7,9 +7,6 @@ const useStyles = makeStyles({ name: 'Menu' })((theme) => ({
 
     userSelect: 'none',
     listStyleType: 'none',
-
-    maxHeight: '166px',
-    overflowY: 'scroll',
   },
 
   listItem: {
@@ -31,7 +28,6 @@ const useStyles = makeStyles({ name: 'Menu' })((theme) => ({
   },
 
   subLabel: {
-    ...theme.typography['body/xs'],
     color: theme.colors['text/disabled'],
 
     paddingLeft: theme.spacing(1),
