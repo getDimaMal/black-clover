@@ -17,7 +17,8 @@
       "options": {
         "commands": [
           "tsc --noEmit --project libs/front/ui/tsconfig.lib.json",
-          "tsc --noEmit --project libs/front/ui/tsconfig.spec.json"
+          "tsc --noEmit --project libs/front/ui/tsconfig.spec.json",
+          "tsc --noEmit --project libs/front/ui/.storybook/tsconfig.json"
         ]
       }
     },
