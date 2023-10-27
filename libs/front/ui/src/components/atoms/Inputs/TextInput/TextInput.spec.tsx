@@ -28,13 +28,13 @@ describe('TextInput', () => {
 
   it('should call onChange', () => {
     const value = 'Some value';
-    const onChange = jest.fn();
-    const { getByTestId } = customRender(<TextInput {...getProps({ testId, onChange })} />);
+    const props = getProps({ testId });
+    const { getByTestId } = customRender(<TextInput {...props} />);
 
     fireEvent.change(getByTestId(testId), { target: { value } });
-    fireEvent.blur(getByTestId(testId));
 
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(props.onChange).toHaveBeenCalledTimes(1);
+    expect(props.onChange).toHaveBeenCalledWith(props.name, value);
   });
 
   it('should be disabled when disabled === true', () => {

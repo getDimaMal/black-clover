@@ -9,18 +9,18 @@ import useStyles from './TextField.styles';
 export type TextFieldProps = {
   name: string;
   value: string | null;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  type?: Types;
-  label?: string;
-  autoFocus?: boolean;
-  errorMessage?: string | null;
-  successMessage?: string | null;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-};
+  onChange: (name: string, value: string) => void;
+} & Partial<{
+  type: Types;
+  label: string;
+  autoFocus: boolean;
+  errorMessage: string | null;
+  successMessage: string | null;
+}>;
 
-const TextField: FC<TextFieldProps> = ({ label, errorMessage, successMessage, type: initType, ...other }) => {
+const TextField: FC<TextFieldProps> = ({ label, errorMessage, successMessage, type: initType = 'text', ...other }) => {
   const { classes, cx } = useStyles();
-  const [type, setType] = useState<Types>(initType || 'text');
+  const [type, setType] = useState<Types>(initType);
 
   return (
     <div className={classes.root}>

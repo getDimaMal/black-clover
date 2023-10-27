@@ -10,8 +10,8 @@ export type TUseFormProps<Form> = {
 export type TGetInputProps<Form> = (name: keyof Form) => {
   name: keyof Form;
   value: Form[keyof Form];
-  errorMessage: null | string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  errorMessage: string | null;
+  onChange: (name: string, value: string) => void;
 };
 
 export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormProps<Form>) => {
@@ -31,13 +31,9 @@ export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormPro
     setErrors({ ...newErrors });
   }, [Resolver, values]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const { name, value } = event.target;
+  const handleChange = useCallback((name: string, value: string) => {
     setValues((old) => ({ ...old, [name]: value }));
-  };
+  }, []);
 
   const handleSubmit = useCallback(
     (callback: (args: Form) => void) => (event: React.FormEvent<HTMLFormElement | HTMLButtonElement>) => {
@@ -56,11 +52,11 @@ export const useForm = <Form extends object>({ initForm, Resolver }: TUseFormPro
       return {
         name,
         value: values[name],
-        onChange: handleChange,
         errorMessage: isSubmitted ? errors[name] || null : null,
+        onChange: handleChange,
       };
     },
-    [errors, isSubmitted, values]
+    [errors, handleChange, isSubmitted, values]
   );
 
   return { handleSubmit, getInputProps };

@@ -18,14 +18,11 @@ class Resolver {
 
 const initForm: Resolver = { [name]: '' };
 
-type TProps = React.FocusEvent<HTMLInputElement> &
-  React.ChangeEvent<HTMLInputElement> &
-  React.FormEvent<HTMLFormElement | HTMLButtonElement>;
-const getEvent = ({ target, ...props }: Partial<TProps> | { target: Partial<TProps['target']> } = {}) =>
+type TProps = React.FormEvent<HTMLFormElement | HTMLButtonElement>;
+const getEvent = ({ ...props }: Partial<TProps> = {}) =>
   ({
     preventDefault: jest.fn(),
     stopPropagation: jest.fn(),
-    target: { name, value: '', ...target },
     ...props,
   } as TProps);
 
@@ -54,7 +51,7 @@ describe('useForm', () => {
       const { result } = renderHook(() => useForm<Resolver>({ initForm, Resolver }));
 
       await act(async () => {
-        result.current.getInputProps(name).onChange(getEvent({ target: { value } }));
+        result.current.getInputProps(name).onChange(name, value);
       });
 
       expect(result.current.getInputProps(name).value).toBe(value);
