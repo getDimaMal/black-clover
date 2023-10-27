@@ -16,10 +16,11 @@ export type FilterProps = {
   label: string;
   value: string[];
   options: Record<string, Option>;
-  onChange: (id: string) => void;
-  withSearch?: boolean;
-  onSearch?: (str: string) => void;
-};
+  onChange: (value: string) => void;
+} & Partial<{
+  withSearch: boolean;
+  onSearch: (value: string) => void;
+}>;
 
 const Filter: FC<FilterProps> = ({ label: baseLabel, value, options, onChange, withSearch, onSearch }) => {
   const { classes } = useStyles();
@@ -28,7 +29,7 @@ const Filter: FC<FilterProps> = ({ label: baseLabel, value, options, onChange, w
   const [label, setLabel] = useState(baseLabel);
 
   useEffect(() => {
-    setSearch('');
+    isOpen && setSearch('');
   }, [isOpen]);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const Filter: FC<FilterProps> = ({ label: baseLabel, value, options, onChange, w
       <div className={classes.dropdown}>
         {Boolean(withSearch) && <SearchField fullWidth autoFocus value={search} onChange={setSearch} />}
 
-        <Menu>
+        <Menu className={classes.list}>
           {Object.values(options).map(({ id, label }) => (
             <Menu.MenuItem checkbox key={id} label={label} checked={value.includes(id)} onClick={() => onChange(id)} />
           ))}

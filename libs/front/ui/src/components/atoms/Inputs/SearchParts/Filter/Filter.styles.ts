@@ -2,6 +2,7 @@ import { makeStyles } from '../../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'Filter' })((theme) => ({
   dropdown: {
+    maxWidth: 'fit-content',
     padding: theme.spacing(2),
     marginTop: theme.spacing(2),
 
@@ -15,7 +16,7 @@ const useStyles = makeStyles({ name: 'Filter' })((theme) => ({
   },
 
   list: {
-    maxHeight: '200px',
+    maxHeight: '170px',
     overflowY: 'scroll',
   },
 }));

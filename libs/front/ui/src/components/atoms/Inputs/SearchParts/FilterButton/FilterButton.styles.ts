@@ -2,10 +2,10 @@ import { makeStyles } from '../../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'FilterButton' })((theme) => ({
   root: {
-    ...theme.typography['body/s'],
+    ...theme.typography['body/xs'],
     color: theme.colors['text/grey/1'],
 
-    padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
+    padding: `${theme.spacing(2)} ${theme.spacing(2)}`,
 
     borderRadius: '4px',
     border: `1px solid ${theme.colors['field/default']}`,

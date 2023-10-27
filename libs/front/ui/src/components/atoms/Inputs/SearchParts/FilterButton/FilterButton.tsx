@@ -8,8 +8,9 @@ import useStyles from './FilterButton.styles';
 export type FilterButtonProps = {
   label: string;
   onClick: () => void;
-  isActive?: boolean;
-};
+} & Partial<{
+  isActive: boolean;
+}>;
 
 const FilterButton: FC<FilterButtonProps> = ({ label, onClick, isActive }) => {
   const { classes, cx } = useStyles();

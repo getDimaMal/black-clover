@@ -8,11 +8,12 @@ import useStyles from './Menu.styles';
 
 export type MenuItemProps = {
   label: string;
-  subLabel?: string;
-  checked?: boolean;
-  onClick?: () => void;
-  checkbox?: boolean;
-};
+} & Partial<{
+  subLabel: string;
+  checked: boolean;
+  checkbox: boolean;
+  onClick: () => void;
+}>;
 
 type MenuComposition = {
   MenuItem: (props: MenuItemProps) => JSX.Element;
@@ -20,14 +21,16 @@ type MenuComposition = {
 
 export type MenuProps = {
   children: JSX.Element | JSX.Element[];
-};
+} & Partial<{
+  className: string;
+}>;
 
 type MenuWrapper = (props: MenuProps) => JSX.Element;
 
-const Menu: MenuWrapper & MenuComposition = ({ children }) => {
-  const { classes } = useStyles();
+const Menu: MenuWrapper & MenuComposition = ({ children, className }) => {
+  const { classes, cx } = useStyles();
 
-  return <ul className={classes.root}>{children}</ul>;
+  return <ul className={cx(classes.root, className)}>{children}</ul>;
 };
 
 const MenuItem = ({ label, subLabel, checkbox, onClick, checked = false }: MenuItemProps) => {
