@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
 import Popover from '../../../Popover/Popover';
 import Menu from '../../Menu/Menu';
@@ -16,7 +16,7 @@ export type FilterProps = {
   label: string;
   value: string[];
   options: Record<string, Option>;
-  onChange: (value: string) => void;
+  onChange: (value: string[]) => void;
 } & Partial<{
   withSearch: boolean;
   onSearch: (value: string) => void;
@@ -45,6 +45,18 @@ const Filter: FC<FilterProps> = ({ label: baseLabel, value, options, onChange, w
     });
   }, [baseLabel, options, value]);
 
+  const handleChange = useCallback(
+    (id: string) => {
+      if (value.includes(id)) {
+        const index = value.findIndex((val) => val === id);
+        onChange([...value.slice(0, index), ...value.slice(index + 1)]);
+      } else {
+        onChange([...value, id]);
+      }
+    },
+    [onChange, value]
+  );
+
   return (
     <Popover
       isOpen={isOpen}
@@ -56,7 +68,13 @@ const Filter: FC<FilterProps> = ({ label: baseLabel, value, options, onChange, w
 
         <Menu className={classes.list}>
           {Object.values(options).map(({ id, label }) => (
-            <Menu.MenuItem checkbox key={id} label={label} checked={value.includes(id)} onClick={() => onChange(id)} />
+            <Menu.MenuItem
+              key={id}
+              checkbox
+              label={label}
+              checked={value.includes(id)}
+              onClick={() => handleChange(id)}
+            />
           ))}
         </Menu>
       </div>

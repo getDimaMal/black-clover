@@ -29,16 +29,7 @@ type Story = StoryObj<FilterProps>;
 const FilterWithHook: FC<FilterProps> = ({ value: initValue, ...props }) => {
   const [value, setValue] = useState<string[]>(initValue);
 
-  const handleChange = (id: string) => {
-    if (value.includes(id)) {
-      const index = value.findIndex((val) => val === id);
-      setValue((old) => [...old.slice(0, index), ...old.slice(index + 1)]);
-    } else {
-      setValue((old) => [...old, id]);
-    }
-  };
-
-  return <Filter {...props} value={value} onChange={handleChange} />;
+  return <Filter {...props} value={value} onChange={setValue} />;
 };
 
 export const Default: Story = {

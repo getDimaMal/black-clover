@@ -9,7 +9,7 @@ import ChangePasswordPage from './auth/ChangePasswordPage';
 import ResetPasswordPage from './auth/ResetPasswordPage';
 import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
-import CategoryPage from './CategoryPage/CategoryPage';
+import CategoriesPage from './CategoriesPage/CategoriesPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import ROUTES from './routes.json';
 
@@ -51,7 +51,7 @@ const Pages = () => {
             ],
           ]}
         >
-          <Route exact path="/" component={CategoryPage} />
+          <Route exact path="/" component={CategoriesPage} />
           <Route exact path="/properties" component={() => <Typography variant="h1">Properties</Typography>} />
           <Route exact path="/groups" component={() => <Typography variant="h1">Groups</Typography>} />
           <Route exact path="/events" component={() => <Typography variant="h1">Events</Typography>} />

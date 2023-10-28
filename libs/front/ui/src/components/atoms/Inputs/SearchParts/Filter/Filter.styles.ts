@@ -12,10 +12,12 @@ const useStyles = makeStyles({ name: 'Filter' })((theme) => ({
 
     borderRadius: '8px',
     border: `1px solid ${theme.colors['field/focused']}`,
+    backgroundColor: theme.colors['bg/light'],
     boxShadow: theme.shadows['shadow/2'],
   },
 
   list: {
+    minWidth: '200px',
     maxHeight: '170px',
     overflowY: 'scroll',
   },

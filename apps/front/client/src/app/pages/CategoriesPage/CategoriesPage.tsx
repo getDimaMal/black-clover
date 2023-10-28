@@ -1,19 +1,26 @@
 import React from 'react';
 import Categories from '@black-clover/front/services/components/categories/Categories';
+import Filter from '@black-clover/front/ui/components/atoms/Inputs/SearchParts/Filter/Filter';
 import SearchDropdown from '@black-clover/front/ui/components/atoms/Inputs/SearchParts/SearchDropdown/SearchDropdown';
 import CategoryHeader from '@black-clover/front/ui/components/organisms/categories/CategoryHeader/CategoryHeader';
 import PageLayout from '@black-clover/front/ui/components/organisms/layouts/PageLayout/PageLayout';
 
-const CategoryPage = () => {
+const CategoriesPage = () => {
   return (
     <Categories>
-      {({ search }) => (
+      {({ search, categoriesFilter, sourcesFilter, tagsFilter }) => (
         <PageLayout
           Header={
             <CategoryHeader
               name="Workspace Name"
               Search={<SearchDropdown {...search} />}
-              Filters={<div>Place for Filters</div>}
+              Filters={
+                <>
+                  <Filter {...categoriesFilter} withSearch label="Categories" />
+                  <Filter {...sourcesFilter} withSearch label="Sources" />
+                  <Filter {...tagsFilter} withSearch label="Tags" />
+                </>
+              }
             />
           }
           Content={
@@ -39,4 +46,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default CategoriesPage;

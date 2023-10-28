@@ -30,22 +30,12 @@ describe('Filter', () => {
 
   it('should render open dropdown', () => {
     const props = getProps();
-    const { getByText, queryByText } = customRender(<Filter {...props} />);
+    const { getByText } = customRender(<Filter {...props} />);
 
     fireEvent.click(getByText(props.label));
     Object.values(options).forEach(({ label }) => {
-      expect(queryByText(label)).toBeInTheDocument();
+      expect(getByText(label)).toBeInTheDocument();
     });
-  });
-
-  it('should call onClick when dropdown item click', () => {
-    const props = getProps();
-    const { getByText, queryByText } = customRender(<Filter {...props} />);
-
-    fireEvent.click(getByText(props.label));
-    fireEvent.click(queryByText(options['1']['label']) as Element);
-
-    expect(props.onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should close dropdown on click outside', () => {
@@ -60,12 +50,37 @@ describe('Filter', () => {
 
     fireEvent.click(getByText(props.label));
     Object.values(options).forEach(({ label }) => {
-      expect(queryByText(label)).toBeInTheDocument();
+      expect(getByText(label)).toBeInTheDocument();
     });
 
     fireEvent.click(getByText(outside));
     Object.values(options).forEach(({ label }) => {
       expect(queryByText(label)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('should change selected items', () => {
+    it('should check item', () => {
+      const props = getProps();
+      const { getByText } = customRender(<Filter {...props} />);
+
+      fireEvent.click(getByText(props.label));
+      fireEvent.click(getByText(props.options['1']['label']));
+
+      expect(props.onChange).toHaveBeenCalledTimes(1);
+      expect(props.onChange).toHaveBeenCalledWith([props.options['1']['id']]);
+    });
+
+    it('should uncheck item', () => {
+      const props = getProps({ value: ['1', '2'] });
+      const label = `${props.options['1']['label']}, ${props.options['2']['label']}`;
+      const { getByText } = customRender(<Filter {...props} />);
+
+      fireEvent.click(getByText(label));
+      fireEvent.click(getByText(props.options['1']['label']));
+
+      expect(props.onChange).toHaveBeenCalledTimes(1);
+      expect(props.onChange).toHaveBeenCalledWith([props.options['2']['id']]);
     });
   });
 
