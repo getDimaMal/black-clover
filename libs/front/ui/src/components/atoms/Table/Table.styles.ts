@@ -6,11 +6,9 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
 
     width: '100%',
 
-    borderRadius: '16px',
+    borderRadius: '8px',
     border: `1px solid ${theme.colors['bg/blue/1']}`,
     backgroundColor: theme.colors['bg/light'],
-
-    overflow: 'hidden',
   },
 
   header: {
@@ -20,6 +18,7 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
     display: 'inline-flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+    borderRadius: '8px 8px 0 0',
   },
 
   table: {
@@ -45,7 +44,11 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
     textAlign: 'left',
 
     border: `1px solid ${theme.colors['bg/blue/1']}`,
-    padding: `${theme.spacing(2)} ${theme.spacing(2)}`,
+    padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
+
+    '&:first-of-type': {
+      borderLeft: 'none',
+    },
 
     '&:last-child': {
       borderRight: 'none',
@@ -55,6 +58,7 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
   footer: {
     height: theme.spacing(5),
     backgroundColor: theme.colors['bg/grey/2'],
+    borderRadius: '0 0 8px 8px',
   },
 }));
 

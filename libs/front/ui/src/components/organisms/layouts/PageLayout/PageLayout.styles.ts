@@ -28,6 +28,9 @@ const useStyles = makeStyles({ name: 'PageLayout' })((theme) => ({
     paddingBottom: theme.spacing(11),
 
     flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(5),
   },
 }));
 
