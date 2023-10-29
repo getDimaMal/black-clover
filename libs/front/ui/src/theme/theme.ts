@@ -8,7 +8,7 @@ export type Theme = {
   colors: Record<Colors, string>;
   shadows: Record<Shadows, string>;
   typography: Record<Typography, TypographyDefinition>;
-  spacing: (num: 0 | 0.5 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 9 | 10 | 11 | 16 | 32 | 70) => `${number}px`;
+  spacing: (num: number) => `${number}px`;
   logo: string;
 };
 

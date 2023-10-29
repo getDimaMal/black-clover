@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import useStyles from './ModalContainer.styles';
 
@@ -7,14 +7,33 @@ export type ModalContainerProps = {
   children: React.ReactNode;
 } & Partial<{
   variant: 'center' | 'right';
+  onClose: () => void;
 }>;
 
-const ModalContainer: FC<ModalContainerProps> = ({ isOpen, children, variant = 'center' }) => {
+const ModalContainer: FC<ModalContainerProps> = ({ isOpen, children, onClose, variant = 'center' }) => {
   const { classes, cx } = useStyles();
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current === event.target) {
+        onClose?.();
+      }
+    };
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [onClose, ref]);
 
   if (!isOpen) return null;
 
-  return <div className={cx(classes.root, classes[variant])}>{children}</div>;
+  return (
+    <div ref={ref} className={cx(classes.root, classes[variant])}>
+      {children}
+    </div>
+  );
 };
 
 export default ModalContainer;

@@ -1,3 +1,4 @@
+import { FC, useEffect, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import ModalContainer, { ModalContainerProps } from './ModalContainer';
@@ -16,9 +17,18 @@ export default {
 
 type Story = StoryObj<ModalContainerProps>;
 
+const ModalContainerHook: FC<ModalContainerProps> = ({ isOpen: open, ...props }) => {
+  const [isOpen, setIsOpen] = useState(open);
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
+
+  return <ModalContainer {...props} isOpen={isOpen} onClose={() => setIsOpen(false)} />;
+};
+
 export const Default: Story = {
   render: ({ variant, ...args }) => (
-    <ModalContainer {...args} variant={variant}>
+    <ModalContainerHook {...args} variant={variant}>
       <div
         style={{
           minWidth: '400px',
@@ -30,6 +40,6 @@ export const Default: Story = {
       >
         Modal
       </div>
-    </ModalContainer>
+    </ModalContainerHook>
   ),
 };

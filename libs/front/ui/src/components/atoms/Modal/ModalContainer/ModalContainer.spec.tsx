@@ -1,10 +1,11 @@
-import { customRender } from '../../../../test-utils';
+import { customRender, fireEvent } from '../../../../test-utils';
 
 import ModalContainer, { ModalContainerProps } from './ModalContainer';
 
 const getProps = (props: Partial<ModalContainerProps> = {}): ModalContainerProps => ({
   isOpen: true,
   children: 'Modal',
+  onClose: jest.fn(),
   ...props,
 });
 
@@ -30,5 +31,25 @@ describe('ModalContainer', () => {
     const { queryByText } = customRender(<ModalContainer {...props} />);
 
     expect(queryByText(String(props.children))).not.toBeInTheDocument();
+  });
+
+  describe('onClose', () => {
+    it('should NOT call on children click', () => {
+      const children = 'children';
+      const props = getProps({ children: <div>{children}</div> });
+      const { getByText } = customRender(<ModalContainer {...props} />);
+
+      fireEvent.click(getByText(children));
+      expect(props.onClose).toHaveBeenCalledTimes(0);
+    });
+
+    it('should call on SELF click', () => {
+      const children = 'children';
+      const props = getProps({ children: <div>{children}</div> });
+      const { getByText } = customRender(<ModalContainer {...props} />);
+
+      fireEvent.click(getByText(children).parentElement as Element);
+      expect(props.onClose).toHaveBeenCalledTimes(1);
+    });
   });
 });
