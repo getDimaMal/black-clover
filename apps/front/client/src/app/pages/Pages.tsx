@@ -11,6 +11,7 @@ import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
 import CategoriesPage from './CategoriesPage/CategoriesPage';
 import WelcomePage from './WelcomePage/WelcomePage';
+import WorkspacesPage from './WorkspacesPage/WorkspacesPage';
 import ROUTES from './routes.json';
 
 const Pages = () => {
@@ -52,12 +53,12 @@ const Pages = () => {
           ]}
         >
           <Route exact path="/" component={CategoriesPage} />
+          <Route exact path="/switch" component={WorkspacesPage} />
           <Route exact path="/properties" component={() => <Typography variant="h1">Properties</Typography>} />
           <Route exact path="/groups" component={() => <Typography variant="h1">Groups</Typography>} />
           <Route exact path="/events" component={() => <Typography variant="h1">Events</Typography>} />
           <Route exact path="/tags" component={() => <Typography variant="h1">Tags</Typography>} />
           <Route exact path="/workspace" component={() => <Typography variant="h1">Workspace Settings</Typography>} />
-          <Route exact path="/switch" component={() => <Typography variant="h1">Switch</Typography>} />
           <Route exact path="/billing" component={() => <Typography variant="h1">Billing</Typography>} />
           <Route exact path="/import" component={() => <Typography variant="h1">Import</Typography>} />
           <Route exact path="/export" component={() => <Typography variant="h1">Export</Typography>} />
