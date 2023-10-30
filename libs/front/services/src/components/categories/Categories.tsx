@@ -62,6 +62,7 @@ const options: Filter['options'] = {
   '3': { id: '3', label: 'Label 3' },
   '4': { id: '4', label: 'Label 4' },
   '5': { id: '5', label: 'Label 5' },
+  '6': { id: '6', label: 'This label has too many words' },
 };
 
 const event: Event = {
