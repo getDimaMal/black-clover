@@ -1,14 +1,17 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'AuthForm' })((theme) => ({
+const useStyles = makeStyles({ name: 'CreateWorkspaceForm' })((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: '300px',
+    width: theme.spacing(84),
 
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    gap: theme.spacing(8),
+    gap: theme.spacing(4),
+  },
+
+  alignCenter: {
+    textAlign: 'center',
   },
 }));
 

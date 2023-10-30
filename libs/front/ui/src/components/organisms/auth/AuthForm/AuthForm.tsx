@@ -19,7 +19,7 @@ const AuthForm: FC<AuthFormProps> = ({ isLoading, onSubmit, errorMessage, childr
     <form noValidate onSubmit={onSubmit} className={classes.root} aria-label="form">
       <Loader isLoading={isLoading} />
 
-      <div className={classes.alert}>{errorMessage && <Alert variant="error" message={errorMessage} />}</div>
+      {errorMessage && <Alert variant="error" message={errorMessage} />}
 
       {children}
     </form>
