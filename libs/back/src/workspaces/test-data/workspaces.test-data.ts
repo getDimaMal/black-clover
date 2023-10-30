@@ -1,5 +1,6 @@
-import { CreateWorkspaceDto } from '../dto/create-workspace.dto';
-import { UpdateWorkspaceDto } from '../dto/update-workspace.dto';
+import { CreateWorkspaceDto } from '@black-clover/shared/dto/workspaces/create-workspace.dto';
+import { UpdateWorkspaceDto } from '@black-clover/shared/dto/workspaces/update-workspace.dto';
+
 import { Workspace } from '../entities/workspace.entity';
 
 export const workspace: Workspace = {

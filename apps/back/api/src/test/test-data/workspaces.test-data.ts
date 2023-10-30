@@ -1,5 +1,5 @@
-import { CreateWorkspaceDto } from '@black-clover/back/workspaces/dto/create-workspace.dto';
-import { WorkspaceDto } from '@black-clover/back/workspaces/dto/workspace.dto';
+import { CreateWorkspaceDto } from '@black-clover/shared/dto/workspaces/create-workspace.dto';
+import { WorkspaceDto } from '@black-clover/shared/dto/workspaces/workspace.dto';
 
 const name = 'Test Workspace';
 

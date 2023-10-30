@@ -1,9 +1,9 @@
+import { CreateWorkspaceDto } from '@black-clover/shared/dto/workspaces/create-workspace.dto';
+import { UpdateWorkspaceDto } from '@black-clover/shared/dto/workspaces/update-workspace.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { CreateWorkspaceDto } from './dto/create-workspace.dto';
-import { UpdateWorkspaceDto } from './dto/update-workspace.dto';
 import { Workspace } from './entities/workspace.entity';
 
 @Injectable()
