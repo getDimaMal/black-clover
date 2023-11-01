@@ -1,31 +1,37 @@
-import axios, { AxiosInstance } from 'axios';
-
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 class BaseApi {
-  private readonly instance: AxiosInstance;
+  private axiosInstance: AxiosInstance;
 
   constructor(baseURL: string) {
-    this.instance = axios.create({ baseURL });
+    this.axiosInstance = axios.create({ baseURL });
 
-    // Add token
-    this.instance.interceptors.request.use((config) => {
-      const token = localStorage.getItem('TOKEN');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    });
+    this.axiosInstance.interceptors.request.use(this.addTokenInterceptors);
   }
 
-  get(url: string) {
-    return this.instance.get(url);
+  async get<Resp>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<Resp>> {
+    return this.axiosInstance.get<Resp>(url, config);
   }
 
-  post(url: string, body?: unknown) {
-    return this.instance.post(url, body);
+  async post<Resp, Req>(url: string, data?: Req, config?: AxiosRequestConfig): Promise<AxiosResponse<Resp>> {
+    return this.axiosInstance.post<Resp>(url, data, config);
   }
 
-  put(url: string, body?: unknown) {
-    return this.instance.put(url, body);
+  async put<Resp, Req>(url: string, data?: Req, config?: AxiosRequestConfig): Promise<AxiosResponse<Resp>> {
+    return this.axiosInstance.put<Resp>(url, data, config);
+  }
+
+  async delete<Resp>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<Resp>> {
+    return this.axiosInstance.delete<Resp>(url, config);
+  }
+
+  addTokenInterceptors(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig {
+    const token = JSON.parse(localStorage.getItem('TOKEN') || JSON.stringify(null));
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
   }
 }
 

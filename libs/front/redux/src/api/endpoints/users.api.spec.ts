@@ -13,6 +13,7 @@ describe('UsersApi', () => {
 
   const root = '/users';
   const body: CreateUserDto = { email: 'email@mail.com', password: 'passwrd123' };
+  const config = undefined;
 
   beforeEach(() => {
     Api = new UsersApi(new BaseApi(baseURL));
@@ -22,14 +23,14 @@ describe('UsersApi', () => {
     await Api.signUp(body);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith(`${root}/signUp`, body);
+    expect(axios.post).toHaveBeenCalledWith(`${root}/signUp`, body, config);
   });
 
   it('should make signIn request', async () => {
     await Api.signIn(body);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith(`${root}/signIn`, body);
+    expect(axios.post).toHaveBeenCalledWith(`${root}/signIn`, body, config);
   });
 
   it('should make checkEmail request', async () => {
@@ -37,7 +38,7 @@ describe('UsersApi', () => {
     await Api.checkEmail(body);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith(`${root}/checkEmail`, body);
+    expect(axios.post).toHaveBeenCalledWith(`${root}/checkEmail`, body, config);
   });
 
   it('should make changePassword request', async () => {
@@ -45,6 +46,6 @@ describe('UsersApi', () => {
     await Api.changePassword(body);
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith(`${root}/changePassword`, body);
+    expect(axios.post).toHaveBeenCalledWith(`${root}/changePassword`, body, config);
   });
 });
