@@ -19,6 +19,7 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@black-clover/back/*": ["libs/back/src/*"],
+      "@black-clover/front/api": ["libs/front/api/src/index.ts"],
       "@black-clover/front/redux/*": ["libs/front/redux/src/*"],
       "@black-clover/front/services/*": ["libs/front/services/src/*"],
       "@black-clover/front/shared/*": ["libs/front/shared/src/*"],
