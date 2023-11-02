@@ -1,13 +1,11 @@
-import UsersApi from './endpoints/users.api';
-import BaseApi from './base.api';
+import BaseApi from '../api/base.api';
+import UsersApi from '../api/endpoints/users.api';
 
-const API = () => {
+export function useApi() {
   //TODO Use .ENV
   const baseApi = new BaseApi('http://localhost:8000/api');
 
   return {
     users: new UsersApi(baseApi),
   };
-};
-
-export default API;
+}

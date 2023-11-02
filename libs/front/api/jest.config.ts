@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
   displayName: 'front-api',
-  preset: '../../../jest.preset.js',
+  preset: '../../../jest.preset.ts',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],

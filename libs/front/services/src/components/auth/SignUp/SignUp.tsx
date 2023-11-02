@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import useUserAuth from '@black-clover/front/redux/hooks/useUserAuth';
+import { useSignUp } from '@black-clover/front/api';
 import { SignUpFormProps } from '@black-clover/front/shared/types/auth.type';
 
 import { useAuth } from '../AuthContext/AuthContext';
@@ -10,12 +10,8 @@ export type SignUpProps = {
 };
 
 const SignUp: FC<SignUpProps> = ({ signInLink, children }) => {
-  const { user, isLoading, clear, signUp, error } = useUserAuth();
   const { login } = useAuth();
-
-  useEffect(() => {
-    clear();
-  }, [clear]);
+  const { signUp, user, isLoading, error } = useSignUp();
 
   useEffect(() => {
     if (user) {

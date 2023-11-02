@@ -1,8 +1,8 @@
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 import { baseURL } from '../../jest.setup';
 
-import BaseApi from './base.api';
+import BaseApi, { ErrorType } from './base.api';
 
 describe('BaseApi', () => {
   let baseApi: BaseApi;
@@ -31,6 +31,15 @@ describe('BaseApi', () => {
 
       const { headers } = baseApi.addTokenInterceptors({ headers: {} } as InternalAxiosRequestConfig);
       expect(headers.Authorization).toBe(`Bearer ${token}`);
+    });
+
+    it('should return error message', async () => {
+      const axiosError = { message: 'some error' } as AxiosError<ErrorType>;
+      try {
+        await baseApi.addErrorHandlerInterceptors(axiosError);
+      } catch (error) {
+        expect(error).toEqual(axiosError);
+      }
     });
   });
 

@@ -1,3 +1,4 @@
+import { act, renderHook } from '@testing-library/react-hooks';
 import axios from 'axios';
 
 jest.mock('axios');
@@ -20,3 +21,5 @@ beforeEach(() => {
 
 // ToDo move to a better place
 export const baseURL = 'http://localhost:8000/api';
+
+export { renderHook, act };

@@ -1,11 +1,20 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+
+export type ErrorType = {
+  message: string;
+};
+
 class BaseApi {
   private axiosInstance: AxiosInstance;
 
   constructor(baseURL: string) {
     this.axiosInstance = axios.create({ baseURL });
 
+    // Request
     this.axiosInstance.interceptors.request.use(this.addTokenInterceptors);
+
+    // Response
+    this.axiosInstance.interceptors.response.use(null, this.addErrorHandlerInterceptors);
   }
 
   async get<Resp>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<Resp>> {
@@ -32,6 +41,14 @@ class BaseApi {
     }
 
     return config;
+  }
+
+  addErrorHandlerInterceptors(axiosError: AxiosError<ErrorType>): Promise<ErrorType> {
+    const error: ErrorType = {
+      message: axiosError.response?.data.message || axiosError.message,
+    };
+
+    return Promise.reject(error);
   }
 }
 
