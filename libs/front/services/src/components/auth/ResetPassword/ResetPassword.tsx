@@ -1,5 +1,5 @@
 import React from 'react';
-import useUserAuth from '@black-clover/front/redux/hooks/useUserAuth';
+import { useResetPassword } from '@black-clover/front/api';
 import { ResetPasswordFormProps } from '@black-clover/front/shared/types/auth.type';
 
 type CheckEmailProps = {
@@ -8,15 +8,13 @@ type CheckEmailProps = {
 };
 
 const ResetPassword: React.FC<CheckEmailProps> = ({ changePasswordLink, children }) => {
-  const { token, error, isLoading, checkEmail } = useUserAuth();
-
-  console.log(error);
+  const { user, error, isLoading, resetPassword } = useResetPassword();
 
   return children({
     isLoading,
     errorMessage: error,
-    onSubmit: checkEmail,
-    changePasswordLink: token ? `${changePasswordLink}/${token}` : null,
+    onSubmit: resetPassword,
+    changePasswordLink: user?.token ? `${changePasswordLink}/${user.token}` : null,
   });
 };
 
