@@ -43,12 +43,10 @@ class BaseApi {
     return config;
   }
 
-  addErrorHandlerInterceptors(axiosError: AxiosError<ErrorType>): Promise<ErrorType> {
-    const error: ErrorType = {
-      message: axiosError.response?.data.message || axiosError.message,
-    };
-
-    return Promise.reject(error);
+  addErrorHandlerInterceptors(error: AxiosError<ErrorType>): Promise<ErrorType> {
+    return Promise.reject({
+      message: error.response?.data.message || error.message,
+    });
   }
 }
 
