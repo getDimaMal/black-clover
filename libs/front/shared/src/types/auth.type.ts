@@ -19,9 +19,9 @@ export type SignUpFormProps = {
 
 export type ResetPasswordFormProps = {
   isLoading: boolean;
-  onSubmit: (args: CheckEmailDto) => void;
   errorMessage: string | null;
   changePasswordLink: string | null;
+  onSubmit: (args: CheckEmailDto) => void;
 };
 
 export type ChangePasswordFormProps = {

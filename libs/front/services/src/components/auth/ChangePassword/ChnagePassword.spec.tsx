@@ -1,5 +1,5 @@
 import React from 'react';
-import useUserAuth from '@black-clover/front/redux/hooks/useUserAuth';
+import { useChangePassword } from '@black-clover/front/api';
 import { ChangePasswordFormProps } from '@black-clover/front/shared/types/auth.type';
 import { ChangePasswordNoTokenDto } from '@black-clover/shared/dto/users/change-password.dto';
 import { fireEvent } from '@testing-library/react';
@@ -10,12 +10,15 @@ import ChangePassword, { ChangePasswordProps } from './ChangePassword';
 
 const mockChangePassword = jest.fn();
 
-jest.mock('@black-clover/front/redux/hooks/useUserAuth', () =>
-  jest.fn<Partial<ReturnType<typeof useUserAuth>>, unknown[]>(() => ({
+jest.mock('@black-clover/front/api', () => ({
+  useChangePassword: jest.fn<ReturnType<typeof useChangePassword>, unknown[]>(() => ({
+    user: null,
+    error: null,
     isLoading: false,
     changePassword: mockChangePassword,
-  }))
-);
+  })),
+}));
+
 const button = 'change password';
 const payload: ChangePasswordNoTokenDto = { password: 'password123' };
 const Component: React.FC<ChangePasswordFormProps> = ({ onSubmit }) => (
