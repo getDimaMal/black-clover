@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import useUserAuth from '@black-clover/front/redux/hooks/useUserAuth';
+import { useSignIn } from '@black-clover/front/api';
 import { SignInFormProps } from '@black-clover/front/shared/types/auth.type';
 
 import { useAuth } from '../AuthContext/AuthContext';
@@ -11,7 +11,7 @@ export type SignInProps = {
 };
 
 const SignIn: FC<SignInProps> = ({ onSignUp, resetPasswordLink, children }) => {
-  const { user, isLoading, signIn, error } = useUserAuth();
+  const { signIn, user, isLoading, error } = useSignIn();
   const { login } = useAuth();
 
   useEffect(() => {
