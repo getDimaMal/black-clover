@@ -1,5 +1,6 @@
 import BaseApi from '../api/base.api';
 import UsersApi from '../api/endpoints/users.api';
+import WorkspacesApi from '../api/endpoints/workspaces.api';
 
 export function useApi() {
   //TODO Use .ENV
@@ -7,5 +8,6 @@ export function useApi() {
 
   return {
     users: new UsersApi(baseApi),
+    workspaces: new WorkspacesApi(baseApi),
   };
 }
