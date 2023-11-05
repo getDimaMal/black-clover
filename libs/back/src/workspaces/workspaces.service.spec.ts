@@ -3,8 +3,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { user } from '../__test-data__/users.test-data';
+
 import { Workspace } from './entities/workspace.entity';
-import { workspace, workspaceCreate, workspaceUpdate } from './test-data/workspaces.test-data';
+import { workspace, workspaceCreate, workspacesList, workspaceUpdate } from './test-data/workspaces.test-data';
 import { WorkspacesService } from './workspaces.service';
 
 describe('WorkspacesService', () => {
@@ -14,6 +16,7 @@ describe('WorkspacesService', () => {
     create: jest.fn().mockReturnValue(workspace),
     save: jest.fn().mockResolvedValue(workspace),
     findOne: jest.fn().mockResolvedValue(workspace),
+    find: jest.fn().mockResolvedValue(workspacesList),
   };
 
   beforeEach(async () => {
@@ -26,11 +29,27 @@ describe('WorkspacesService', () => {
 
   describe('create', () => {
     it('should create a new workspace', async () => {
-      const result = await workspacesService.create(workspaceCreate);
+      const result = await workspacesService.create(workspaceCreate, user);
 
       expect(mockRepository.create).toHaveBeenCalledWith({ name: workspaceCreate.name });
       expect(mockRepository.save).toHaveBeenCalledWith(workspace);
       expect(result).toEqual(workspace);
+    });
+  });
+
+  describe('findAll', () => {
+    it('should return a list of workspaces', async () => {
+      const result = await workspacesService.findAll('userId');
+
+      expect(result).toEqual(workspacesList);
+    });
+
+    it('should return an empty list', async () => {
+      jest.spyOn(workspacesService, 'findAll').mockResolvedValue([]);
+
+      const result = await workspacesService.findAll('userId');
+
+      expect(result).toEqual([]);
     });
   });
 

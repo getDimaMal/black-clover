@@ -15,6 +15,7 @@ export const user: User = {
   firstName: null,
   lastName: null,
   hash: 'mockedHash',
+  workspaces: [],
 };
 
 export const createUser: CreateUserDto = { email: 'test@example.com', password: 'password123' };

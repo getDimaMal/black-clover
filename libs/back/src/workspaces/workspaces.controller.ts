@@ -6,6 +6,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { Serialize } from '../core/interseptors/serialize.interceptor';
+import { GetSelf } from '../users/decorators/get-self.decorator';
+import { User } from '../users/entities/user.entity';
 
 import { WorkspacesService } from './workspaces.service';
 
@@ -18,8 +20,13 @@ export class WorkspacesController {
   constructor(private readonly workspacesService: WorkspacesService) {}
 
   @Post()
-  create(@Body() body: CreateWorkspaceDto) {
-    return this.workspacesService.create(body);
+  create(@Body() body: CreateWorkspaceDto, @GetSelf() user: User) {
+    return this.workspacesService.create(body, user);
+  }
+
+  @Get()
+  findAll(@GetSelf() { id }: User) {
+    return this.workspacesService.findAll(id);
   }
 
   @Get(':id')

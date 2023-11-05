@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Workspace } from '../../workspaces/entities/workspace.entity';
 
 @Entity()
 export class User {
@@ -16,4 +18,7 @@ export class User {
 
   @Column({ default: null })
   lastName: null | string;
+
+  @OneToMany(() => Workspace, (workspace) => workspace.author, { eager: true })
+  workspaces: Workspace[];
 }

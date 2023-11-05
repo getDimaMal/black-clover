@@ -6,12 +6,18 @@ import { AppModule } from '../app.module';
 import { getFindByIdErrorCases } from './test-data/test-data';
 import {
   getCreateWorkspaceErrorCases,
+  getCreateWorkspaceProps,
   getCreateWorkspaceResultCases,
   getWorkspaceProps,
 } from './test-data/workspaces.test-data';
 import { getUUID } from './test-utils/test-utils';
 import { useGetAuthHeader } from './test-utils/users.test-utils';
-import { useGetWorkspaceById, usePostWorkspace, usePutWorkspace } from './test-utils/workspaces.test-utils';
+import {
+  useGetWorkspaceById,
+  useGetWorkspacesList,
+  usePostWorkspace,
+  usePutWorkspace,
+} from './test-utils/workspaces.test-utils';
 
 describe('WorkspacesController (e2e)', () => {
   let app: INestApplication;
@@ -57,6 +63,36 @@ describe('WorkspacesController (e2e)', () => {
       const [{ message }, status] = await usePostWorkspace({ app });
 
       expect(status).toEqual(401);
+      expect(message).toEqual('Unauthorized');
+    });
+  });
+
+  describe('/workspaces (GET)', () => {
+    it('should return an empty list', async () => {
+      const header = await useGetAuthHeader({ app });
+      const [body, status] = await useGetWorkspacesList({ app, header });
+
+      expect(status).toBe(200);
+      expect(body).toEqual([]);
+    });
+
+    it('should return a list of workspaces', async () => {
+      const header = await useGetAuthHeader({ app });
+
+      const result = [
+        (await usePostWorkspace({ app, header, props: getCreateWorkspaceProps({ name: 'One Workspace' }) }))[0],
+      ];
+
+      const [body, status] = await useGetWorkspacesList({ app, header });
+
+      expect(status).toBe(200);
+      expect(body).toEqual(result);
+    });
+
+    it('should return an error when the auth header was not provided', async () => {
+      const [{ message }, status] = await useGetWorkspacesList({ app });
+
+      expect(status).toBe(401);
       expect(message).toEqual('Unauthorized');
     });
   });

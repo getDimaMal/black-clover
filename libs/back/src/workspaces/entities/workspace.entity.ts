@@ -1,10 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Category } from '../../categories/entities/category.entity';
 import { Event } from '../../events/entities/event.entity';
 import { Group } from '../../groups/entities/group.entity';
 import { Property } from '../../properties/entities/property.entity';
 import { Transaction } from '../../transactions/entities/transaction.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Workspace {
@@ -27,10 +28,13 @@ export class Workspace {
   categories: Category[];
 
   @OneToMany(() => Event, (event) => event.workspace, { eager: true })
-  events: Category[];
+  events: Event[];
 
   @OneToMany(() => Property, (property) => property.workspace, { eager: true })
-  properties: Category[];
+  properties: Property[];
+
+  @ManyToOne(() => User, (user) => user.workspaces)
+  author: User;
 
   @Column({ default: null })
   expiredDate: null | Date;

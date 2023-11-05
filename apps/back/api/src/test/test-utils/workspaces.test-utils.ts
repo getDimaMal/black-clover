@@ -34,6 +34,17 @@ export const usePostWorkspace = async ({
   return [body as UseWorkspaceResultProps[0], status];
 };
 
+export const useGetWorkspacesList = async ({
+  app,
+  header = ['header', ''],
+}: UseProps): Promise<UseWorkspaceResultProps> => {
+  const { status, body } = await getServer(app)
+    .get(`/workspaces`)
+    .set(...header);
+
+  return [body as UseWorkspaceResultProps[0], status];
+};
+
 export const useGetWorkspaceById = async ({
   app,
   workspaceId,

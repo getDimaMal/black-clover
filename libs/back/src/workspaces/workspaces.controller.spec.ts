@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { workspace, workspaceCreate, workspaceUpdate } from './test-data/workspaces.test-data';
+import { user } from '../__test-data__/users.test-data';
+
+import { workspace, workspaceCreate, workspacesList, workspaceUpdate } from './test-data/workspaces.test-data';
 import { WorkspacesController } from './workspaces.controller';
 import { WorkspacesService } from './workspaces.service';
 
@@ -12,6 +14,7 @@ describe('WorkspacesController', () => {
     create: jest.fn().mockResolvedValue(workspace),
     update: jest.fn().mockResolvedValue(workspace),
     findOne: jest.fn().mockResolvedValue(workspace),
+    findAll: jest.fn().mockResolvedValue(workspacesList),
   };
 
   beforeEach(async () => {
@@ -26,10 +29,19 @@ describe('WorkspacesController', () => {
 
   describe('create', () => {
     it('should call workspacesService.create and return the result', async () => {
-      const result = await workspacesController.create(workspaceCreate);
+      const result = await workspacesController.create(workspaceCreate, user);
 
-      expect(workspacesService.create).toHaveBeenCalledWith(workspaceCreate);
+      expect(workspacesService.create).toHaveBeenCalledWith(workspaceCreate, user);
       expect(result).toEqual(workspace);
+    });
+  });
+
+  describe('findAll', () => {
+    it('should call eventsService.findAll and return the result', async () => {
+      const result = await workspacesController.findAll(user);
+
+      expect(workspacesService.findAll).toHaveBeenCalledWith(user.id);
+      expect(result).toEqual(workspacesList);
     });
   });
 
