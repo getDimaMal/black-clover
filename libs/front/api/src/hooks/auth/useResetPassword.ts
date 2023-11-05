@@ -3,7 +3,7 @@ import { useRequest } from '../useRequest';
 
 export function useResetPassword() {
   const { users } = useApi();
-  const { makeRequest: resetPassword, response: user, isLoading, error } = useRequest(users.checkEmail);
+  const { makeRequest: resetPassword, response: user, error, status, isLoading } = useRequest(users.checkEmail);
 
-  return { resetPassword, user, isLoading, error };
+  return { resetPassword, user, error, status, isLoading };
 }

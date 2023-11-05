@@ -3,7 +3,7 @@ import { useRequest } from '../useRequest';
 
 export function useSignUp() {
   const { users } = useApi();
-  const { makeRequest: signUp, response: user, isLoading, error } = useRequest(users.signUp);
+  const { makeRequest: signUp, response: user, error, status, isLoading } = useRequest(users.signUp);
 
-  return { signUp, user, isLoading, error };
+  return { signUp, user, error, status, isLoading };
 }
