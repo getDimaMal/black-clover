@@ -20,13 +20,13 @@ const useStyles = makeStyles({ name: 'AuthLayout' })((theme) => ({
 
     width: '100%',
     maxWidth: `calc(300px + 2px + (${theme.spacing(16)}) )`,
+  },
 
+  form: {
     display: 'flex',
     alignItems: 'stretch',
     flexDirection: 'column',
     gap: theme.spacing(8),
-
-    position: 'relative',
   },
 }));
 

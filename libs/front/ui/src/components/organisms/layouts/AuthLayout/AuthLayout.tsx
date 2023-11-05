@@ -1,28 +1,38 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import Paper from '../../../atoms/Paper/Paper';
-import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './AuthLayout.styles';
 
-export type AuthLayoutProps = {
-  label: string;
+type AuthFormProps = {
   children: React.ReactNode;
 };
 
-const AuthLayout: FC<AuthLayoutProps> = ({ label, children }) => {
+export type AuthLayoutProps = {
+  children: React.ReactNode;
+};
+
+type AuthLayoutCompose = {
+  Form: (props: AuthFormProps) => JSX.Element;
+};
+
+type AuthLayoutWrapper = (props: AuthLayoutProps) => JSX.Element;
+
+const AuthLayout: AuthLayoutWrapper & AuthLayoutCompose = ({ children }) => {
   const { classes } = useStyles();
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Typography centerAlign variant="h3">
-          {label}
-        </Typography>
-        {children}
-      </Paper>
+      <Paper className={classes.paper}>{children}</Paper>
     </div>
   );
 };
+
+const AuthForm = ({ children }: AuthFormProps) => {
+  const { classes } = useStyles();
+  return <div className={classes.form}>{children}</div>;
+};
+
+AuthLayout.Form = AuthForm;
 
 export default AuthLayout;

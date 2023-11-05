@@ -1,21 +1,30 @@
 import React from 'react';
 import { useResetPassword } from '@black-clover/front/api';
-import { ResetPasswordFormProps } from '@black-clover/front/shared/types/auth.type';
+import { CheckEmailDto } from '@black-clover/shared/dto/users/check-email.dto';
+
+import FormContainer, { FormContainerRenderProps } from '../../form/FormContainer';
+
+type RenderProps = {
+  isLoading: boolean;
+  error: string | null;
+  token: string | null;
+} & FormContainerRenderProps<CheckEmailDto>;
 
 type CheckEmailProps = {
-  changePasswordLink: string;
-  children: (props: ResetPasswordFormProps) => React.ReactElement;
+  render: (props: RenderProps) => JSX.Element;
 };
 
-const ResetPassword: React.FC<CheckEmailProps> = ({ changePasswordLink, children }) => {
-  const { user, error, isLoading, resetPassword } = useResetPassword();
+const ResetPassword: React.FC<CheckEmailProps> = ({ render }) => {
+  const { resetPassword, user, error, isLoading } = useResetPassword();
 
-  return children({
-    isLoading,
-    errorMessage: error,
-    onSubmit: resetPassword,
-    changePasswordLink: user?.token ? `${changePasswordLink}/${user.token}` : null,
-  });
+  return (
+    <FormContainer
+      onSubmit={resetPassword}
+      initForm={{ email: '' }}
+      Resolver={CheckEmailDto}
+      render={(props) => render({ ...props, error, isLoading, token: user?.token || null })}
+    />
+  );
 };
 
 export default ResetPassword;

@@ -5,9 +5,7 @@ import ResetPassword from './ResetPassword';
 describe('ResetPassword', () => {
   it('should redner without error', () => {
     const test = 'test';
-    const { getByText } = customRender(
-      <ResetPassword changePasswordLink="link">{() => <span>{test}</span>}</ResetPassword>
-    );
+    const { getByText } = customRender(<ResetPassword render={() => <span>{test}</span>} />);
 
     expect(getByText(test)).toBeInTheDocument();
   });

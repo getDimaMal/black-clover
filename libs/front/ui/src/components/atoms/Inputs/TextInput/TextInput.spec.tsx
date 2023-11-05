@@ -34,7 +34,7 @@ describe('TextInput', () => {
     fireEvent.change(getByTestId(testId), { target: { value } });
 
     expect(props.onChange).toHaveBeenCalledTimes(1);
-    expect(props.onChange).toHaveBeenCalledWith(props.name, value);
+    expect(props.onChange).toHaveBeenCalledWith(value);
   });
 
   it('should be disabled when disabled === true', () => {

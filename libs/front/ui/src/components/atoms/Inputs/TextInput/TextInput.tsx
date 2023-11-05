@@ -7,7 +7,7 @@ export type Types = 'text' | 'email' | 'password';
 export type TextInputProps = {
   name: string;
   value: string | null;
-  onChange: (name: string, value: string) => void;
+  onChange: (value: string) => void;
 } & Partial<{
   type: Types;
   error: boolean;
@@ -30,7 +30,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         autoFocus={autoFocus}
         disabled={Boolean(disabled)}
         className={cx(classes.root, { [classes.error]: error, [classes.success]: success })}
-        onChange={(event) => onChange(event.target.name, event.target.value)}
+        onChange={(event) => onChange(event.target.value)}
         data-testid={testId}
         autoComplete="off"
       />

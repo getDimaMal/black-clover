@@ -10,7 +10,7 @@ type Story = StoryObj<AuthLayoutProps>;
 
 export const Default: Story = {
   render: (args) => (
-    <AuthLayout {...args} label="Form Label">
+    <AuthLayout {...args}>
       <div style={{ textAlign: 'center' }}>Form Content</div>
     </AuthLayout>
   ),

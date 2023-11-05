@@ -21,14 +21,14 @@ describe('InputField', () => {
 
   it('should render error message', () => {
     const message = 'message';
-    const { getByText } = customRender(<TextField {...getProps({ errorMessage: message })} />);
+    const { getByText } = customRender(<TextField {...getProps({ error: message })} />);
 
     expect(getByText(message)).toBeInTheDocument();
   });
 
   it('should render success message', () => {
     const message = 'message';
-    const { getByText } = customRender(<TextField {...getProps({ successMessage: message })} />);
+    const { getByText } = customRender(<TextField {...getProps({ success: message })} />);
 
     expect(getByText(message)).toBeInTheDocument();
   });

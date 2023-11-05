@@ -1,30 +1,39 @@
 import React, { FC, useEffect } from 'react';
 import { useSignUp } from '@black-clover/front/api';
-import { SignUpFormProps } from '@black-clover/front/shared/types/auth.type';
+import { CreateUserDto } from '@black-clover/shared/dto/users/create-user.dto';
+import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 
-import { useAuth } from '../AuthContext/AuthContext';
+import FormContainer, { FormContainerRenderProps } from '../../form/FormContainer';
+
+type RenderProps = {
+  isLoading: boolean;
+  error: string | null;
+} & FormContainerRenderProps<CreateUserDto>;
 
 export type SignUpProps = {
-  signInLink: string;
-  children: (props: SignUpFormProps) => React.ReactElement;
+  onSuccess: (data: TokenUserDto) => void;
+  render: (props: RenderProps) => JSX.Element;
 };
 
-const SignUp: FC<SignUpProps> = ({ signInLink, children }) => {
-  const { login } = useAuth();
-  const { signUp, user, isLoading, error } = useSignUp();
+const initForm: CreateUserDto = { email: '', password: '' };
+
+const SignUp: FC<SignUpProps> = ({ onSuccess, render }) => {
+  const { signUp, user, error, status, isLoading } = useSignUp();
 
   useEffect(() => {
-    if (user) {
-      login(user);
+    if (status === 'success' && user) {
+      onSuccess(user);
     }
-  }, [login, user]);
+  }, [onSuccess, status, user]);
 
-  return children({
-    isLoading,
-    signInLink,
-    onSignUp: signUp,
-    errorMessage: error,
-  });
+  return (
+    <FormContainer
+      onSubmit={signUp}
+      initForm={initForm}
+      Resolver={CreateUserDto}
+      render={(props) => render({ ...props, error, isLoading })}
+    />
+  );
 };
 
 export default SignUp;
