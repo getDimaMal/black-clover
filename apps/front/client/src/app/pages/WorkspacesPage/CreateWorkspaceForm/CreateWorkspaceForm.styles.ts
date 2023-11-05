@@ -1,4 +1,4 @@
-import { makeStyles } from '../../../../theme/makeStyles';
+import { makeStyles } from '@black-clover/front/ui/theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'CreateWorkspaceForm' })((theme) => ({
   root: {

@@ -1,14 +1,10 @@
-import { useCreateWorkspace } from '@black-clover/front/api';
-import CreateWorkspaceForm from '@black-clover/front/ui/components/organisms/workspaces/CreateWorkspaceForm/CreateWorkspaceForm';
 import WorkspacesList from '@black-clover/front/ui/components/organisms/workspaces/WorkspacesList/WorkspacesList';
 
-const WorkspacesPage = () => {
-  const { createWorkspace } = useCreateWorkspace();
+import CreateWorkspaceForm from './CreateWorkspaceForm/CreateWorkspaceForm';
 
+const WorkspacesPage = () => {
   return (
-    <WorkspacesList
-      CreateWorkspaceForm={<CreateWorkspaceForm onSubmit={createWorkspace} isLoading={false} errorMessage={null} />}
-    >
+    <WorkspacesList renderWorkspaceForm={({ handleClose }) => <CreateWorkspaceForm onSuccess={handleClose} />}>
       <WorkspacesList.Item>Workspace Name 1</WorkspacesList.Item>
       <WorkspacesList.Item>Workspace Name 2</WorkspacesList.Item>
       <WorkspacesList.Item>Workspace Name 3</WorkspacesList.Item>

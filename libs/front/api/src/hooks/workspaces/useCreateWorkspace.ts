@@ -3,7 +3,13 @@ import { useRequest } from '../useRequest';
 
 export function useCreateWorkspace() {
   const { workspaces } = useApi();
-  const { makeRequest: createWorkspace, response: data, isLoading, error } = useRequest(workspaces.createWorkspace);
+  const {
+    error,
+    status,
+    isLoading,
+    response: data,
+    makeRequest: createWorkspace,
+  } = useRequest(workspaces.createWorkspace);
 
-  return { createWorkspace, data, isLoading, error };
+  return { createWorkspace, data, error, status, isLoading };
 }

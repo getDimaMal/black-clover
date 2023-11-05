@@ -19,15 +19,18 @@ type WorkspacesListComposition = {
 
 export type WorkspacesListProps = {
   children: React.ReactNode;
-} & Partial<{
-  CreateWorkspaceForm: React.ReactNode;
-}>;
+  renderWorkspaceForm: (props: { handleClose: () => void }) => JSX.Element;
+};
 
 type WorkspacesListWrapper = (props: WorkspacesListProps) => JSX.Element;
 
-const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({ children, CreateWorkspaceForm }) => {
+const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({ children, renderWorkspaceForm }) => {
   const { classes } = useStyles();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className={classes.root}>
@@ -37,8 +40,8 @@ const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({ chi
         <Icon size="lg" icon={Add} />
       </Item>
 
-      <ModalContainer isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        {CreateWorkspaceForm}
+      <ModalContainer isOpen={isOpen} onClose={handleClose}>
+        <Paper>{renderWorkspaceForm({ handleClose })}</Paper>
       </ModalContainer>
     </div>
   );

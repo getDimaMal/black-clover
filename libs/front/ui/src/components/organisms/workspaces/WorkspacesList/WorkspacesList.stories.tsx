@@ -10,7 +10,7 @@ type Story = StoryObj<WorkspacesListProps>;
 
 export const Default: Story = {
   render: (args) => (
-    <WorkspacesList {...args}>
+    <WorkspacesList {...args} renderWorkspaceForm={() => <div>Create Workspace Form</div>}>
       <WorkspacesList.Item>Workspace Name 1</WorkspacesList.Item>
       <WorkspacesList.Item>Workspace Name 2</WorkspacesList.Item>
       <WorkspacesList.Item>Workspace Name 3</WorkspacesList.Item>
