@@ -9,10 +9,10 @@ describe('useRequest', () => {
   it('should return init values', () => {
     const { result } = renderHook(() => useRequest(jest.fn()));
 
-    expect(result.current.error).toBe(null);
-    expect(result.current.isLoading).toBe(false);
-
-    expect(result.current.response).toBe(null);
+    expect(result.current.isLoading).toBeFalsy();
+    expect(result.current.status).toBe('idle');
+    expect(result.current.response).toBeNull();
+    expect(result.current.error).toBeNull();
   });
 
   describe('request function', () => {
@@ -25,12 +25,14 @@ describe('useRequest', () => {
         result.current.makeRequest({});
       });
 
-      expect(result.current.isLoading).toBe(true);
+      expect(result.current.status).toBe('pending');
+      expect(result.current.isLoading).toBeTruthy();
 
       await waitForNextUpdate();
 
       expect(result.current.response).toBe(response);
-      expect(result.current.isLoading).toBe(false);
+      expect(result.current.status).toBe('success');
+      expect(result.current.isLoading).toBeFalsy();
       expect(result.current.error).toBeNull();
     });
 
@@ -43,13 +45,15 @@ describe('useRequest', () => {
         result.current.makeRequest({});
       });
 
-      expect(result.current.isLoading).toBe(true);
+      expect(result.current.status).toBe('pending');
+      expect(result.current.isLoading).toBeTruthy();
 
       await waitForNextUpdate();
 
-      expect(result.current.response).toBeNull();
-      expect(result.current.isLoading).toBe(false);
       expect(result.current.error).toBe(errorMessage);
+      expect(result.current.isLoading).toBeFalsy();
+      expect(result.current.status).toBe('failed');
+      expect(result.current.response).toBeNull();
     });
   });
 });
