@@ -24,8 +24,8 @@ describe('WorkspaceApi', () => {
     expect(axios.post).toHaveBeenCalledWith(root, body, config);
   });
 
-  it('should make getWorkspaces request', async () => {
-    await Api.getWorkspaces();
+  it('should make getWorkspacesList request', async () => {
+    await Api.getWorkspacesList();
 
     expect(axios.get).toHaveBeenCalledTimes(1);
   });

@@ -13,7 +13,7 @@ class WorkspacesApi {
     return data;
   };
 
-  getWorkspaces = async () => {
+  getWorkspacesList = async () => {
     const { data } = await this.baseApi.get<WorkspaceDto[]>(this.url);
     return data;
   };

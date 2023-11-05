@@ -11,6 +11,8 @@ const useStyles = makeStyles({ name: 'WorkspacesList' })((theme) => ({
     alignContent: 'flex-start',
     justifyContent: 'flex-start',
     gap: theme.spacing(4),
+
+    position: 'relative',
   },
 
   item: {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Add } from '../../../../assets/images';
 import Icon from '../../../atoms/Icon/Icon';
+import Loader from '../../../atoms/Loader/Loader';
 import ModalContainer from '../../../atoms/Modal/ModalContainer/ModalContainer';
 import Paper from '../../../atoms/Paper/Paper';
 
@@ -20,11 +21,17 @@ type WorkspacesListComposition = {
 export type WorkspacesListProps = {
   children: React.ReactNode;
   renderWorkspaceForm: (props: { handleClose: () => void }) => JSX.Element;
-};
+} & Partial<{
+  isLoading: boolean;
+}>;
 
 type WorkspacesListWrapper = (props: WorkspacesListProps) => JSX.Element;
 
-const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({ children, renderWorkspaceForm }) => {
+const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({
+  children,
+  isLoading,
+  renderWorkspaceForm,
+}) => {
   const { classes } = useStyles();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,6 +41,8 @@ const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({ chi
 
   return (
     <div className={classes.root}>
+      <Loader isLoading={Boolean(isLoading)} />
+
       {children}
 
       <Item onClick={() => setIsOpen(true)}>

@@ -4,3 +4,4 @@ export * from './hooks/auth/useResetPassword';
 export * from './hooks/auth/useChangePassword';
 
 export * from './hooks/workspaces/useCreateWorkspace';
+export * from './hooks/workspaces/useGetWorkspacesList';
