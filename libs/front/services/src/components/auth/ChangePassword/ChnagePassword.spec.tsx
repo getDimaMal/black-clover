@@ -42,15 +42,6 @@ describe('ChangePassword', () => {
     expect(getByText(children)).toBeInTheDocument();
   });
 
-  it('should call changePassword with a token', () => {
-    const { getByRole } = customRender(<ChangePassword {...getProps()} />);
-
-    fireEvent.submit(getByRole('form'));
-
-    expect(mockChangePassword).toHaveBeenCalledTimes(1);
-    expect(mockChangePassword).toHaveBeenCalledWith({ token, password: '' });
-  });
-
   it('should call onSuccess', () => {
     jest
       .spyOn(authHook, 'useChangePassword')
@@ -60,5 +51,44 @@ describe('ChangePassword', () => {
     customRender(<ChangePassword {...props} />);
 
     expect(props.onSuccess).toHaveBeenCalledTimes(1);
+  });
+
+  describe('changePassword', () => {
+    it('should call with a token', () => {
+      const password = 'password123';
+
+      const { getByRole } = customRender(
+        <ChangePassword
+          {...getProps()}
+          render={({ control }) => {
+            control.current.setValue('password', password);
+            return <div />;
+          }}
+        />
+      );
+
+      fireEvent.submit(getByRole('form'));
+
+      expect(mockChangePassword).toHaveBeenCalledTimes(1);
+      expect(mockChangePassword).toHaveBeenCalledWith({ token, password });
+    });
+
+    it('should NOT call when password is INVALID', () => {
+      const password = 'password';
+
+      const { getByRole } = customRender(
+        <ChangePassword
+          {...getProps()}
+          render={({ control }) => {
+            control.current.setValue('password', password);
+            return <div />;
+          }}
+        />
+      );
+
+      fireEvent.submit(getByRole('form'));
+
+      expect(mockChangePassword).not.toHaveBeenCalled();
+    });
   });
 });

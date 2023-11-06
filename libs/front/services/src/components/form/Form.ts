@@ -8,12 +8,14 @@ type FormArgs<FORM> = {
 
 export interface FormInterface<FORM> {
   getForm: () => FORM;
-  hasError: () => boolean;
-  getErrors: () => Record<keyof FORM, string>;
-  validate: (name: keyof FORM) => string;
-  getError: (name: keyof FORM) => string;
+
   getValue: (name: keyof FORM) => FORM[keyof FORM];
   setValue: (name: keyof FORM, value: FORM[keyof FORM]) => FORM[keyof FORM];
+
+  validate: () => void;
+  hasError: () => boolean;
+  getError: (name: keyof FORM) => string;
+  getErrors: () => Record<keyof FORM, string>;
 }
 
 export class Form<FORM extends object> implements FormInterface<FORM> {
@@ -25,9 +27,11 @@ export class Form<FORM extends object> implements FormInterface<FORM> {
     this.form = initForm;
     this.resolver = new Resolver();
     this.errors = {} as Record<keyof FORM, string>;
+
+    this.validate();
   }
 
-  validate = (name: keyof FORM) => {
+  validate = () => {
     Object.assign(this.resolver, this.form);
 
     const result = validateSync(this.resolver, { validationError: { target: false } }).map(
@@ -35,12 +39,11 @@ export class Form<FORM extends object> implements FormInterface<FORM> {
     ) as [keyof FORM, string][];
 
     this.errors = { ...(Object.fromEntries(result) as Record<keyof FORM, string>) };
-
-    return this.errors[name];
   };
 
   setValue = (name: keyof FORM, value: FORM[keyof FORM]) => {
     this.form = { ...this.form, [name]: value };
+    this.validate();
     return value;
   };
 

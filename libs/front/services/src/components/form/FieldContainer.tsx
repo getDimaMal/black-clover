@@ -23,7 +23,7 @@ const FieldContainer = <FORM,>({ name, control, isSubmitted, render }: Container
 
   const handleChange = (value: FORM[keyof FORM]) => {
     setValue(control.current.setValue(name, value));
-    setError(control.current.validate(name));
+    setError(control.current.getError(name));
   };
 
   return render({ name, value, error: isSubmitted ? error : null, onChange: handleChange });

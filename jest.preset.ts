@@ -8,5 +8,6 @@ module.exports = {
     '!**/index.{js,jsx,ts,tsx}',
     '!**/.storybook/**',
     '!**/test-utils.{js,jsx,ts,tsx}',
+    '!**/__test-data__.{js,jsx,ts,tsx}',
   ],
 };

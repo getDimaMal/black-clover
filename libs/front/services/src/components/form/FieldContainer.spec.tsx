@@ -1,22 +1,8 @@
-import { IsString, MinLength } from 'class-validator';
-
 import { fireEvent, render } from '../../../jest.setup';
 
+import { errorMessage, TestDto, testForm } from './__test-data__';
 import FieldContainer, { RenderProps } from './FieldContainer';
 import FormContainer from './FormContainer';
-
-const error = 'Error';
-const fieldName = 'firstName';
-
-class TestDto {
-  @IsString()
-  @MinLength(3, { message: error })
-  firstName: string;
-}
-
-const initForm: TestDto = {
-  firstName: 'Rick',
-};
 
 function Field<FORM extends object>({ name, error, value, onChange }: RenderProps<FORM>) {
   return (
@@ -38,10 +24,10 @@ function Field<FORM extends object>({ name, error, value, onChange }: RenderProp
 function Form() {
   return (
     <FormContainer
-      initForm={initForm}
-      onSubmit={jest.fn()}
       Resolver={TestDto}
-      render={(props) => <FieldContainer {...props} name={fieldName} render={(props) => <Field {...props} />} />}
+      initForm={testForm}
+      onSubmit={jest.fn()}
+      render={(props) => <FieldContainer {...props} name="firstName" render={(props) => <Field {...props} />} />}
     />
   );
 }
@@ -50,14 +36,14 @@ describe('FieldContainer', () => {
   it('should render field', () => {
     const { getByLabelText } = render(<Form />);
 
-    expect(getByLabelText(fieldName)).toBeInTheDocument();
+    expect(getByLabelText('firstName')).toBeInTheDocument();
   });
 
   it('should change field value', () => {
     const value = 'Morty';
     const { getByLabelText, getByDisplayValue } = render(<Form />);
 
-    fireEvent.change(getByLabelText(fieldName), { target: { value } });
+    fireEvent.change(getByLabelText('firstName'), { target: { value } });
     expect(getByDisplayValue(value)).toBeInTheDocument();
   });
 
@@ -65,10 +51,10 @@ describe('FieldContainer', () => {
     const value = '!';
     const { getByText, queryByText, getByRole, getByLabelText } = render(<Form />);
 
-    fireEvent.change(getByLabelText(fieldName), { target: { value } });
-    expect(queryByText(error)).not.toBeInTheDocument();
+    fireEvent.change(getByLabelText('firstName'), { target: { value } });
+    expect(queryByText(errorMessage)).not.toBeInTheDocument();
 
     fireEvent.submit(getByRole('form'));
-    expect(getByText(error)).toBeInTheDocument();
+    expect(getByText(errorMessage)).toBeInTheDocument();
   });
 });

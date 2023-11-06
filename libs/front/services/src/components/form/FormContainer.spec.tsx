@@ -3,12 +3,14 @@ import { fireEvent } from '@black-clover/front/ui/test-utils';
 
 import { render } from '../../../jest.setup';
 
+import { TestDto, testForm } from './__test-data__';
 import FormContainer from './FormContainer';
 
 const children = 'children';
+
 const getProps = (props: Partial<ComponentProps<typeof FormContainer>> = {}): ComponentProps<typeof FormContainer> => ({
-  initForm: {},
-  Resolver: class {},
+  Resolver: TestDto,
+  initForm: testForm,
   onSubmit: jest.fn(),
   render: () => <div>{children}</div>,
   ...props,
