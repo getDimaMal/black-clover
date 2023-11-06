@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import AuthProvider from './components/auth/AuthContext/AuthContext';
+import AuthProvider from './components/auth/AuthProvider/AuthProvider';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   return <AuthProvider>{children}</AuthProvider>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
+import { useAuth } from '@black-clover/front/services/components/auth/AuthProvider/AuthProvider';
 import ChangePassword from '@black-clover/front/services/components/auth/ChangePassword/ChangePassword';
 import FieldContainer from '@black-clover/front/services/components/form/FieldContainer';
 import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Button';

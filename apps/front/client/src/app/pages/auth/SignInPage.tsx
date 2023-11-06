@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
+import { useAuth } from '@black-clover/front/services/components/auth/AuthProvider/AuthProvider';
 import SignIn from '@black-clover/front/services/components/auth/SignIn/SignIn';
 import FieldContainer from '@black-clover/front/services/components/form/FieldContainer';
 import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Button';

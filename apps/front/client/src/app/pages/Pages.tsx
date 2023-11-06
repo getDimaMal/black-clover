@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
+import { useAuth } from '@black-clover/front/services/components/auth/AuthProvider/AuthProvider';
 import { Logout, Map, Setting } from '@black-clover/front/ui/assets/images';
 import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Button';
 import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
+import { useAuth } from '@black-clover/front/services/components/auth/AuthProvider/AuthProvider';
 import SignUp from '@black-clover/front/services/components/auth/SignUp/SignUp';
 import FieldContainer from '@black-clover/front/services/components/form/FieldContainer';
 import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Button';
