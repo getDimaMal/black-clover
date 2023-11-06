@@ -8,6 +8,7 @@ export default {
     name: 'Workspace Name',
     Search: <div>Place for Search</div>,
     Filters: <div>Place for Filters</div>,
+    Modal: <div>Modal Form</div>,
   },
 } as Meta<CategoryHeaderProps>;
 

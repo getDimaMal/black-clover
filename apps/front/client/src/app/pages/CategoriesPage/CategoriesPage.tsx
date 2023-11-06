@@ -14,6 +14,7 @@ const CategoriesPage = () => {
           Header={
             <CategoryHeader
               name="Workspace Name"
+              Modal="Modal Form"
               Search={<SearchDropdown {...search} />}
               Filters={
                 <>

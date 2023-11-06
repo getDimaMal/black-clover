@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 
+import { useModalState } from '../../../../hooks/useModalState';
 import Button from '../../../atoms/Buttons/Button/Button';
+import SideModal from '../../../atoms/Modal/SideModal/SideModal';
 import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './CategoryHeader.styles';
@@ -9,10 +11,12 @@ export type CategoryHeaderProps = {
   name: string;
   Search: React.ReactNode;
   Filters: React.ReactNode;
+  Modal: React.ReactNode;
 };
 
-const CategoryHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters }) => {
+const CategoryHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters, Modal }) => {
   const { classes, cx } = useStyles();
+  const { isOpen, open: openModal, close: closeModal } = useModalState();
 
   return (
     <div className={classes.root}>
@@ -20,8 +24,8 @@ const CategoryHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters }) => {
         <Typography variant="h2">{name}</Typography>
 
         <div className={cx(classes.row, classes.gap5)}>
-          <Button variant="contained" label="New Event" />
-          <Button variant="outlined" label="New Category" />
+          <Button variant="contained" label="New Event" onClick={openModal} />
+          <Button variant="outlined" label="New Category" onClick={openModal} />
         </div>
       </div>
 
@@ -30,6 +34,10 @@ const CategoryHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters }) => {
 
         <div className={cx(classes.row, classes.gap4, classes.filters)}>{Filters}</div>
       </div>
+
+      <SideModal isOpen={isOpen} onClose={closeModal}>
+        {Modal}
+      </SideModal>
     </div>
   );
 };
