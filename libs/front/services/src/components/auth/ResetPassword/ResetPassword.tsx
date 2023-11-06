@@ -10,11 +10,11 @@ type RenderProps = {
   token: string | null;
 } & FormContainerRenderProps<CheckEmailDto>;
 
-type CheckEmailProps = {
+export type ResetPasswordProps = {
   render: (props: RenderProps) => JSX.Element;
 };
 
-const ResetPassword: React.FC<CheckEmailProps> = ({ render }) => {
+const ResetPassword: React.FC<ResetPasswordProps> = ({ render }) => {
   const { resetPassword, user, error, isLoading } = useResetPassword();
 
   return (
