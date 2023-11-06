@@ -18,7 +18,9 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
     display: 'inline-flex',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+
     borderRadius: '8px 8px 0 0',
+    backgroundColor: theme.colors['bg/grey/2'],
   },
 
   table: {
