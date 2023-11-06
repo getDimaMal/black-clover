@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { useAuth } from '@black-clover/front/services/components/auth/AuthContext/AuthContext';
-import { Map, Setting } from '@black-clover/front/ui/assets/images';
+import { Logout, Map, Setting } from '@black-clover/front/ui/assets/images';
+import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Button';
 import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
 import SidebarLayout from '@black-clover/front/ui/components/organisms/layouts/SidebarLayout/SidebarLayout';
 
@@ -15,13 +16,14 @@ import WorkspacesPage from './WorkspacesPage/WorkspacesPage';
 import ROUTES from './routes.json';
 
 const Pages = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const history = useHistory();
 
   return (
     <Switch>
       {user ? (
         <SidebarLayout
+          LogoutButton={<Button label="Logout" variant="outlined" onClick={() => logout()} startIcon={Logout} />}
           onNavigate={(page) => history.push(page)}
           navigations={[
             [

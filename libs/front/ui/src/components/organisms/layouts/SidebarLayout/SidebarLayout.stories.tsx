@@ -1,6 +1,8 @@
+import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Map, Setting } from '../../../../assets/images';
+import { Logout, Map, Setting } from '../../../../assets/images';
+import Button from '../../../atoms/Buttons/Button/Button';
 
 import SidebarLayout, { SidebarLayoutProps } from './SidebarLayout';
 
@@ -10,6 +12,7 @@ export default {
   component: SidebarLayout,
   args: {
     height: 500,
+    LogoutButton: <Button label="Logout" variant="outlined" startIcon={Logout} />,
     navigations: [
       [
         {
@@ -41,6 +44,7 @@ export default {
   },
   argTypes: {
     navigations: { control: false },
+    LogoutButton: { control: false },
   },
 } as Meta<SidebarLayoutWithHeightProps>;
 

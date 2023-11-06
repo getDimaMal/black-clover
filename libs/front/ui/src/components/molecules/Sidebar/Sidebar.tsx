@@ -37,7 +37,7 @@ type SidebarComposition = {
 
 export type SidebarProps = {
   children: JSX.Element | JSX.Element[];
-  Footer: JSX.Element;
+  Footer: React.ReactNode;
 };
 
 type SidebarWrapper = (props: SidebarProps) => JSX.Element;
