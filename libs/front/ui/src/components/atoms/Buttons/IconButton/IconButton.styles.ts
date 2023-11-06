@@ -8,22 +8,22 @@ const useStyles = makeStyles({ name: 'IconButton' })((theme) => ({
     borderRadius: '100%',
 
     backgroundColor: 'inherit',
-    color: theme.colors['button/default'],
+    color: theme.colors['text/disabled'],
 
     '&:hover': {
       cursor: 'pointer',
-      color: theme.colors['button/hover'],
+      color: theme.colors['text/disabled'],
       backgroundColor: theme.colors['bg/grey/2'],
     },
 
     '&:active': {
-      color: theme.colors['button/pressed'],
+      color: theme.colors['blue/1'],
       backgroundColor: theme.colors['bg/grey/3'],
     },
 
     '&:disabled': {
       cursor: 'not-allowed',
-      color: theme.colors['text/disabled'],
+      color: theme.colors['stroke/disabled'],
     },
   },
 }));
