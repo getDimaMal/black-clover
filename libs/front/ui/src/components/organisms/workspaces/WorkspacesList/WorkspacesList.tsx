@@ -43,11 +43,11 @@ const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({
     <div className={classes.root}>
       <Loader isLoading={Boolean(isLoading)} />
 
-      {children}
-
       <Item onClick={() => setIsOpen(true)}>
         <Icon size="lg" icon={Add} />
       </Item>
+
+      {children}
 
       <ModalContainer isOpen={isOpen} onClose={handleClose}>
         <Paper>{renderWorkspaceForm({ handleClose })}</Paper>

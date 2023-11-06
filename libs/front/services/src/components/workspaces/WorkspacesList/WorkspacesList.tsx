@@ -13,7 +13,7 @@ export type WorkspacesListProps = {
 };
 
 const WorkspacesList: FC<WorkspacesListProps> = ({ render }) => {
-  const { data, status, isLoading, loadWorkspacesList } = useGetWorkspacesList();
+  const { workspaces, status, isLoading, loadWorkspacesList } = useGetWorkspacesList();
 
   useEffect(() => {
     if (status === 'idle') {
@@ -21,7 +21,7 @@ const WorkspacesList: FC<WorkspacesListProps> = ({ render }) => {
     }
   }, [loadWorkspacesList, status]);
 
-  return render({ workspaces: data || [], isLoading, loadWorkspacesList });
+  return render({ workspaces, isLoading, loadWorkspacesList });
 };
 
 export default WorkspacesList;

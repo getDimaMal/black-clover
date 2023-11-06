@@ -7,7 +7,7 @@ describe('useGetWorkspacesList', () => {
   it('should return default', () => {
     const { result } = renderHook(() => useGetWorkspacesList());
 
-    expect(result.current.data).toBeNull();
+    expect(result.current.workspaces).toEqual([]);
     expect(typeof result.current.loadWorkspacesList).toBe('function');
 
     expect(result.current.error).toBeNull();
