@@ -1,11 +1,11 @@
 import { customRender } from '../../test-utils';
 
-import Categories from './Categories';
+import Events from './Events';
 
-describe('Categories', () => {
+describe('Events', () => {
   it('should render default', () => {
     const children = 'children';
-    const { getByText } = customRender(<Categories>{() => <div>{children}</div>}</Categories>);
+    const { getByText } = customRender(<Events>{() => <div>{children}</div>}</Events>);
 
     expect(getByText(children)).toBeInTheDocument();
   });

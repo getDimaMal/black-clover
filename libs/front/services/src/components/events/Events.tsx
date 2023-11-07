@@ -77,7 +77,7 @@ const event: Event = {
   tags: ['Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated'],
 };
 
-const Categories: FC<CategoriesProps> = ({ children }) => {
+const Events: FC<CategoriesProps> = ({ children }) => {
   const search = useSearchField();
 
   const tagsFilter = useFilter();
@@ -99,4 +99,4 @@ const Categories: FC<CategoriesProps> = ({ children }) => {
   });
 };
 
-export default Categories;
+export default Events;

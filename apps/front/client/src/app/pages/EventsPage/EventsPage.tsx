@@ -1,5 +1,5 @@
 import React from 'react';
-import Categories from '@black-clover/front/services/components/categories/Categories';
+import Events from '@black-clover/front/services/components/events/Events';
 import { useWorkspace } from '@black-clover/front/services/components/workspaces/WorkspaceProvider/WorkspaceProvider';
 import Filter from '@black-clover/front/ui/components/atoms/Inputs/SearchParts/Filter/Filter';
 import SearchDropdown from '@black-clover/front/ui/components/atoms/Inputs/SearchParts/SearchDropdown/SearchDropdown';
@@ -13,7 +13,7 @@ const EventsPage = () => {
   if (!workspace) return null;
 
   return (
-    <Categories>
+    <Events>
       {({ search, categoriesFilter, sourcesFilter, tagsFilter, categoryTable }) => (
         <PageLayout
           Header={
@@ -40,7 +40,7 @@ const EventsPage = () => {
           }
         />
       )}
-    </Categories>
+    </Events>
   );
 };
 
