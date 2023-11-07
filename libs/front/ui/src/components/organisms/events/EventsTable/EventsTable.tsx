@@ -6,9 +6,9 @@ import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './EventsTable.styles';
 
-type Columns = 'name' | 'parameters' | 'sources' | 'tags';
+export type Columns = 'name' | 'parameters' | 'sources' | 'tags';
 
-type Event = {
+export type Event = {
   name: string;
   description: string;
   parameters: string[];
@@ -18,19 +18,20 @@ type Event = {
 
 export type CategoriesTableProps = {
   name: string;
-  eventsCount: number;
   columns: Columns[];
   columnsName: Record<Columns, string>;
   events: Event[];
 };
 
-const EventsTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, columnsName, events }) => {
+const EventsTable: FC<CategoriesTableProps> = ({ name, columns, columnsName, events }) => {
   const { classes, cx } = useStyles();
+
+  const eventsCount = events.length;
 
   const rednerHeaderLeft = () => {
     return (
       <div className={classes.headerLeft}>
-        <Typography variant="bodyXS" className={classes.colorGrey}>
+        <Typography variant="bodyXS" color="secondary">
           Category
         </Typography>
         <Typography variant="bodyM" className={classes.fontWeightBold}>
@@ -41,8 +42,9 @@ const EventsTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, col
   };
 
   const renderHeaderRight = () => {
+    if (eventsCount <= 1) return null;
     return (
-      <Typography variant="bodyS" className={classes.colorGrey}>
+      <Typography variant="bodyS" color="secondary">
         {eventsCount} events
       </Typography>
     );
@@ -63,7 +65,7 @@ const EventsTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, col
           <Table.TableCell>
             <div className={cx(classes.cellFlexColumn, classes.cellGap)}>
               <Typography variant="bodyS">{name}</Typography>
-              <Typography variant="bodyXS" className={classes.colorGrey}>
+              <Typography variant="bodyXS" color="secondary">
                 {description}
               </Typography>
             </div>
@@ -74,7 +76,7 @@ const EventsTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, col
           <Table.TableCell>
             <div className={classes.cellFlexColumn}>
               {parameters.map((parameter, index) => (
-                <Typography key={index} variant="bodyXS" className={classes.colorGrey}>
+                <Typography key={index} variant="bodyXS" color="secondary">
                   {parameter}
                 </Typography>
               ))}
@@ -105,12 +107,32 @@ const EventsTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, col
     ));
   };
 
+  const rednerEmptyRow = () => {
+    return (
+      <tbody>
+        <Table.TableRow>
+          <Table.TableCell>
+            <Typography centerAlign variant="bodyXS" color="secondary">
+              No Events Yet
+            </Typography>
+          </Table.TableCell>
+        </Table.TableRow>
+      </tbody>
+    );
+  };
+
   return (
     <Table HeaderLeft={rednerHeaderLeft()} HeaderRight={renderHeaderRight()}>
-      <thead>
-        <Table.TableRow>{rednerColumnsHeader()}</Table.TableRow>
-      </thead>
-      <tbody>{renderEvents()}</tbody>
+      {eventsCount ? (
+        <>
+          <thead>
+            <Table.TableRow>{rednerColumnsHeader()}</Table.TableRow>
+          </thead>
+          <tbody>{renderEvents()}</tbody>
+        </>
+      ) : (
+        rednerEmptyRow()
+      )}
     </Table>
   );
 };

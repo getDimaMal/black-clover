@@ -1,33 +1,23 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { columns, columnsName, getEventsList } from './__test-data__';
 import EventsTable, { CategoriesTableProps } from './EventsTable';
 
-const event: CategoriesTableProps['events'][0] = {
-  name: 'Share Button Tap',
-  description: 'A share button has been tapped',
-  parameters: [
-    'available_auth_services: [String]',
-    'available_auth_services: [String]',
-    'available_auth_services: [String]',
-  ],
-  sources: ['iOS', 'Android'],
-  tags: ['Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated'],
-};
+type PropsWithCount = CategoriesTableProps & { eventsCount: number };
 
 export default {
   component: EventsTable,
   args: {
+    columns,
+    columnsName,
     name: 'Landing',
-    eventsCount: 12,
-    columns: ['name', 'parameters', 'sources', 'tags'],
-    columnsName: { name: 'Name', parameters: 'Parameters', sources: 'Sources', tags: 'Tags' },
-  },
-} as Meta<CategoriesTableProps>;
 
-type Story = StoryObj<CategoriesTableProps>;
+    eventsCount: 12,
+  },
+} as Meta<PropsWithCount>;
+
+type Story = StoryObj<PropsWithCount>;
 
 export const Default: Story = {
-  render: ({ eventsCount, ...args }) => (
-    <EventsTable {...args} eventsCount={eventsCount} events={new Array(eventsCount).fill(event)} />
-  ),
+  render: ({ eventsCount, ...args }) => <EventsTable {...args} events={getEventsList(eventsCount)} />,
 };

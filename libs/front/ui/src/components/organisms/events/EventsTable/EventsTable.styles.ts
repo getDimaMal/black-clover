@@ -28,10 +28,6 @@ const useStyles = makeStyles({ name: 'EventsTable' })((theme) => ({
     flexWrap: 'wrap',
   },
 
-  colorGrey: {
-    color: theme.colors['text/grey/1'],
-  },
-
   fontWeightBold: {
     fontWeight: 700,
   },
