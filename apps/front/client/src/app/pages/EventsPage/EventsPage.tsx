@@ -2,17 +2,17 @@ import React from 'react';
 import Categories from '@black-clover/front/services/components/categories/Categories';
 import Filter from '@black-clover/front/ui/components/atoms/Inputs/SearchParts/Filter/Filter';
 import SearchDropdown from '@black-clover/front/ui/components/atoms/Inputs/SearchParts/SearchDropdown/SearchDropdown';
-import CategoriesTable from '@black-clover/front/ui/components/organisms/categories/CategoriesTable/CategoriesTable';
-import CategoryHeader from '@black-clover/front/ui/components/organisms/categories/CategoryHeader/CategoryHeader';
+import EventsHeader from '@black-clover/front/ui/components/organisms/events/EventsHeader/EventsHeader';
+import EventsTable from '@black-clover/front/ui/components/organisms/events/EventsTable/EventsTable';
 import PageLayout from '@black-clover/front/ui/components/organisms/layouts/PageLayout/PageLayout';
 
-const CategoriesPage = () => {
+const EventsPage = () => {
   return (
     <Categories>
       {({ search, categoriesFilter, sourcesFilter, tagsFilter, categoryTable }) => (
         <PageLayout
           Header={
-            <CategoryHeader
+            <EventsHeader
               name="Workspace Name"
               Modal="Modal Form"
               Search={<SearchDropdown {...search} />}
@@ -27,10 +27,10 @@ const CategoriesPage = () => {
           }
           Content={
             <>
-              <CategoriesTable {...categoryTable} />
-              <CategoriesTable {...categoryTable} />
-              <CategoriesTable {...categoryTable} />
-              <CategoriesTable {...categoryTable} />
+              <EventsTable {...categoryTable} />
+              <EventsTable {...categoryTable} />
+              <EventsTable {...categoryTable} />
+              <EventsTable {...categoryTable} />
             </>
           }
         />
@@ -39,4 +39,4 @@ const CategoriesPage = () => {
   );
 };
 
-export default CategoriesPage;
+export default EventsPage;

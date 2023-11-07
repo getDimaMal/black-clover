@@ -10,7 +10,7 @@ import ChangePasswordPage from './auth/ChangePasswordPage';
 import ResetPasswordPage from './auth/ResetPasswordPage';
 import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
-import CategoriesPage from './CategoriesPage/CategoriesPage';
+import EventsPage from './EventsPage/EventsPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import WorkspacesPage from './WorkspacesPage/WorkspacesPage';
 import ROUTES from './routes.json';
@@ -31,12 +31,12 @@ const Pages = () => {
                 icon: Map,
                 variant: 'head',
                 label: 'Tracking Plan',
-                isActive: (path) => ['/events', '/properties', '/', '/groups', '/tags'].includes(String(path)),
+                isActive: (path) => ['/', '/properties', '/categories', '/groups', '/tags'].includes(String(path)),
               },
-              { path: '/', label: 'Categories', variant: 'item' },
+              { path: '/', label: 'Events', variant: 'item' },
               { path: '/properties', label: 'Properties', variant: 'item' },
+              { path: '/categories', label: 'Categories', variant: 'item' },
               { path: '/groups', label: 'Groups', variant: 'item' },
-              { path: '/events', label: 'Events', variant: 'item' },
               { path: '/tags', label: 'Tags', variant: 'item' },
             ],
             [
@@ -46,7 +46,7 @@ const Pages = () => {
                 label: 'Settings',
                 isActive: (path) => ['/workspace', '/billing', '/import', '/export', '/switch'].includes(String(path)),
               },
-              { path: '/workspace', label: 'Workspace Settings', variant: 'item' },
+              { path: '/settings', label: 'Workspace Settings', variant: 'item' },
               { path: '/switch', label: 'Switch Workspace', variant: 'item' },
               { path: '/billing', label: 'Billing', variant: 'item' },
               { path: '/import', label: 'Import', variant: 'item' },
@@ -54,7 +54,7 @@ const Pages = () => {
             ],
           ]}
         >
-          <Route exact path="/" component={CategoriesPage} />
+          <Route exact path="/" component={EventsPage} />
           <Route exact path="/switch" component={WorkspacesPage} />
           <Route exact path="/properties" component={() => <Typography variant="h1">Properties</Typography>} />
           <Route exact path="/groups" component={() => <Typography variant="h1">Groups</Typography>} />

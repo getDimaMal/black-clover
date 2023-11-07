@@ -4,7 +4,7 @@ import Chips from '../../../atoms/Chips/Chips';
 import Table from '../../../atoms/Table/Table';
 import Typography from '../../../atoms/Typography/Typography';
 
-import useStyles from './CategoriesTable.styles';
+import useStyles from './EventsTable.styles';
 
 type Columns = 'name' | 'parameters' | 'sources' | 'tags';
 
@@ -24,7 +24,7 @@ export type CategoriesTableProps = {
   events: Event[];
 };
 
-const CategoriesTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, columnsName, events }) => {
+const EventsTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns, columnsName, events }) => {
   const { classes, cx } = useStyles();
 
   const rednerHeaderLeft = () => {
@@ -115,4 +115,4 @@ const CategoriesTable: FC<CategoriesTableProps> = ({ name, eventsCount, columns,
   );
 };
 
-export default CategoriesTable;
+export default EventsTable;

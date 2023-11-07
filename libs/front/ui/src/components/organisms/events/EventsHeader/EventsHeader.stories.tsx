@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import CategoryHeader, { CategoryHeaderProps } from './CategoryHeader';
+import EventsHeader, { CategoryHeaderProps } from './EventsHeader';
 
 export default {
-  component: CategoryHeader,
+  component: EventsHeader,
   args: {
     name: 'Workspace Name',
     Search: <div>Place for Search</div>,
@@ -15,5 +15,5 @@ export default {
 type Story = StoryObj<CategoryHeaderProps>;
 
 export const Default: Story = {
-  render: (args) => <CategoryHeader {...args} />,
+  render: (args) => <EventsHeader {...args} />,
 };

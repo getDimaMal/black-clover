@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'CategoryHeader' })((theme) => ({
+const useStyles = makeStyles({ name: 'EventsHeader' })((theme) => ({
   root: {
     width: '100%',
 

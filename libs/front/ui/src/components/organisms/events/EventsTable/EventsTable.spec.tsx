@@ -1,6 +1,6 @@
 import { customRender } from '../../../../test-utils';
 
-import CategoriesTable, { CategoriesTableProps } from './CategoriesTable';
+import EventsTable, { CategoriesTableProps } from './EventsTable';
 
 const event: CategoriesTableProps['events'][0] = {
   name: 'Share Button Tap',
@@ -19,10 +19,10 @@ const getProps = (props: Partial<CategoriesTableProps> = {}): CategoriesTablePro
   ...props,
 });
 
-describe('CategoryTable', () => {
+describe('EventsTable', () => {
   it('should render default', () => {
     const props = getProps();
-    const { getByText } = customRender(<CategoriesTable {...props} />);
+    const { getByText } = customRender(<EventsTable {...props} />);
 
     expect(getByText('Category')).toBeInTheDocument();
     expect(getByText(props.name)).toBeInTheDocument();

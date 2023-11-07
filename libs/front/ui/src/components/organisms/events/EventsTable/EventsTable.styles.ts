@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'CategoriesTable' })((theme) => ({
+const useStyles = makeStyles({ name: 'EventsTable' })((theme) => ({
   headerLeft: {
     display: 'flex',
     flexDirection: 'column',

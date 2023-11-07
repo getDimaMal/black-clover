@@ -1,6 +1,6 @@
 import { customRender, fireEvent } from '../../../../test-utils';
 
-import CategoryHeader, { CategoryHeaderProps } from './CategoryHeader';
+import EventsHeader, { CategoryHeaderProps } from './EventsHeader';
 
 const getProps = (props: Partial<CategoryHeaderProps> = {}): CategoryHeaderProps => ({
   name: 'Name',
@@ -10,10 +10,10 @@ const getProps = (props: Partial<CategoryHeaderProps> = {}): CategoryHeaderProps
   ...props,
 });
 
-describe('CategoryHeader', () => {
+describe('EventsHeader', () => {
   it('should render default', () => {
     const props = getProps();
-    const { getByText, getByRole } = customRender(<CategoryHeader {...props} />);
+    const { getByText, getByRole } = customRender(<EventsHeader {...props} />);
 
     expect(getByText(props.name)).toBeInTheDocument();
     expect(getByText(String(props.Search))).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe('CategoryHeader', () => {
   describe('Modal', () => {
     it('render on "New Event" click', () => {
       const props = getProps();
-      const { getByText, getByRole, queryByText } = customRender(<CategoryHeader {...props} />);
+      const { getByText, getByRole, queryByText } = customRender(<EventsHeader {...props} />);
 
       expect(queryByText(String(props.Modal))).not.toBeInTheDocument();
 
@@ -36,7 +36,7 @@ describe('CategoryHeader', () => {
 
     it('render on "New Category" click', () => {
       const props = getProps();
-      const { getByText, getByRole, queryByText } = customRender(<CategoryHeader {...props} />);
+      const { getByText, getByRole, queryByText } = customRender(<EventsHeader {...props} />);
 
       expect(queryByText(String(props.Modal))).not.toBeInTheDocument();
 

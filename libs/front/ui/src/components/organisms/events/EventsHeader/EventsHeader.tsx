@@ -5,7 +5,7 @@ import Button from '../../../atoms/Buttons/Button/Button';
 import SideModal from '../../../atoms/Modal/SideModal/SideModal';
 import Typography from '../../../atoms/Typography/Typography';
 
-import useStyles from './CategoryHeader.styles';
+import useStyles from './EventsHeader.styles';
 
 export type CategoryHeaderProps = {
   name: string;
@@ -14,7 +14,7 @@ export type CategoryHeaderProps = {
   Modal: React.ReactNode;
 };
 
-const CategoryHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters, Modal }) => {
+const EventsHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters, Modal }) => {
   const { classes, cx } = useStyles();
   const { isOpen, open: openModal, close: closeModal } = useModalState();
 
@@ -42,4 +42,4 @@ const CategoryHeader: FC<CategoryHeaderProps> = ({ name, Search, Filters, Modal 
   );
 };
 
-export default CategoryHeader;
+export default EventsHeader;

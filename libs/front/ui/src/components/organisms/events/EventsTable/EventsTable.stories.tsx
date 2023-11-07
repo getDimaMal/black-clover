@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import CategoriesTable, { CategoriesTableProps } from './CategoriesTable';
+import EventsTable, { CategoriesTableProps } from './EventsTable';
 
 const event: CategoriesTableProps['events'][0] = {
   name: 'Share Button Tap',
@@ -15,7 +15,7 @@ const event: CategoriesTableProps['events'][0] = {
 };
 
 export default {
-  component: CategoriesTable,
+  component: EventsTable,
   args: {
     name: 'Landing',
     eventsCount: 12,
@@ -28,6 +28,6 @@ type Story = StoryObj<CategoriesTableProps>;
 
 export const Default: Story = {
   render: ({ eventsCount, ...args }) => (
-    <CategoriesTable {...args} eventsCount={eventsCount} events={new Array(eventsCount).fill(event)} />
+    <EventsTable {...args} eventsCount={eventsCount} events={new Array(eventsCount).fill(event)} />
   ),
 };
