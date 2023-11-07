@@ -1,13 +1,46 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
+import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
+
+import { fireEvent } from '../../../../jest.setup';
+import { customRender, renderHook } from '../../../test-utils';
+import { mockUseWorkspace } from '../../workspaces/WorkspaceProvider/__test-data__';
+import * as Workspace from '../../workspaces/WorkspaceProvider/WorkspaceProvider';
 
 import AuthProvider, { useAuth } from './AuthProvider';
 
+const loginButton = 'Login Button';
+const logoutButton = 'Logout Button';
+const mockUser: TokenUserDto = {
+  id: 'userId',
+  email: 'user@email.com',
+  lastName: 'LastName',
+  firstName: 'First Name',
+  accessToken: 'access token',
+};
+
+const TestComponent = () => {
+  const { user, login, logout } = useAuth();
+  return (
+    <>
+      <p>{user?.email}</p>
+      <button type="button" onClick={() => login(mockUser)}>
+        {loginButton}
+      </button>
+      <button type="button" onClick={() => logout()}>
+        {logoutButton}
+      </button>
+    </>
+  );
+};
+
 describe('AuthProvider', () => {
+  afterAll(() => {
+    localStorage.clear();
+  });
+
   it('should render children', () => {
     const children = 'Some Children';
-    const { getByText } = render(
+    const { getByText } = customRender(
       <AuthProvider>
         <div>{children}</div>
       </AuthProvider>
@@ -23,6 +56,33 @@ describe('AuthProvider', () => {
       const { result } = renderHook(() => useAuth());
 
       expect(result.error).toEqual(new Error('useAuth must be used within an AuthProvider'));
+    });
+
+    it('should call login', () => {
+      const { getByRole, getByText, queryByText } = customRender(<TestComponent />);
+
+      expect(queryByText(mockUser.email)).not.toBeInTheDocument();
+
+      fireEvent.click(getByRole('button', { name: loginButton }));
+      expect(getByText(mockUser.email)).toBeInTheDocument();
+      expect(JSON.parse(localStorage.getItem('USER') || '')).toEqual(mockUser);
+      expect(JSON.parse(localStorage.getItem('TOKEN') || '')).toBe(mockUser.accessToken);
+    });
+
+    it('should call logout', () => {
+      const clearWorkspace = jest.fn();
+      jest.spyOn(Workspace, 'useWorkspace').mockReturnValue(mockUseWorkspace({ clearWorkspace }));
+
+      const { getByRole, getByText, queryByText } = customRender(<TestComponent />);
+
+      fireEvent.click(getByRole('button', { name: loginButton }));
+      expect(getByText(mockUser.email)).toBeInTheDocument();
+
+      fireEvent.click(getByRole('button', { name: logoutButton }));
+      expect(queryByText(mockUser.email)).not.toBeInTheDocument();
+      expect(clearWorkspace).toHaveBeenCalledTimes(1);
+      expect(localStorage.getItem('USER')).toBeNull();
+      expect(localStorage.getItem('TOKEN')).toBeNull();
     });
   });
 });

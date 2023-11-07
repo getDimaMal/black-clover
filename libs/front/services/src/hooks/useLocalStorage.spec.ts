@@ -40,7 +40,7 @@ describe('useLocalStorage', () => {
 
     act(() => result.current[1](null));
 
-    expect(localStorage.getItem(key)).toBe(null);
-    expect(result.current[0]).toBe(null);
+    expect(localStorage.getItem(key)).toBeNull();
+    expect(result.current[0]).toBeNull();
   });
 });

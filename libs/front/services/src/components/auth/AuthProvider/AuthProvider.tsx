@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 
 import useLocalStorage from '../../../hooks/useLocalStorage';
+import { useWorkspace } from '../../workspaces/WorkspaceProvider/WorkspaceProvider';
 
 type AuthContextType = {
   user: TokenUserDto | null;
@@ -21,17 +22,19 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, saveUser] = useLocalStorage<TokenUserDto>('USER', null);
-  const [, saveToken] = useLocalStorage<string>('TOKEN', null);
+  const [user, setUser] = useLocalStorage<TokenUserDto>('USER', null);
+  const [, setToken] = useLocalStorage<string>('TOKEN', null);
+  const { clearWorkspace } = useWorkspace();
 
   const login = (newUser: TokenUserDto) => {
-    saveUser(newUser);
-    saveToken(newUser.accessToken);
+    setUser(newUser);
+    setToken(newUser.accessToken);
   };
 
   const logout = () => {
-    saveUser(null);
-    saveToken(null);
+    setUser(null);
+    setToken(null);
+    clearWorkspace();
   };
 
   return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
