@@ -20,6 +20,14 @@ const useStyles = makeStyles({ name: 'Typography' })((theme) => ({
   bodyXS: { ...theme.typography['body/xs'] },
   bodyXXS: { ...theme.typography['body/xxs'] },
 
+  primary: {
+    color: theme.colors['text/black/1'],
+  },
+
+  secondary: {
+    color: theme.colors['text/grey/1'],
+  },
+
   inherit: {
     fontFamily: 'inherit',
     fontWeight: 'inherit',

@@ -1,16 +1,19 @@
-import React, { forwardRef, HTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 
 import useStyles from './Typography.styles';
 
 export type Variant = 'h1' | 'h2' | 'h3' | 'bodyXL' | 'bodyL' | 'bodyM' | 'bodyS' | 'bodyXS' | 'bodyXXS' | 'inherit';
 export type MapVariant = 'h1' | 'h2' | 'h3' | 'p' | 'span';
+export type Colors = 'primary' | 'secondary';
 
 export type TypographyProps = {
-  variant?: Variant;
-  className?: string;
-  centerAlign?: boolean;
   children: React.ReactNode;
-} & HTMLAttributes<HTMLElement>;
+} & Partial<{
+  color: Colors;
+  variant: Variant;
+  className: string;
+  centerAlign: boolean;
+}>;
 
 const mapVariantToTag: Record<Variant, MapVariant> = {
   h1: 'h1',
@@ -26,12 +29,12 @@ const mapVariantToTag: Record<Variant, MapVariant> = {
 };
 
 const Typography = forwardRef<HTMLElement, TypographyProps>(
-  ({ className, children, centerAlign, variant = 'bodyM', ...rest }, ref) => {
+  ({ className, children, centerAlign, color = 'primary', variant = 'bodyM', ...rest }, ref) => {
     const { classes, cx } = useStyles();
 
     const Tag = mapVariantToTag[variant] as React.ElementType;
 
-    const combinedClasses = cx(classes.root, classes[variant], className, {
+    const combinedClasses = cx(classes.root, classes[color], classes[variant], className, {
       [classes.centerAlign]: Boolean(centerAlign),
     });
 

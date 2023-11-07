@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Typography, { TypographyProps } from './Typography';
+import Typography, { Colors, TypographyProps } from './Typography';
 
 export default {
   component: Typography,
+  args: {
+    color: 'primary',
+  },
   argTypes: {
+    color: {
+      control: { type: 'radio' },
+      options: ['primary', 'secondary'] as Colors[],
+    },
+
     variant: { control: false },
   },
 } as Meta<TypographyProps>;

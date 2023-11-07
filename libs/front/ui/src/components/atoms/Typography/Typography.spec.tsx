@@ -1,6 +1,6 @@
 import { customRender } from '../../../test-utils';
 
-import Typography, { MapVariant, TypographyProps, Variant } from './Typography';
+import Typography, { Colors, MapVariant, TypographyProps, Variant } from './Typography';
 
 const text = 'Hello, Event Panel!';
 
@@ -49,5 +49,12 @@ describe('Typography', () => {
 
     expect(element.tagName.toLowerCase()).toBe(tag);
     expect(element.className).toContain(variant);
+  });
+
+  it.each<Colors>(['primary', 'secondary'])('should renders with color: %s', (color) => {
+    const { getByText } = customRender(<Typography {...generateProps({ color })} />);
+    const element = getByText(text);
+
+    expect(element.className).toContain(color);
   });
 });
