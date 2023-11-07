@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useCreateWorkspace } from '@black-clover/front/api';
 import { CreateWorkspaceDto } from '@black-clover/shared/dto/workspaces/create-workspace.dto';
+import { WorkspaceDto } from '@black-clover/shared/dto/workspaces/workspace.dto';
 
 import FormContainer, { FormContainerRenderProps } from '../../form/FormContainer';
 
@@ -11,18 +12,18 @@ type RenderProps = {
 };
 
 export type CreateWorkspaceProps = {
-  onSuccess: () => void;
+  onSuccess: (data: WorkspaceDto) => void;
   render: (props: RenderProps) => JSX.Element;
 };
 
 const CreateWorkspace: FC<CreateWorkspaceProps> = ({ onSuccess, render }) => {
-  const { createWorkspace, error, status, isLoading } = useCreateWorkspace();
+  const { createWorkspace, data, error, status, isLoading } = useCreateWorkspace();
 
   useEffect(() => {
-    if (status === 'success') {
-      onSuccess();
+    if (status === 'success' && data) {
+      onSuccess(data);
     }
-  }, [onSuccess, status]);
+  }, [data, onSuccess, status]);
 
   return (
     <FormContainer

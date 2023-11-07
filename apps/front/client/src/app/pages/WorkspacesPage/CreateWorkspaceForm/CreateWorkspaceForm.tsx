@@ -6,11 +6,12 @@ import TextField from '@black-clover/front/ui/components/atoms/Inputs/TextField/
 import Loader from '@black-clover/front/ui/components/atoms/Loader/Loader';
 import Alert from '@black-clover/front/ui/components/atoms/Messages/Alert/Alert';
 import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
+import { WorkspaceDto } from '@black-clover/shared/dto/workspaces/workspace.dto';
 
 import useStyles from './CreateWorkspaceForm.styles';
 
 type CreateWorkspaceFormProps = {
-  onSuccess: () => void;
+  onSuccess: (data: WorkspaceDto) => void;
 };
 
 const CreateWorkspaceForm: FC<CreateWorkspaceFormProps> = ({ onSuccess }) => {
