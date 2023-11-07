@@ -1,10 +1,10 @@
 import { fireEvent, render } from '../../../jest.setup';
 
 import { errorMessage, TestDto, testForm } from './__test-data__';
-import FieldContainer, { RenderProps } from './FieldContainer';
+import FieldContainer, { FieldContainerRenderProps } from './FieldContainer';
 import FormContainer from './FormContainer';
 
-function Field<FORM extends object>({ name, error, value, onChange }: RenderProps<FORM>) {
+function Field<FORM extends object>({ name, error, value, onChange }: FieldContainerRenderProps<FORM>) {
   return (
     <div>
       <label>

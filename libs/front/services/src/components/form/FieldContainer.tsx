@@ -2,7 +2,7 @@ import { MutableRefObject, useState } from 'react';
 
 import { FormInterface } from './Form';
 
-export type RenderProps<FORM> = {
+export type FieldContainerRenderProps<FORM> = {
   name: keyof FORM;
   value: FORM[keyof FORM];
   onChange: (value: FORM[keyof FORM]) => void;
@@ -12,7 +12,7 @@ export type RenderProps<FORM> = {
 type ContainerProps<FORM> = {
   name: keyof FORM;
   control: MutableRefObject<FormInterface<FORM>>;
-  render: (props: RenderProps<FORM>) => JSX.Element;
+  render: (props: FieldContainerRenderProps<FORM>) => JSX.Element;
 } & Partial<{
   isSubmitted: boolean;
 }>;
