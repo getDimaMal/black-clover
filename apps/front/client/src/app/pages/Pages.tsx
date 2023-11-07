@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { useAuth } from '@black-clover/front/services/components/auth/AuthProvider/AuthProvider';
+import { useLogout } from '@black-clover/front/services/hooks/useLogout';
 import { Logout, Map, Setting } from '@black-clover/front/ui/assets/images';
 import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Button';
 import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
@@ -16,7 +17,8 @@ import WorkspacesPage from './WorkspacesPage/WorkspacesPage';
 import ROUTES from './routes.json';
 
 const Pages = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
+  const logout = useLogout();
   const history = useHistory();
 
   return (

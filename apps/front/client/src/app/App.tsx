@@ -16,16 +16,16 @@ export function App() {
 
   return (
     <StrictMode>
-      <WorkspaceProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <WorkspaceProvider>
           <ThemeProvider {...theme}>
             <GlobalStyles />
             <BrowserRouter>
               <Pages />
             </BrowserRouter>
           </ThemeProvider>
-        </AuthProvider>
-      </WorkspaceProvider>
+        </WorkspaceProvider>
+      </AuthProvider>
     </StrictMode>
   );
 }

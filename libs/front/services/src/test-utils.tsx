@@ -7,9 +7,9 @@ import WorkspaceProvider from './components/workspaces/WorkspaceProvider/Workspa
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <WorkspaceProvider>
-      <AuthProvider>{children}</AuthProvider>
-    </WorkspaceProvider>
+    <AuthProvider>
+      <WorkspaceProvider>{children}</WorkspaceProvider>
+    </AuthProvider>
   );
 };
 

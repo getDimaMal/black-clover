@@ -3,8 +3,6 @@ import { TokenUserDto } from '@black-clover/shared/dto/users/token-user.dto';
 
 import { fireEvent } from '../../../../jest.setup';
 import { customRender, renderHook } from '../../../test-utils';
-import { mockUseWorkspace } from '../../workspaces/WorkspaceProvider/__test-data__';
-import * as Workspace from '../../workspaces/WorkspaceProvider/WorkspaceProvider';
 
 import AuthProvider, { useAuth } from './AuthProvider';
 
@@ -70,9 +68,6 @@ describe('AuthProvider', () => {
     });
 
     it('should call logout', () => {
-      const clearWorkspace = jest.fn();
-      jest.spyOn(Workspace, 'useWorkspace').mockReturnValue(mockUseWorkspace({ clearWorkspace }));
-
       const { getByRole, getByText, queryByText } = customRender(<TestComponent />);
 
       fireEvent.click(getByRole('button', { name: loginButton }));
@@ -80,7 +75,6 @@ describe('AuthProvider', () => {
 
       fireEvent.click(getByRole('button', { name: logoutButton }));
       expect(queryByText(mockUser.email)).not.toBeInTheDocument();
-      expect(clearWorkspace).toHaveBeenCalledTimes(1);
       expect(localStorage.getItem('USER')).toBeNull();
       expect(localStorage.getItem('TOKEN')).toBeNull();
     });
