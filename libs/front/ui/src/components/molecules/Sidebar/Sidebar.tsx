@@ -4,7 +4,7 @@ import Icon from '../../atoms/Icon/Icon';
 import Logo from '../../atoms/Logo/Logo';
 
 import useStiles from './Sidebar.styles';
-import SidebarProvider, { useSidebar } from './SidebarContext';
+import SidebarProvider, { useSidebar } from './SidebarProvider';
 
 type SidebarNavCommonProps = {
   label: string;

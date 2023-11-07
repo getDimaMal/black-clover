@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, FC, useContext, useState } from 'react';
 
 type SidebarContextProps = {
   currentPage: string | null;
@@ -11,12 +11,6 @@ type SidebarProviderProps = {
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
 
-export default function SidebarProvider({ children }: SidebarProviderProps) {
-  const [currentPage, setCurrentPage] = useState<string | null>(null);
-
-  return <SidebarContext.Provider value={{ currentPage, setCurrentPage }}>{children}</SidebarContext.Provider>;
-}
-
 export function useSidebar() {
   const context = useContext(SidebarContext);
 
@@ -24,3 +18,11 @@ export function useSidebar() {
 
   return context;
 }
+
+const SidebarProvider: FC<SidebarProviderProps> = ({ children }) => {
+  const [currentPage, setCurrentPage] = useState<string | null>(null);
+
+  return <SidebarContext.Provider value={{ currentPage, setCurrentPage }}>{children}</SidebarContext.Provider>;
+};
+
+export default SidebarProvider;

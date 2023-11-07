@@ -6,19 +6,19 @@ describe('SidebarLayout', () => {
   it('should render', () => {
     const label = 'label';
     const logout = 'logout';
-    const content = 'content';
+    const children = 'children';
     const { getByText } = customRender(
       <SidebarLayout
-        onNavigate={jest.fn()}
         navigations={[[{ label, variant: 'item', path: '/' }]]}
-        LogoutButton={<div>{logout}</div>}
+        onNavigate={jest.fn()}
+        LogoutButton={logout}
       >
-        {content}
+        {children}
       </SidebarLayout>
     );
 
     expect(getByText(label)).toBeInTheDocument();
     expect(getByText(logout)).toBeInTheDocument();
-    expect(getByText(content)).toBeInTheDocument();
+    expect(getByText(children)).toBeInTheDocument();
   });
 });
