@@ -4,7 +4,7 @@ import { Add } from '../../../../assets/images';
 import { useModalState } from '../../../../hooks/useModalState';
 import Icon from '../../../atoms/Icon/Icon';
 import Loader from '../../../atoms/Loader/Loader';
-import ModalContainer from '../../../atoms/Modal/ModalContainer/ModalContainer';
+import Modal from '../../../atoms/Modals/Modal/Modal';
 import Paper from '../../../atoms/Paper/Paper';
 
 import useStyles from './WorkspacesList.styles';
@@ -46,9 +46,9 @@ const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({
 
       {children}
 
-      <ModalContainer isOpen={isOpen} onClose={closeModal}>
+      <Modal isOpen={isOpen} onClose={closeModal}>
         <Paper>{renderWorkspaceForm({ handleClose: closeModal })}</Paper>
-      </ModalContainer>
+      </Modal>
     </div>
   );
 };

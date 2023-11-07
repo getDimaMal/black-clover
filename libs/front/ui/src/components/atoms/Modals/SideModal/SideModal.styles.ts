@@ -2,6 +2,11 @@ import { makeStyles } from '../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'SideModal' })((theme) => ({
   root: {
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
+
+  modal: {
     padding: `${theme.spacing(8)} ${theme.spacing(10)}`,
 
     width: `calc(${theme.spacing(10)} * 2 + ${theme.spacing(90)})`,

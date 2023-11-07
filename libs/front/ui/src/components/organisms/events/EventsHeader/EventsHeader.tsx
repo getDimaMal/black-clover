@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { useModalState } from '../../../../hooks/useModalState';
 import Button from '../../../atoms/Buttons/Button/Button';
-import SideModal from '../../../atoms/Modal/SideModal/SideModal';
+import SideModal from '../../../atoms/Modals/SideModal/SideModal';
 import Typography from '../../../atoms/Typography/Typography';
 
 import useStyles from './EventsHeader.styles';

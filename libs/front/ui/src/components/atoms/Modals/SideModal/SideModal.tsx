@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Cross } from '../../../../assets/images';
 import IconButton from '../../Buttons/IconButton/IconButton';
-import ModalContainer from '../ModalContainer/ModalContainer';
+import Modal from '../Modal/Modal';
 
 import useStyles from './SideModal.styles';
 
@@ -16,15 +16,15 @@ const SideModal: FC<SideModalProps> = ({ isOpen, onClose, children }) => {
   const { classes } = useStyles();
 
   return (
-    <ModalContainer isOpen={isOpen} variant="right" onClose={onClose}>
-      <div className={classes.root}>
+    <Modal isOpen={isOpen} onClose={onClose} className={classes.root}>
+      <div className={classes.modal}>
         <div className={classes.header}>
           <IconButton size="lg" icon={Cross} onClick={() => onClose()} />
         </div>
 
         {children}
       </div>
-    </ModalContainer>
+    </Modal>
   );
 };
 

@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'ModalContainer' })(() => ({
+const useStyles = makeStyles({ name: 'Modal' })(() => ({
   root: {
     position: 'fixed',
     top: 0,
@@ -16,11 +16,6 @@ const useStyles = makeStyles({ name: 'ModalContainer' })(() => ({
 
   center: {
     alignItems: 'center',
-  },
-
-  right: {
-    flexDirection: 'column',
-    alignItems: 'flex-end',
   },
 }));
 
