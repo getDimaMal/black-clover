@@ -6,7 +6,8 @@ const getProps = (props: Partial<CategoryHeaderProps> = {}): CategoryHeaderProps
   name: 'Name',
   Search: 'Search',
   Filters: 'Filters',
-  Modal: 'Modal',
+  onCreateEventClick: jest.fn(),
+  onCreateCategoryClick: jest.fn(),
   ...props,
 });
 
@@ -23,25 +24,19 @@ describe('EventsHeader', () => {
     expect(getByRole('button', { name: 'New Category' })).toBeInTheDocument();
   });
 
-  describe('Modal', () => {
-    it('render on "New Event" click', () => {
-      const props = getProps();
-      const { getByText, getByRole, queryByText } = customRender(<EventsHeader {...props} />);
+  it('should call onCreateEventClick', () => {
+    const props = getProps();
+    const { getByRole } = customRender(<EventsHeader {...props} />);
 
-      expect(queryByText(String(props.Modal))).not.toBeInTheDocument();
+    fireEvent.click(getByRole('button', { name: 'New Event' }));
+    expect(props.onCreateEventClick).toHaveBeenCalledTimes(1);
+  });
 
-      fireEvent.click(getByRole('button', { name: 'New Event' }));
-      expect(getByText(String(props.Modal))).toBeInTheDocument();
-    });
+  it('should call onCreateCategoryClick', () => {
+    const props = getProps();
+    const { getByRole } = customRender(<EventsHeader {...props} />);
 
-    it('render on "New Category" click', () => {
-      const props = getProps();
-      const { getByText, getByRole, queryByText } = customRender(<EventsHeader {...props} />);
-
-      expect(queryByText(String(props.Modal))).not.toBeInTheDocument();
-
-      fireEvent.click(getByRole('button', { name: 'New Category' }));
-      expect(getByText(String(props.Modal))).toBeInTheDocument();
-    });
+    fireEvent.click(getByRole('button', { name: 'New Category' }));
+    expect(props.onCreateCategoryClick).toHaveBeenCalledTimes(1);
   });
 });
