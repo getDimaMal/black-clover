@@ -9,7 +9,8 @@ const useStyles = makeStyles({ name: 'SideModal' })((theme) => ({
   modal: {
     padding: `${theme.spacing(8)} ${theme.spacing(10)}`,
 
-    width: `calc(${theme.spacing(10)} * 2 + ${theme.spacing(90)})`,
+    width: '30%',
+    widthMin: `calc(${theme.spacing(10)} * 2 + ${theme.spacing(90)})`,
 
     flex: '1',
     display: 'inline-flex',
