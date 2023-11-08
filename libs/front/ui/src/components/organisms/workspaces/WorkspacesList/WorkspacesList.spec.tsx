@@ -2,10 +2,9 @@ import { customRender, fireEvent } from '../../../../test-utils';
 
 import WorkspacesList, { WorkspacesListProps } from './WorkspacesList';
 
-const modal = 'modal';
 const children = 'children';
 const getProps = (props: Partial<WorkspacesListProps> = {}): WorkspacesListProps => ({
-  renderWorkspaceForm: () => <div>{modal}</div>,
+  onAddWorkspace: jest.fn(),
   children: <WorkspacesList.Item>{children}</WorkspacesList.Item>,
   ...props,
 });
@@ -21,7 +20,6 @@ describe('WorkspacesList', () => {
 
     expect(queryByText(/add/)).toBeInTheDocument();
     expect(getByText(children)).toBeInTheDocument();
-    expect(queryByText(modal)).not.toBeInTheDocument();
   });
 
   it('should call onClick', () => {
@@ -33,25 +31,11 @@ describe('WorkspacesList', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should open modal onClick', () => {
+  it('should call onAddWorkspace on click', () => {
     const props = getProps();
-    const { queryByText, getByText } = customRender(<WorkspacesList {...props} />);
+    const { queryByText } = customRender(<WorkspacesList {...props} />);
 
     fireEvent.click(queryByText(/add/) as Element);
-    expect(getByText(modal)).toBeInTheDocument();
-  });
-
-  it('should close modal', () => {
-    const button = 'button';
-    const props = getProps({
-      renderWorkspaceForm: ({ handleClose }) => <button onClick={handleClose}>{button}</button>,
-    });
-    const { queryByText, getByRole } = customRender(<WorkspacesList {...props} />);
-
-    fireEvent.click(queryByText(/add/) as Element);
-    expect(getByRole('button', { name: button })).toBeInTheDocument();
-
-    fireEvent.click(getByRole('button', { name: button }));
-    expect(queryByText(modal)).not.toBeInTheDocument();
+    expect(props.onAddWorkspace).toHaveBeenCalledTimes(1);
   });
 });

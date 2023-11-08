@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from '@black-clover/front/services/components/auth/AuthProvider/AuthProvider';
 import WorkspaceProvider from '@black-clover/front/services/components/workspaces/WorkspaceProvider/WorkspaceProvider';
+import ModalProvider from '@black-clover/front/ui/components/atoms/Modals/ModalProvider/ModalProvider';
 import GlobalStyles from '@black-clover/front/ui/components/organisms/GlobalStyles/GlobalStyles';
 import ThemeProvider from '@black-clover/front/ui/components/organisms/ThemeProvider/ThemeProvider';
 import useTheme from '@black-clover/front/ui/hooks/useTheme';
@@ -20,9 +21,11 @@ export function App() {
         <WorkspaceProvider>
           <ThemeProvider {...theme}>
             <GlobalStyles />
-            <BrowserRouter>
-              <Pages />
-            </BrowserRouter>
+            <ModalProvider>
+              <BrowserRouter>
+                <Pages />
+              </BrowserRouter>
+            </ModalProvider>
           </ThemeProvider>
         </WorkspaceProvider>
       </AuthProvider>

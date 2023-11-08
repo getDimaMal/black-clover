@@ -5,6 +5,7 @@ import Button from '@black-clover/front/ui/components/atoms/Buttons/Button/Butto
 import TextField from '@black-clover/front/ui/components/atoms/Inputs/TextField/TextField';
 import Loader from '@black-clover/front/ui/components/atoms/Loader/Loader';
 import Alert from '@black-clover/front/ui/components/atoms/Messages/Alert/Alert';
+import Paper from '@black-clover/front/ui/components/atoms/Paper/Paper';
 import Typography from '@black-clover/front/ui/components/atoms/Typography/Typography';
 import { WorkspaceDto } from '@black-clover/shared/dto/workspaces/workspace.dto';
 
@@ -21,7 +22,7 @@ const CreateWorkspaceForm: FC<CreateWorkspaceFormProps> = ({ onSuccess }) => {
     <CreateWorkspace
       onSuccess={onSuccess}
       render={({ field, error, isLoading }) => (
-        <div className={classes.root}>
+        <Paper className={classes.root}>
           <Loader isLoading={isLoading} />
 
           <Typography variant="h2" className={classes.alignCenter}>
@@ -37,7 +38,7 @@ const CreateWorkspaceForm: FC<CreateWorkspaceFormProps> = ({ onSuccess }) => {
           />
 
           <Button fullWidth type="submit" label="Create" />
-        </div>
+        </Paper>
       )}
     />
   );

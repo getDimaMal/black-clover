@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { Add } from '../../../../assets/images';
-import { useModalState } from '../../../../hooks/useModalState';
 import Icon from '../../../atoms/Icon/Icon';
 import Loader from '../../../atoms/Loader/Loader';
-import Modal from '../../../atoms/Modals/Modal/Modal';
 import Paper from '../../../atoms/Paper/Paper';
 
 import useStyles from './WorkspacesList.styles';
@@ -21,34 +19,25 @@ type WorkspacesListComposition = {
 
 export type WorkspacesListProps = {
   children: React.ReactNode;
-  renderWorkspaceForm: (props: { handleClose: () => void }) => JSX.Element;
+  onAddWorkspace: () => void;
 } & Partial<{
   isLoading: boolean;
 }>;
 
 type WorkspacesListWrapper = (props: WorkspacesListProps) => JSX.Element;
 
-const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({
-  children,
-  isLoading,
-  renderWorkspaceForm,
-}) => {
+const WorkspacesList: WorkspacesListWrapper & WorkspacesListComposition = ({ children, isLoading, onAddWorkspace }) => {
   const { classes } = useStyles();
-  const { isOpen, open: openModal, close: closeModal } = useModalState();
 
   return (
     <div className={classes.root}>
       <Loader isLoading={Boolean(isLoading)} />
 
-      <Item onClick={openModal}>
+      <Item onClick={onAddWorkspace}>
         <Icon size="lg" icon={Add} />
       </Item>
 
       {children}
-
-      <Modal isOpen={isOpen} onClose={closeModal}>
-        <Paper>{renderWorkspaceForm({ handleClose: closeModal })}</Paper>
-      </Modal>
     </div>
   );
 };

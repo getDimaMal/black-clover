@@ -2,7 +2,7 @@ import { makeStyles } from '@black-clover/front/ui/theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'CreateWorkspaceForm' })((theme) => ({
   root: {
-    width: theme.spacing(84),
+    width: theme.spacing(100),
 
     display: 'flex',
     flexDirection: 'column',
