@@ -6,7 +6,7 @@ import BaseApi from '../base.api';
 
 import WorkspacesApi from './workspaces.api';
 
-describe('WorkspaceApi', () => {
+describe('WorkspacesApi', () => {
   let Api: WorkspacesApi;
 
   const root = '/workspaces';
