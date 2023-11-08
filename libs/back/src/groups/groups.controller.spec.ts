@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { workspace } from '../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../__test-data__/workspaces.test-data';
 
 import { createGroup, group, groupsList } from './test-data/groups.test-data';
 import { GroupsController } from './groups.controller';

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { workspace } from '../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../__test-data__/workspaces.test-data';
 
 import { createProperty, propertiesList, property } from './test-data/properties.test-data';
 import { PropertiesController } from './properties.controller';

@@ -1,6 +1,6 @@
-import { CategoryDto } from '@black-clover/back/categories/dto/category.dto';
-import { CreateCategoryDto } from '@black-clover/back/categories/dto/create-category.dto';
-import { UpdateCategoryDto } from '@black-clover/back/categories/dto/update-category.dto';
+import { CategoryDto } from '@black-clover/shared/dto/categories/category.dto';
+import { CreateCategoryDto } from '@black-clover/shared/dto/categories/create-category.dto';
+import { UpdateCategoryDto } from '@black-clover/shared/dto/categories/update-category.dto';
 
 import { getLorem, getUUID } from '../test-utils/test-utils';
 

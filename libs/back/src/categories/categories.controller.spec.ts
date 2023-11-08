@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { workspace } from '../workspaces/test-data/workspaces.test-data';
+import { categoriesList, category, createCategory } from '../__test-data__/categories.test-data';
+import { workspace } from '../__test-data__/workspaces.test-data';
 
-import { categoriesList, category, createCategory } from './test-data/categories.test-data';
 import { CategoriesController } from './categories.controller';
 import { CategoriesService } from './categories.service';
 

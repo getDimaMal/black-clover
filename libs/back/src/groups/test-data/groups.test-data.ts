@@ -1,4 +1,4 @@
-import { workspace } from '../../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../../__test-data__/workspaces.test-data';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import { Group } from '../entities/group.entity';

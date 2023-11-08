@@ -1,7 +1,9 @@
-import { workspace } from '../../workspaces/test-data/workspaces.test-data';
-import { CreateCategoryDto } from '../dto/create-category.dto';
-import { UpdateCategoryDto } from '../dto/update-category.dto';
-import { Category } from '../entities/category.entity';
+import { CreateCategoryDto } from '@black-clover/shared/dto/categories/create-category.dto';
+import { UpdateCategoryDto } from '@black-clover/shared/dto/categories/update-category.dto';
+
+import { Category } from '../categories/entities/category.entity';
+
+import { workspace } from './workspaces.test-data';
 
 export const category: Category = {
   workspace,

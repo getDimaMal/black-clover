@@ -1,4 +1,4 @@
-import { workspace } from '../../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../../__test-data__/workspaces.test-data';
 import { CreatePropertyDto } from '../dto/create-property.dto';
 import { UpdatePropertyDto } from '../dto/update-property.dto';
 import { Property } from '../entities/property.entity';

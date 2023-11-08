@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { workspace } from '../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../__test-data__/workspaces.test-data';
 
 import { createEvent, event, eventsList } from './test-data/events.test-data';
 import { EventsController } from './events.controller';

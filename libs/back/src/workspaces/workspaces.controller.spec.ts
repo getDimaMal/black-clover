@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { user } from '../__test-data__/users.test-data';
+import { workspace, workspaceCreate, workspacesList, workspaceUpdate } from '../__test-data__/workspaces.test-data';
 
-import { workspace, workspaceCreate, workspacesList, workspaceUpdate } from './test-data/workspaces.test-data';
 import { WorkspacesController } from './workspaces.controller';
 import { WorkspacesService } from './workspaces.service';
 

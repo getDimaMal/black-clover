@@ -1,8 +1,9 @@
 import { CreateWorkspaceDto } from '@black-clover/shared/dto/workspaces/create-workspace.dto';
 import { UpdateWorkspaceDto } from '@black-clover/shared/dto/workspaces/update-workspace.dto';
 
-import { user } from '../../__test-data__/users.test-data';
-import { Workspace } from '../entities/workspace.entity';
+import { Workspace } from '../workspaces/entities/workspace.entity';
+
+import { user } from './users.test-data';
 
 export const workspace: Workspace = {
   id: 'workspaceId',

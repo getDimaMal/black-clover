@@ -1,10 +1,10 @@
+import { CreateCategoryDto } from '@black-clover/shared/dto/categories/create-category.dto';
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { WorkspacesService } from '../workspaces/workspaces.service';
 
-import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './entities/category.entity';
 
 @Injectable()

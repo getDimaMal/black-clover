@@ -4,9 +4,9 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { user } from '../__test-data__/users.test-data';
+import { workspace, workspaceCreate, workspacesList, workspaceUpdate } from '../__test-data__/workspaces.test-data';
 
 import { Workspace } from './entities/workspace.entity';
-import { workspace, workspaceCreate, workspacesList, workspaceUpdate } from './test-data/workspaces.test-data';
 import { WorkspacesService } from './workspaces.service';
 
 describe('WorkspacesService', () => {

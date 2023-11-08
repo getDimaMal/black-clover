@@ -1,4 +1,4 @@
-import { workspace } from '../../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../../__test-data__/workspaces.test-data';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
 import { Event } from '../entities/event.entity';

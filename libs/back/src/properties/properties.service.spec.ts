@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { workspace } from '../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../__test-data__/workspaces.test-data';
 import { WorkspacesService } from '../workspaces/workspaces.service';
 
 import { Property } from './entities/property.entity';

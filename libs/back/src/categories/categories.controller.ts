@@ -1,12 +1,12 @@
+import { CategoryDto } from '@black-clover/shared/dto/categories/category.dto';
+import { CreateCategoryDto } from '@black-clover/shared/dto/categories/create-category.dto';
+import { UpdateCategoryDto } from '@black-clover/shared/dto/categories/update-category.dto';
 import { Body, Controller, Get, Param, ParseUUIDPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { Serialize } from '../core/interseptors/serialize.interceptor';
 
-import { CategoryDto } from './dto/category.dto';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CategoriesService } from './categories.service';
 
 @ApiTags('Categories')

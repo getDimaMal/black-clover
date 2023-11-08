@@ -1,4 +1,4 @@
-import { workspace } from '../../workspaces/test-data/workspaces.test-data';
+import { workspace } from '../../__test-data__/workspaces.test-data';
 import { CreateTransactionDto } from '../dto/create-transaction.dto';
 import { Transaction } from '../entities/transaction.entity';
 
