@@ -1,4 +1,5 @@
 import BaseApi from '../api/base.api';
+import CategoriesApi from '../api/endpoints/categories.api';
 import UsersApi from '../api/endpoints/users.api';
 import WorkspacesApi from '../api/endpoints/workspaces.api';
 
@@ -8,6 +9,7 @@ export function useApi() {
 
   return {
     users: new UsersApi(baseApi),
+    categories: new CategoriesApi(baseApi),
     workspaces: new WorkspacesApi(baseApi),
   };
 }

@@ -11,7 +11,7 @@ class CategoriesApi {
 
   getCategoriesList = async ({ workspaceId }: GetCategoriesListDTO) => {
     const url = `${this.baseUrl}/workspace/${workspaceId}`;
-    const { data } = await this.baseApi.get<CategoryDto>(url);
+    const { data } = await this.baseApi.get<CategoryDto[]>(url);
     return data;
   };
 
