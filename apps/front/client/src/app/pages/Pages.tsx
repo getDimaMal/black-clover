@@ -11,7 +11,7 @@ import ChangePasswordPage from './auth/ChangePasswordPage';
 import ResetPasswordPage from './auth/ResetPasswordPage';
 import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
-import EventsPage from './EventsPage/EventsPage';
+import EventsPage from './events/EventsPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import WorkspacesPage from './WorkspacesPage/WorkspacesPage';
 import ROUTES from './routes.json';

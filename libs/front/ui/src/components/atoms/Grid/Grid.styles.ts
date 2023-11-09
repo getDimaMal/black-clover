@@ -18,7 +18,7 @@ const useStyles = makeStyles<Props>({ name: 'Grid' })((theme, { gap = 0, size = 
   },
 
   item: {
-    flex: size,
+    ...(size && { flex: size }),
     display: 'inline-flex',
   },
 }));
