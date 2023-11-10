@@ -12,14 +12,15 @@ const useStyles = makeStyles<Props>({ name: 'Grid' })((theme, { gap = 0, size = 
     height: '100%',
 
     flex: 1,
-    display: 'inline-flex',
+    display: 'flex',
+    justifyContent: 'flex-start',
     flexDirection: direction,
     gap: theme.spacing(gap),
   },
 
   item: {
     ...(size && { flex: size }),
-    display: 'inline-flex',
+    display: 'flex',
   },
 }));
 
