@@ -7,4 +7,4 @@ export const category: Omit<Category, 'id'> = {
 };
 
 export const getCategories = (amount: number): Category[] =>
-  new Array(amount).fill(category).map((category, index) => ({ ...category, id: index }));
+  new Array(amount).fill(category).map((category, id) => ({ ...category, id }));

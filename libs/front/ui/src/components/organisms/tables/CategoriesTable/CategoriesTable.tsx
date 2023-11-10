@@ -69,7 +69,7 @@ const CategoriesTable: FC<CategoriesTableProps> = ({ categories, groupName, cate
           <Table.TableCell isHeader size={1}>
             Name
           </Table.TableCell>
-          <Table.TableCell isHeader size={1}>
+          <Table.TableCell isHeader size={2}>
             Amount of Events
           </Table.TableCell>
         </Table.TableRow>
