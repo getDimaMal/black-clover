@@ -13,6 +13,7 @@ import SignInPage from './auth/SignInPage';
 import SignUpPage from './auth/SignUpPage';
 import CategoriesPage from './categories/CategoriesPage';
 import EventsPage from './events/EventsPage';
+import GroupsPage from './groups/GroupsPage';
 import PropertiesPage from './properties/PropertiesPage';
 import WelcomePage from './WelcomePage/WelcomePage';
 import WorkspacesPage from './WorkspacesPage/WorkspacesPage';
@@ -61,9 +62,9 @@ const Pages = () => {
           <Route exact path="/" component={EventsPage} />
           <Route exact path="/properties" component={PropertiesPage} />
           <Route exact path="/categories" component={CategoriesPage} />
+          <Route exact path="/groups" component={GroupsPage} />
 
           <Route exact path="/switch" component={WorkspacesPage} />
-          <Route exact path="/groups" component={() => <Typography variant="h1">Groups</Typography>} />
           <Route exact path="/events" component={() => <Typography variant="h1">Events</Typography>} />
           <Route exact path="/tags" component={() => <Typography variant="h1">Tags</Typography>} />
           <Route exact path="/workspace" component={() => <Typography variant="h1">Workspace Settings</Typography>} />
