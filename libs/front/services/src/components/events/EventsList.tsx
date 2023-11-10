@@ -60,7 +60,7 @@ const event: Omit<Event, 'id'> = {
   tags: ['Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated'],
 };
 
-const Events: FC<CategoriesProps> = ({ children }) => {
+const EventsList: FC<CategoriesProps> = ({ children }) => {
   const search = useSearchField();
 
   const tagsFilter = useFilter();
@@ -80,4 +80,4 @@ const Events: FC<CategoriesProps> = ({ children }) => {
   });
 };
 
-export default Events;
+export default EventsList;

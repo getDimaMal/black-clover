@@ -1,5 +1,5 @@
 import React from 'react';
-import Events from '@black-clover/front/services/components/events/Events';
+import EventsList from '@black-clover/front/services/components/events/EventsList';
 import { useWorkspace } from '@black-clover/front/services/components/workspaces/WorkspaceProvider/WorkspaceProvider';
 import ButtonGroup from '@black-clover/front/ui/components/atoms/Buttons/ButtonGroup/ButtonGroup';
 import Grid from '@black-clover/front/ui/components/atoms/Grid/Grid';
@@ -18,7 +18,7 @@ const EventsPage = () => {
   if (!workspace) return null;
 
   return (
-    <Events>
+    <EventsList>
       {({ search, categoriesFilter, sourcesFilter, tagsFilter, eventsTable }) => (
         <PageLayout
           Header={
@@ -49,7 +49,7 @@ const EventsPage = () => {
           }
         />
       )}
-    </Events>
+    </EventsList>
   );
 };
 
