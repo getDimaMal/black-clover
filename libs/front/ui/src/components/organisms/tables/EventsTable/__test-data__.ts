@@ -1,6 +1,6 @@
-import { Columns, Event } from './EventsTable';
+import { Event } from './EventsTable';
 
-const event: Event = {
+const event: Omit<Event, 'id'> = {
   name: 'Share Button Tap',
   description: 'A share button has been tapped',
   parameters: [
@@ -12,11 +12,5 @@ const event: Event = {
   tags: ['Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated', 'Skipped', 'Skipped', 'Skipped', 'Generated'],
 };
 
-export const getEventsList = (count: number) => new Array(count).fill(event);
-export const columns: Columns[] = ['name', 'parameters', 'sources', 'tags'];
-export const columnsName: Record<Columns, string> = {
-  name: 'Name',
-  parameters: 'Parameters',
-  sources: 'Sources',
-  tags: 'Tags',
-};
+export const getEventsList = (amount: number): Event[] =>
+  new Array(amount).fill(event).map((event, index) => ({ ...event, id: index }));

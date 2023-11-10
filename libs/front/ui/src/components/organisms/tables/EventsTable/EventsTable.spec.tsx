@@ -1,46 +1,59 @@
 import { customRender } from '../../../../test-utils';
 
-import { columns, columnsName, getEventsList } from './__test-data__';
-import EventsTable, { CategoriesTableProps } from './EventsTable';
+import { getEventsList } from './__test-data__';
+import EventsTable, { EventsTableProps } from './EventsTable';
 
-const events = getEventsList(3);
+const categoryName = 'Category Name';
+const eventsAmount = 12;
 
-const getProps = (props: Partial<CategoriesTableProps> = {}): CategoriesTableProps => ({
+const events = getEventsList(1);
+
+const getProps = (props: Partial<EventsTableProps> = {}): EventsTableProps => ({
   events,
-  columns,
-  columnsName,
-  name: 'Landing',
   ...props,
 });
 
 describe('EventsTable', () => {
   it('should render default', () => {
-    const props = getProps();
-    const { getByText, getAllByText } = customRender(<EventsTable {...props} />);
+    const { queryByText, getByText, getAllByText } = customRender(<EventsTable {...getProps()} />);
+
+    // Headers
+    expect(queryByText('Category')).not.toBeInTheDocument();
+    expect(queryByText(categoryName)).not.toBeInTheDocument();
+    expect(queryByText(`${eventsAmount} events`)).not.toBeInTheDocument();
+
+    // Table Headers
+    expect(getByText('Name')).toBeInTheDocument();
+    expect(getByText('Parameters')).toBeInTheDocument();
+    expect(getByText('Sources')).toBeInTheDocument();
+    expect(getByText('Tags')).toBeInTheDocument();
+
+    // Table Content
+    expect(getByText(events[0].name)).toBeInTheDocument();
+    expect(getByText(events[0].description)).toBeInTheDocument();
+    expect(getAllByText(events[0].parameters[0]).length).toBe(3);
+    expect(getAllByText(events[0].sources[0]).length).toBe(1);
+    expect(getAllByText(events[0].tags[0]).length).toBe(3);
+  });
+
+  it('should render with categoryName', () => {
+    const { getByText } = customRender(<EventsTable {...getProps({ categoryName })} />);
 
     expect(getByText('Category')).toBeInTheDocument();
-    expect(getByText(props.name)).toBeInTheDocument();
-    expect(getByText(`${props.events.length} events`)).toBeInTheDocument();
-
-    Object.values(props.columnsName).forEach((name) => expect(getByText(name)).toBeInTheDocument());
-
-    expect(getAllByText(events[0].name)[0]).toBeInTheDocument();
-    expect(getAllByText(events[0].description)[0]).toBeInTheDocument();
-    expect(getAllByText(events[0].parameters[0])[0]).toBeInTheDocument();
-    expect(getAllByText(events[0].sources[0])[0]).toBeInTheDocument();
-    expect(getAllByText(events[0].tags[0])[0]).toBeInTheDocument();
+    expect(getByText(categoryName)).toBeInTheDocument();
   });
 
-  it('should render "No Events Yet" when the events list is empty.', () => {
-    const { getByText } = customRender(<EventsTable {...getProps({ events: getEventsList(0) })} />);
+  describe('eventsAmount', () => {
+    it('should render when grater than 2', () => {
+      const { getByText } = customRender(<EventsTable {...getProps({ eventsAmount })} />);
 
-    expect(getByText('No Events Yet')).toBeInTheDocument();
-  });
+      expect(getByText(`${eventsAmount} events`)).toBeInTheDocument();
+    });
 
-  it.each<number>([0, 1])('should NOT render eventsCount when: %s', (count) => {
-    const props = getProps({ events: getEventsList(count) });
-    const { queryByText } = customRender(<EventsTable {...props} />);
+    it.each<number>([0, 1])('should NOT render when: %s', (eventsAmount) => {
+      const { queryByText } = customRender(<EventsTable {...getProps({ eventsAmount })} />);
 
-    expect(queryByText(`${props.events.length} events`)).not.toBeInTheDocument();
+      expect(queryByText(`${eventsAmount} events`)).not.toBeInTheDocument();
+    });
   });
 });

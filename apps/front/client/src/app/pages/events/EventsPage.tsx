@@ -19,7 +19,7 @@ const EventsPage = () => {
 
   return (
     <Events>
-      {({ search, categoriesFilter, sourcesFilter, tagsFilter, categoryTable }) => (
+      {({ search, categoriesFilter, sourcesFilter, tagsFilter, eventsTable }) => (
         <PageLayout
           Header={
             <EventsHeader
@@ -42,10 +42,9 @@ const EventsPage = () => {
           }
           Content={
             <>
-              <EventsTable {...categoryTable} />
-              <EventsTable {...categoryTable} />
-              <EventsTable {...categoryTable} />
-              <EventsTable {...categoryTable} />
+              <EventsTable {...eventsTable} />
+              <EventsTable {...eventsTable} />
+              <EventsTable {...eventsTable} eventsAmount={undefined} categoryName={undefined} />
             </>
           }
         />

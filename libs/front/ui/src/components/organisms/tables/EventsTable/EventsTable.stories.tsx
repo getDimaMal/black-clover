@@ -1,27 +1,32 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { columns, columnsName, getEventsList } from './__test-data__';
-import EventsTable, { CategoriesTableProps } from './EventsTable';
-
-type PropsWithCount = CategoriesTableProps & { eventsCount: number };
+import { getEventsList } from './__test-data__';
+import EventsTable, { EventsTableProps } from './EventsTable';
 
 export default {
   component: EventsTable,
   args: {
-    columns,
-    columnsName,
-    name: 'Landing',
-
-    eventsCount: 12,
+    eventsAmount: 4,
   },
-} as Meta<PropsWithCount>;
+} as Meta<EventsTableProps>;
 
-type Story = StoryObj<PropsWithCount>;
+type Story = StoryObj<EventsTableProps>;
 
 export const Default: Story = {
-  render: ({ eventsCount, ...args }) => (
-    <div>
-      <EventsTable {...args} events={getEventsList(eventsCount)} />
-    </div>
+  render: ({ eventsAmount = 0, ...args }) => (
+    <>
+      <div style={{ width: '100%' }}>
+        <EventsTable {...args} events={getEventsList(eventsAmount)} />
+      </div>
+
+      <div style={{ width: '100%' }}>
+        <EventsTable
+          {...args}
+          events={getEventsList(eventsAmount)}
+          categoryName="Landing"
+          eventsAmount={eventsAmount}
+        />
+      </div>
+    </>
   ),
 };

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Event, EventsTableProps } from '@black-clover/front/ui/components/organisms/tables/EventsTable/EventsTable';
 
 import { useFilter } from '../../hooks/useFilter';
 import { useSearchField } from '../../hooks/useSearchField';
@@ -21,31 +22,13 @@ type Filter = {
   onChange: (value: string[]) => void;
 };
 
-type Columns = 'name' | 'parameters' | 'sources' | 'tags';
-
-type Event = {
-  name: string;
-  description: string;
-  parameters: string[];
-  sources: string[];
-  tags: string[];
-};
-
-type CategoryTable = {
-  name: string;
-  columns: Columns[];
-  eventsCount: number;
-  columnsName: Record<Columns, string>;
-  events: Event[];
-};
-
 export type CategoriesProps = {
   children: (props: {
     search: Search;
     tagsFilter: Filter;
     sourcesFilter: Filter;
     categoriesFilter: Filter;
-    categoryTable: CategoryTable;
+    eventsTable: EventsTableProps;
   }) => React.ReactElement;
 };
 
@@ -65,7 +48,7 @@ const options: Filter['options'] = {
   '6': { id: '6', label: 'This label has too many words' },
 };
 
-const event: Event = {
+const event: Omit<Event, 'id'> = {
   name: 'Share Button Tap',
   description: 'A share button has been tapped',
   parameters: [
@@ -89,12 +72,10 @@ const Events: FC<CategoriesProps> = ({ children }) => {
     tagsFilter: { ...tagsFilter, options },
     sourcesFilter: { ...sourcesFilter, options },
     categoriesFilter: { ...categoriesFilter, options },
-    categoryTable: {
-      name: 'Landing',
-      eventsCount: 12,
-      columns: ['name', 'parameters', 'sources', 'tags'],
-      columnsName: { name: 'Name', parameters: 'Parameters', sources: 'Sources', tags: 'Tags' },
-      events: new Array(12).fill(event),
+    eventsTable: {
+      events: new Array(4).fill(event).map((event, id) => ({ ...event, id })),
+      categoryName: 'Landing',
+      eventsAmount: 4,
     },
   });
 };

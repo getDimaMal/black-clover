@@ -1,12 +1,6 @@
 import { makeStyles } from '../../../../theme/makeStyles';
 
 const useStyles = makeStyles({ name: 'EventsTable' })((theme) => ({
-  headerLeft: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(1),
-  },
-
   cellFlexColumn: {
     minWidth: 'fit-content',
     whiteSpace: 'nowrap',
@@ -26,10 +20,6 @@ const useStyles = makeStyles({ name: 'EventsTable' })((theme) => ({
 
   cellWrap: {
     flexWrap: 'wrap',
-  },
-
-  fontWeightBold: {
-    fontWeight: 700,
   },
 }));
 
