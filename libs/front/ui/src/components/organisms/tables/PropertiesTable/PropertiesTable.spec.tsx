@@ -1,11 +1,11 @@
 import { customRender } from '../../../../test-utils';
 
-import { getProperties } from './__test-data__';
+import { getPropertiesList } from './__test-data__';
 import PropertiesTable from './PropertiesTable';
 
 describe('PropertiesTable', () => {
   it('should render default', () => {
-    const properties = getProperties(1);
+    const properties = getPropertiesList(1);
     const { getByText } = customRender(<PropertiesTable properties={properties} />);
 
     //Table Header

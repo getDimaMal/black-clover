@@ -22,9 +22,9 @@ type GridItemProps = {
   gap: never;
 }>;
 
-export type GridProps = {
+export type GridProps = Partial<{
   children: React.ReactNode;
-};
+}>;
 
 const Grid: FC<GridProps & (GridContainerProps | GridItemProps)> = ({
   container,

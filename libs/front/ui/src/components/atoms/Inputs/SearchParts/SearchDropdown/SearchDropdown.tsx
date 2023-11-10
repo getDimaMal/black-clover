@@ -6,10 +6,15 @@ import SearchField from '../SearchField/SearchField';
 
 import useStyles from './SearchDropdown.styles';
 
+export type Suggestion = {
+  label: string;
+  subLabel: string;
+};
+
 export type SearchDropdownProps = {
   value: string;
   onSearch: (value: string) => void;
-  suggestions: { label: string; subLabel: string }[];
+  suggestions: Suggestion[];
 };
 
 const SearchDropdown: FC<SearchDropdownProps> = ({ value, onSearch, suggestions }) => {

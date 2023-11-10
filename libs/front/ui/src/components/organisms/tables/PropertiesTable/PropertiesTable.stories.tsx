@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { getProperties } from './__test-data__';
+import { getPropertiesList } from './__test-data__';
 import PropertiesTable, { PropertiesTableProps } from './PropertiesTable';
 
 export default {
@@ -12,7 +12,7 @@ type Story = StoryObj<PropertiesTableProps>;
 export const Default: Story = {
   render: (args) => (
     <div style={{ width: '100%' }}>
-      <PropertiesTable {...args} properties={getProperties(4)} />
+      <PropertiesTable {...args} properties={getPropertiesList(4)} />
     </div>
   ),
 };

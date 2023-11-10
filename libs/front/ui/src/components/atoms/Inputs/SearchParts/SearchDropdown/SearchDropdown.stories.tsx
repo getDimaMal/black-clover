@@ -1,18 +1,14 @@
 import { FC, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
+import { suggestions } from './__test-data__';
 import SearchDropdown, { SearchDropdownProps } from './SearchDropdown';
 
 export default {
   component: SearchDropdown,
   args: {
+    suggestions,
     fullWidth: false,
-    suggestions: [
-      { label: 'Search', subLabel: 'suggestion' },
-      { label: 'Another search', subLabel: 'and another suggestion' },
-      { label: 'One more search', subLabel: 'and one more suggestion' },
-      { label: 'Wubba Lubba', subLabel: 'Dub Dub' },
-    ],
   },
   argTypes: {
     fullWidth: { control: 'boolean' },

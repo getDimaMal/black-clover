@@ -9,5 +9,5 @@ const property: Omit<Property, 'id'> = {
   optionality: 'Optional',
 };
 
-export const getProperties = (amount: number): Property[] =>
+export const getPropertiesList = (amount: number): Property[] =>
   new Array(amount).fill(property).map((property, id) => ({ ...property, id }));

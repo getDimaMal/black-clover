@@ -1,11 +1,7 @@
 import { customRender, fireEvent } from '../../../../../test-utils';
 
+import { suggestions } from './__test-data__';
 import SearchDropdown, { SearchDropdownProps } from './SearchDropdown';
-
-const suggestions: SearchDropdownProps['suggestions'] = [
-  { label: 'Search', subLabel: 'suggestion' },
-  { label: 'Another search', subLabel: 'another suggestion' },
-];
 
 const getProps = (props: Partial<SearchDropdownProps> = {}): SearchDropdownProps => ({
   suggestions,
