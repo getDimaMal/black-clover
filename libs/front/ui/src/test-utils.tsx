@@ -13,6 +13,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const customRender = (component: ReactElement) => render(component, { wrapper: Provider });
+export const customRender = (component: ReactElement) => render(component, { wrapper: Provider });
 
-export { fireEvent, screen, customRender, renderHook };
+export { fireEvent, screen, renderHook };

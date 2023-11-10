@@ -19,5 +19,9 @@ export default {
 type Story = StoryObj<PropsWithCount>;
 
 export const Default: Story = {
-  render: ({ eventsCount, ...args }) => <EventsTable {...args} events={getEventsList(eventsCount)} />,
+  render: ({ eventsCount, ...args }) => (
+    <div>
+      <EventsTable {...args} events={getEventsList(eventsCount)} />
+    </div>
+  ),
 };

@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 
 import useStyles from './Table.styles';
 
 type TableCellProps = {
   children: React.ReactNode;
 } & Partial<{
+  size: number;
   isHeader: boolean;
+  className: string;
 }>;
 
 type TableRowProps = {
   children: React.ReactNode;
-};
+} & Partial<{
+  isFlex: boolean;
+}>;
 
 type TableComposition = {
   TableRow: (props: TableRowProps) => JSX.Element;
@@ -26,35 +30,52 @@ export type TableProps = {
 
 type TableWrapper = (props: TableProps) => JSX.Element;
 
+const TableContext = createContext({ isHighlighted: false });
+
 const Table: TableComposition & TableWrapper = ({ children: Table, HeaderLeft, HeaderRight }) => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles({});
+
+  const hasHeader = Boolean(HeaderLeft || HeaderRight);
 
   return (
-    <div className={classes.root}>
-      <div className={classes.header}>
-        <div>{HeaderLeft}</div>
-        <div>{HeaderRight}</div>
+    <TableContext.Provider value={{ isHighlighted: !hasHeader }}>
+      <div className={classes.root}>
+        {hasHeader && (
+          <div className={cx(classes.header, classes.highlighted)}>
+            <div>{HeaderLeft}</div>
+            <div>{HeaderRight}</div>
+          </div>
+        )}
+
+        <table className={classes.table}>{Table}</table>
+
+        <div className={cx(classes.footer, classes.highlighted)} />
       </div>
-
-      <table className={classes.table}>{Table}</table>
-
-      <div className={classes.footer} />
-    </div>
+    </TableContext.Provider>
   );
 };
 
-const TableRow = ({ children }: TableRowProps) => {
-  const { classes } = useStyles();
+const TableRow = ({ isFlex, children }: TableRowProps) => {
+  const { classes, cx } = useStyles({});
 
-  return <tr className={classes.tableRow}>{children}</tr>;
+  return <tr className={cx(classes.tableRow, { [classes.tableRowFlex]: isFlex })}>{children}</tr>;
 };
 
-const TableCell = ({ children, isHeader = false }: TableCellProps) => {
-  const { classes, cx } = useStyles();
+const TableCell = ({ children, size, isHeader, className }: TableCellProps) => {
+  const { classes, cx } = useStyles({ size });
+  const { isHighlighted } = useContext(TableContext);
 
   const Tag = (isHeader ? 'th' : 'td') as React.ElementType;
 
-  return <Tag className={cx(classes.tableCell)}>{children}</Tag>;
+  return (
+    <Tag
+      className={cx(classes.tableCell, className, {
+        [classes.highlighted]: Boolean(isHeader && isHighlighted),
+      })}
+    >
+      {children}
+    </Tag>
+  );
 };
 
 Table.TableRow = TableRow;

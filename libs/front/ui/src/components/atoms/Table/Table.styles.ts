@@ -1,6 +1,6 @@
 import { makeStyles } from '../../../theme/makeStyles';
 
-const useStyles = makeStyles({ name: 'Table' })((theme) => ({
+const useStyles = makeStyles<Partial<{ size: number }>>({ name: 'Table' })((theme, { size }) => ({
   root: {
     ...theme.typography['body/xs'],
 
@@ -9,6 +9,7 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
     borderRadius: '8px',
     border: `1px solid ${theme.colors['bg/blue/1']}`,
     backgroundColor: theme.colors['bg/light'],
+    overflow: 'hidden',
   },
 
   header: {
@@ -19,15 +20,13 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
 
-    borderRadius: '8px 8px 0 0',
-    backgroundColor: theme.colors['bg/grey/2'],
+    borderBottom: `1px solid ${theme.colors['bg/blue/1']}`,
   },
 
   table: {
     width: '100%',
 
     borderCollapse: 'collapse',
-    borderTop: `1px solid ${theme.colors['bg/blue/1']}`,
     borderBottom: `1px solid ${theme.colors['bg/blue/1']}`,
   },
 
@@ -42,10 +41,19 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
     },
   },
 
+  tableRowFlex: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+
   tableCell: {
+    ...(size && { flex: size }),
+    ...theme.typography['body/xs'],
+
     textAlign: 'left',
 
-    border: `1px solid ${theme.colors['bg/blue/1']}`,
+    borderRight: `1px solid ${theme.colors['bg/blue/1']}`,
+    borderBottom: `1px solid ${theme.colors['bg/blue/1']}`,
     padding: `${theme.spacing(2)} ${theme.spacing(3)}`,
 
     '&:first-of-type': {
@@ -59,8 +67,10 @@ const useStyles = makeStyles({ name: 'Table' })((theme) => ({
 
   footer: {
     height: theme.spacing(5),
+  },
+
+  highlighted: {
     backgroundColor: theme.colors['bg/grey/2'],
-    borderRadius: '0 0 8px 8px',
   },
 }));
 
